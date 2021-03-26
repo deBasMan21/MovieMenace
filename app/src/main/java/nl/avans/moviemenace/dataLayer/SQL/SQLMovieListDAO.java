@@ -55,7 +55,7 @@ public class SQLMovieListDAO extends DatabaseConnection implements MovieListDAO 
             String SQLMovies = "SELECT * FROM Listcontent AS L INNER JOIN MOVIE AS M ON L.MovieID = M.Id WHERE ListID = " + listID;
             executeSQLSelectStatement(SQLMovies);
             while(rs.next()){
-                Movie movie = new Movie(rs.getInt("Id"), rs.getString("Title"), rs.getString("Description"), LocalDate.parse(rs.getString("ReleaseDate")), rs.getBoolean("Adult"));
+                Movie movie = new Movie(rs.getInt("Id"), rs.getString("Title"), rs.getString("Description"), rs.getString("ReleaseDate"), rs.getBoolean("Adult"));
                 moviesInList.add(movie);
             }
 

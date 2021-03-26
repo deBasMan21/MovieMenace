@@ -15,7 +15,7 @@ public class SQLMovieDAO extends DatabaseConnection implements MovieDAO {
             String SQL = "SELECT * FROM Movie WHERE Id = " + id;
             executeSQLSelectStatement(SQL);
 
-            movie = new Movie(rs.getInt("Id"), rs.getString("Title"), rs.getString("Description"), LocalDate.parse(rs.getString("ReleaseDate")), rs.getBoolean("Adult"));
+            movie = new Movie(rs.getInt("Id"), rs.getString("Title"), rs.getString("Description"),rs.getString("ReleaseDate"), rs.getBoolean("Adult"));
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -32,7 +32,7 @@ public class SQLMovieDAO extends DatabaseConnection implements MovieDAO {
 
             while (rs.next()) {
                 movie = new Movie(rs.getInt("Id"), rs.getString("Title"),
-                        rs.getString("Description"), LocalDate.parse(rs.getString("ReleaseDate")),
+                        rs.getString("Description"), rs.getString("ReleaseDate"),
                         rs.getBoolean("Adult"));
                 movies.add(movie);
             }

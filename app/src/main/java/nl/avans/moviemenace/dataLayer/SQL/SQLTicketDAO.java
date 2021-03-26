@@ -51,16 +51,49 @@ public class SQLTicketDAO extends DatabaseConnection implements TicketDAO {
 
     @Override
     public ArrayList<Ticket> getUpcomingTicketsForAccount(String email) {
-        return null;
+        ArrayList<Ticket> tickets = new ArrayList<>();
+        try{
+            String SQL = "SELECT * FROM TICKETS WHERE Email = '" + email + "' AND Status = 'UPCOMING'";
+            executeSQLSelectStatement(SQL);
+            while(rs.next()){
+                Ticket ticket = new Ticket(rs.getInt("ChairNumber"), rs.getString("Email"), rs.getInt("ViewID"), rs.getString("Status"), rs.getInt("RowNumber"));
+                tickets.add(ticket);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return tickets;
     }
 
     @Override
     public ArrayList<Ticket> getExpiredTicketsForAccount(String email) {
-        return null;
+        ArrayList<Ticket> tickets = new ArrayList<>();
+        try{
+            String SQL = "SELECT * FROM TICKETS WHERE Email = '" + email + "' AND Status = 'EXPIRED'";
+            executeSQLSelectStatement(SQL);
+            while(rs.next()){
+                Ticket ticket = new Ticket(rs.getInt("ChairNumber"), rs.getString("Email"), rs.getInt("ViewID"), rs.getString("Status"), rs.getInt("RowNumber"));
+                tickets.add(ticket);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return tickets;
     }
 
     @Override
     public ArrayList<Ticket> getUsedTicketsForAccount(String email) {
-        return null;
+        ArrayList<Ticket> tickets = new ArrayList<>();
+        try{
+            String SQL = "SELECT * FROM TICKETS WHERE Email = '" + email + "' AND Status = 'USED'";
+            executeSQLSelectStatement(SQL);
+            while(rs.next()){
+                Ticket ticket = new Ticket(rs.getInt("ChairNumber"), rs.getString("Email"), rs.getInt("ViewID"), rs.getString("Status"), rs.getInt("RowNumber"));
+                tickets.add(ticket);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return tickets;
     }
 }
