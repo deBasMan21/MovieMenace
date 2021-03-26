@@ -1,4 +1,4 @@
-package nl.avans.moviemenace.ui.gallery;
+package nl.avans.moviemenace.ui.films;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,15 +14,15 @@ import androidx.lifecycle.ViewModelProvider;
 
 import nl.avans.moviemenace.R;
 
-public class GalleryFragment extends Fragment {
+public class FilmsFragment extends Fragment {
 
-    private GalleryViewModel galleryViewModel;
+    private FilmsViewModel galleryViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         galleryViewModel =
-                new ViewModelProvider(this).get(GalleryViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_gallery, container, false);
+                new ViewModelProvider(this).get(FilmsViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_films, container, false);
         final TextView textView = root.findViewById(R.id.text_gallery);
         galleryViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
