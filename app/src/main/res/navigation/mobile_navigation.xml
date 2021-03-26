@@ -13,13 +13,13 @@
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="nl.avans.moviemenace.ui.gallery.GalleryFragment"
+        android:name="nl.avans.moviemenace.ui.films.FilmsFragment"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="nl.avans.moviemenace.ui.slideshow.SlideshowFragment"
+        android:name="nl.avans.moviemenace.ui.account.AccountFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
 </navigation>
