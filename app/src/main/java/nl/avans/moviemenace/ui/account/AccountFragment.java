@@ -23,7 +23,7 @@ public class AccountFragment extends Fragment {
         slideshowViewModel =
                 new ViewModelProvider(this).get(AccountViewModel.class);
         View root = inflater.inflate(R.layout.fragment_account, container, false);
-        final TextView textView = root.findViewById(R.id.text_slideshow);
+        final TextView textView = root.findViewById(R.id.text_account);
         slideshowViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {

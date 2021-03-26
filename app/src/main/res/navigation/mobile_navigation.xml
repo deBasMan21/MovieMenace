@@ -12,14 +12,27 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
+        android:id="@+id/nav_films"
         android:name="nl.avans.moviemenace.ui.films.FilmsFragment"
-        android:label="@string/menu_gallery"
+        android:label="@string/menu_films"
         tools:layout="@layout/fragment_films" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
+        android:id="@+id/nav_account"
         android:name="nl.avans.moviemenace.ui.account.AccountFragment"
-        android:label="@string/menu_slideshow"
+        android:label="@string/menu_account"
         tools:layout="@layout/fragment_account" />
+
+    <fragment
+        android:id="@+id/nav_lists"
+        android:name="nl.avans.moviemenace.ui.lists.ListsFragment"
+        android:label="@string/menu_lists"
+        tools:layout="@layout/fragment_account" />
+
+    <fragment
+        android:id="@+id/nav_tickets"
+        android:name="nl.avans.moviemenace.ui.tickets.TicketsFragment"
+        android:label="@string/menu_tickets"
+        tools:layout="@layout/fragment_account" />
+
 </navigation>
