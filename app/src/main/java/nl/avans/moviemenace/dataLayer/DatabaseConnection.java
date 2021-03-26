@@ -15,6 +15,7 @@ public class DatabaseConnection {
     // be closed as you would do when it was a local variable in the query
     // execution method.
     private Statement statement;
+    protected ResultSet rs = null;
 
     public DatabaseConnection() {
         connection = null;
@@ -27,7 +28,7 @@ public class DatabaseConnection {
         if (connection == null) {
             try {
                 // Try to create a connection with the library database
-                connection = DriverManager.getConnection("jdbc:mysql://localhost/library", "biblio1", "boekje");
+                connection = DriverManager.getConnection("jdbc:mysql://localhost/Cinema");
 
                 if (connection != null) {
                     statement = connection.createStatement();
@@ -75,21 +76,18 @@ public class DatabaseConnection {
     }
 
     public ResultSet executeSQLSelectStatement(String query) {
-        ResultSet resultset = null;
-
         // First, check whether a some query was passed and the connection with
         // the database.
         if (query != null && connectionIsOpen()) {
             // Then, if succeeded, execute the query.
             try {
-                resultset = statement.executeQuery(query);
+                rs = statement.executeQuery(query);
             } catch (SQLException e) {
                 System.out.println(e);
-                resultset = null;
+                rs = null;
             }
         }
-
-        return resultset;
+        return rs;
     }
 
     public boolean executeSQLDeleteStatement(String query) {
