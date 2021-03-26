@@ -18,12 +18,12 @@ import nl.avans.moviemenace.R;
 
 public class FilmsFragment extends Fragment {
 
-    private FilmsViewModel galleryViewModel;
+    private FilmsViewModel filmsViewModel;
     private RecyclerView mFilmsRecyclerview;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        galleryViewModel =
+        filmsViewModel =
                 new ViewModelProvider(this).get(FilmsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_films, container, false);
 
@@ -32,7 +32,7 @@ public class FilmsFragment extends Fragment {
         mFilmsRecyclerview.setLayoutManager(new GridLayoutManager(this.getContext(), 3, GridLayoutManager.VERTICAL, false));
 
         final TextView textView = root.findViewById(R.id.text_films);
-        galleryViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        filmsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
