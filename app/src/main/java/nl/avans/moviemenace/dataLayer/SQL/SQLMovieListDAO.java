@@ -18,14 +18,7 @@ public class SQLMovieListDAO extends DatabaseConnection implements MovieListDAO 
             executeSQLSelectStatement(SQL);
             movieList = new MovieList(rs.getInt("ID"), rs.getString("Name"), rs.getString("Description"), rs.getString("Email"));
 
-            String SQLMovies = "SELECT * FROM Listcontent AS L INNER JOIN MOVIE AS M ON L.MovieID = M.Id WHERE ListID = " + id;
-            executeSQLSelectStatement(SQLMovies);
-            while(rs.next()){
-                Movie movie = new Movie(rs.getInt("Id"), rs.getString("Title"), rs.getString("Description"), LocalDate.parse(rs.getString("ReleaseDate")), rs.getBoolean("Adult"));
-                moviesInList.add(movie);
-            }
-
-            movieList.setMovies(moviesInList);
+            movieList.setMovies(getMoviesForList(id));
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -33,12 +26,42 @@ public class SQLMovieListDAO extends DatabaseConnection implements MovieListDAO 
     }
 
     @Override
-    public MovieList getMovieListByName(String name) {
-        return null;
+    public ArrayList<MovieList> getMovieListsForAccount(String email) {
+        ArrayList<MovieList> movieLists = new ArrayList<>();
+
+        try{
+            String SQL = "SELECT * FROM List WHERE Email = " + email;
+            executeSQLSelectStatement(SQL);
+
+            while(rs.next()){
+                ArrayList<Movie> moviesInList = new ArrayList<>();
+                MovieList movieList = new MovieList(rs.getInt("ID"), rs.getString("Name"), rs.getString("Description"), rs.getString("Email"));
+
+                movieList.setMovies(getMoviesForList(rs.getInt("ID")));
+
+                movieLists.add(movieList);
+            }
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return movieLists;
     }
 
     @Override
-    public ArrayList<MovieList> getMovieListsForAccount(String email) {
-        return null;
+    public ArrayList<Movie> getMoviesForList(int listID){
+        ArrayList<Movie> moviesInList = new ArrayList<>();
+        try{
+            String SQLMovies = "SELECT * FROM Listcontent AS L INNER JOIN MOVIE AS M ON L.MovieID = M.Id WHERE ListID = " + listID;
+            executeSQLSelectStatement(SQLMovies);
+            while(rs.next()){
+                Movie movie = new Movie(rs.getInt("Id"), rs.getString("Title"), rs.getString("Description"), LocalDate.parse(rs.getString("ReleaseDate")), rs.getBoolean("Adult"));
+                moviesInList.add(movie);
+            }
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return moviesInList;
     }
 }
