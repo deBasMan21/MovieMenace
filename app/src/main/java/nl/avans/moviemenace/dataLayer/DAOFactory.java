@@ -1,4 +1,4 @@
 package nl.avans.moviemenace.dataLayer;
 
-public class test {
+public interface DAOFactory {
 }
