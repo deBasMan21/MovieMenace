@@ -4,6 +4,7 @@ public class Room {
     private int roomNumber;
     private int numberOfSeats;
     private boolean threeDimensional;
+    private Cinema cinema;
 
     public Room(int roomNumber, int numberOfSeats, boolean threeDimensional) {
         this.roomNumber = roomNumber;
@@ -33,5 +34,13 @@ public class Room {
 
     public void setThreeDimensional(boolean threeDimensional) {
         this.threeDimensional = threeDimensional;
+    }
+
+    public Cinema getCinema() {
+        return cinema;
+    }
+
+    public void setCinema(Cinema cinema) {
+        this.cinema = cinema;
     }
 }
