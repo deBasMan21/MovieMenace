@@ -21,8 +21,8 @@ public class TicketsFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         ticketsViewModel =
                 new ViewModelProvider(this).get(TicketsViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
+        View root = inflater.inflate(R.layout.fragment_tickets, container, false);
+        final TextView textView = root.findViewById(R.id.text_tickets);
         ticketsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {

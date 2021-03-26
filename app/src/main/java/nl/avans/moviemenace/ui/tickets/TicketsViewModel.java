@@ -9,7 +9,7 @@ public class TicketsViewModel extends ViewModel {
 
     public TicketsViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is tickets fragment");
+        mText.setValue("Mijn tickets fragment");
     }
 
     public LiveData<String> getText() {

@@ -1,6 +1,7 @@
 package nl.avans.moviemenace.dataLayer.IDAO;
 
-import android.accounts.Account;
+
+import nl.avans.moviemenace.domain.Account;
 
 public interface AccountDAO {
     Account getAccount(String email);

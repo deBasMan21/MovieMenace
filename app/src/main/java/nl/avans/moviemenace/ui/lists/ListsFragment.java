@@ -21,8 +21,8 @@ public class ListsFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         listsViewModel =
                 new ViewModelProvider(this).get(ListsViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_account, container, false);
-        final TextView textView = root.findViewById(R.id.text_slideshow);
+        View root = inflater.inflate(R.layout.fragment_lists, container, false);
+        final TextView textView = root.findViewById(R.id.text_lists);
         listsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
