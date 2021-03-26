@@ -29,7 +29,7 @@ public class SQLAccountDAO extends DatabaseConnection implements AccountDAO  {
                     + updatedAccount.getEmail() + ", " + updatedAccount.getName() + ", "
                     + updatedAccount.getAddress() + ", " + updatedAccount.getZipCode() + ") WHERE Email = " + email;
 
-            executeSQLSelectStatement(SQL);
+            executeSQLStatement(SQL);
         } catch(Exception e){
             e.printStackTrace();
         }
@@ -43,7 +43,7 @@ public class SQLAccountDAO extends DatabaseConnection implements AccountDAO  {
                     + newAccount.getAddress() + ", " + newAccount.getZipCode() + ", " + newAccount.getIban() + ", "
                     + newAccount.getDateOfBirth().toString() + ")";
 
-            executeSQLSelectStatement(SQL);
+            executeSQLStatement(SQL);
         } catch(Exception e){
             e.printStackTrace();
         }

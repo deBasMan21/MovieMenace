@@ -90,7 +90,7 @@ public class DatabaseConnection {
         return rs;
     }
 
-    public boolean executeSQLDeleteStatement(String query) {
+    public boolean executeSQLStatement(String query) {
         boolean result = false;
 
         // First, check whether a some query was passed and the connection with
@@ -98,7 +98,7 @@ public class DatabaseConnection {
         if (query != null && connectionIsOpen()) {
             // Then, if succeeded, execute the query.
             try {
-                statement.executeUpdate(query);
+                statement.executeQuery(query);
                 result = true;
             } catch (SQLException e) {
                 System.out.println(e);
