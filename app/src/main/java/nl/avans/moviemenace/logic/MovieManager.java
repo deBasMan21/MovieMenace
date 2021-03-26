@@ -2,6 +2,8 @@ package nl.avans.moviemenace.logic;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -15,7 +17,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.internal.EverythingIsNonNull;
 
 public class MovieManager implements Callback<MovieApiResponse> {
 
@@ -23,14 +24,14 @@ public class MovieManager implements Callback<MovieApiResponse> {
     public static final String BASE_URL = "https://api.themoviedb.org/3/";
     public static final String BASE_POSTER_PATH_URL = "https://image.tmdb.org/t/p/w500/";
 
-    private MovieControllerListener listener;
+//    private MovieControllerListener listener;
 
     private final Retrofit retrofit;
     private final Gson gson;
     private final MovieAPI movieAPI;
 
-    public MovieManager(MovieControllerListener listener) {
-        this.listener = listener;
+    public MovieManager(/* MovieControllerListener listener */) {
+//        this.listener = listener;
 
         gson = new GsonBuilder()
                 .setLenient()
@@ -50,7 +51,6 @@ public class MovieManager implements Callback<MovieApiResponse> {
     }
 
     @Override
-    @EverythingIsNonNull
     public void onResponse(Call<MovieApiResponse> call, Response<MovieApiResponse> response) {
         Log.d(TAG, "onResponse() status code: " + response.code());
 
@@ -58,17 +58,21 @@ public class MovieManager implements Callback<MovieApiResponse> {
             Log.d(TAG, "Response: " + response.body());
 
             List<Movie> movies = response.body().getResults();
-            listener.onMoviesAvailable(movies);
+            for (Movie movie : movies) {
+                Log.d(TAG, movie.toString());
+            }
+//            listener.onMoviesAvailable(movies);
+        } else {
+            Log.e(TAG, "Not successful! Message: " + response.message());
         }
     }
 
     @Override
-    @EverythingIsNonNull
-    public void onFailure(Call<MovieApiResponse> call, Throwable t) {
+    public void onFailure(@NonNull Call<MovieApiResponse> call, Throwable t) {
         Log.e(TAG, "onFailure" + t.getMessage());
     }
 
-    public interface  MovieControllerListener {
+    public interface MovieControllerListener {
         void onMoviesAvailable(List<Movie> movies);
     }
 

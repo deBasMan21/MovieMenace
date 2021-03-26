@@ -33,7 +33,6 @@ public class MovieApiResponse {
     }
 
     @Override
-    @NonNull
     public String toString() {
         return "MovieApiResponse{" +
                 "page=" + page +

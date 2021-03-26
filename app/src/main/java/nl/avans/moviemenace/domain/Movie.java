@@ -8,11 +8,11 @@ public class Movie {
     private int id;
     private String title;
     private String overview;
-    private LocalDate release_date;
+    private String release_date;
     private boolean adult;
     private List<Viewing> viewings;
 
-    public Movie(int id, String title, String overview, LocalDate release_date, boolean adult) {
+    public Movie(int id, String title, String overview, String release_date, boolean adult) {
         this.id = id;
         this.title = title;
         this.overview = overview;
@@ -45,11 +45,11 @@ public class Movie {
         this.overview = overview;
     }
 
-    public LocalDate getRelease_date() {
+    public String getRelease_date() {
         return release_date;
     }
 
-    public void setRelease_date(LocalDate release_date) {
+    public void setRelease_date(String release_date) {
         this.release_date = release_date;
     }
 
@@ -67,5 +67,17 @@ public class Movie {
 
     public void setViewings(List<Viewing> viewings) {
         this.viewings = viewings;
+    }
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", overview='" + overview + '\'' +
+                ", release_date='" + release_date + '\'' +
+                ", adult=" + adult +
+                ", viewings=" + viewings +
+                '}';
     }
 }
