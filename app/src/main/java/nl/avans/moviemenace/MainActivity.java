@@ -16,7 +16,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import nl.avans.moviemenace.dataLayer.DAOFactory;
+import nl.avans.moviemenace.dataLayer.SQLDAOFactory;
 import nl.avans.moviemenace.logic.MovieManager;
+import nl.avans.moviemenace.logic.TicketManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,6 +46,9 @@ public class MainActivity extends AppCompatActivity {
 
         MovieManager movieManager = new MovieManager();
         movieManager.loadTrendingMoviesPerWeek();
+
+        DAOFactory factory = new SQLDAOFactory();
+        TicketManager ticketManager = new TicketManager(factory);
     }
 
     @Override
