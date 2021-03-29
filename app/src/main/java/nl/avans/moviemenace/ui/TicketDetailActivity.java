@@ -24,7 +24,6 @@ import nl.avans.moviemenace.R;
 
 import java.util.Hashtable;
 
-
 public class TicketDetailActivity extends AppCompatActivity {
     private TextView mTitleTv;
     private TextView mLocationTv;
