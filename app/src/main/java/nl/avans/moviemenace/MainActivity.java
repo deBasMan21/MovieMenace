@@ -1,5 +1,6 @@
 package nl.avans.moviemenace;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
         DAOFactory factory = new SQLDAOFactory();
         TicketManager ticketManager = new TicketManager(factory);
-
+        new dbtest().execute();
     }
 
     @Override
@@ -65,5 +66,15 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    public class dbtest extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            DatabaseConnection databaseConnection = new DatabaseConnection();
+            System.out.println("The database connection is: " + databaseConnection.openConnection());
+            return null;
+        }
     }
 }

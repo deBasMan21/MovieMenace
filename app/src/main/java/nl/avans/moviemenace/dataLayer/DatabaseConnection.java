@@ -16,6 +16,14 @@ public class DatabaseConnection {
     // execution method.
     private Statement statement;
     protected ResultSet rs = null;
+    private static String Classes = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+    private static String ip = "aei-sql2.avans.nl/studenten";
+    private static String port = "1443";
+    private static String database = "MovieMenaceB12";
+    private static String username = "AdminB12";
+    private static String password = "tom&jerry";
+    private static String url = "jdbc:sqlserver://" + ip + ":" + port + ";databaseName=" + database;
+    private static String urlLocal = "jdbc:sqlserver://localhost;databaseName=Cinema;integratedSecurity=true";
 
     public DatabaseConnection() {
         connection = null;
@@ -28,14 +36,16 @@ public class DatabaseConnection {
         if (connection == null) {
             try {
                 // Try to create a connection with the library database
-                connection = DriverManager.getConnection("jdbc:jtds:sqlserver://aei-sql2.avans.nl\\studenten:1443:MovieMenaceB12", "AdminB12", "tom&jerry");
+                Class.forName(Classes);
+//                connection = DriverManager.getConnection(url, username, password);
+                connection = DriverManager.getConnection(url, username, password);
 
                 if (connection != null) {
                     statement = connection.createStatement();
                 }
 
                 result = true;
-            } catch (SQLException e) {
+            } catch (Exception e) {
                 System.out.println(e);
                 result = false;
             }
