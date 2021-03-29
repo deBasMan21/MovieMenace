@@ -1,2 +1,3 @@
+include ':mssql-jdbc-9.2.1.jre11'
 include ':app'
 rootProject.name = "MovieMenace"

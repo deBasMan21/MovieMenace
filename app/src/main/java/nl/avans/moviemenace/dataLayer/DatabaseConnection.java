@@ -28,7 +28,7 @@ public class DatabaseConnection {
         if (connection == null) {
             try {
                 // Try to create a connection with the library database
-                connection = DriverManager.getConnection("jdbc:mysql://localhost/Cinema");
+                connection = DriverManager.getConnection("jdbc:jtds:sqlserver://aei-sql2.avans.nl\\studenten:1443:MovieMenaceB12", "AdminB12", "tom&jerry");
 
                 if (connection != null) {
                     statement = connection.createStatement();
