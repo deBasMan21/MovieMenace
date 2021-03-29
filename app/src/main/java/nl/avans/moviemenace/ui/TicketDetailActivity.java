@@ -1,12 +1,17 @@
 package nl.avans.moviemenace.ui;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
@@ -22,6 +27,13 @@ import java.util.Hashtable;
 
 
 public class TicketDetailActivity extends AppCompatActivity {
+    private TextView mTitleTv;
+    private TextView mLocationTv;
+    private TextView mRowSeatTv;
+    private TextView mDateTimeTv;
+
+    private Button mUseBn;
+
     private ImageView mBarcodeIv;
 
     @Override
@@ -29,9 +41,23 @@ public class TicketDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ticket_detail);
 
+        mUseBn = findViewById(R.id.bn_ticket_detail_use);
+
         mBarcodeIv = findViewById(R.id.iv_ticket_detail_barcode);
+
         mBarcodeIv.setImageBitmap(encodeAsBitmap("placeholder"));
 
+        mUseBn.setOnClickListener((View v) -> {
+            new AlertDialog.Builder(this)
+                    .setTitle("Ticket inleveren")
+                    .setMessage("Weet u zeker dat u dit ticket wil gebruiken?")
+                    .setPositiveButton("Inleveren", (dialog, which) -> {
+                        finish();
+                    })
+                    .setNegativeButton("Annuleren", null)
+                    .setIcon(R.drawable.ic_menu_tickets)
+                    .show();
+        });
     }
 
     private Bitmap encodeAsBitmap(String data) {
