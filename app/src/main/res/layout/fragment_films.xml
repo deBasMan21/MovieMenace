@@ -7,7 +7,7 @@
     tools:context=".ui.films.FilmsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_films_recyclerview"
+        android:id="@+id/rv_films"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintStart_toStartOf="parent"

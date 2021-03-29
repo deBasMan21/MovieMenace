@@ -1,4 +1,4 @@
-package nl.avans.moviemenace.ui.home;
+package nl.avans.moviemenace;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,17 +11,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import nl.avans.moviemenace.FilmDetailActivity;
-import nl.avans.moviemenace.R;
-
-public class PopularFilmAdapter extends RecyclerView.Adapter<PopularFilmAdapter.PopularFilmViewHolder> {
-    public static class PopularFilmViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class ListFilmAdapter extends RecyclerView.Adapter {
+    public static class ListFilmsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private Context context;
-        
+
         private ImageView mPosterIv;
         private TextView mTitleTv;
 
-        public PopularFilmViewHolder(@NonNull View itemView) {
+        public ListFilmsViewHolder(@NonNull View itemView) {
             super(itemView);
             context = itemView.getContext();
             itemView.setOnClickListener(this);
@@ -38,20 +35,20 @@ public class PopularFilmAdapter extends RecyclerView.Adapter<PopularFilmAdapter.
 
     @NonNull
     @Override
-    public PopularFilmViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.viewholder_film, parent, false);
 
-        return new PopularFilmViewHolder(view);
+        return new ListFilmsViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PopularFilmViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return 8;
     }
 }

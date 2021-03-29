@@ -11,24 +11,25 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import nl.avans.moviemenace.R;
 
 public class ListsFragment extends Fragment {
     private ListsViewModel listsViewModel;
+    private RecyclerView mListsRv;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         listsViewModel =
                 new ViewModelProvider(this).get(ListsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_lists, container, false);
-        final TextView textView = root.findViewById(R.id.text_lists);
-        listsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+
+        mListsRv = root.findViewById(R.id.rv_lists);
+        mListsRv.setAdapter(new ListsAdapter());
+        mListsRv.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false));
+
         return root;
     }
 }
