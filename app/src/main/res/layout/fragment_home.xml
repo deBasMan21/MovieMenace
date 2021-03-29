@@ -10,10 +10,12 @@
         android:id="@+id/iv_home_banner"
         android:layout_width="0dp"
         android:layout_height="200dp"
-        android:src="@drawable/ic_launcher_background"
+        android:background="#999999"
+        android:src="@drawable/ic_image_placeholder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/white" />
 
     <TextView
         android:id="@+id/tv_home_desc"
@@ -33,9 +35,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:padding="16dp"
         android:text="TextView"
         android:textSize="24sp"
-        android:padding="16dp"
+        android:background="#CE2127"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_home_desc" />
