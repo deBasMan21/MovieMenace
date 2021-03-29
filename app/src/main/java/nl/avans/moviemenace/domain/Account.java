@@ -10,7 +10,7 @@ public class Account {
     private String name;
     private String password;
     private String address;
-    private String zipCode;
+    private ZipCode zipCode;
     private String iban;
     private LocalDate dateOfBirth;
     private List<Ticket> tickets;
@@ -21,7 +21,7 @@ public class Account {
         this.name = name;
         this.password = password;
         this.address = address;
-        this.zipCode = zipCode;
+        this.zipCode = new ZipCode(zipCode);
         this.iban = iban;
         this.dateOfBirth = dateOfBirth;
         this.tickets = new ArrayList<>();
@@ -61,11 +61,11 @@ public class Account {
     }
 
     public String getZipCode() {
-        return zipCode;
+        return zipCode.getZipCodeValue();
     }
 
     public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
+        this.zipCode = new ZipCode(zipCode);
     }
 
     public String getIban() {
