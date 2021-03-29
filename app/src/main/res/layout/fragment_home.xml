@@ -35,19 +35,19 @@
 
         <TextView
             android:id="@+id/tv_home_popular_header"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="414dp"
+            android:layout_height="68dp"
             android:layout_marginTop="16dp"
-            android:paddingVertical="16dp"
-            android:paddingHorizontal="24dp"
-            android:text="TextView"
-            android:textSize="24sp"
             android:background="#CE2127"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="16dp"
+            android:text="Populaire films"
             android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_home_desc"
-            android:textStyle="bold" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_home_desc" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_home_popular"
