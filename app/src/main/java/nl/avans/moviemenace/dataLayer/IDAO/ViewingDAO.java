@@ -9,5 +9,5 @@ public interface ViewingDAO {
     Viewing getViewing(int viewID);
     ArrayList<Viewing> getUpcomingViewingsForFilm(int movieID);
     ArrayList<Viewing> getUpcomingViewingsForRoom(int roomNumber);
-    ArrayList<Viewing> getViewingsForDate(LocalDate date);
+    ArrayList<Viewing> getViewingsForToday();
 }

@@ -12,11 +12,12 @@ public class Viewing {
     private Room room;
     private List<Ticket> tickets;
 
-    public Viewing(int id, LocalDateTime date, double price, boolean threeDimensional) {
+    public Viewing(int id, LocalDateTime date, double price, boolean threeDimensional, Room room) {
         this.id = id;
         this.date = date;
         this.price = price;
         this.threeDimensional = threeDimensional;
+        this.room = room;
         this.tickets = new ArrayList<>();
     }
 
