@@ -17,12 +17,12 @@ public class DatabaseConnection {
     private Statement statement;
     protected ResultSet rs = null;
     private static String Classes = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-    private static String ip = "aei-sql2.avans.nl/studenten";
+    private static String ip = "aei-sql2.avans.nl\\studenten";
     private static String port = "1443";
     private static String database = "MovieMenaceB12";
     private static String username = "AdminB12";
     private static String password = "tom&jerry";
-    private static String url = "jdbc:sqlserver://" + ip + ":" + port + ";databaseName=" + database;
+    private static String url = "jdbc:sqlserver://" + ip + ":" + port + ";databaseName=" + database + ";user=" + username + ";password=" + password;
     private static String urlLocal = "jdbc:sqlserver://localhost;databaseName=Cinema;integratedSecurity=true";
 
     public DatabaseConnection() {
@@ -38,7 +38,7 @@ public class DatabaseConnection {
                 // Try to create a connection with the library database
                 Class.forName(Classes);
 //                connection = DriverManager.getConnection(url, username, password);
-                connection = DriverManager.getConnection(url, username, password);
+                connection = DriverManager.getConnection(url);
 
                 if (connection != null) {
                     statement = connection.createStatement();
