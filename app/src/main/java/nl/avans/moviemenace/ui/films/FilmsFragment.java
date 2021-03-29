@@ -31,13 +31,6 @@ public class FilmsFragment extends Fragment {
         mFilmsRecyclerview.setAdapter(new FilmsAdapter());
         mFilmsRecyclerview.setLayoutManager(new GridLayoutManager(this.getContext(), 3, GridLayoutManager.VERTICAL, false));
 
-        final TextView textView = root.findViewById(R.id.text_films);
-        filmsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
         return root;
     }
 }
