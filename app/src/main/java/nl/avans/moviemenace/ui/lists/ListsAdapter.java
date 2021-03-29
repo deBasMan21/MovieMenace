@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import nl.avans.moviemenace.ListDetailActivity;
+import nl.avans.moviemenace.ui.ListDetailActivity;
 import nl.avans.moviemenace.R;
 
 public class ListsAdapter extends RecyclerView.Adapter<ListsAdapter.ListsViewHolder> {

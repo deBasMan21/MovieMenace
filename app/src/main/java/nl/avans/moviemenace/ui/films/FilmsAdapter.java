@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import nl.avans.moviemenace.FilmDetailActivity;
+import nl.avans.moviemenace.ui.FilmDetailActivity;
 import nl.avans.moviemenace.R;
 
 public class FilmsAdapter extends RecyclerView.Adapter {

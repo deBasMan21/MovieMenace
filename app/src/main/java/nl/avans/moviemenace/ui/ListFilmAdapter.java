@@ -1,4 +1,4 @@
-package nl.avans.moviemenace;
+package nl.avans.moviemenace.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import nl.avans.moviemenace.R;
+import nl.avans.moviemenace.ui.FilmDetailActivity;
 
 public class ListFilmAdapter extends RecyclerView.Adapter {
     public static class ListFilmsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

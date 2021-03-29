@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:paddingHorizontal="24dp"
     android:paddingTop="32dp"
-    tools:context=".EditAccountActivity">
+    tools:context=".ui.EditAccountActivity">
 
     <TextView
         android:id="@+id/tv_edit_account_name"

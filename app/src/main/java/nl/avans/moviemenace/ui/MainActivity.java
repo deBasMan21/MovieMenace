@@ -1,4 +1,4 @@
-package nl.avans.moviemenace;
+package nl.avans.moviemenace.ui;
 
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +16,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import nl.avans.moviemenace.R;
 import nl.avans.moviemenace.dataLayer.DAOFactory;
 import nl.avans.moviemenace.dataLayer.DatabaseConnection;
 import nl.avans.moviemenace.dataLayer.SQLDAOFactory;

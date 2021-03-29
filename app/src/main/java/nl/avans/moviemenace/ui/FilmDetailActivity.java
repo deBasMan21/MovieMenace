@@ -1,4 +1,4 @@
-package nl.avans.moviemenace;
+package nl.avans.moviemenace.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -11,6 +11,8 @@ import androidx.navigation.ui.NavigationUI;
 import android.os.Bundle;
 
 import com.google.android.material.navigation.NavigationView;
+
+import nl.avans.moviemenace.R;
 
 public class FilmDetailActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;

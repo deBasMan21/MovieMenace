@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import nl.avans.moviemenace.EditAccountActivity;
+import nl.avans.moviemenace.ui.EditAccountActivity;
 import nl.avans.moviemenace.R;
 
 public class AccountFragment extends Fragment {
