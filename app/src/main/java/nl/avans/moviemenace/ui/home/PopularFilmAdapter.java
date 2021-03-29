@@ -9,15 +9,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import nl.avans.moviemenace.FilmDetailActivity;
 import nl.avans.moviemenace.R;
 
-public class PopularFilmAdapter extends RecyclerView.Adapter {
+public class PopularFilmAdapter extends RecyclerView.Adapter<PopularFilmAdapter.PopularFilmViewHolder> {
     public static class PopularFilmViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private Context context;
-
+        
         private ImageView mPosterIv;
         private TextView mTitleTv;
 
@@ -38,7 +39,7 @@ public class PopularFilmAdapter extends RecyclerView.Adapter {
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public PopularFilmViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.film_viewholder, parent, false);
 
@@ -46,7 +47,7 @@ public class PopularFilmAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PopularFilmViewHolder holder, int position) {
 
     }
 
