@@ -12,7 +12,7 @@
         <ImageView
             android:id="@+id/iv_home_banner"
             android:layout_width="0dp"
-            android:layout_height="200dp"
+            android:layout_height="176dp"
             android:background="#999999"
             android:src="@drawable/ic_image_placeholder"
             app:layout_constraintEnd_toEndOf="parent"

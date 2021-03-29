@@ -11,12 +11,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MovieMenace">
+        <activity android:name=".ui.TicketDetailActivity"></activity>
         <activity
             android:name=".ui.EditAccountActivity"
-            android:parentActivityName=".ui.MainActivity"/>
+            android:parentActivityName=".ui.MainActivity" />
         <activity
             android:name=".ui.ListDetailActivity"
-            android:parentActivityName=".ui.MainActivity"/>
+            android:parentActivityName=".ui.MainActivity" />
         <activity
             android:name=".ui.FilmDetailActivity"
             android:parentActivityName=".ui.MainActivity" />
