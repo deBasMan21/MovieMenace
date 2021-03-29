@@ -16,14 +16,11 @@ public class DatabaseConnection {
     // execution method.
     private Statement statement;
     protected ResultSet rs = null;
-    private static String Classes = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-    private static String ip = "aei-sql2.avans.nl/studenten";
-    private static String port = "1443";
-    private static String database = "MovieMenaceB12";
+    private static String Classes = "net.sourceforge.jtds.jdbc.Driver";
     private static String username = "AdminB12";
     private static String password = "tom&jerry";
-    private static String url = "jdbc:sqlserver://" + ip + ":" + port + ";databaseName=" + database;
-    private static String urlLocal = "jdbc:sqlserver://localhost;databaseName=Cinema;integratedSecurity=true";
+    private static String url = "jdbc:jtds:sqlserver://aei-sql2.avans.nl:1443/MovieMenaceB12";
+
 
     public DatabaseConnection() {
         connection = null;
@@ -108,7 +105,7 @@ public class DatabaseConnection {
         if (query != null && connectionIsOpen()) {
             // Then, if succeeded, execute the query.
             try {
-                statement.executeQuery(query);
+                statement.executeUpdate(query);
                 result = true;
             } catch (SQLException e) {
                 System.out.println(e);

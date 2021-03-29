@@ -2,6 +2,7 @@ package nl.avans.moviemenace.logic;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Map;
 
 import nl.avans.moviemenace.dataLayer.DAOFactory;
 import nl.avans.moviemenace.dataLayer.IDAO.TicketDAO;
@@ -36,6 +37,20 @@ public class TicketManager {
         }
 
         return price;
+    }
+
+    //
+    public boolean checkAvailableSeats(Viewing viewing, int selectedSeats) {
+        int rows = viewing.getRoom().getNumberOfRows();
+        int seats = viewing.getRoom().getNumberOfSeats();
+        Map<Integer, Ticket> list = viewing.getTickets();
+        int takenSeats = list.size();
+
+        if (list.size() + selectedSeats > list.size()) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
 

@@ -2,7 +2,9 @@ package nl.avans.moviemenace.domain;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Viewing {
     private int id;
@@ -10,7 +12,7 @@ public class Viewing {
     private double price;
     private boolean threeDimensional;
     private Room room;
-    private List<Ticket> tickets;
+    private Map<Integer, Ticket> tickets;
 
     public Viewing(int id, LocalDateTime date, double price, boolean threeDimensional, Room room) {
         this.id = id;
@@ -18,7 +20,7 @@ public class Viewing {
         this.price = price;
         this.threeDimensional = threeDimensional;
         this.room = room;
-        this.tickets = new ArrayList<>();
+        this.tickets = new HashMap<>();
     }
 
     public int getId() {
@@ -61,11 +63,11 @@ public class Viewing {
         this.room = room;
     }
 
-    public List<Ticket> getTickets() {
+    public Map<Integer, Ticket> getTickets() {
         return tickets;
     }
 
-    public void setTickets(List<Ticket> tickets) {
+    public void setTickets(Map<Integer, Ticket> tickets) {
         this.tickets = tickets;
     }
 }

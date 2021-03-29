@@ -8,6 +8,11 @@ import nl.avans.moviemenace.dataLayer.IDAO.AccountDAO;
 import nl.avans.moviemenace.domain.Account;
 
 public class SQLAccountDAO extends DatabaseConnection implements AccountDAO  {
+
+    public SQLAccountDAO() {
+        openConnection();
+    }
+
     @Override
     public Account getAccount(String email) {
         // An account is created to fill in with the data from the db
@@ -48,7 +53,7 @@ public class SQLAccountDAO extends DatabaseConnection implements AccountDAO  {
             //This string contains the create query filled in with the data from the newaccount to create a new account in the db
             String SQL = "INSERT INTO Account (Email, Name, Password, Adress, Zipcode, IBAN, DateOfBirth) VALUES('"
                     + newAccount.getEmail() + "', '" + newAccount.getName() + "', '" + newAccount.getPassword() + "', '"
-                    + newAccount.getAddress() + "', '" + newAccount.getZipCode() + "', " + newAccount.getIban() + ", '"
+                    + newAccount.getAddress() + "', '" + newAccount.getZipCode() + "', " + "'" + newAccount.getIban() + "'" + ", '"
                     + newAccount.getDateOfBirth().toString() + "')";
             //This executes the query
             executeSQLStatement(SQL);
