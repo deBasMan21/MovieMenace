@@ -25,4 +25,8 @@
     <style name="Theme.MovieMenace.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.MovieMenace.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Theme.MovieMenace.TextSecondary">
+        <item name="android:textColor">@android:color/secondary_text_light</item>
+    </style>
 </resources>

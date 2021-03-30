@@ -28,6 +28,7 @@ import nl.avans.moviemenace.logic.MovieManager;
 import nl.avans.moviemenace.logic.TicketManager;
 
 public class MainActivity extends AppCompatActivity {
+    private final boolean LOGINTEST = true;
 
     private AppBarConfiguration mAppBarConfiguration;
 
@@ -43,9 +44,10 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_films, R.id.nav_account, R.id.nav_lists, R.id.nav_tickets)
+                R.id.nav_home, R.id.nav_films, R.id.nav_account, R.id.nav_lists, R.id.nav_tickets, R.id.nav_login)
                 .setDrawerLayout(drawer)
                 .build();
+
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);

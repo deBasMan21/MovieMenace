@@ -20,6 +20,7 @@ public class FilmsFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
         filmsViewModel =
                 new ViewModelProvider(this).get(FilmsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_films, container, false);
