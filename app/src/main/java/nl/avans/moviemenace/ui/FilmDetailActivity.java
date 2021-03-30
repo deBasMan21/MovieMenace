@@ -8,18 +8,27 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.android.material.navigation.NavigationView;
 
 import nl.avans.moviemenace.R;
 
 public class FilmDetailActivity extends AppCompatActivity {
-    private AppBarConfiguration mAppBarConfiguration;
+    private Button mFilmToListBn;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_film_detail);
+
+        mFilmToListBn = findViewById(R.id.bn_film_detail_list);
+
+        mFilmToListBn.setOnClickListener((View v) -> {
+            startActivity(new Intent(v.getContext(), FilmToListActivity.class));
+        });
 
     }
 }
