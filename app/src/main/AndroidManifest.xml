@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_mm_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MovieMenace">
-        <activity android:name=".ui.FilmToListActivity"></activity>
+        <activity android:name=".ui.ListToFilmActivity"></activity>
+        <activity android:name=".ui.FilmToListActivity" />
         <activity
             android:name=".ui.TicketDetailActivity"
             android:parentActivityName=".ui.MainActivity" />
