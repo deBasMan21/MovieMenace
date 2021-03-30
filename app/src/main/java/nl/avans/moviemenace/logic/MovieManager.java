@@ -89,4 +89,6 @@ public class MovieManager implements Callback<TrendingMoviesApiResponse> {
         void onMoviesAvailable(List<Movie> movies);
     }
 
+
+
 }

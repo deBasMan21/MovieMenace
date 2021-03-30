@@ -19,12 +19,13 @@ public class TicketManager {
         this.ticketDAO = factory.createTicketDAO();
     }
 
+    //Last step of payment
     public boolean createTicket(Ticket ticket) {
         ticketDAO.createTicket(ticket);
         return true;
     }
 
-    // Calculating price incl. discount
+    // Calculating price incl. discount (trigger after selecting seats)
     public double calculatePrice(Account account, Viewing viewing) {
         double price = viewing.getPrice();
         LocalDate dateOfBirth = account.getDateOfBirth();
@@ -40,31 +41,33 @@ public class TicketManager {
         return price;
     }
 
-    // check on available seats for the viewing
-//    public boolean checkAvailableSeats(Viewing viewing, int selectedSeats) {
-//        int seats = viewing.getRoom().getNumberOfSeats();
-//        List<Ticket> list = viewing.getTickets();
-//        int takenSeats = list.size();
-//
-//        if (list.size() + selectedSeats > seats) {
-//            return false;
-//        } else {
-//            return true;
-//        }
-//    }
+    // MOET NOG EEN QUERY VOOR KOMEN
+    public int getTakenSeats() {
+        return 0;
+    }
 
-//    //returns seat numbers
-//    public int[] getSeats(Viewing viewing, int selectedSeats) {
-//        int[] seats = new int[selectedSeats];
-//        List<Ticket> list = viewing.getTickets();
-////        int startNumber = list.size();
-//         for (int i = 0; i < selectedSeats; i++) {
-//
-//         }
-//    return null;
-//    }
+    // check available seats for the viewing (trigger after selecting a viewing)
+    public int checkAvailableSeats(Viewing viewing) {
+        int maxSeats = viewing.getRoom().getNumberOfSeats();
+        int takenSeats = getTakenSeats();
 
-    // returns row number
+        return maxSeats - takenSeats;
+    }
+
+    //returns seat numbers for ticket creation (Needed after pressing pay)
+    public int[] getSeats(Viewing viewing, int selectedSeats) {
+        int takenSeats = getTakenSeats();
+        int[] seatNumbers = new int[selectedSeats];
+
+        for (int i = 0; i < selectedSeats; i ++) {
+            seatNumbers[i] = takenSeats + 1;;
+            takenSeats += 1;
+        }
+
+        return seatNumbers;
+    }
+
+    // returns row number for ticket creation (Needed after pressing pay)
     public int getRow(Viewing viewing, int seatNumber) {
         int rows = viewing.getRoom().getNumberOfRows();
         int seats = viewing.getRoom().getNumberOfSeats();
