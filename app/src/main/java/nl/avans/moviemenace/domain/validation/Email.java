@@ -4,7 +4,7 @@ public class Email {
     private String email;
 
     public Email(String email) {
-        this.email = email;
+        setEmail(email);
     }
 
     public String getEmail() {
@@ -12,7 +12,9 @@ public class Email {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        if (checkEmail(email)) {
+            this.email = email;
+        }
     }
 
     public boolean checkEmail(String mailAddress) {
