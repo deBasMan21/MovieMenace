@@ -10,17 +10,17 @@ public class Movie {
     private String overview;
     private String release_date;
     private boolean adult;
+    private String status;
     private int duration;
-    private List<Viewing> viewings;
 
-    public Movie(int id, String title, String overview, String release_date, boolean adult, int duration) {
+    public Movie(int id, String title, String overview, String release_date, boolean adult, String status, int duration) {
         this.id = id;
         this.title = title;
         this.overview = overview;
         this.release_date = release_date;
         this.adult = adult;
+        this.status = status;
         this.duration = duration;
-        this.viewings = new ArrayList<>();
     }
 
     public int getId() {
@@ -63,12 +63,12 @@ public class Movie {
         this.adult = adult;
     }
 
-    public List<Viewing> getViewings() {
-        return viewings;
+    public String getStatus() {
+        return this.status;
     }
 
-    public void setViewings(List<Viewing> viewings) {
-        this.viewings = viewings;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public int getDuration() {
@@ -87,7 +87,6 @@ public class Movie {
                 ", overview='" + overview + '\'' +
                 ", release_date='" + release_date + '\'' +
                 ", adult=" + adult +
-                ", viewings=" + viewings +
                 '}';
     }
 }
