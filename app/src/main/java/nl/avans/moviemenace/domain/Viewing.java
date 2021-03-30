@@ -12,7 +12,7 @@ public class Viewing {
     private double price;
     private boolean threeDimensional;
     private Room room;
-    private Map<Integer, Ticket> tickets;
+    private List<Ticket> tickets;
     private Movie movie;
 
     public Viewing(int id, LocalDateTime date, double price, boolean threeDimensional, Room room, Movie movie) {
@@ -21,7 +21,7 @@ public class Viewing {
         this.price = price;
         this.threeDimensional = threeDimensional;
         this.room = room;
-        this.tickets = new HashMap<>();
+        this.tickets = new ArrayList<>();
         this.movie = movie;
     }
 
@@ -65,11 +65,11 @@ public class Viewing {
         this.room = room;
     }
 
-    public Map<Integer, Ticket> getTickets() {
+    public List<Ticket> getTickets() {
         return tickets;
     }
 
-    public void setTickets(Map<Integer, Ticket> tickets) {
+    public void setTickets(List<Ticket> tickets) {
         this.tickets = tickets;
     }
 
