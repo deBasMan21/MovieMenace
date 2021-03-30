@@ -16,6 +16,7 @@ public class SQLCinemaDAO extends DatabaseConnection implements CinemaDAO {
             //This executes the query
             executeSQLSelectStatement(SQL);
             //The cinema object created before will be filled in with data here
+            rs.next();
             cinema = new Cinema(rs.getString("Name"), rs.getString("Place"), rs.getInt("NumberOfRooms"));
         } catch(Exception e){
             //Prints out any errors that may occur

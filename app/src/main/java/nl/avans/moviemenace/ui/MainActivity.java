@@ -24,6 +24,7 @@ import nl.avans.moviemenace.dataLayer.DAOFactory;
 import nl.avans.moviemenace.dataLayer.DatabaseConnection;
 import nl.avans.moviemenace.dataLayer.SQLDAOFactory;
 import nl.avans.moviemenace.domain.Account;
+import nl.avans.moviemenace.domain.Cinema;
 import nl.avans.moviemenace.logic.MovieManager;
 import nl.avans.moviemenace.logic.TicketManager;
 
@@ -80,7 +81,8 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
             DAOFactory factory = new SQLDAOFactory();
-            factory.createAccountDAO().createAccount(new Account("abc", "abc", "abc", "abc", "1234 TR", "abc", LocalDate.parse("1999-10-12")));
+            Cinema cinema = factory.createCinemaDAO().getCinema("MovieMenace");
+
             return null;
         }
     }

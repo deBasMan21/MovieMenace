@@ -23,7 +23,8 @@ public class SQLAccountDAO extends DatabaseConnection implements AccountDAO  {
             String SQL = "SELECT * FROM Account WHERE Email = '" + email + "'";
             executeSQLSelectStatement(SQL);
             //The account that was created is filled in with the data from the db selected by the query
-            account = new Account(rs.getString("Email"), rs.getString("Name"), rs.getString("Password"), rs.getString("Adress"), rs.getString("Zipcode"), rs.getString("IBAN"), LocalDate.parse(rs.getString("DateOfBirth")));
+            rs.next();
+            account = new Account(this.rs.getString("Email"), this.rs.getString("Name"), this.rs.getString("Password"), this.rs.getString("Adress"), this.rs.getString("Zipcode"), this.rs.getString("IBAN"), LocalDate.parse(this.rs.getString("DateOfBirth")));
         } catch(Exception e){
             //Prints out any errors that may occur
             e.printStackTrace();
@@ -39,9 +40,9 @@ public class SQLAccountDAO extends DatabaseConnection implements AccountDAO  {
         openConnection();
         try{
             //This string contains the update query filled in with the data from the updatedaccount
-            String SQL = "UPDATE Account (Email, Name, Adress, Zipcode) SET VALUES('"
-                    + updatedAccount.getEmail() + "', '" + updatedAccount.getName() + "', '"
-                    + updatedAccount.getAddress() + "', '" + updatedAccount.getZipCode() + "') WHERE Email = '" + email + "'";
+            String SQL = "UPDATE Account SET Email = '"
+                    + updatedAccount.getEmail() + "', Name = '" + updatedAccount.getName() + "', Adress = '"
+                    + updatedAccount.getAddress() + "', Zipcode = '" + updatedAccount.getZipCode() + "' WHERE Email = '" + email + "'";
 
             //This executes the query
             executeSQLStatement(SQL);
@@ -83,6 +84,7 @@ public class SQLAccountDAO extends DatabaseConnection implements AccountDAO  {
             //Executes the select query
             executeSQLSelectStatement(SQL);
             //Fills the string created before with the data thats selected with the query
+            rs.next();
             password = rs.getString("Password");
         } catch(Exception e){
             //Prints out any errors that may occur
