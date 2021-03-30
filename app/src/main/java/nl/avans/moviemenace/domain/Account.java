@@ -4,24 +4,28 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import nl.avans.moviemenace.domain.validation.Email;
+import nl.avans.moviemenace.domain.validation.Password;
+import nl.avans.moviemenace.domain.validation.ZipCode;
+
 public class Account {
 
-    private String email;
+    private Email email;
     private String name;
-    private String password;
+    private Password password;
     private String address;
-    private String zipCode;
+    private ZipCode zipCode;
     private String iban;
     private LocalDate dateOfBirth;
     private List<Ticket> tickets;
     private List<MovieList> movieLists;
 
     public Account(String email, String name, String password, String address, String zipCode, String iban, LocalDate dateOfBirth) {
-        this.email = email;
+        this.email = new Email(email);
         this.name = name;
-        this.password = password;
+        this.password = new Password(password);
         this.address = address;
-        this.zipCode = zipCode;
+        this.zipCode = new ZipCode(zipCode);
         this.iban = iban;
         this.dateOfBirth = dateOfBirth;
         this.tickets = new ArrayList<>();
@@ -29,11 +33,11 @@ public class Account {
     }
 
     public String getEmail() {
-        return email;
+        return email.getEmail();
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email = new Email(email);
     }
 
     public String getName() {
@@ -45,11 +49,11 @@ public class Account {
     }
 
     public String getPassword() {
-        return password;
+        return password.getPassword();
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = new Password(password);
     }
 
     public String getAddress() {
@@ -61,11 +65,11 @@ public class Account {
     }
 
     public String getZipCode() {
-        return zipCode;
+        return zipCode.getZipCodeValue();
     }
 
     public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
+        this.zipCode = new ZipCode(zipCode);
     }
 
     public String getIban() {
