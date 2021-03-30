@@ -15,7 +15,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import java.time.LocalDate;
+
 import nl.avans.moviemenace.R;
+import nl.avans.moviemenace.domain.Account;
 import nl.avans.moviemenace.ui.account.AccountFragment;
 import nl.avans.moviemenace.ui.account.AccountViewModel;
 
@@ -46,7 +49,8 @@ public class LoginFragment extends Fragment {
 
         mLoginBn = view.findViewById(R.id.bn_login_login);
         mLoginBn.setOnClickListener((View v) -> {
-            accountViewModel.setAccount("logged in");
+            // set dummy account to simulate logged in user
+            accountViewModel.setAccount(new Account("email", "name", "pass", "address", "0000AA", "iban", LocalDate.of(2000, 1, 1)));
             Navigation.findNavController(view).navigate(R.id.nav_account);
         });
     }

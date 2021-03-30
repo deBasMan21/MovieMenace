@@ -11,13 +11,17 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import nl.avans.moviemenace.R;
+import nl.avans.moviemenace.ui.account.AccountViewModel;
 
 public class TicketsFragment extends Fragment {
     private TicketsViewModel ticketsViewModel;
+    private AccountViewModel accountViewModel;
 
     private RecyclerView mTicketsRv;
 
@@ -25,6 +29,9 @@ public class TicketsFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         ticketsViewModel =
                 new ViewModelProvider(this).get(TicketsViewModel.class);
+        accountViewModel =
+                new ViewModelProvider((requireActivity())).get(AccountViewModel.class);
+
         View root = inflater.inflate(R.layout.fragment_tickets, container, false);
 
         return root;
@@ -34,6 +41,13 @@ public class TicketsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // navigate to login fragment if no user i slogged in
+        NavController navController = Navigation.findNavController(view);
+        accountViewModel.getAccount().observe(getViewLifecycleOwner(), account -> {
+            if (account == null) {
+                navController.navigate(R.id.nav_login);
+            }
+        });
 
         mTicketsRv = view.findViewById(R.id.rv_tickets);
         mTicketsRv.setAdapter(new TicketsAdapter());

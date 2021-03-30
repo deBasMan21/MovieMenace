@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,9 +19,12 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import nl.avans.moviemenace.R;
 import nl.avans.moviemenace.ui.CreateListActivity;
+import nl.avans.moviemenace.ui.account.AccountViewModel;
 
 public class ListsFragment extends Fragment {
     private ListsViewModel listsViewModel;
+    private AccountViewModel accountViewModel;
+
     private RecyclerView mListsRv;
 
     private FloatingActionButton mAddFb;
@@ -27,7 +32,10 @@ public class ListsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         listsViewModel =
-                new ViewModelProvider(this).get(ListsViewModel.class);
+                new ViewModelProvider(requireActivity()).get(ListsViewModel.class);
+        accountViewModel =
+                new ViewModelProvider(requireActivity()).get(AccountViewModel.class);
+
         View root = inflater.inflate(R.layout.fragment_lists, container, false);
 
         return root;
@@ -36,6 +44,14 @@ public class ListsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        // navigate to login fragment if no user i slogged in
+        NavController navController = Navigation.findNavController(view);
+        accountViewModel.getAccount().observe(getViewLifecycleOwner(), account -> {
+            if (account == null) {
+                navController.navigate(R.id.nav_login);
+            }
+        });
 
         mAddFb = view.findViewById(R.id.fb_lists_add);
         mAddFb.setOnClickListener((View v) -> {
