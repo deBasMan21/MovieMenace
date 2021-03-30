@@ -10,4 +10,5 @@ public interface ViewingDAO {
     ArrayList<Viewing> getUpcomingViewingsForFilm(int movieID);
     ArrayList<Viewing> getUpcomingViewingsForRoom(int roomNumber);
     ArrayList<Viewing> getViewingsForToday();
+    int getTakenSeats(int viewID);
 }

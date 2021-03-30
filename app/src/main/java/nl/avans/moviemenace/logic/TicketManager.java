@@ -7,6 +7,7 @@ import java.util.Map;
 
 import nl.avans.moviemenace.dataLayer.DAOFactory;
 import nl.avans.moviemenace.dataLayer.IDAO.TicketDAO;
+import nl.avans.moviemenace.dataLayer.IDAO.ViewingDAO;
 import nl.avans.moviemenace.domain.Account;
 import nl.avans.moviemenace.domain.Ticket;
 import nl.avans.moviemenace.domain.Viewing;
@@ -14,9 +15,11 @@ import nl.avans.moviemenace.domain.Viewing;
 public class TicketManager {
 
     TicketDAO ticketDAO;
+    ViewingDAO viewingDAO;
 
     public TicketManager(DAOFactory factory) {
         this.ticketDAO = factory.createTicketDAO();
+        this.viewingDAO = factory.createViewingDAO();
     }
 
     //Last step of payment
@@ -41,22 +44,22 @@ public class TicketManager {
         return price;
     }
 
-    // MOET NOG EEN QUERY VOOR KOMEN
-    public int getTakenSeats() {
-        return 0;
+    //Used for calculating the available seats and the seatNumbers (used in getSeats() && checkAvailableSeats())
+    private int getTakenSeats(int viewID) {
+        return viewingDAO.getTakenSeats(viewID);
     }
 
     // check available seats for the viewing (trigger after selecting a viewing)
     public int checkAvailableSeats(Viewing viewing) {
         int maxSeats = viewing.getRoom().getNumberOfSeats();
-        int takenSeats = getTakenSeats();
+        int takenSeats = getTakenSeats(viewing.getId());
 
         return maxSeats - takenSeats;
     }
 
     //returns seat numbers for ticket creation (Needed after pressing pay)
     public int[] getSeats(Viewing viewing, int selectedSeats) {
-        int takenSeats = getTakenSeats();
+        int takenSeats = getTakenSeats(viewing.getId());
         int[] seatNumbers = new int[selectedSeats];
 
         for (int i = 0; i < selectedSeats; i ++) {

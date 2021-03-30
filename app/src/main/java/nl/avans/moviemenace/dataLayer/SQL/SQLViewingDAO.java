@@ -138,4 +138,25 @@ public class SQLViewingDAO extends DatabaseConnection implements ViewingDAO {
         //returns the list with viewings
         return viewingsForDate;
     }
+
+    @Override
+    public int getTakenSeats(int viewID) {
+        openConnection();
+        int takenSeats = 0;
+
+        try {
+            // Retrieve ticket count for a viewing
+            String SQL = "SELECT COUNT(*) AS takenSeats FROM Tickets WHERE ViewID =" + "'" + viewID + "'";
+            executeSQLSelectStatement(SQL);
+
+            takenSeats = rs.getInt("takenSeats");
+        } catch (Exception e) {
+            //Prints out any errors that may occur
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+
+        return takenSeats;
+    }
 }
