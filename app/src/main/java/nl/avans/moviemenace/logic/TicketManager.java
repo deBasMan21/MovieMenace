@@ -2,6 +2,7 @@ package nl.avans.moviemenace.logic;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -63,7 +64,7 @@ public class TicketManager {
         int[] seatNumbers = new int[selectedSeats];
 
         for (int i = 0; i < selectedSeats; i ++) {
-            seatNumbers[i] = takenSeats + 1;;
+            seatNumbers[i] = takenSeats + 1;
             takenSeats += 1;
         }
 
@@ -82,7 +83,19 @@ public class TicketManager {
                 return i;
             }
         }
-
         return -1;
+    }
+
+    public ArrayList<Ticket> getAllTicketsForAccount(String email) {
+        return ticketDAO.getAllTicketsForAccount(email);
+    }
+    public ArrayList<Ticket> getUpcomingTicketsForAccount(String email) {
+        return ticketDAO.getUpcomingTicketsForAccount(email);
+    }
+    public ArrayList<Ticket> getExpiredTicketsForAccount(String email) {
+        return ticketDAO.getExpiredTicketsForAccount(email);
+    }
+    public ArrayList<Ticket> getUsedTicketsForAccount(String email) {
+        return ticketDAO.getUsedTicketsForAccount(email);
     }
 }
