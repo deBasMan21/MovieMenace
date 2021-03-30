@@ -29,7 +29,7 @@ public class SQLViewingDAO extends DatabaseConnection implements ViewingDAO {
             //creates room object to use in the viewing object
             Room room = new Room(rs.getInt("RoomNumber"), rs.getInt("NumberOfSeats"), rs.getBoolean("[3D]"), rs.getInt("NumberOfRows"));
             //adds the data to the viewing
-            viewing = new Viewing(rs.getInt("ViewID"), dateAndTime, rs.getDouble("Price"), rs.getBoolean("[3D]"), room);
+            viewing = new Viewing(rs.getInt("ViewID"), dateAndTime, rs.getDouble("Price"), rs.getBoolean("[3D]"), room, rs.getInt("MovieID"));
         } catch (Exception e){
             //Prints out any errors that may occur
             e.printStackTrace();
@@ -57,7 +57,7 @@ public class SQLViewingDAO extends DatabaseConnection implements ViewingDAO {
                 //creates room object to use for the viewing
                 Room room = new Room(rs.getInt("RoomNumber"), rs.getInt("NumberOfSeats"), rs.getBoolean("[3D]"), rs.getInt("NumberOfRows"));
                 //creates the viewing object will all data in it
-                Viewing viewing = new Viewing(rs.getInt("ViewID"), dateAndTime, rs.getDouble("Price"), rs.getBoolean("[3D]"), room);
+                Viewing viewing = new Viewing(rs.getInt("ViewID"), dateAndTime, rs.getDouble("Price"), rs.getBoolean("[3D]"), room, rs.getInt("MovieID"));
                 //checks if the viewing is later today or not
                 if(viewing.getDate().isAfter(LocalDateTime.now())){
                     //adds the viewing to the list if its later today
@@ -91,7 +91,7 @@ public class SQLViewingDAO extends DatabaseConnection implements ViewingDAO {
                 //creates room object to use in a viewing
                 Room room = new Room(rs.getInt("RoomNumber"), rs.getInt("NumberOfSeats"), rs.getBoolean("[3D]"), rs.getInt("NumberOfRows"));
                 //creates viewing with all data in it
-                Viewing viewing = new Viewing(rs.getInt("ViewID"), dateAndTime, rs.getDouble("Price"), rs.getBoolean("[3D]"), room);
+                Viewing viewing = new Viewing(rs.getInt("ViewID"), dateAndTime, rs.getDouble("Price"), rs.getBoolean("[3D]"), room, rs.getInt("MovieID"));
                 //checks if the viewing is in the future
                 if(viewing.getDate().isAfter(LocalDateTime.now())){
                     //adds the viewing when it is upcoming
@@ -125,7 +125,7 @@ public class SQLViewingDAO extends DatabaseConnection implements ViewingDAO {
                 //creates room object to use in viewing
                 Room room = new Room(rs.getInt("RoomNumber"), rs.getInt("NumberOfSeats"), rs.getBoolean("[3D]"), rs.getInt("NumberOfRows"));
                 //creates viewing with all the data
-                Viewing viewing = new Viewing(rs.getInt("ViewID"), dateAndTime, rs.getDouble("Price"), rs.getBoolean("[3D]"), room);
+                Viewing viewing = new Viewing(rs.getInt("ViewID"), dateAndTime, rs.getDouble("Price"), rs.getBoolean("[3D]"), room, rs.getInt("MovieID"));
                 //adds the viewing to the list
                 viewingsForDate.add(viewing);
             }

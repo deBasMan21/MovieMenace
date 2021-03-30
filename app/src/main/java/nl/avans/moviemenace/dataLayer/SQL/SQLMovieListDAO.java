@@ -75,7 +75,7 @@ public class SQLMovieListDAO extends DatabaseConnection implements MovieListDAO 
             //creates a loop for alle the found items for a sudden list.
             while(rs.next()){
                 //creates movie items
-                Movie movie = new Movie(rs.getInt("Id"), rs.getString("Title"), rs.getString("Description"), rs.getString("ReleaseDate"), rs.getBoolean("Adult"));
+                Movie movie = new Movie(rs.getInt("Id"), rs.getString("Title"), rs.getString("Description"), rs.getString("ReleaseDate"), rs.getBoolean("Adult"), rs.getString("Status") ,rs.getInt("Duration"));
                 //adds movie items to the list
                 moviesInList.add(movie);
             }
