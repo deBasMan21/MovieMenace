@@ -46,7 +46,7 @@ public class TicketManager {
         Map<Integer, Ticket> list = viewing.getTickets();
         int takenSeats = list.size();
 
-        if (list.size() + selectedSeats > list.size()) {
+        if (list.size() + selectedSeats > seats) {
             return false;
         } else {
             return true;

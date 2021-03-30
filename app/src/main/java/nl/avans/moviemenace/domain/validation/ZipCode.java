@@ -1,4 +1,4 @@
-package nl.avans.moviemenace.domain;
+package nl.avans.moviemenace.domain.validation;
 
 public class ZipCode {
     private String zipCodeValue;
@@ -18,6 +18,18 @@ public class ZipCode {
 
     public String getZipCodeValue() {
         return zipCodeValue;
+    }
+
+    public boolean checkZipCode(String zipCode) {
+        String letters = zipCode.trim().substring(4).trim().toUpperCase();
+        int numbersLength = Integer.valueOf(zipCode.trim().substring(0, 4));
+        int lettersLength = zipCode.trim().substring(4).length();
+        char firstLetter = letters.charAt(0);
+        char secondLetter = letters.charAt(1);
+        if (numbersLength > 999 && numbersLength <= 9999 && lettersLength == 2 && (firstLetter >= 'A' && firstLetter <= 'Z') && (secondLetter >= 'A' && secondLetter <= 'Z')) {
+            return true;
+        }
+        return false;
     }
 
     private String formatZipCode(String zipCode) {
