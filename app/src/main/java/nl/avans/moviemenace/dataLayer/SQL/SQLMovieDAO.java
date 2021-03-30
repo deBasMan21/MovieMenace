@@ -19,10 +19,12 @@ public class SQLMovieDAO extends DatabaseConnection implements MovieDAO {
             //This executes the query
             executeSQLSelectStatement(SQL);
             //The selected movie will be filled in with data
-            movie = new Movie(rs.getInt("Id"), rs.getString("Title"), rs.getString("Description"),rs.getString("ReleaseDate"), rs.getBoolean("Adult"));
+            movie = new Movie(rs.getInt("Id"), rs.getString("Title"), rs.getString("Description"),rs.getString("ReleaseDate"), rs.getBoolean("Adult"), rs.getString("Status"), rs.getInt("Duration"));
         } catch (Exception e){
             //Prints out any errors that may occur
             e.printStackTrace();
+        } finally {
+            closeConnection();
         }
         //Returns the movie object created before
         return movie;
@@ -30,6 +32,7 @@ public class SQLMovieDAO extends DatabaseConnection implements MovieDAO {
 
     @Override
     public ArrayList<Movie> getMovieByTitle(String title) {
+        openConnection();
         //Creates an arraylist and movie object. In this arraylist all the movies with the same title will be stored.
         ArrayList<Movie> movies = new ArrayList<>();
         Movie movie = null;
@@ -42,12 +45,14 @@ public class SQLMovieDAO extends DatabaseConnection implements MovieDAO {
             while (rs.next()) {
                 movie = new Movie(rs.getInt("Id"), rs.getString("Title"),
                         rs.getString("Description"), rs.getString("ReleaseDate"),
-                        rs.getBoolean("Adult"));
+                        rs.getBoolean("Adult"), rs.getString("Status"), rs.getInt("Duration"));
                 movies.add(movie);
             }
         } catch (Exception e){
             //Prints out any errors that may occur
             e.printStackTrace();
+        } finally {
+            closeConnection();
         }
         //This returns the list with movies
         return movies;

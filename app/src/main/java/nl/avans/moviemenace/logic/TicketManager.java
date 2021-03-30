@@ -2,6 +2,7 @@ package nl.avans.moviemenace.logic;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.List;
 import java.util.Map;
 
 import nl.avans.moviemenace.dataLayer.DAOFactory;
@@ -39,19 +40,43 @@ public class TicketManager {
         return price;
     }
 
-    //
-    public boolean checkAvailableSeats(Viewing viewing, int selectedSeats) {
+    // check on available seats for the viewing
+//    public boolean checkAvailableSeats(Viewing viewing, int selectedSeats) {
+//        int seats = viewing.getRoom().getNumberOfSeats();
+//        List<Ticket> list = viewing.getTickets();
+//        int takenSeats = list.size();
+//
+//        if (list.size() + selectedSeats > seats) {
+//            return false;
+//        } else {
+//            return true;
+//        }
+//    }
+
+//    //returns seat numbers
+//    public int[] getSeats(Viewing viewing, int selectedSeats) {
+//        int[] seats = new int[selectedSeats];
+//        List<Ticket> list = viewing.getTickets();
+////        int startNumber = list.size();
+//         for (int i = 0; i < selectedSeats; i++) {
+//
+//         }
+//    return null;
+//    }
+
+    // returns row number
+    public int getRow(Viewing viewing, int seatNumber) {
         int rows = viewing.getRoom().getNumberOfRows();
         int seats = viewing.getRoom().getNumberOfSeats();
-        Map<Integer, Ticket> list = viewing.getTickets();
-        int takenSeats = list.size();
+        int seatsInRow = seats / rows;
 
-        if (list.size() + selectedSeats > seats) {
-            return false;
-        } else {
-            return true;
+        for (int i = 0; i < rows; i ++) {
+            int amountOfSeats = seatsInRow * (i + 1);
+            if (seatNumber <= amountOfSeats) {
+                return i;
+            }
         }
+
+        return -1;
     }
-
-
 }

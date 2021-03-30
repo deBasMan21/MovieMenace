@@ -9,6 +9,7 @@ import nl.avans.moviemenace.domain.Ticket;
 public class SQLTicketDAO extends DatabaseConnection implements TicketDAO {
     @Override
     public void createTicket(Ticket ticket) {
+        openConnection();
         try{
             //this string contains the query to add a ticket to the db
             String SQL = "INSERT INTO Ticket (ChairNumber, Email, ViewID, Status, RowNumber) VALUES ("
@@ -19,11 +20,14 @@ public class SQLTicketDAO extends DatabaseConnection implements TicketDAO {
         } catch (Exception e){
             //Prints out any errors that may occur
             e.printStackTrace();
+        } finally {
+            closeConnection();
         }
     }
 
     @Override
     public Ticket getTicket(int chairnumber, String email, int viewID) {
+        openConnection();
         //creates a ticket object to store the data
         Ticket ticket = null;
         try{
@@ -36,6 +40,8 @@ public class SQLTicketDAO extends DatabaseConnection implements TicketDAO {
         } catch (Exception e){
             //Prints out any errors that may occur
             e.printStackTrace();
+        } finally {
+            closeConnection();
         }
         //returns the ticket
         return ticket;
@@ -43,6 +49,7 @@ public class SQLTicketDAO extends DatabaseConnection implements TicketDAO {
 
     @Override
     public ArrayList<Ticket> getAllTicketsForAccount(String email) {
+        openConnection();
         //creates an arraylist to store the tickets from an account
         ArrayList<Ticket> tickets = new ArrayList<>();
         try{
@@ -58,6 +65,8 @@ public class SQLTicketDAO extends DatabaseConnection implements TicketDAO {
         } catch (Exception e){
             //Prints out any errors that may occur
             e.printStackTrace();
+        } finally {
+            closeConnection();
         }
         //this returns the list
         return tickets;
@@ -65,6 +74,7 @@ public class SQLTicketDAO extends DatabaseConnection implements TicketDAO {
 
     @Override
     public ArrayList<Ticket> getUpcomingTicketsForAccount(String email) {
+        openConnection();
         //creates an arraylist with tickets to store all upcoming tickets for an account
         ArrayList<Ticket> tickets = new ArrayList<>();
         try{
@@ -80,6 +90,8 @@ public class SQLTicketDAO extends DatabaseConnection implements TicketDAO {
         } catch (Exception e){
             //Prints out any errors that may occur
             e.printStackTrace();
+        } finally {
+            closeConnection();
         }
         //this returns the list of tickets
         return tickets;
@@ -87,6 +99,7 @@ public class SQLTicketDAO extends DatabaseConnection implements TicketDAO {
 
     @Override
     public ArrayList<Ticket> getExpiredTicketsForAccount(String email) {
+        openConnection();
         //creates an arraylist to contain all expired tickets for an account
         ArrayList<Ticket> tickets = new ArrayList<>();
         try{
@@ -102,6 +115,8 @@ public class SQLTicketDAO extends DatabaseConnection implements TicketDAO {
         } catch (Exception e){
             //Prints out any errors that may occur
             e.printStackTrace();
+        }finally {
+            closeConnection();
         }
         //returns the list of tickets
         return tickets;
@@ -109,6 +124,7 @@ public class SQLTicketDAO extends DatabaseConnection implements TicketDAO {
 
     @Override
     public ArrayList<Ticket> getUsedTicketsForAccount(String email) {
+        openConnection();
         //creates an arraylist to contain all the used tickets for an account
         ArrayList<Ticket> tickets = new ArrayList<>();
         try{
@@ -124,6 +140,8 @@ public class SQLTicketDAO extends DatabaseConnection implements TicketDAO {
         } catch (Exception e){
             //Prints out any errors that may occur
             e.printStackTrace();
+        } finally {
+            closeConnection();
         }
         //returns the list of tickets
         return tickets;

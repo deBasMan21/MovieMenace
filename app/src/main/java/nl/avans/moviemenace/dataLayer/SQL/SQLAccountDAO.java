@@ -15,6 +15,7 @@ public class SQLAccountDAO extends DatabaseConnection implements AccountDAO  {
 
     @Override
     public Account getAccount(String email) {
+        openConnection();
         // An account is created to fill in with the data from the db
         Account account = null;
         try{
@@ -22,10 +23,13 @@ public class SQLAccountDAO extends DatabaseConnection implements AccountDAO  {
             String SQL = "SELECT * FROM Account WHERE Email = '" + email + "'";
             executeSQLSelectStatement(SQL);
             //The account that was created is filled in with the data from the db selected by the query
-            account = new Account(rs.getString("Email"), rs.getString("Name"), rs.getString("Password"), rs.getString("Adress"), rs.getString("Zipcode"), rs.getString("IBAN"), LocalDate.parse(rs.getString("DateOfBirth")));
+            rs.next();
+            account = new Account(this.rs.getString("Email"), this.rs.getString("Name"), this.rs.getString("Password"), this.rs.getString("Adress"), this.rs.getString("Zipcode"), this.rs.getString("IBAN"), LocalDate.parse(this.rs.getString("DateOfBirth")));
         } catch(Exception e){
             //Prints out any errors that may occur
             e.printStackTrace();
+        } finally {
+            closeConnection();
         }
         //Returns the account
         return account;
@@ -33,22 +37,26 @@ public class SQLAccountDAO extends DatabaseConnection implements AccountDAO  {
 
     @Override
     public void updateAccount(String email, Account updatedAccount) {
+        openConnection();
         try{
             //This string contains the update query filled in with the data from the updatedaccount
-            String SQL = "UPDATE Account (Email, Name, Adress, Zipcode) SET VALUES('"
-                    + updatedAccount.getEmail() + "', '" + updatedAccount.getName() + "', '"
-                    + updatedAccount.getAddress() + "', '" + updatedAccount.getZipCode() + "') WHERE Email = '" + email + "'";
+            String SQL = "UPDATE Account SET Email = '"
+                    + updatedAccount.getEmail() + "', Name = '" + updatedAccount.getName() + "', Adress = '"
+                    + updatedAccount.getAddress() + "', Zipcode = '" + updatedAccount.getZipCode() + "' WHERE Email = '" + email + "'";
 
             //This executes the query
             executeSQLStatement(SQL);
         } catch(Exception e){
             //Prints out any errors that may occur
             e.printStackTrace();
+        } finally {
+            closeConnection();
         }
     }
 
     @Override
     public void createAccount(Account newAccount) {
+        openConnection();
         try{
             //This string contains the create query filled in with the data from the newaccount to create a new account in the db
             String SQL = "INSERT INTO Account (Email, Name, Password, Adress, Zipcode, IBAN, DateOfBirth) VALUES('"
@@ -60,11 +68,14 @@ public class SQLAccountDAO extends DatabaseConnection implements AccountDAO  {
         } catch(Exception e){
             //Prints out any errors that may occur
             e.printStackTrace();
+        } finally {
+            closeConnection();
         }
     }
 
     @Override
     public String getPassword(String email) {
+        openConnection();
         //This string is the string that will be returned with the password in it
         String password = "";
         try{
@@ -73,10 +84,13 @@ public class SQLAccountDAO extends DatabaseConnection implements AccountDAO  {
             //Executes the select query
             executeSQLSelectStatement(SQL);
             //Fills the string created before with the data thats selected with the query
+            rs.next();
             password = rs.getString("Password");
         } catch(Exception e){
             //Prints out any errors that may occur
             e.printStackTrace();
+        } finally {
+            closeConnection();
         }
         //Returns the password that was selected
         return password;
