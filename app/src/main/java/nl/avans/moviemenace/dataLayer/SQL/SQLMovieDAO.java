@@ -10,6 +10,7 @@ import nl.avans.moviemenace.domain.Movie;
 public class SQLMovieDAO extends DatabaseConnection implements MovieDAO {
     @Override
     public Movie getMovie(int id) {
+        openConnection();
         //Creates a movie object without any data in it
         Movie movie = null;
         try{

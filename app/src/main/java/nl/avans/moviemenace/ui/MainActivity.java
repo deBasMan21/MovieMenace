@@ -1,5 +1,6 @@
-package nl.avans.moviemenace.ui;
+package nl.avans.moviemenace;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
@@ -16,10 +17,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import nl.avans.moviemenace.R;
+import java.time.LocalDate;
+
 import nl.avans.moviemenace.dataLayer.DAOFactory;
 import nl.avans.moviemenace.dataLayer.DatabaseConnection;
 import nl.avans.moviemenace.dataLayer.SQLDAOFactory;
+import nl.avans.moviemenace.domain.Account;
 import nl.avans.moviemenace.logic.MovieManager;
 import nl.avans.moviemenace.logic.TicketManager;
 
@@ -52,6 +55,9 @@ public class MainActivity extends AppCompatActivity {
         DAOFactory factory = new SQLDAOFactory();
         TicketManager ticketManager = new TicketManager(factory);
 
+        new dbtest().execute();
+
+
     }
 
     @Override
@@ -67,4 +73,17 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
+    public class dbtest extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            DatabaseConnection databaseConnection = new DatabaseConnection();
+            System.out.println("The database connection is: " + databaseConnection.openConnection());
+            DAOFactory factory = new SQLDAOFactory();
+//            factory.createAccountDAO().createAccount(new Account("abc", "abc", "abc", "abc", "1234 TR", "abc", LocalDate.parse("1999-10-12")));
+            return null;
+        }
+    }
+
 }

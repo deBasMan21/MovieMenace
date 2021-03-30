@@ -16,6 +16,11 @@ public class DatabaseConnection {
     // execution method.
     private Statement statement;
     protected ResultSet rs = null;
+    private static String Classes = "net.sourceforge.jtds.jdbc.Driver";
+    private static String username = "AdminB12";
+    private static String password = "tom&jerry";
+    private static String url = "jdbc:jtds:sqlserver://aei-sql2.avans.nl:1443/MovieMenaceB12";
+
 
     public DatabaseConnection() {
         connection = null;
@@ -28,14 +33,16 @@ public class DatabaseConnection {
         if (connection == null) {
             try {
                 // Try to create a connection with the library database
-                connection = DriverManager.getConnection("jdbc:jtds:sqlserver://aei-sql2.avans.nl\\studenten:1443:MovieMenaceB12", "AdminB12", "tom&jerry");
+                Class.forName(Classes);
+//                connection = DriverManager.getConnection(url, username, password);
+                connection = DriverManager.getConnection(url, username, password);
 
                 if (connection != null) {
                     statement = connection.createStatement();
                 }
 
                 result = true;
-            } catch (SQLException e) {
+            } catch (Exception e) {
                 System.out.println(e);
                 result = false;
             }
@@ -98,7 +105,7 @@ public class DatabaseConnection {
         if (query != null && connectionIsOpen()) {
             // Then, if succeeded, execute the query.
             try {
-                statement.executeQuery(query);
+                statement.executeUpdate(query);
                 result = true;
             } catch (SQLException e) {
                 System.out.println(e);
