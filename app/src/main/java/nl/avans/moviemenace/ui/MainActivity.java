@@ -1,4 +1,4 @@
-package nl.avans.moviemenace;
+package nl.avans.moviemenace.ui;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -19,6 +19,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import java.time.LocalDate;
 
+import nl.avans.moviemenace.R;
 import nl.avans.moviemenace.dataLayer.DAOFactory;
 import nl.avans.moviemenace.dataLayer.DatabaseConnection;
 import nl.avans.moviemenace.dataLayer.SQLDAOFactory;
