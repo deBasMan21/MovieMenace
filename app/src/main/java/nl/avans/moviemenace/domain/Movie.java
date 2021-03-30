@@ -10,14 +10,16 @@ public class Movie {
     private String overview;
     private String release_date;
     private boolean adult;
+    private int duration;
     private List<Viewing> viewings;
 
-    public Movie(int id, String title, String overview, String release_date, boolean adult) {
+    public Movie(int id, String title, String overview, String release_date, boolean adult, int duration) {
         this.id = id;
         this.title = title;
         this.overview = overview;
         this.release_date = release_date;
         this.adult = adult;
+        this.duration = duration;
         this.viewings = new ArrayList<>();
     }
 
@@ -67,6 +69,14 @@ public class Movie {
 
     public void setViewings(List<Viewing> viewings) {
         this.viewings = viewings;
+    }
+
+    public int getDuration() {
+        return this.duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 
     @Override

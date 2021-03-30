@@ -13,14 +13,16 @@ public class Viewing {
     private boolean threeDimensional;
     private Room room;
     private Map<Integer, Ticket> tickets;
+    private Movie movie;
 
-    public Viewing(int id, LocalDateTime date, double price, boolean threeDimensional, Room room) {
+    public Viewing(int id, LocalDateTime date, double price, boolean threeDimensional, Room room, Movie movie) {
         this.id = id;
         this.date = date;
         this.price = price;
         this.threeDimensional = threeDimensional;
         this.room = room;
         this.tickets = new HashMap<>();
+        this.movie = movie;
     }
 
     public int getId() {
@@ -69,5 +71,13 @@ public class Viewing {
 
     public void setTickets(Map<Integer, Ticket> tickets) {
         this.tickets = tickets;
+    }
+
+    public Movie getMovie() {
+        return this.movie;
+    }
+
+    public void setMovie(Movie movie) {
+        this.movie = movie;
     }
 }
