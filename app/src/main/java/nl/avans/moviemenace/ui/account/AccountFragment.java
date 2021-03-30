@@ -35,11 +35,6 @@ public class AccountFragment extends Fragment {
                 new ViewModelProvider(requireActivity()).get(AccountViewModel.class);
         View root = inflater.inflate(R.layout.fragment_account, container, false);
 
-        mEditBn = root.findViewById(R.id.bn_account_edit);
-        mEditBn.setOnClickListener((View v) -> {
-            startActivity(new Intent(this.getContext(), EditAccountActivity.class));
-        });
-
         return root;
     }
 
@@ -52,6 +47,11 @@ public class AccountFragment extends Fragment {
             if (account.equals("test")) {
                 navController.navigate(R.id.nav_login);
             }
+        });
+
+        mEditBn = view.findViewById(R.id.bn_account_edit);
+        mEditBn.setOnClickListener((View v) -> {
+            startActivity(new Intent(this.getContext(), EditAccountActivity.class));
         });
 
     }
