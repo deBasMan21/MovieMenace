@@ -11,6 +11,7 @@ import nl.avans.moviemenace.domain.MovieList;
 public class SQLMovieListDAO extends DatabaseConnection implements MovieListDAO {
     @Override
     public MovieList getMovieList(int id) {
+        openConnection();
         //Creates a  movielist object without any data
         MovieList movieList = null;
         try{
@@ -25,6 +26,8 @@ public class SQLMovieListDAO extends DatabaseConnection implements MovieListDAO 
         } catch (Exception e){
             //Prints out any errors that may occur
             e.printStackTrace();
+        } finally {
+            closeConnection();
         }
         //Returns the movielist with the films in it
         return movieList;
@@ -32,6 +35,7 @@ public class SQLMovieListDAO extends DatabaseConnection implements MovieListDAO 
 
     @Override
     public ArrayList<MovieList> getMovieListsForAccount(String email) {
+        openConnection();
         //Creates an arraylist for the movielists
         ArrayList<MovieList> movieLists = new ArrayList<>();
         try{
@@ -51,6 +55,8 @@ public class SQLMovieListDAO extends DatabaseConnection implements MovieListDAO 
         } catch (Exception e){
             //Prints out any errors that may occur
             e.printStackTrace();
+        } finally {
+            closeConnection();
         }
         //Returns the list with movielists
         return movieLists;
@@ -58,6 +64,7 @@ public class SQLMovieListDAO extends DatabaseConnection implements MovieListDAO 
 
     @Override
     public ArrayList<Movie> getMoviesForList(int listID){
+        openConnection();
         //Creates an arraylist for all the movies that are in a specific list
         ArrayList<Movie> moviesInList = new ArrayList<>();
         try{
@@ -75,6 +82,8 @@ public class SQLMovieListDAO extends DatabaseConnection implements MovieListDAO 
         } catch (Exception e){
             //Prints out any errors that may occur
             e.printStackTrace();
+        } finally {
+            closeConnection();
         }
         //returns the list with the movies for a specific movielist
         return moviesInList;

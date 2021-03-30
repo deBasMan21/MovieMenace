@@ -7,6 +7,7 @@ import nl.avans.moviemenace.domain.Room;
 public class SQLRoomDAO extends DatabaseConnection implements RoomDAO {
     @Override
     public Room getRoom(int roomNumber) {
+        openConnection();
         //creates a room
         Room room = null;
         try{
@@ -19,6 +20,8 @@ public class SQLRoomDAO extends DatabaseConnection implements RoomDAO {
         } catch (Exception e){
             //Prints out any errors that may occur
             e.printStackTrace();
+        } finally {
+            closeConnection();
         }
         //this returns the room created above
         return room;

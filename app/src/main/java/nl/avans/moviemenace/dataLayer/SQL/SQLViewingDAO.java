@@ -13,6 +13,7 @@ import nl.avans.moviemenace.domain.Viewing;
 public class SQLViewingDAO extends DatabaseConnection implements ViewingDAO {
     @Override
     public Viewing getViewing(int viewID) {
+        openConnection();
         DatabaseConnection databaseConnection = new DatabaseConnection();
         databaseConnection.openConnection();
         System.out.println("The database connection is: " + databaseConnection.openConnection());
@@ -32,6 +33,8 @@ public class SQLViewingDAO extends DatabaseConnection implements ViewingDAO {
         } catch (Exception e){
             //Prints out any errors that may occur
             e.printStackTrace();
+        } finally {
+            closeConnection();
         }
         //returns the viewing
         return viewing;
@@ -39,6 +42,7 @@ public class SQLViewingDAO extends DatabaseConnection implements ViewingDAO {
 
     @Override
     public ArrayList<Viewing> getUpcomingViewingsForFilm(int movieID) {
+        openConnection();
         //creates an arraylist of viewings to contain all upcoming viewings for a specific film
         ArrayList<Viewing> viewingsForFilm = new ArrayList<>();
         try{
@@ -63,6 +67,8 @@ public class SQLViewingDAO extends DatabaseConnection implements ViewingDAO {
         } catch (Exception e){
             //Prints out any errors that may occur
             e.printStackTrace();
+        } finally {
+            closeConnection();
         }
         //returns the list of viewings
         return viewingsForFilm;
@@ -70,6 +76,7 @@ public class SQLViewingDAO extends DatabaseConnection implements ViewingDAO {
 
     @Override
     public ArrayList<Viewing> getUpcomingViewingsForRoom(int roomNumber) {
+        openConnection();
         //creates an arraylist to contain all viewings that are upcoming in a room
         ArrayList<Viewing> viewingsForRoom = new ArrayList<>();
         try{
@@ -94,6 +101,8 @@ public class SQLViewingDAO extends DatabaseConnection implements ViewingDAO {
         } catch (Exception e){
             //Prints out any errors that may occur
             e.printStackTrace();
+        } finally {
+            closeConnection();
         }
         //returns the list of viewings for a room
         return viewingsForRoom;
@@ -101,6 +110,7 @@ public class SQLViewingDAO extends DatabaseConnection implements ViewingDAO {
 
     @Override
     public ArrayList<Viewing> getViewingsForToday() {
+        openConnection();
         //creates an arraylist to contain all viewings for a day
         ArrayList<Viewing> viewingsForDate = new ArrayList<>();
         try{
@@ -122,6 +132,8 @@ public class SQLViewingDAO extends DatabaseConnection implements ViewingDAO {
         } catch (Exception e){
             //Prints out any errors that may occur
             e.printStackTrace();
+        } finally {
+            closeConnection();
         }
         //returns the list with viewings
         return viewingsForDate;
