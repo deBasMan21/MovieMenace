@@ -41,28 +41,28 @@ public class TicketManager {
     }
 
     // check on available seats for the viewing
-    public boolean checkAvailableSeats(Viewing viewing, int selectedSeats) {
-        int seats = viewing.getRoom().getNumberOfSeats();
-        List<Ticket> list = viewing.getTickets();
-        int takenSeats = list.size();
+//    public boolean checkAvailableSeats(Viewing viewing, int selectedSeats) {
+//        int seats = viewing.getRoom().getNumberOfSeats();
+//        List<Ticket> list = viewing.getTickets();
+//        int takenSeats = list.size();
+//
+//        if (list.size() + selectedSeats > seats) {
+//            return false;
+//        } else {
+//            return true;
+//        }
+//    }
 
-        if (list.size() + selectedSeats > seats) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    //returns seat numbers
-    public int[] getSeats(Viewing viewing, int selectedSeats) {
-        int[] seats = new int[selectedSeats];
-        List<Ticket> list = viewing.getTickets();
-//        int startNumber = list.size();
-         for (int i = 0; i < selectedSeats; i++) {
-
-         }
-    return null;
-    }
+//    //returns seat numbers
+//    public int[] getSeats(Viewing viewing, int selectedSeats) {
+//        int[] seats = new int[selectedSeats];
+//        List<Ticket> list = viewing.getTickets();
+////        int startNumber = list.size();
+//         for (int i = 0; i < selectedSeats; i++) {
+//
+//         }
+//    return null;
+//    }
 
     // returns row number
     public int getRow(Viewing viewing, int seatNumber) {

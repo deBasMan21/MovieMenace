@@ -11,18 +11,18 @@ public class Viewing {
     private LocalDateTime date;
     private double price;
     private boolean threeDimensional;
+    private int movie;
     private Room room;
-    private List<Ticket> tickets;
-    private Movie movie;
 
-    public Viewing(int id, LocalDateTime date, double price, boolean threeDimensional, Room room, Movie movie) {
+
+    public Viewing(int id, LocalDateTime date, double price, boolean threeDimensional,
+                   int movie, Room room) {
         this.id = id;
         this.date = date;
         this.price = price;
         this.threeDimensional = threeDimensional;
-        this.room = room;
-        this.tickets = new ArrayList<>();
         this.movie = movie;
+        this.room = room;
     }
 
     public int getId() {
@@ -57,27 +57,19 @@ public class Viewing {
         this.threeDimensional = threeDimensional;
     }
 
+    public int getMovie() {
+        return this.movie;
+    }
+
+    public void setMovie(int movie) {
+        this.movie = movie;
+    }
+
     public Room getRoom() {
         return room;
     }
 
     public void setRoom(Room room) {
         this.room = room;
-    }
-
-    public List<Ticket> getTickets() {
-        return tickets;
-    }
-
-    public void setTickets(List<Ticket> tickets) {
-        this.tickets = tickets;
-    }
-
-    public Movie getMovie() {
-        return this.movie;
-    }
-
-    public void setMovie(Movie movie) {
-        this.movie = movie;
     }
 }
