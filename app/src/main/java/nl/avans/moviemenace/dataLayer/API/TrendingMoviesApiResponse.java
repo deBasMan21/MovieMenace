@@ -6,12 +6,13 @@ import java.util.List;
 
 import nl.avans.moviemenace.domain.Movie;
 
-public class MovieApiResponse {
+// Class using GSON to read JSON data. Automatically creates Movie class objects with returned results.
+public class TrendingMoviesApiResponse {
 
     private int page;
     private List<Movie> results;
 
-    public MovieApiResponse(int page, List<Movie> results) {
+    public TrendingMoviesApiResponse(int page, List<Movie> results) {
         this.page = page;
         this.results = results;
     }
