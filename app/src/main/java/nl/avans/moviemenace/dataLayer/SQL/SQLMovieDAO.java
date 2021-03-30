@@ -19,6 +19,7 @@ public class SQLMovieDAO extends DatabaseConnection implements MovieDAO {
             //This executes the query
             executeSQLSelectStatement(SQL);
             //The selected movie will be filled in with data
+            rs.next();
             movie = new Movie(rs.getInt("Id"), rs.getString("Title"), rs.getString("Description"),rs.getString("ReleaseDate"), rs.getBoolean("Adult"), rs.getString("Status"), rs.getInt("Duration"));
         } catch (Exception e){
             //Prints out any errors that may occur
@@ -38,7 +39,7 @@ public class SQLMovieDAO extends DatabaseConnection implements MovieDAO {
         Movie movie = null;
         try{
             //This string contains the query where multiple movies can come out
-            String SQL = "SELECT * FROM Movie WHERE Title = '" + title + "'";
+            String SQL = "SELECT * FROM Movie WHERE Title LIKE '%" + title + "%'";
             //This executes the query
             executeSQLSelectStatement(SQL);
             //This is a loop for all the items that are selected in wich this data is parsed to movie objects. These objects are put in the list created above/
