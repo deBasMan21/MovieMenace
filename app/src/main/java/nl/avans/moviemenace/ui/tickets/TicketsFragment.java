@@ -27,10 +27,16 @@ public class TicketsFragment extends Fragment {
                 new ViewModelProvider(this).get(TicketsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_tickets, container, false);
 
-        mTicketsRv = root.findViewById(R.id.rv_tickets);
+        return root;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+
+        mTicketsRv = view.findViewById(R.id.rv_tickets);
         mTicketsRv.setAdapter(new TicketsAdapter());
         mTicketsRv.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false));
-
-        return root;
     }
 }

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -29,15 +30,20 @@ public class ListsFragment extends Fragment {
                 new ViewModelProvider(this).get(ListsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_lists, container, false);
 
-        mAddFb = root.findViewById(R.id.fb_lists_add);
+        return root;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        mAddFb = view.findViewById(R.id.fb_lists_add);
         mAddFb.setOnClickListener((View v) -> {
             startActivity(new Intent(getContext(), CreateListActivity.class));
         });
 
-        mListsRv = root.findViewById(R.id.rv_lists);
+        mListsRv = view.findViewById(R.id.rv_lists);
         mListsRv.setAdapter(new ListsAdapter());
         mListsRv.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false));
-
-        return root;
     }
 }
