@@ -7,6 +7,7 @@ import nl.avans.moviemenace.domain.Cinema;
 public class SQLCinemaDAO extends DatabaseConnection implements CinemaDAO {
     @Override
     public Cinema getCinema(String name) {
+        openConnection();
         //This creates a cinema wich will contain the data later
         Cinema cinema = null;
         try{
@@ -19,6 +20,8 @@ public class SQLCinemaDAO extends DatabaseConnection implements CinemaDAO {
         } catch(Exception e){
             //Prints out any errors that may occur
             e.printStackTrace();
+        } finally {
+            closeConnection();
         }
         //Returns the cinema object
         return cinema;

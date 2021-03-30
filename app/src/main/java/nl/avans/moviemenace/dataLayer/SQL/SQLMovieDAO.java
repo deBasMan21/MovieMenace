@@ -23,6 +23,8 @@ public class SQLMovieDAO extends DatabaseConnection implements MovieDAO {
         } catch (Exception e){
             //Prints out any errors that may occur
             e.printStackTrace();
+        } finally {
+            closeConnection();
         }
         //Returns the movie object created before
         return movie;
@@ -30,6 +32,7 @@ public class SQLMovieDAO extends DatabaseConnection implements MovieDAO {
 
     @Override
     public ArrayList<Movie> getMovieByTitle(String title) {
+        openConnection();
         //Creates an arraylist and movie object. In this arraylist all the movies with the same title will be stored.
         ArrayList<Movie> movies = new ArrayList<>();
         Movie movie = null;
@@ -48,6 +51,8 @@ public class SQLMovieDAO extends DatabaseConnection implements MovieDAO {
         } catch (Exception e){
             //Prints out any errors that may occur
             e.printStackTrace();
+        } finally {
+            closeConnection();
         }
         //This returns the list with movies
         return movies;

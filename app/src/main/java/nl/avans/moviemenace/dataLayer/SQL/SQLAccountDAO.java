@@ -15,6 +15,7 @@ public class SQLAccountDAO extends DatabaseConnection implements AccountDAO  {
 
     @Override
     public Account getAccount(String email) {
+        openConnection();
         // An account is created to fill in with the data from the db
         Account account = null;
         try{
@@ -26,6 +27,8 @@ public class SQLAccountDAO extends DatabaseConnection implements AccountDAO  {
         } catch(Exception e){
             //Prints out any errors that may occur
             e.printStackTrace();
+        } finally {
+            closeConnection();
         }
         //Returns the account
         return account;
@@ -33,6 +36,7 @@ public class SQLAccountDAO extends DatabaseConnection implements AccountDAO  {
 
     @Override
     public void updateAccount(String email, Account updatedAccount) {
+        openConnection();
         try{
             //This string contains the update query filled in with the data from the updatedaccount
             String SQL = "UPDATE Account (Email, Name, Adress, Zipcode) SET VALUES('"
@@ -44,11 +48,14 @@ public class SQLAccountDAO extends DatabaseConnection implements AccountDAO  {
         } catch(Exception e){
             //Prints out any errors that may occur
             e.printStackTrace();
+        } finally {
+            closeConnection();
         }
     }
 
     @Override
     public void createAccount(Account newAccount) {
+        openConnection();
         try{
             //This string contains the create query filled in with the data from the newaccount to create a new account in the db
             String SQL = "INSERT INTO Account (Email, Name, Password, Adress, Zipcode, IBAN, DateOfBirth) VALUES('"
@@ -60,11 +67,14 @@ public class SQLAccountDAO extends DatabaseConnection implements AccountDAO  {
         } catch(Exception e){
             //Prints out any errors that may occur
             e.printStackTrace();
+        } finally {
+            closeConnection();
         }
     }
 
     @Override
     public String getPassword(String email) {
+        openConnection();
         //This string is the string that will be returned with the password in it
         String password = "";
         try{
@@ -77,6 +87,8 @@ public class SQLAccountDAO extends DatabaseConnection implements AccountDAO  {
         } catch(Exception e){
             //Prints out any errors that may occur
             e.printStackTrace();
+        } finally {
+            closeConnection();
         }
         //Returns the password that was selected
         return password;
