@@ -79,10 +79,8 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            DatabaseConnection databaseConnection = new DatabaseConnection();
-            System.out.println("The database connection is: " + databaseConnection.openConnection());
             DAOFactory factory = new SQLDAOFactory();
-//            factory.createAccountDAO().createAccount(new Account("abc", "abc", "abc", "abc", "1234 TR", "abc", LocalDate.parse("1999-10-12")));
+            factory.createAccountDAO().createAccount(new Account("abc", "abc", "abc", "abc", "1234 TR", "abc", LocalDate.parse("1999-10-12")));
             return null;
         }
     }

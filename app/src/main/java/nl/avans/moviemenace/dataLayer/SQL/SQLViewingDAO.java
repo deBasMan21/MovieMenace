@@ -13,6 +13,9 @@ import nl.avans.moviemenace.domain.Viewing;
 public class SQLViewingDAO extends DatabaseConnection implements ViewingDAO {
     @Override
     public Viewing getViewing(int viewID) {
+        DatabaseConnection databaseConnection = new DatabaseConnection();
+        databaseConnection.openConnection();
+        System.out.println("The database connection is: " + databaseConnection.openConnection());
         //creates a viewing to contain the data
         Viewing viewing = null;
         try{
