@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -23,7 +24,7 @@ public class ListDetailActivity extends AppCompatActivity {
 
         mAddFb = findViewById(R.id.fb_list_detail_add);
         mAddFb.setOnClickListener((View v) -> {
-
+            startActivity(new Intent(v.getContext(), ListToFilmActivity.class));
         });
 
         mListFilmsRv = findViewById(R.id.rv_list_films);
