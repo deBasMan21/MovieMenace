@@ -80,11 +80,4 @@ public class TicketDetailActivity extends AppCompatActivity {
             return null;
         }
     }
-
-    //TODO Override onSupportNavigateUp for all lower level activities to avoid closing MainActivity
-    @Override
-    public boolean onSupportNavigateUp() {
-
-        return false;
-    }
 }
