@@ -50,4 +50,6 @@
     <string name="login">Login</string>
     <string name="list">List icon</string>
     <string name="ticket">Ticket icon</string>
+    <string name="choose_seats">Choose seats</string>
+    <string name="amount_seats">Number of seats</string>
 </resources>
