@@ -19,6 +19,6 @@ public interface RoomMovieDAO{
     List<MovieEntity> getAllMovies();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public void insertMovies(MovieEntity... movies);
+    public void insertMovies(MovieEntity[] movies);
 
 }

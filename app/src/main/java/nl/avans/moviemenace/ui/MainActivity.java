@@ -31,6 +31,7 @@ import nl.avans.moviemenace.dataLayer.SQLDAOFactory;
 import nl.avans.moviemenace.domain.Account;
 import nl.avans.moviemenace.domain.Cinema;
 import nl.avans.moviemenace.domain.Movie;
+import nl.avans.moviemenace.logic.MovieEntityManager;
 import nl.avans.moviemenace.logic.MovieManager;
 import nl.avans.moviemenace.logic.TicketManager;
 
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private DAOFactory factory = new SQLDAOFactory();
 
     private AppBarConfiguration mAppBarConfiguration;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,8 +90,9 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... voids) {
+            MovieEntityManager mem = new MovieEntityManager(getApplication());
             MovieManager mm = new MovieManager(factory);
-            mm.addMoviesToLocalDB(getApplication());
+            mem.insertAllMovies(mm.getAllMovies());
             return null;
         }
     }

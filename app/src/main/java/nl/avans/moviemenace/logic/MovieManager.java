@@ -2,6 +2,7 @@ package nl.avans.moviemenace.logic;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -36,25 +37,11 @@ public class MovieManager {
         this.movieDAO = factory.createMovieDAO();
     }
 
-    public void addMoviesToLocalDB(Application application){
-        MovieDB movieDB = MovieDB.getDatabase(application);
-        RoomMovieDAO movieDAO = movieDB.getMovieDAO();
-
-        movieDAO.insertMovies(convertMoviesToEntity(getAllMovies()));
-    }
-
     public ArrayList<Movie> getAllMovies(){
         return movieDAO.getAllMovies();
     }
 
-    public MovieEntity[] convertMoviesToEntity(ArrayList<Movie> movies){
-        MovieEntity[] moviesParsed = {};
-        for(int i = 0; i < movies.size(); i++){
-            Movie movie = movies.get(i);
-            moviesParsed[i] = new MovieEntity(movie.getId(), movie.getTitle(), movie.getOverview(), movie.getRelease_date().toString(), movie.isAdult(), movie.getStatus(), movie.getDuration(), movie.getPopularity());
-        }
-        return moviesParsed;
-    }
+
 
 
 
