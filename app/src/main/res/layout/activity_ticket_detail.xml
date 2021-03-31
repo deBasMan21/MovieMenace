@@ -13,7 +13,8 @@
         android:layout_height="176dp"
         android:background="#999999"
         app:srcCompat="@drawable/ic_image_placeholder"
-        app:tint="@color/white" />
+        app:tint="@color/white"
+        android:contentDescription="@string/banner" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -25,7 +26,7 @@
             android:id="@+id/tv_ticket_detail_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Filmtitel"
+            android:text="@string/movie_title"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -36,7 +37,7 @@
             android:id="@+id/tv_ticket_detail_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bioscoop - Zaal #"
+            android:text="@string/location_placeholder"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_ticket_detail_title" />
@@ -46,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Rij # - Stoel #"
+            android:text="@string/rowseat_placeholder"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_ticket_detail_location" />
@@ -56,7 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Datum - Tijd"
+            android:text="@string/datetime_placeholder"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ticket_detail_rowseat" />
@@ -69,14 +70,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_ticket_detail_datetime"
-            app:srcCompat="@drawable/ic_image_placeholder" />
+            app:srcCompat="@drawable/ic_image_placeholder"
+            android:contentDescription="@string/barcode" />
 
         <Button
             android:id="@+id/bn_ticket_detail_use"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Inleveren"
+            android:text="@string/use"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iv_ticket_detail_barcode"

@@ -12,7 +12,7 @@
         android:id="@+id/tv_register_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Naam"
+        android:text="@string/name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -21,6 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="@+id/tv_register_name"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Email"
+        android:text="@string/email"
         app:layout_constraintStart_toStartOf="@+id/tv_register_name"
         app:layout_constraintTop_toBottomOf="@+id/tv_register_name" />
 
@@ -40,6 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:importantForAutofill="no"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toBottomOf="@+id/tv_register_email"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,6 +52,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="@+id/tv_register_place"
         app:layout_constraintEnd_toEndOf="parent"
@@ -60,7 +63,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Plaats"
+        android:text="@string/place"
         app:layout_constraintStart_toStartOf="@+id/tv_register_email"
         app:layout_constraintTop_toBottomOf="@+id/tv_register_email" />
 
@@ -69,7 +72,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Adres"
+        android:text="@string/address"
         app:layout_constraintStart_toStartOf="@+id/tv_register_place"
         app:layout_constraintTop_toBottomOf="@+id/tv_register_place" />
 
@@ -81,14 +84,15 @@
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="@+id/tv_register_address"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_register_address" />
+        app:layout_constraintTop_toTopOf="@+id/tv_register_address"
+        android:importantForAutofill="no" />
 
     <TextView
         android:id="@+id/tv_register_post"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Postcode"
+        android:text="@string/post"
         app:layout_constraintStart_toStartOf="@+id/tv_register_address"
         app:layout_constraintTop_toBottomOf="@+id/tv_register_address" />
 
@@ -101,7 +105,8 @@
         android:inputType="numberSigned"
         app:layout_constraintBottom_toBottomOf="@+id/tv_register_post"
         app:layout_constraintEnd_toStartOf="@+id/et_register_post_char"
-        app:layout_constraintTop_toTopOf="@+id/tv_register_post" />
+        app:layout_constraintTop_toTopOf="@+id/tv_register_post"
+        android:importantForAutofill="no" />
 
     <EditText
         android:id="@+id/et_register_post_char"
@@ -111,7 +116,8 @@
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="@+id/tv_register_post"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_register_post" />
+        app:layout_constraintTop_toTopOf="@+id/tv_register_post"
+        android:importantForAutofill="no" />
 
     <EditText
         android:id="@+id/et_register_birth"
@@ -125,14 +131,15 @@
         android:inputType="date"
         app:layout_constraintBottom_toBottomOf="@+id/tv_register_birth"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_register_birth" />
+        app:layout_constraintTop_toTopOf="@+id/tv_register_birth"
+        android:importantForAutofill="no" />
 
     <TextView
         android:id="@+id/tv_register_birth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Geboortedatum"
+        android:text="@string/birth"
         app:layout_constraintStart_toStartOf="@+id/tv_register_post"
         app:layout_constraintTop_toBottomOf="@+id/tv_register_post" />
 
@@ -141,7 +148,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
-        android:text="Wachtwoord"
+        android:text="@string/pass"
         app:layout_constraintStart_toStartOf="@+id/tv_register_birth"
         app:layout_constraintTop_toBottomOf="@+id/tv_register_birth" />
 
@@ -160,7 +167,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Herhaal wachtwoord"
+        android:text="@string/pass_re"
         app:layout_constraintStart_toStartOf="@+id/tv_register_pass"
         app:layout_constraintTop_toBottomOf="@+id/tv_register_pass" />
 
@@ -172,7 +179,8 @@
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="@+id/tv_register_pass_re"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_register_pass_re" />
+        app:layout_constraintTop_toTopOf="@+id/tv_register_pass_re"
+        android:importantForAutofill="no" />
 
     <Button
         android:id="@+id/bn_register_conf"
@@ -180,7 +188,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:backgroundTint="@color/black"
-        android:text="Bevestig"
+        android:text="@string/conf"
         app:layout_constraintStart_toStartOf="@+id/tv_register_pass_re"
         app:layout_constraintTop_toBottomOf="@+id/tv_register_pass_re" />
 

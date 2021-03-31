@@ -19,7 +19,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/logo_mm_full_foreground" />
+        app:srcCompat="@mipmap/logo_mm_full_foreground"
+        android:contentDescription="@string/logo" />
 
     <EditText
         android:id="@+id/et_login_email"
@@ -29,14 +30,15 @@
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="@+id/iv_login_banner"
         app:layout_constraintStart_toStartOf="@+id/iv_login_banner"
-        app:layout_constraintTop_toBottomOf="@+id/tv_login_email" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_login_email"
+        android:importantForAutofill="no" />
 
     <TextView
         android:id="@+id/tv_login_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Email"
+        android:text="@string/email"
         app:layout_constraintStart_toStartOf="@+id/et_login_email"
         app:layout_constraintTop_toBottomOf="@+id/iv_login_banner" />
 
@@ -45,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Wachtwoord"
+        android:text="@string/pass"
         app:layout_constraintStart_toStartOf="@+id/et_login_pass"
         app:layout_constraintTop_toBottomOf="@+id/et_login_email" />
 
@@ -57,7 +59,8 @@
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="@+id/et_login_email"
         app:layout_constraintStart_toStartOf="@+id/et_login_email"
-        app:layout_constraintTop_toBottomOf="@+id/tv_login_pass" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_login_pass"
+        android:importantForAutofill="no" />
 
     <TextView
         android:id="@+id/tv_login_register"
@@ -78,7 +81,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:backgroundTint="@color/black"
-        android:text="Login"
+        android:text="@string/login"
         app:layout_constraintEnd_toEndOf="@+id/tv_login_register"
         app:layout_constraintStart_toStartOf="@+id/tv_login_register"
         app:layout_constraintTop_toBottomOf="@+id/tv_login_register" />

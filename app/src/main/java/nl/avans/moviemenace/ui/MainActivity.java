@@ -1,5 +1,6 @@
 package nl.avans.moviemenace.ui;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -56,6 +57,31 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
 
         TicketManager ticketManager = new TicketManager(factory);
+
+        // navigate to fragments with given destination intent extra, navigate to home by default
+        Intent srcIntent = getIntent();
+        if (srcIntent.hasExtra("destination")) {
+            switch (srcIntent.getStringExtra("destination")) {
+                case "account":
+                    navController.navigate(R.id.nav_account);
+                    break;
+                case "films":
+                    navController.navigate(R.id.nav_films);
+                    break;
+                case "lists":
+                    navController.navigate(R.id.nav_lists);
+                    break;
+                case "login":
+                    navController.navigate(R.id.nav_login);
+                    break;
+                case "tickets":
+                    navController.navigate(R.id.nav_tickets);
+                    break;
+                default:
+                    navController.navigate(R.id.nav_home);
+                    break;
+            }
+        }
 
 
 //        new insertMoviesIntoLocalDB().execute();

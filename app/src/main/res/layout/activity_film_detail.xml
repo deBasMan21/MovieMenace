@@ -16,14 +16,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_image_placeholder"
-        app:tint="@color/white" />
+        app:tint="@color/white"
+        android:contentDescription="@string/poster" />
 
     <TextView
         android:id="@+id/tv_film_detail_duration"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Duur"
+        android:text="@string/duration"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_film_detail_poster"
@@ -33,7 +34,7 @@
         android:id="@+id/tv_film_detail_duration_value"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@string/time_placeholder"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/tv_film_detail_duration"
@@ -45,7 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Leeftijd"
+        android:text="@string/agerating"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_film_detail_poster"
@@ -55,7 +56,7 @@
         android:id="@+id/tv_film_detail_agerating_value"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@string/agerating_placeholder"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/tv_film_detail_agerating"
@@ -66,7 +67,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="TextView"
+        android:text="@string/film_desc_placeholder"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -88,7 +89,7 @@
             android:layout_marginEnd="16dp"
             android:layout_weight="1"
             android:backgroundTint="@color/black"
-            android:text="Koop een ticket" />
+            android:text="@string/buy_ticket" />
 
         <Button
             android:id="@+id/bn_film_detail_list"
@@ -96,7 +97,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="@color/black"
-            android:text="Voeg toe aan een lijst"
+            android:text="@string/add_to_list"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_film_detail_desc" />
     </LinearLayout>

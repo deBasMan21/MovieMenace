@@ -18,7 +18,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/white" />
+            app:tint="@color/white"
+            android:contentDescription="@string/banner" />
 
         <TextView
             android:id="@+id/tv_home_desc"
@@ -27,7 +28,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim  veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea  commodo consequat."
+            android:text="@string/film_desc_placeholder"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -41,7 +42,7 @@
             android:background="#CE2127"
             android:paddingHorizontal="24dp"
             android:paddingVertical="16dp"
-            android:text="Populaire films"
+            android:text="@string/popular_movies"
             android:textColor="@color/white"
             android:textSize="24sp"
             android:textStyle="bold"

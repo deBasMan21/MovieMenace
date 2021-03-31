@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Naam"
+        android:text="@string/name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Email"
+        android:text="@string/email"
         app:layout_constraintStart_toStartOf="@+id/tv_edit_account_name"
         app:layout_constraintTop_toBottomOf="@+id/tv_edit_account_name" />
 
@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Plaats"
+        android:text="@string/place"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_edit_account_email" />
 
@@ -40,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Adres"
+        android:text="@string/address"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_edit_account_place" />
 
@@ -49,7 +49,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Postcode"
+        android:text="@string/post"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_edit_account_address" />
 
@@ -64,7 +64,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/tv_edit_account_name"
-        app:layout_constraintTop_toTopOf="@+id/tv_edit_account_name" />
+        app:layout_constraintTop_toTopOf="@+id/tv_edit_account_name"
+        android:importantForAutofill="no" />
 
     <EditText
         android:id="@+id/et_edit_account_email"
@@ -76,7 +77,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/tv_edit_account_email"
-        app:layout_constraintTop_toTopOf="@+id/tv_edit_account_email" />
+        app:layout_constraintTop_toTopOf="@+id/tv_edit_account_email"
+        android:importantForAutofill="no" />
 
     <EditText
         android:id="@+id/et_edit_account_place"
@@ -88,7 +90,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/tv_edit_account_place"
-        app:layout_constraintTop_toTopOf="@+id/tv_edit_account_place" />
+        app:layout_constraintTop_toTopOf="@+id/tv_edit_account_place"
+        android:importantForAutofill="no" />
 
     <EditText
         android:id="@+id/et_edit_account_address"
@@ -100,7 +103,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/tv_edit_account_address"
-        app:layout_constraintTop_toTopOf="@+id/tv_edit_account_address" />
+        app:layout_constraintTop_toTopOf="@+id/tv_edit_account_address"
+        android:importantForAutofill="no" />
 
     <EditText
         android:id="@+id/et_edit_account_post_char"
@@ -111,7 +115,8 @@
         android:minEms="2"
         app:layout_constraintBottom_toBottomOf="@+id/et_edit_account_post_num"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/et_edit_account_post_num" />
+        app:layout_constraintTop_toTopOf="@+id/et_edit_account_post_num"
+        android:importantForAutofill="no" />
 
     <EditText
         android:id="@+id/et_edit_account_post_num"
@@ -125,7 +130,8 @@
         app:layout_constraintEnd_toStartOf="@+id/et_edit_account_post_char"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/tv_edit_account_post"
-        app:layout_constraintTop_toTopOf="@+id/tv_edit_account_post" />
+        app:layout_constraintTop_toTopOf="@+id/tv_edit_account_post"
+        android:importantForAutofill="no" />
 
     <Button
         android:id="@+id/bn_edit_account_conf"
@@ -133,7 +139,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:backgroundTint="@color/black"
-        android:text="Bevestigen"
+        android:text="@string/conf"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_edit_account_post" />
 
