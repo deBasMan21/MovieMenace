@@ -1,9 +1,7 @@
 package nl.avans.moviemenace.logic;
 
-import nl.avans.moviemenace.dataLayer.DAOFactory;
+import nl.avans.moviemenace.dataLayer.factory.DAOFactory;
 import nl.avans.moviemenace.dataLayer.IDAO.AccountDAO;
-import nl.avans.moviemenace.dataLayer.SQL.SQLAccountDAO;
-import nl.avans.moviemenace.dataLayer.SQLDAOFactory;
 import nl.avans.moviemenace.domain.Account;
 
 public class AccountManager {

@@ -15,8 +15,9 @@ public class Movie {
     private int duration;
     private int popularity;
     private HashMap<String, String> translations;
+    private String url;
 
-    public Movie(int id, String title, String overview, String release_date, boolean adult, String status, int duration, int popularity) {
+    public Movie(int id, String title, String overview, String release_date, boolean adult, String status, int duration, int popularity, String url) {
         this.id = id;
         this.title = title;
         this.overview = overview;
@@ -25,6 +26,7 @@ public class Movie {
         this.status = status;
         this.duration = duration;
         this.popularity = popularity;
+        this.url = url;
     }
 
     public int getId() {
@@ -97,6 +99,14 @@ public class Movie {
 
     public void setTranslations(HashMap<String, String> translations) {
         this.translations = translations;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     @Override

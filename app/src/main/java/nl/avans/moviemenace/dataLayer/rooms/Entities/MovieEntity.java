@@ -1,11 +1,8 @@
-package nl.avans.moviemenace.dataLayer.Rooms.Entities;
+package nl.avans.moviemenace.dataLayer.rooms.Entities;
 
-import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
-import java.time.LocalDate;
 
 @Entity
 public class MovieEntity {

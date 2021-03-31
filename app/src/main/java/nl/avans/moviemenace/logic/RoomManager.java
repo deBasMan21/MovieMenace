@@ -1,6 +1,6 @@
 package nl.avans.moviemenace.logic;
 
-import nl.avans.moviemenace.dataLayer.DAOFactory;
+import nl.avans.moviemenace.dataLayer.factory.DAOFactory;
 import nl.avans.moviemenace.dataLayer.IDAO.RoomDAO;
 import nl.avans.moviemenace.domain.Room;
 
