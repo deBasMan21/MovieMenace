@@ -19,7 +19,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_menu_lists"
-            app:tint="@color/black"/>
+            app:tint="@color/black"
+            android:contentDescription="@string/list" />
 
         <TextView
             android:id="@+id/tv_list_viewholder_title"
@@ -27,17 +28,19 @@
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
             android:gravity="center_vertical|left"
-            android:text="TextView"
+            android:text="@string/listname"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/iv_list_viewholder_ic"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/iv_list_viewholder_ic"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="RtlHardcoded" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="8dp"
         app:srcCompat="@drawable/div_dashed"
-        android:layout_marginHorizontal="40dp"/>
+        android:layout_marginHorizontal="40dp"
+        tools:ignore="ContentDescription" />
 </LinearLayout>

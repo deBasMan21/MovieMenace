@@ -20,7 +20,7 @@
         android:id="@+id/tv_film_viewholder_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Filmtitel"
+        android:text="@string/movie_title"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="@+id/iv_film_viewholder_poster"
         app:layout_constraintStart_toStartOf="@+id/iv_film_viewholder_poster"

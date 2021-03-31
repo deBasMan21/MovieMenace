@@ -13,7 +13,7 @@
         android:id="@+id/tv_account_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Naam"
+        android:text="@string/name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:textSize="24sp"
@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Email"
+        android:text="@string/email"
         app:layout_constraintStart_toStartOf="@+id/tv_account_name"
         app:layout_constraintTop_toBottomOf="@+id/tv_account_name" />
 
@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Geboortedatum"
+        android:text="@string/birth"
         app:layout_constraintStart_toStartOf="@+id/email"
         app:layout_constraintTop_toBottomOf="@+id/email" />
 
@@ -42,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Adres"
+        android:text="@string/address"
         app:layout_constraintStart_toStartOf="@+id/tv_account_birth"
         app:layout_constraintTop_toBottomOf="@+id/tv_account_birth" />
 
@@ -51,7 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Bijwerken"
+        android:text="@string/edit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_account_address"
         android:backgroundTint="@color/black"/>

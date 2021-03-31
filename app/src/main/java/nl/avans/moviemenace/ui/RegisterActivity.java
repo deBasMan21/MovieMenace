@@ -28,7 +28,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         mConfBn = findViewById(R.id.bn_register_conf);
         mConfBn.setOnClickListener((View v) -> {
-            startActivity(new Intent(v.getContext(), MainActivity.class));
+            startActivity(new Intent(v.getContext(), MainActivity.class).putExtra("destination", "login"));
         });
 
         mBirthEt = findViewById(R.id.et_register_birth);

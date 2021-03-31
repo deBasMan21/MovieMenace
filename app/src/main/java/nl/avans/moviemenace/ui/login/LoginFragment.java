@@ -18,6 +18,7 @@ import java.time.LocalDate;
 
 import nl.avans.moviemenace.R;
 import nl.avans.moviemenace.domain.Account;
+import nl.avans.moviemenace.ui.MainActivity;
 import nl.avans.moviemenace.ui.RegisterActivity;
 import nl.avans.moviemenace.ui.account.AccountViewModel;
 
