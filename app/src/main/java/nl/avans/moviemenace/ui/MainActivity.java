@@ -16,6 +16,7 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.room.Room;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -23,6 +24,8 @@ import java.util.ArrayList;
 import nl.avans.moviemenace.R;
 import nl.avans.moviemenace.dataLayer.DAOFactory;
 import nl.avans.moviemenace.dataLayer.DatabaseConnection;
+import nl.avans.moviemenace.dataLayer.IDAO.MovieDAO;
+import nl.avans.moviemenace.dataLayer.Rooms.MovieDB;
 import nl.avans.moviemenace.dataLayer.Rooms.RoomDAO.RoomMovieDAO;
 import nl.avans.moviemenace.dataLayer.SQLDAOFactory;
 import nl.avans.moviemenace.domain.Account;
@@ -34,11 +37,15 @@ import nl.avans.moviemenace.logic.TicketManager;
 public class MainActivity extends AppCompatActivity {
     private final boolean LOGINTEST = true;
 
+
+
     private AppBarConfiguration mAppBarConfiguration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Room.databaseBuilder(this, MovieDB.class, "movieDB");
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -64,7 +71,9 @@ public class MainActivity extends AppCompatActivity {
 
         new dbtest().execute();
 
-
+        MovieDB movieDB = MovieDB.getDatabase(getApplication());
+        RoomMovieDAO movieDAO = movieDB.getMovieDAO();
+        movieDAO.getAllMovies();
     }
 
     @Override
@@ -85,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... voids) {
-
 
             return null;
         }
