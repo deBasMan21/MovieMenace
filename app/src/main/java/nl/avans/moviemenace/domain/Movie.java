@@ -12,8 +12,9 @@ public class Movie {
     private boolean adult;
     private String status;
     private int duration;
+    private int popularity;
 
-    public Movie(int id, String title, String overview, String release_date, boolean adult, String status, int duration) {
+    public Movie(int id, String title, String overview, String release_date, boolean adult, String status, int duration, int popularity) {
         this.id = id;
         this.title = title;
         this.overview = overview;
@@ -21,6 +22,7 @@ public class Movie {
         this.adult = adult;
         this.status = status;
         this.duration = duration;
+        this.popularity = popularity;
     }
 
     public int getId() {
@@ -77,6 +79,14 @@ public class Movie {
 
     public void setDuration(int duration) {
         this.duration = duration;
+    }
+
+    public int getPopularity() {
+        return popularity;
+    }
+
+    public void setPopularity(int popularity) {
+        this.popularity = popularity;
     }
 
     @Override

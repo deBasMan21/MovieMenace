@@ -37,7 +37,7 @@ import nl.avans.moviemenace.logic.TicketManager;
 public class MainActivity extends AppCompatActivity {
     private final boolean LOGINTEST = true;
 
-
+    private DAOFactory factory = new SQLDAOFactory();
 
     private AppBarConfiguration mAppBarConfiguration;
 
@@ -63,17 +63,11 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        MovieManager movieManager = new MovieManager();
-        movieManager.loadTrendingMoviesPerWeek();
-
-        DAOFactory factory = new SQLDAOFactory();
         TicketManager ticketManager = new TicketManager(factory);
+
 
         new dbtest().execute();
 
-        MovieDB movieDB = MovieDB.getDatabase(getApplication());
-        RoomMovieDAO movieDAO = movieDB.getMovieDAO();
-        movieDAO.getAllMovies();
     }
 
     @Override
@@ -94,9 +88,11 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... voids) {
-
+            MovieManager mm = new MovieManager(factory);
+            mm.addMoviesToLocalDB(getApplication());
             return null;
         }
     }
+
 
 }
