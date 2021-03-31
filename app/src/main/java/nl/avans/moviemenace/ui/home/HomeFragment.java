@@ -50,4 +50,5 @@ public class HomeFragment extends Fragment {
         mPopularRv.setAdapter(popularFilmAdapter = new PopularFilmAdapter(movieList));
         mPopularRv.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false));
     }
+
 }

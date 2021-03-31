@@ -12,11 +12,9 @@
         android:id="@+id/iv_film_detail_poster"
         android:layout_width="140dp"
         android:layout_height="200dp"
-        android:background="#999999"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_image_placeholder"
-        app:tint="@color/white"
         android:contentDescription="@string/poster" />
 
     <TextView

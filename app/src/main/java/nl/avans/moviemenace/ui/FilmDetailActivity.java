@@ -12,17 +12,46 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
+import com.squareup.picasso.Picasso;
 
 import nl.avans.moviemenace.R;
+import nl.avans.moviemenace.domain.Movie;
 
 public class FilmDetailActivity extends AppCompatActivity {
+    private Movie movie;
     private Button mFilmToListBn;
+    private ImageView mPoster;
+    private TextView mDuration;
+    private TextView mDescription;
+    private TextView mAge;
+    public static String MOVIE_KEY = "MovieKey";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_film_detail);
+
+        Intent intent = getIntent();
+        if (intent.hasExtra(MOVIE_KEY)) {
+            movie = (Movie) intent.getSerializableExtra(MOVIE_KEY);
+        }
+
+        mDuration = findViewById(R.id.tv_film_detail_duration_value);
+        mDuration.setText(movie.getDuration()+ "");
+        mDescription = findViewById(R.id.tv_film_detail_desc);
+        mDescription.setText(movie.getOverview());
+        mPoster = findViewById(R.id.iv_film_detail_poster);
+        Picasso.get().load(MainActivity.BASE_URL + movie.getUrl()).into(mPoster);
+        mAge = findViewById(R.id.tv_film_detail_agerating_value);
+        if (movie.isAdult()) {
+            mAge.setText("Adult");
+        } else {
+            mAge.setText("Children");
+        }
+
 
         mFilmToListBn = findViewById(R.id.bn_film_detail_list);
 

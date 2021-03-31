@@ -28,7 +28,7 @@ public class PopularFilmAdapter extends RecyclerView.Adapter<PopularFilmAdapter.
         this.movieList = movieList;
     }
 
-    public static class PopularFilmViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class PopularFilmViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private Context context;
         
         public ImageView mPosterIv;
@@ -47,7 +47,8 @@ public class PopularFilmAdapter extends RecyclerView.Adapter<PopularFilmAdapter.
         public void onClick(View v) {
             int index = getAdapterPosition();
             Intent intent = new Intent(context, FilmDetailActivity.class);
-            context.startActivity(new Intent(context, FilmDetailActivity.class));
+            intent.putExtra(FilmDetailActivity.MOVIE_KEY, movieList.get(getAdapterPosition()));
+            context.startActivity(intent);
         }
     }
 
@@ -75,9 +76,5 @@ public class PopularFilmAdapter extends RecyclerView.Adapter<PopularFilmAdapter.
     public void setMovieList(List<Movie> movieList) {
         this.movieList = movieList;
         notifyDataSetChanged();
-    }
-
-    public interface onClickHandler{
-        void onItemClicked();
     }
 }
