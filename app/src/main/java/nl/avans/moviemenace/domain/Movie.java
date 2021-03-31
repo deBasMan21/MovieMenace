@@ -2,6 +2,7 @@ package nl.avans.moviemenace.domain;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Movie {
@@ -13,8 +14,9 @@ public class Movie {
     private String status;
     private int duration;
     private int popularity;
+    private HashMap<String, String> translations;
 
-    public Movie(int id, String title, String overview, String release_date, boolean adult, String status, int duration, int popularity) {
+    public Movie(int id, String title, String overview, String release_date, boolean adult, String status, int duration, int popularity, HashMap<String, String> translations) {
         this.id = id;
         this.title = title;
         this.overview = overview;
@@ -23,6 +25,7 @@ public class Movie {
         this.status = status;
         this.duration = duration;
         this.popularity = popularity;
+        this.translations = translations;
     }
 
     public int getId() {
@@ -87,6 +90,14 @@ public class Movie {
 
     public void setPopularity(int popularity) {
         this.popularity = popularity;
+    }
+
+    public HashMap<String, String> getTranslations() {
+        return translations;
+    }
+
+    public void setTranslations(HashMap<String, String> translations) {
+        this.translations = translations;
     }
 
     @Override
