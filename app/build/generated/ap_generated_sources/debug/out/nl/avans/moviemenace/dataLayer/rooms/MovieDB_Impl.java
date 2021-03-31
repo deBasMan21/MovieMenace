@@ -3,11 +3,17 @@ package nl.avans.moviemenace.dataLayer.rooms;
 import androidx.room.DatabaseConfiguration;
 import androidx.room.InvalidationTracker;
 import androidx.room.RoomOpenHelper;
+import androidx.room.RoomOpenHelper.Delegate;
+import androidx.room.RoomOpenHelper.ValidationResult;
 import androidx.room.util.DBUtil;
 import androidx.room.util.TableInfo;
+import androidx.room.util.TableInfo.Column;
+import androidx.room.util.TableInfo.ForeignKey;
+import androidx.room.util.TableInfo.Index;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 import androidx.sqlite.db.SupportSQLiteOpenHelper;
-
+import androidx.sqlite.db.SupportSQLiteOpenHelper.Callback;
+import androidx.sqlite.db.SupportSQLiteOpenHelper.Configuration;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
@@ -86,7 +92,7 @@ public final class MovieDB_Impl extends MovieDB {
         final TableInfo _infoMovieEntity = new TableInfo("MovieEntity", _columnsMovieEntity, _foreignKeysMovieEntity, _indicesMovieEntity);
         final TableInfo _existingMovieEntity = TableInfo.read(_db, "MovieEntity");
         if (! _infoMovieEntity.equals(_existingMovieEntity)) {
-          return new RoomOpenHelper.ValidationResult(false, "MovieEntity(nl.avans.moviemenace.dataLayer.Rooms.Entities.MovieEntity).\n"
+          return new RoomOpenHelper.ValidationResult(false, "MovieEntity(nl.avans.moviemenace.dataLayer.rooms.Entities.MovieEntity).\n"
                   + " Expected:\n" + _infoMovieEntity + "\n"
                   + " Found:\n" + _existingMovieEntity);
         }

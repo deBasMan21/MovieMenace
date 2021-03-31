@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         TicketManager ticketManager = new TicketManager(factory);
 
 
-        new dbtest().execute();
+        new insertMoviesIntoLocalDB().execute();
 
     }
 
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
-    public class dbtest extends AsyncTask<Void, Void, Void> {
+    public class insertMoviesIntoLocalDB extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected Void doInBackground(Void... voids) {
