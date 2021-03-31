@@ -11,10 +11,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
+import nl.avans.moviemenace.domain.Movie;
 import nl.avans.moviemenace.ui.FilmDetailActivity;
 import nl.avans.moviemenace.R;
 
 public class PopularFilmAdapter extends RecyclerView.Adapter<PopularFilmAdapter.PopularFilmViewHolder> {
+    private List<Movie> movieList;
+
+    public PopularFilmAdapter(List<Movie> movieList) {
+        this.movieList = movieList;
+    }
+
     public static class PopularFilmViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private Context context;
         
@@ -47,11 +56,17 @@ public class PopularFilmAdapter extends RecyclerView.Adapter<PopularFilmAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull PopularFilmViewHolder holder, int position) {
-
+        Movie movie = movieList.get(position);
+        holder.mTitleTv.setText(movie.getTitle());
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return movieList.size();
+    }
+
+    public void setMovieList(List<Movie> movieList) {
+        this.movieList = movieList;
+        notifyDataSetChanged();
     }
 }

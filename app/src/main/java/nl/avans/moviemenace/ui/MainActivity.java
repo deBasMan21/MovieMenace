@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         TicketManager ticketManager = new TicketManager(factory);
 
 
-        new insertMoviesIntoLocalDB().execute();
+//        new insertMoviesIntoLocalDB().execute();
 
     }
 
@@ -74,16 +74,16 @@ public class MainActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
-    public class insertMoviesIntoLocalDB extends AsyncTask<Void, Void, Void> {
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            MovieEntityManager mem = new MovieEntityManager(getApplication());
-            MovieManager mm = new MovieManager(factory);
-            mem.insertAllMovies(mm.getAllMovies());
-            return null;
-        }
-    }
+//    public class insertMoviesIntoLocalDB extends AsyncTask<Void, Void, Void> {
+//
+//        @Override
+//        protected Void doInBackground(Void... voids) {
+//            MovieEntityManager mem = new MovieEntityManager(getApplication());
+//            MovieManager mm = new MovieManager(factory);
+//            mem.insertAllMovies(mm.getAllMovies());
+//            return null;
+//        }
+//    }
 
 
 }
