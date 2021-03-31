@@ -2,8 +2,10 @@ package nl.avans.moviemenace.dataLayer.SQL;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import nl.avans.moviemenace.dataLayer.DatabaseConnection;
+import nl.avans.moviemenace.dataLayer.IDAO.MovieDAO;
 import nl.avans.moviemenace.dataLayer.IDAO.MovieListDAO;
 import nl.avans.moviemenace.domain.Movie;
 import nl.avans.moviemenace.domain.MovieList;
@@ -76,6 +78,8 @@ public class SQLMovieListDAO extends DatabaseConnection implements MovieListDAO 
             while(rs.next()){
                 //creates movie items
                 Movie movie = new Movie(rs.getInt("Id"), rs.getString("Title"), rs.getString("Description"), rs.getString("ReleaseDate"), rs.getBoolean("Adult"), rs.getString("Status") ,rs.getInt("Duration"), rs.getInt("Popularity"));
+
+                movie.setTranslations(getTranslationsForMovie(rs.getInt("Id")));
                 //adds movie items to the list
                 moviesInList.add(movie);
             }
@@ -88,4 +92,22 @@ public class SQLMovieListDAO extends DatabaseConnection implements MovieListDAO 
         //returns the list with the movies for a specific movielist
         return moviesInList;
     }
+
+    public HashMap<String, String> getTranslationsForMovie(int id){
+        openConnection();
+        HashMap<String, String> translations = new HashMap<>();
+        try{
+            String SQL = "SELECT * FROM Translation WHERE Id = " + id;
+            executeSQLSelectStatement(SQL);
+            while (rs.next()){
+                translations.put(rs.getString("Language"), rs.getString("Description"));
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        return translations;
+    }
+
 }

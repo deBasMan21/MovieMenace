@@ -16,7 +16,7 @@ public class Movie {
     private int popularity;
     private HashMap<String, String> translations;
 
-    public Movie(int id, String title, String overview, String release_date, boolean adult, String status, int duration, int popularity, HashMap<String, String> translations) {
+    public Movie(int id, String title, String overview, String release_date, boolean adult, String status, int duration, int popularity) {
         this.id = id;
         this.title = title;
         this.overview = overview;
@@ -25,7 +25,6 @@ public class Movie {
         this.status = status;
         this.duration = duration;
         this.popularity = popularity;
-        this.translations = translations;
     }
 
     public int getId() {
