@@ -15,7 +15,7 @@ public class Movie implements Serializable {
     private String status;
     private int duration;
     private int popularity;
-    private HashMap<String, String> translations;
+    private HashMap<String, Translation> translations;
     private String url;
 
     public Movie(int id, String title, String overview, String release_date, boolean adult, String status, int duration, int popularity, String url) {
@@ -94,11 +94,11 @@ public class Movie implements Serializable {
         this.popularity = popularity;
     }
 
-    public HashMap<String, String> getTranslations() {
+    public HashMap<String, Translation> getTranslations() {
         return translations;
     }
 
-    public void setTranslations(HashMap<String, String> translations) {
+    public void setTranslations(HashMap<String, Translation> translations) {
         this.translations = translations;
     }
 

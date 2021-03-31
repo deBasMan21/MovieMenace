@@ -8,6 +8,7 @@ import java.util.HashMap;
 import nl.avans.moviemenace.dataLayer.DatabaseConnection;
 import nl.avans.moviemenace.dataLayer.IDAO.MovieDAO;
 import nl.avans.moviemenace.domain.Movie;
+import nl.avans.moviemenace.domain.Translation;
 
 public class SQLMovieDAO extends DatabaseConnection implements MovieDAO {
     @Override
@@ -96,15 +97,16 @@ public class SQLMovieDAO extends DatabaseConnection implements MovieDAO {
         return movies;
     }
 
-    public HashMap<String, String> getTranslationsForMovie(int id){
+    public HashMap<String, Translation> getTranslationsForMovie(int id){
         openConnection();
-        HashMap<String, String> translations = new HashMap<>();
+        HashMap<String, Translation> translations = new HashMap<>();
         try{
             String SQL = "SELECT * FROM Translations WHERE Id = " + id;
 
             executeSQLSelectStatement(SQL);
             while (rs.next()){
-                translations.put(rs.getString("Language"), rs.getString("Description"));
+                Translation trans = new Translation(rs.getInt("Id"), rs.getString("Title"), rs.getString("Description"), rs.getString("URL"), rs.getString("URL"));
+                translations.put(rs.getString("Language"), trans);
             }
         } catch (Exception e){
             e.printStackTrace();
