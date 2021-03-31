@@ -42,7 +42,7 @@ public class AccountFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // navigate to login fragment if no user i slogged in
+        // navigate to login fragment if no user is logged in
         NavController navController = Navigation.findNavController(view);
         accountViewModel.getAccount().observe(getViewLifecycleOwner(), account -> {
             if (account == null) {

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingHorizontal="24dp"
+    android:paddingTop="32dp"
+    tools:context=".ui.RegisterActivity">
+
+    <TextView
+        android:id="@+id/tv_register_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Naam"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/et_register_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_register_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_register_name" />
+
+    <TextView
+        android:id="@+id/tv_register_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Email"
+        app:layout_constraintStart_toStartOf="@+id/tv_register_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_register_name" />
+
+    <EditText
+        android:id="@+id/et_register_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_register_email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_register_email" />
+
+    <EditText
+        android:id="@+id/et_register_place"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_register_place"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_register_place" />
+
+    <TextView
+        android:id="@+id/tv_register_place"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Plaats"
+        app:layout_constraintStart_toStartOf="@+id/tv_register_email"
+        app:layout_constraintTop_toBottomOf="@+id/tv_register_email" />
+
+    <TextView
+        android:id="@+id/tv_register_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Adres"
+        app:layout_constraintStart_toStartOf="@+id/tv_register_place"
+        app:layout_constraintTop_toBottomOf="@+id/tv_register_place" />
+
+    <EditText
+        android:id="@+id/et_register_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_register_address"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_register_address" />
+
+    <TextView
+        android:id="@+id/tv_register_post"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Postcode"
+        app:layout_constraintStart_toStartOf="@+id/tv_register_address"
+        app:layout_constraintTop_toBottomOf="@+id/tv_register_address" />
+
+    <EditText
+        android:id="@+id/et_register_post_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:ems="4"
+        android:inputType="numberSigned"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_register_post"
+        app:layout_constraintEnd_toStartOf="@+id/et_register_post_char"
+        app:layout_constraintTop_toTopOf="@+id/tv_register_post" />
+
+    <EditText
+        android:id="@+id/et_register_post_char"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="2"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_register_post"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_register_post" />
+
+    <EditText
+        android:id="@+id/et_register_birth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:cursorVisible="false"
+        android:ems="10"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:inputType="date"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_register_birth"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_register_birth" />
+
+    <TextView
+        android:id="@+id/tv_register_birth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Geboortedatum"
+        app:layout_constraintStart_toStartOf="@+id/tv_register_post"
+        app:layout_constraintTop_toBottomOf="@+id/tv_register_post" />
+
+    <TextView
+        android:id="@+id/tv_register_pass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="Wachtwoord"
+        app:layout_constraintStart_toStartOf="@+id/tv_register_birth"
+        app:layout_constraintTop_toBottomOf="@+id/tv_register_birth" />
+
+    <EditText
+        android:id="@+id/et_register_pass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_register_pass"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_register_pass" />
+
+    <TextView
+        android:id="@+id/tv_register_pass_re"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Herhaal wachtwoord"
+        app:layout_constraintStart_toStartOf="@+id/tv_register_pass"
+        app:layout_constraintTop_toBottomOf="@+id/tv_register_pass" />
+
+    <EditText
+        android:id="@+id/et_register_pass_re"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_register_pass_re"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_register_pass_re" />
+
+    <Button
+        android:id="@+id/bn_register_conf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="@color/black"
+        android:text="Bevestig"
+        app:layout_constraintStart_toStartOf="@+id/tv_register_pass_re"
+        app:layout_constraintTop_toBottomOf="@+id/tv_register_pass_re" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

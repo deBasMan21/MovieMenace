@@ -65,7 +65,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Nog geen account? registreer hier"
+        android:text="@string/login_register"
         android:textAlignment="center"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="@+id/et_login_pass"
