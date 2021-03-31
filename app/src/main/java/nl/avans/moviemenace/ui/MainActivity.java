@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
 
+    public static final String BASE_URL = "https://image.tmdb.org/t/p/w500";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

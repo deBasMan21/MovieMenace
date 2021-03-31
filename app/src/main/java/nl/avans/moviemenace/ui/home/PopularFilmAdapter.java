@@ -2,6 +2,7 @@ package nl.avans.moviemenace.ui.home;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +12,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import nl.avans.moviemenace.domain.Movie;
 import nl.avans.moviemenace.ui.FilmDetailActivity;
 import nl.avans.moviemenace.R;
+import nl.avans.moviemenace.ui.MainActivity;
 
 public class PopularFilmAdapter extends RecyclerView.Adapter<PopularFilmAdapter.PopularFilmViewHolder> {
     private List<Movie> movieList;
@@ -27,8 +31,8 @@ public class PopularFilmAdapter extends RecyclerView.Adapter<PopularFilmAdapter.
     public static class PopularFilmViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private Context context;
         
-        private ImageView mPosterIv;
-        private TextView mTitleTv;
+        public ImageView mPosterIv;
+        public TextView mTitleTv;
 
         public PopularFilmViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -58,6 +62,7 @@ public class PopularFilmAdapter extends RecyclerView.Adapter<PopularFilmAdapter.
     public void onBindViewHolder(@NonNull PopularFilmViewHolder holder, int position) {
         Movie movie = movieList.get(position);
         holder.mTitleTv.setText(movie.getTitle());
+        Picasso.get().load(MainActivity.BASE_URL + movie.getUrl()).resize(80, 80).into(holder.mPosterIv);
     }
 
     @Override
