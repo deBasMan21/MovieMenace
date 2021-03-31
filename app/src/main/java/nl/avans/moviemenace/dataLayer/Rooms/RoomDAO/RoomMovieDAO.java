@@ -4,6 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Query;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import nl.avans.moviemenace.dataLayer.Rooms.Entities.Movie;
 
@@ -14,5 +15,5 @@ public interface RoomMovieDAO{
     nl.avans.moviemenace.dataLayer.Rooms.Entities.Movie getMovieByID(int movieID);
 
     @Query("SELECT * FROM Movie ORDER BY popularity DESC")
-    ArrayList<Movie> getAllMovies();
+    List<Movie> getAllMovies();
 }
