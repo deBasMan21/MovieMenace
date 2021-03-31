@@ -8,7 +8,7 @@ import java.sql.*;
  */
 public class DatabaseConnection {
 
-    private Connection connection;
+    protected Connection connection;
 
     // The Statement object has been defined as a field because some methods
     // may return a ResultSet object. If so, the statement object may not
