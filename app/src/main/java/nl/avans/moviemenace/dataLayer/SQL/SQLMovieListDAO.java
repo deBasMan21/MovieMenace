@@ -9,6 +9,7 @@ import nl.avans.moviemenace.dataLayer.IDAO.MovieDAO;
 import nl.avans.moviemenace.dataLayer.IDAO.MovieListDAO;
 import nl.avans.moviemenace.domain.Movie;
 import nl.avans.moviemenace.domain.MovieList;
+import nl.avans.moviemenace.domain.Translation;
 
 public class SQLMovieListDAO extends DatabaseConnection implements MovieListDAO {
     @Override
@@ -96,19 +97,19 @@ public class SQLMovieListDAO extends DatabaseConnection implements MovieListDAO 
         return moviesInList;
     }
 
-    public HashMap<String, String> getTranslationsForMovie(int id){
+    public HashMap<String, Translation> getTranslationsForMovie(int id){
         openConnection();
-        HashMap<String, String> translations = new HashMap<>();
+        HashMap<String, Translation> translations = new HashMap<>();
         try{
-            String SQL = "SELECT * FROM Translation WHERE Id = " + id;
+            String SQL = "SELECT * FROM Translations WHERE Id = " + id;
+
             executeSQLSelectStatement(SQL);
             while (rs.next()){
-                translations.put(rs.getString("Language"), rs.getString("Description"));
+                Translation trans = new Translation(rs.getInt("Id"), rs.getString("Title"), rs.getString("Description"), rs.getString("URL"), rs.getString("URL"));
+                translations.put(rs.getString("Language"), trans);
             }
         } catch (Exception e){
             e.printStackTrace();
-        } finally {
-            closeConnection();
         }
         return translations;
     }

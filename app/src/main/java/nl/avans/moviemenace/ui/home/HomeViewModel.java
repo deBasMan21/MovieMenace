@@ -28,8 +28,6 @@ public class HomeViewModel extends ViewModel {
         return movies;
     }
 
-
-
     public class DatabaseTask extends AsyncTask<Void, Void, List<Movie>> {
 
         @Override

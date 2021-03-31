@@ -29,6 +29,7 @@ public class FilmDetailActivity extends AppCompatActivity {
     private TextView mDescription;
     private TextView mAge;
     public static String MOVIE_KEY = "MovieKey";
+    private Button mPurchaseTicketBn;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +58,11 @@ public class FilmDetailActivity extends AppCompatActivity {
 
         mFilmToListBn.setOnClickListener((View v) -> {
             startActivity(new Intent(v.getContext(), FilmToListActivity.class));
+        });
+
+        mPurchaseTicketBn = findViewById(R.id.bn_film_detail_ticket);
+        mPurchaseTicketBn.setOnClickListener((View v) -> {
+            startActivity(new Intent(v.getContext(), PurchaseTicketActivity.class));
         });
 
     }
