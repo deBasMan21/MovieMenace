@@ -12,7 +12,6 @@ import java.util.concurrent.Executors;
 import nl.avans.moviemenace.dataLayer.Rooms.Entities.MovieEntity;
 import nl.avans.moviemenace.dataLayer.Rooms.RoomDAO.RoomMovieDAO;
 
-
 @Database(entities = MovieEntity.class, version = 1)
 public abstract class MovieDB extends RoomDatabase {
 
