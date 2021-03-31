@@ -52,4 +52,6 @@
     <string name="ticket">Ticket icoon</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="menu_home">Home</string>
+    <string name="choose_seats">Stoelen kiezen</string>
+    <string name="amount_seats">Aantal stoelen</string>
 </resources>
