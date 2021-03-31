@@ -20,7 +20,7 @@ public class SQLMovieDAO extends DatabaseConnection implements MovieDAO {
             executeSQLSelectStatement(SQL);
             //The selected movie will be filled in with data
             rs.next();
-            movie = new Movie(rs.getInt("Id"), rs.getString("Title"), rs.getString("Description"),rs.getString("ReleaseDate"), rs.getBoolean("Adult"), rs.getString("Status"), rs.getInt("Duration"));
+            movie = new Movie(rs.getInt("Id"), rs.getString("Title"), rs.getString("Description"),rs.getString("ReleaseDate"), rs.getBoolean("Adult"), rs.getString("Status"), rs.getInt("Duration"), rs.getInt("Popularity"));
         } catch (Exception e){
             //Prints out any errors that may occur
             e.printStackTrace();
@@ -46,7 +46,35 @@ public class SQLMovieDAO extends DatabaseConnection implements MovieDAO {
             while (rs.next()) {
                 movie = new Movie(rs.getInt("Id"), rs.getString("Title"),
                         rs.getString("Description"), rs.getString("ReleaseDate"),
-                        rs.getBoolean("Adult"), rs.getString("Status"), rs.getInt("Duration"));
+                        rs.getBoolean("Adult"), rs.getString("Status"), rs.getInt("Duration"), rs.getInt("Popularity"));
+                movies.add(movie);
+            }
+        } catch (Exception e){
+            //Prints out any errors that may occur
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        //This returns the list with movies
+        return movies;
+    }
+
+    @Override
+    public ArrayList<Movie> getAllMovies() {
+        openConnection();
+        //Creates an arraylist and movie object. In this arraylist all the movies with the same title will be stored.
+        ArrayList<Movie> movies = new ArrayList<>();
+        Movie movie = null;
+        try{
+            //This string contains the query where multiple movies can come out
+            String SQL = "SELECT * FROM Movie";
+            //This executes the query
+            executeSQLSelectStatement(SQL);
+            //This is a loop for all the items that are selected in wich this data is parsed to movie objects. These objects are put in the list created above/
+            while (rs.next()) {
+                movie = new Movie(rs.getInt("Id"), rs.getString("Title"),
+                        rs.getString("Description"), rs.getString("ReleaseDate"),
+                        rs.getBoolean("Adult"), rs.getString("Status"), rs.getInt("Duration"), rs.getInt("Popularity"));
                 movies.add(movie);
             }
         } catch (Exception e){

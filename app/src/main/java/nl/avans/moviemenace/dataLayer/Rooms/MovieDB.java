@@ -9,10 +9,10 @@ import androidx.room.RoomDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import nl.avans.moviemenace.dataLayer.Rooms.Entities.Movie;
+import nl.avans.moviemenace.dataLayer.Rooms.Entities.MovieEntity;
 import nl.avans.moviemenace.dataLayer.Rooms.RoomDAO.RoomMovieDAO;
 
-@Database(entities = Movie.class, version = 1)
+@Database(entities = MovieEntity.class, version = 1)
 public abstract class MovieDB extends RoomDatabase {
 
     private static volatile MovieDB INSTANCE;

@@ -1,5 +1,7 @@
 package nl.avans.moviemenace.logic;
 
+import android.app.Application;
+import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -7,11 +9,18 @@ import androidx.annotation.NonNull;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import nl.avans.moviemenace.dataLayer.API.MovieAPI;
 import nl.avans.moviemenace.dataLayer.API.TrendingMoviesApiResponse;
+import nl.avans.moviemenace.dataLayer.DAOFactory;
+import nl.avans.moviemenace.dataLayer.IDAO.MovieDAO;
+import nl.avans.moviemenace.dataLayer.Rooms.Entities.MovieEntity;
+import nl.avans.moviemenace.dataLayer.Rooms.MovieDB;
+import nl.avans.moviemenace.dataLayer.Rooms.RoomDAO.RoomMovieDAO;
 import nl.avans.moviemenace.domain.Movie;
+import nl.avans.moviemenace.ui.MainActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -19,74 +28,32 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 // Class for interacting between UI and API/Datalayer.
-public class MovieManager implements Callback<TrendingMoviesApiResponse> {
+public class MovieManager {
 
-    private final String TAG = this.getClass().getSimpleName();
+    private MovieDAO movieDAO;
 
-    // URLs for connecting with the API of The Movie Database.
-    public static final String BASE_URL = "https://api.themoviedb.org/3/";
-    public static final String BASE_POSTER_PATH_URL = "https://image.tmdb.org/t/p/w500/";
-
-//    private MovieControllerListener listener;
-
-    private final Retrofit retrofit;
-    private final Gson gson;
-    private final MovieAPI movieAPI;
-
-    public MovieManager(/* MovieControllerListener listener */) {
-//        this.listener = listener;
-
-        // Creates a new GSON builder.
-        gson = new GsonBuilder()
-                .setLenient()
-                .create();
-
-        // Creates the correct Retrofit builder with the base url needed for connecting to the
-        // API. Also gets the GSON for converting JSON results to classes.
-        retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-
-        // Retrofit uses the movieAPI interface to get the correct configuration for getting data
-        // from the API.
-        movieAPI = retrofit.create(MovieAPI.class);
+    public MovieManager(DAOFactory factory){
+        this.movieDAO = factory.createMovieDAO();
     }
 
-    // Method for starting the call to get data from the API.
-    public void loadTrendingMoviesPerWeek() {
-        Call<TrendingMoviesApiResponse> call = movieAPI.loadTrendingMoviesByWeek();
-        call.enqueue(this);
+    public void addMoviesToLocalDB(Application application){
+        MovieDB movieDB = MovieDB.getDatabase(application);
+        RoomMovieDAO movieDAO = movieDB.getMovieDAO();
+
+        movieDAO.insertMovies(convertMoviesToEntity(getAllMovies()));
     }
 
-    // Returns a response on success. Automatically converts JSON data to defined classes with the correct variable names.
-    @Override
-    public void onResponse(Call<TrendingMoviesApiResponse> call,
-                           Response<TrendingMoviesApiResponse> response) {
-        Log.d(TAG, "onResponse() status code: " + response.code());
+    public ArrayList<Movie> getAllMovies(){
+        return movieDAO.getAllMovies();
+    }
 
-        if (response.isSuccessful()) {
-            Log.d(TAG, "Response: " + response.body());
-
-            List<Movie> movies = response.body().getResults();
-            for (Movie movie : movies) {
-                Log.d(TAG, movie.toString());
-            }
-//            listener.onMoviesAvailable(movies);
-        } else {
-            Log.e(TAG, "Not successful! Message: " + response.message());
+    public MovieEntity[] convertMoviesToEntity(ArrayList<Movie> movies){
+        MovieEntity[] moviesParsed = {};
+        for(int i = 0; i < movies.size(); i++){
+            Movie movie = movies.get(i);
+            moviesParsed[i] = new MovieEntity(movie.getId(), movie.getTitle(), movie.getOverview(), movie.getRelease_date().toString(), movie.isAdult(), movie.getStatus(), movie.getDuration(), movie.getPopularity());
         }
-    }
-
-    // Returns an error message if call failed.
-    @Override
-    public void onFailure(@NonNull Call<TrendingMoviesApiResponse> call, Throwable t) {
-        Log.e(TAG, "onFailure" + t.getMessage());
-    }
-
-    // Interface for sending data to the correct class that implements the interface.
-    public interface MovieControllerListener {
-        void onMoviesAvailable(List<Movie> movies);
+        return moviesParsed;
     }
 
 
