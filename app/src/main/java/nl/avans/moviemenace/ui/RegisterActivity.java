@@ -37,7 +37,7 @@ public class RegisterActivity extends AppCompatActivity {
             calendar.set(Calendar.YEAR, year);
             calendar.set(Calendar.MONTH, month);
             calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            mBirthEt.setText(new SimpleDateFormat("dd MMMM yyyy", Locale.getDefault()).format(calendar.getTime()));
+            mBirthEt.setText(new SimpleDateFormat("d MMMM yyyy", Locale.getDefault()).format(calendar.getTime()));
         };
 
         mBirthEt.setOnClickListener((View v) -> {
