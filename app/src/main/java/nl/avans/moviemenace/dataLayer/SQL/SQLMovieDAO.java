@@ -79,7 +79,7 @@ public class SQLMovieDAO extends DatabaseConnection implements MovieDAO {
                         rs.getString("Description"), rs.getString("ReleaseDate"),
                         rs.getBoolean("Adult"), rs.getString("Status"), rs.getInt("Duration"),
                         rs.getInt("Popularity"), rs.getString("URL"));
-                movie.setTranslations(getTranslationsForMovie(rs.getInt("Id")));
+//                movie.setTranslations(getTranslationsForMovie(rs.getInt("Id")));
                 movies.add(movie);
             }
         } catch (Exception e){

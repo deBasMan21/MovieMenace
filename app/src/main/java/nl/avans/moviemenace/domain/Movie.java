@@ -1,11 +1,12 @@
 package nl.avans.moviemenace.domain;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Movie {
+public class Movie implements Serializable {
     private int id;
     private String title;
     private String overview;

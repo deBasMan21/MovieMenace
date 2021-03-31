@@ -22,7 +22,7 @@ import nl.avans.moviemenace.R;
 import nl.avans.moviemenace.ui.MainActivity;
 
 public class PopularFilmAdapter extends RecyclerView.Adapter<PopularFilmAdapter.PopularFilmViewHolder> {
-    private List<Movie> movieList;
+    public List<Movie> movieList;
 
     public PopularFilmAdapter(List<Movie> movieList) {
         this.movieList = movieList;
@@ -45,6 +45,8 @@ public class PopularFilmAdapter extends RecyclerView.Adapter<PopularFilmAdapter.
 
         @Override
         public void onClick(View v) {
+            int index = getAdapterPosition();
+            Intent intent = new Intent(context, FilmDetailActivity.class);
             context.startActivity(new Intent(context, FilmDetailActivity.class));
         }
     }
@@ -73,5 +75,9 @@ public class PopularFilmAdapter extends RecyclerView.Adapter<PopularFilmAdapter.
     public void setMovieList(List<Movie> movieList) {
         this.movieList = movieList;
         notifyDataSetChanged();
+    }
+
+    public interface onClickHandler{
+        void onItemClicked();
     }
 }
