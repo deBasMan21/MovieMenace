@@ -2,14 +2,11 @@ package nl.avans.moviemenace.logic;
 
 import android.app.Application;
 
-import androidx.room.Room;
-
-import java.util.ArrayList;
 import java.util.List;
 
-import nl.avans.moviemenace.dataLayer.Rooms.Entities.MovieEntity;
-import nl.avans.moviemenace.dataLayer.Rooms.MovieDB;
-import nl.avans.moviemenace.dataLayer.Rooms.RoomDAO.RoomMovieDAO;
+import nl.avans.moviemenace.dataLayer.rooms.Entities.MovieEntity;
+import nl.avans.moviemenace.dataLayer.rooms.MovieDB;
+import nl.avans.moviemenace.dataLayer.rooms.RoomDAO.RoomMovieDAO;
 import nl.avans.moviemenace.domain.Movie;
 
 public class MovieEntityManager {

@@ -2,9 +2,8 @@ package nl.avans.moviemenace.logic;
 
 import java.util.ArrayList;
 
-import nl.avans.moviemenace.dataLayer.DAOFactory;
+import nl.avans.moviemenace.dataLayer.factory.DAOFactory;
 import nl.avans.moviemenace.dataLayer.IDAO.MovieListDAO;
-import nl.avans.moviemenace.dataLayer.SQL.SQLMovieListDAO;
 import nl.avans.moviemenace.domain.Movie;
 import nl.avans.moviemenace.domain.MovieList;
 

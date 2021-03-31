@@ -3,10 +3,8 @@ package nl.avans.moviemenace.logic;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
-import nl.avans.moviemenace.dataLayer.DAOFactory;
+import nl.avans.moviemenace.dataLayer.factory.DAOFactory;
 import nl.avans.moviemenace.dataLayer.IDAO.TicketDAO;
 import nl.avans.moviemenace.dataLayer.IDAO.ViewingDAO;
 import nl.avans.moviemenace.domain.Account;

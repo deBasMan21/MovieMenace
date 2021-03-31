@@ -2,11 +2,8 @@ package nl.avans.moviemenace.ui;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Menu;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.navigation.NavController;
@@ -18,19 +15,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.room.Room;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-
 import nl.avans.moviemenace.R;
-import nl.avans.moviemenace.dataLayer.DAOFactory;
-import nl.avans.moviemenace.dataLayer.DatabaseConnection;
-import nl.avans.moviemenace.dataLayer.IDAO.MovieDAO;
-import nl.avans.moviemenace.dataLayer.Rooms.MovieDB;
-import nl.avans.moviemenace.dataLayer.Rooms.RoomDAO.RoomMovieDAO;
-import nl.avans.moviemenace.dataLayer.SQLDAOFactory;
-import nl.avans.moviemenace.domain.Account;
-import nl.avans.moviemenace.domain.Cinema;
-import nl.avans.moviemenace.domain.Movie;
+import nl.avans.moviemenace.dataLayer.factory.DAOFactory;
+import nl.avans.moviemenace.dataLayer.rooms.MovieDB;
+import nl.avans.moviemenace.dataLayer.factory.SQLDAOFactory;
 import nl.avans.moviemenace.logic.MovieEntityManager;
 import nl.avans.moviemenace.logic.MovieManager;
 import nl.avans.moviemenace.logic.TicketManager;

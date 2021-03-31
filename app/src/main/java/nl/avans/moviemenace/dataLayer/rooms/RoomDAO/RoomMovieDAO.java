@@ -1,4 +1,4 @@
-package nl.avans.moviemenace.dataLayer.Rooms.RoomDAO;
+package nl.avans.moviemenace.dataLayer.rooms.RoomDAO;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
@@ -7,7 +7,7 @@ import androidx.room.Query;
 
 import java.util.List;
 
-import nl.avans.moviemenace.dataLayer.Rooms.Entities.MovieEntity;
+import nl.avans.moviemenace.dataLayer.rooms.Entities.MovieEntity;
 
 @Dao
 public interface RoomMovieDAO{

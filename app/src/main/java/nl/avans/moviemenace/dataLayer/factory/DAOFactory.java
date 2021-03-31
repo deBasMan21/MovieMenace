@@ -1,4 +1,4 @@
-package nl.avans.moviemenace.dataLayer;
+package nl.avans.moviemenace.dataLayer.factory;
 
 import nl.avans.moviemenace.dataLayer.IDAO.AccountDAO;
 import nl.avans.moviemenace.dataLayer.IDAO.CinemaDAO;
