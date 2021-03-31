@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/ic_mm_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MovieMenace">
+        <activity android:name=".ui.RegisterActivity"></activity>
         <activity
             android:name=".ui.CreateListActivity"
             android:noHistory="true"

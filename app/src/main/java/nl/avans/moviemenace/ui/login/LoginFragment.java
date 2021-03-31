@@ -2,29 +2,30 @@ package nl.avans.moviemenace.ui.login;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.time.LocalDate;
 
 import nl.avans.moviemenace.R;
 import nl.avans.moviemenace.domain.Account;
-import nl.avans.moviemenace.ui.account.AccountFragment;
+import nl.avans.moviemenace.ui.RegisterActivity;
 import nl.avans.moviemenace.ui.account.AccountViewModel;
 
 public class LoginFragment extends Fragment {
     private LoginViewModel loginViewModel;
     private AccountViewModel accountViewModel;
+
+    private TextView mRegisterTv;
 
     private Button mLoginBn;
 
@@ -53,5 +54,11 @@ public class LoginFragment extends Fragment {
             accountViewModel.setAccount(new Account("email", "name", "pass", "address", "0000AA", "iban", LocalDate.of(2000, 1, 1)));
             Navigation.findNavController(view).navigate(R.id.nav_account);
         });
+
+        mRegisterTv = view.findViewById(R.id.tv_login_register);
+        mRegisterTv.setOnClickListener((View v) -> {
+            startActivity(new Intent(getContext(), RegisterActivity.class));
+        });
+
     }
 }

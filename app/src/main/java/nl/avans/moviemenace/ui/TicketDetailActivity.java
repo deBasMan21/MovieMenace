@@ -43,7 +43,7 @@ public class TicketDetailActivity extends AppCompatActivity {
 
         mBarcodeIv = findViewById(R.id.iv_ticket_detail_barcode);
 
-        mBarcodeIv.setImageBitmap(encodeAsBitmap("placeholder"));
+        mBarcodeIv.setImageBitmap(encodeAsBitmap("placeholdertext"));
 
         mUseBn.setOnClickListener((View v) -> {
             new AlertDialog.Builder(this)
@@ -58,6 +58,8 @@ public class TicketDetailActivity extends AppCompatActivity {
         });
     }
 
+    // encode a string as a barcode bitmap image
+    // screen width of 1080p allows a max of 15 characters
     private Bitmap encodeAsBitmap(String data) {
         Hashtable<EncodeHintType, ErrorCorrectionLevel> hintMap = new Hashtable<>();
         hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
@@ -77,5 +79,12 @@ public class TicketDetailActivity extends AppCompatActivity {
             e.printStackTrace();
             return null;
         }
+    }
+
+    //TODO Override onSupportNavigateUp for all lower level activities to avoid closing MainActivity
+    @Override
+    public boolean onSupportNavigateUp() {
+
+        return false;
     }
 }
