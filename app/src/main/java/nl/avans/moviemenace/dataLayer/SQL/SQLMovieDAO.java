@@ -1,5 +1,6 @@
 package nl.avans.moviemenace.dataLayer.SQL;
 
+import java.sql.PreparedStatement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -79,8 +80,11 @@ public class SQLMovieDAO extends DatabaseConnection implements MovieDAO {
                         rs.getString("Description"), rs.getString("ReleaseDate"),
                         rs.getBoolean("Adult"), rs.getString("Status"), rs.getInt("Duration"),
                         rs.getInt("Popularity"), rs.getString("URL"));
-//                movie.setTranslations(getTranslationsForMovie(rs.getInt("Id")));
+//
                 movies.add(movie);
+            }
+            for (Movie currentMovie : movies) {
+                currentMovie.setTranslations(getTranslationsForMovie(currentMovie.getId()));
             }
         } catch (Exception e){
             //Prints out any errors that may occur
@@ -96,15 +100,14 @@ public class SQLMovieDAO extends DatabaseConnection implements MovieDAO {
         openConnection();
         HashMap<String, String> translations = new HashMap<>();
         try{
-            String SQL = "SELECT * FROM Translation WHERE Id = " + id;
+            String SQL = "SELECT * FROM Translations WHERE Id = " + id;
+
             executeSQLSelectStatement(SQL);
             while (rs.next()){
                 translations.put(rs.getString("Language"), rs.getString("Description"));
             }
         } catch (Exception e){
             e.printStackTrace();
-        } finally {
-            closeConnection();
         }
         return translations;
     }
