@@ -74,8 +74,6 @@ public class LoginFragment extends Fragment {
 
     }
 
-
-
     public class loginTask extends AsyncTask<Void, Void, Void>{
 
         @Override
