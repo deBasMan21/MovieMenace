@@ -30,13 +30,11 @@ public class MovieEntityManager {
     }
 
     public ArrayList<Movie> getAllMovies(){
-//        movieDB.databaseWriteExecuter.execute(new Runnable() {
-//            @Override
-//            public void run() {
-//                movieDAO.getAllMovies();
-//            }
-//        });
         return convertEntityToMovie(movieDAO.getAllMovies());
+    }
+
+    public ArrayList<Movie> getTop10Movies(){
+        return convertEntityToMovie(movieDAO.getTop10Movies());
     }
 
     public MovieEntity[] convertMoviesToEntity(List<Movie> movies){

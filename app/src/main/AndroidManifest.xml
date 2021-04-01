@@ -12,9 +12,14 @@
         android:roundIcon="@mipmap/ic_mm_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MovieMenace">
-        <activity android:name=".ui.tickets.ChooseSeatsActivity"></activity>
+        <activity
+            android:name=".ui.ChooseSeatsActivity"
+            android:noHistory="true"
+            android:parentActivityName=".ui.PurchaseTicketActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.PurchaseTicketActivity"
+            android:parentActivityName=".ui.MainActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.RegisterActivity"

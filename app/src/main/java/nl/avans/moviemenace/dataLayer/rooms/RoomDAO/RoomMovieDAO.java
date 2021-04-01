@@ -18,6 +18,9 @@ public interface RoomMovieDAO{
     @Query("SELECT * FROM MovieEntity ORDER BY popularity DESC")
     List<MovieEntity> getAllMovies();
 
+    @Query("SELECT * FROM MovieEntity ORDER BY Popularity DESC LIMIT 10")
+    List<MovieEntity> getTop10Movies();
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public void insertMovies(MovieEntity[] movies);
 

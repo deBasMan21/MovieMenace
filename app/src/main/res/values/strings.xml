@@ -55,6 +55,7 @@
     <string name="choose_seats">Stoelen kiezen</string>
     <string name="amount_seats">Aantal stoelen</string>
     <string name="action_search">Zoeken</string>
+    <string name="pay">Betalen</string>
     <string name="create_list_empty_alert_title">Missende informatie</string>
-    <string name="create_list_empty_alert_desc">Alstublieft vul in alle velden voor een filmlijst.</string>
+    <string name="create_list_empty_alert_desc">Alstublieft
 </resources>

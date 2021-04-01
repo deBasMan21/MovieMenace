@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.tickets.ChooseSeatsActivity"
+    tools:context=".ui.ChooseSeatsActivity"
     android:paddingTop="32dp"
     android:paddingHorizontal="24dp">
 
@@ -41,5 +41,15 @@
             android:layout_marginTop="16dp"
             android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@+id/iv_choose_seats_hall_preview" />
+
+        <Button
+            android:id="@+id/bn_choose_seats_conf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/pay"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ll_choose_seats_ticket_list"
+            android:backgroundTint="@color/black" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

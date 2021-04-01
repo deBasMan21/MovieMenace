@@ -1,4 +1,4 @@
-package nl.avans.moviemenace.ui.tickets;
+package nl.avans.moviemenace.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,25 +6,41 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import java.util.zip.Inflater;
 
 import nl.avans.moviemenace.R;
+import nl.avans.moviemenace.domain.Account;
 
 public class ChooseSeatsActivity extends AppCompatActivity {
+    public static final String SEATS_AMOUNT_KEY = "SeatsAmountKey";
     private int seatsAmount;
+    private Account account;
     private LinearLayout mTicketListLl;
+    private Button mConfBn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_seats);
 
+        mConfBn = findViewById(R.id.bn_choose_seats_conf);
+        mConfBn.setOnClickListener((View v) -> {
+            Intent ticketsIntent = new Intent(v.getContext(), MainActivity.class);
+            ticketsIntent.putExtra(MainActivity.DESTINATION_KEY, "tickets");
+            ticketsIntent.putExtra(Account.ACCOUNT_KEY, account);
+            startActivity(ticketsIntent);
+        });
+
         Intent intent = getIntent();
-        if (intent.hasExtra("amount")) {
-            seatsAmount = intent.getIntExtra("amount", 1);
+        if (intent.hasExtra(ChooseSeatsActivity.SEATS_AMOUNT_KEY)) {
+            seatsAmount = intent.getIntExtra(ChooseSeatsActivity.SEATS_AMOUNT_KEY, 0);
+        }
+        if (intent.hasExtra(Account.ACCOUNT_KEY)) {
+            account = (Account) intent.getSerializableExtra(Account.ACCOUNT_KEY);
         }
 
         mTicketListLl = findViewById(R.id.ll_choose_seats_ticket_list);
@@ -39,5 +55,11 @@ public class ChooseSeatsActivity extends AppCompatActivity {
 
             mTicketListLl.addView(v);
         }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 }
