@@ -31,7 +31,7 @@ import nl.avans.moviemenace.logic.TicketManager;
 public class MainActivity extends AppCompatActivity {
     public static final String DESTINATION_KEY = "destination";
 
-    private DAOFactory factory = new SQLDAOFactory();
+    public static DAOFactory factory = new SQLDAOFactory();
 
     private AppBarConfiguration mAppBarConfiguration;
 

@@ -1,6 +1,7 @@
 package nl.avans.moviemenace.dataLayer.SQL;
 
 
+import java.sql.Statement;
 import java.time.LocalDate;
 
 import nl.avans.moviemenace.dataLayer.DatabaseConnection;
@@ -19,8 +20,10 @@ public class SQLAccountDAO extends DatabaseConnection implements AccountDAO  {
         // An account is created to fill in with the data from the db
         Account account = null;
         try{
+            rs = null;
             //This string contains the SQL query that will be used
             String SQL = "SELECT * FROM Account WHERE Email = '" + email + "'";
+            Statement stmt = connection.createStatement();
             executeSQLSelectStatement(SQL);
             //The account that was created is filled in with the data from the db selected by the query
             rs.next();
@@ -89,8 +92,6 @@ public class SQLAccountDAO extends DatabaseConnection implements AccountDAO  {
         } catch(Exception e){
             //Prints out any errors that may occur
             e.printStackTrace();
-        } finally {
-            closeConnection();
         }
         //Returns the password that was selected
         return password;
