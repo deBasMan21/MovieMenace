@@ -23,10 +23,12 @@ import nl.avans.moviemenace.R;
 import nl.avans.moviemenace.dataLayer.factory.DAOFactory;
 import nl.avans.moviemenace.dataLayer.rooms.MovieDB;
 import nl.avans.moviemenace.dataLayer.factory.SQLDAOFactory;
+import nl.avans.moviemenace.domain.Account;
 import nl.avans.moviemenace.domain.Movie;
 import nl.avans.moviemenace.logic.MovieEntityManager;
 import nl.avans.moviemenace.logic.MovieManager;
 import nl.avans.moviemenace.logic.TicketManager;
+import nl.avans.moviemenace.ui.account.AccountViewModel;
 
 public class MainActivity extends AppCompatActivity {
     public static final String DESTINATION_KEY = "destination";
@@ -39,12 +41,16 @@ public class MainActivity extends AppCompatActivity {
 
     public static MovieEntityManager mem;
 
+    private AccountViewModel accountViewModel = new AccountViewModel();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mem = new MovieEntityManager(getApplication());
         Room.databaseBuilder(this, MovieDB.class, "movieDB");
+
+        accountViewModel.setAccount((Account) getIntent().getSerializableExtra(Account.ACCOUNT_KEY));
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);

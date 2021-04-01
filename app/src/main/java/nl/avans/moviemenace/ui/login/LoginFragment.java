@@ -89,7 +89,8 @@ public class LoginFragment extends Fragment {
             if(account != null){
                 accountViewModel.setAccount(account);
 //                Navigation.findNavController(view).navigate(R.id.nav_account);
-                startActivity(new Intent(getContext(), MainActivity.class));
+                startActivity(new Intent(getContext(), MainActivity.class).putExtra(Account.ACCOUNT_KEY, account));
+
             } else {
                 new AlertDialog.Builder(getActivity())
                         .setTitle("Login failed")
