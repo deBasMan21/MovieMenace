@@ -56,4 +56,5 @@
     <string name="create_list_empty_alert_title">Missing information</string>
     <string name="create_list_empty_alert_desc">Please fill in all fields for a movie list.</string>
     <string name="login_msg">Click here to log in</string>
+    <string name="pay">Checkout</string>
 </resources>
