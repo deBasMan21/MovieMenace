@@ -20,4 +20,10 @@ public class FilmToListActivity extends AppCompatActivity {
         mListsRv.setAdapter(new FilmToListAdapter());
         mListsRv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
+    }
 }

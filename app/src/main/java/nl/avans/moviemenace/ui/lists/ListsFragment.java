@@ -3,8 +3,11 @@ package nl.avans.moviemenace.ui.lists;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -45,21 +48,20 @@ public class ListsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // navigate to login fragment if no user i slogged in
+        // Navigates to login fragment if no user is logged in.
         NavController navController = Navigation.findNavController(view);
-        accountViewModel.getAccount().observe(getViewLifecycleOwner(), account -> {
-            if (account == null) {
-                navController.navigate(R.id.nav_login);
-            }
-        });
+        if (accountViewModel.getAccount() == null) {
+            navController.navigate(R.id.nav_login);
+        }
 
         mAddFb = view.findViewById(R.id.fb_lists_add);
         mAddFb.setOnClickListener((View v) -> {
-            startActivity(new Intent(getContext(), CreateListActivity.class));
+            startActivity(new Intent(getContext(), CreateListActivity.class).putExtra("loggedInAccount", accountViewModel.getAccount()));
         });
 
         mListsRv = view.findViewById(R.id.rv_lists);
         mListsRv.setAdapter(new ListsAdapter());
         mListsRv.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false));
     }
+
 }

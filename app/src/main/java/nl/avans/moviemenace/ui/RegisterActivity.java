@@ -28,7 +28,8 @@ public class RegisterActivity extends AppCompatActivity {
 
         mConfBn = findViewById(R.id.bn_register_conf);
         mConfBn.setOnClickListener((View v) -> {
-            startActivity(new Intent(v.getContext(), MainActivity.class).putExtra("destination", "login"));
+
+            startActivity(new Intent(v.getContext(), MainActivity.class).putExtra(MainActivity.DESTINATION_KEY, "login"));
         });
 
         mBirthEt = findViewById(R.id.et_register_birth);
@@ -48,5 +49,11 @@ public class RegisterActivity extends AppCompatActivity {
                     calendar.get(Calendar.DAY_OF_MONTH))
             .show();
         });
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 }

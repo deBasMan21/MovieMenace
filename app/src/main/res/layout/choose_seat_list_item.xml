@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="16dp">
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="128dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginHorizontal="16dp" />
+
+    <EditText
+        android:id="@+id/editTextNumberSigned"
+        android:layout_width="64dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ems="3"
+        android:inputType="numberSigned"
+        android:layout_marginHorizontal="16dp"
+        android:autofillHints="Leeftijd" />
+</LinearLayout>

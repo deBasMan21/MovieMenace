@@ -66,7 +66,7 @@ public class TicketDetailActivity extends AppCompatActivity {
         Writer codeWriter = new Code128Writer();
         try {
             int width = Resources.getSystem().getDisplayMetrics().widthPixels;
-            int height = 300;
+            int height = 400;
             BitMatrix bitMatrix = codeWriter.encode(data, BarcodeFormat.CODE_128, width, height, hintMap);
             Bitmap bmp = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
             for (int i = 0; i < width; i++) {
@@ -79,5 +79,11 @@ public class TicketDetailActivity extends AppCompatActivity {
             e.printStackTrace();
             return null;
         }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 }

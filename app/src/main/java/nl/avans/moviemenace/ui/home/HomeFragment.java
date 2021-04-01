@@ -2,6 +2,8 @@ package nl.avans.moviemenace.ui.home;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -17,10 +19,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nl.avans.moviemenace.R;
+import nl.avans.moviemenace.domain.Account;
 import nl.avans.moviemenace.domain.Movie;
+import nl.avans.moviemenace.ui.account.AccountViewModel;
 
 public class HomeFragment extends Fragment {
-
+    private AccountViewModel accountViewModel;
+    private Account userAccount;
     private HomeViewModel homeViewModel;
     private RecyclerView mPopularRv;
     private PopularFilmAdapter popularFilmAdapter;
@@ -30,6 +35,9 @@ public class HomeFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
+        accountViewModel =
+                new ViewModelProvider(requireActivity()).get(AccountViewModel.class);
+
         homeViewModel.getMovies().observe(getViewLifecycleOwner(), new Observer<List<Movie>>() {
             @Override
             public void onChanged(List<Movie> movies) {
@@ -47,7 +55,7 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         mPopularRv = view.findViewById(R.id.rv_home_popular);
-        mPopularRv.setAdapter(popularFilmAdapter = new PopularFilmAdapter(movieList));
+        mPopularRv.setAdapter(popularFilmAdapter = new PopularFilmAdapter(movieList, accountViewModel.getAccount()));
         mPopularRv.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false));
     }
 

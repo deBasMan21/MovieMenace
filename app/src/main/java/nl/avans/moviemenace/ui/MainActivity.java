@@ -1,5 +1,6 @@
 package nl.avans.moviemenace.ui;
 
+import android.app.Application;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.view.Menu;
 
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -16,28 +18,44 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.room.Room;
 
+import java.util.ArrayList;
+
 import nl.avans.moviemenace.R;
 import nl.avans.moviemenace.dataLayer.factory.DAOFactory;
 import nl.avans.moviemenace.dataLayer.rooms.MovieDB;
 import nl.avans.moviemenace.dataLayer.factory.SQLDAOFactory;
+import nl.avans.moviemenace.domain.Account;
+import nl.avans.moviemenace.domain.Movie;
 import nl.avans.moviemenace.logic.MovieEntityManager;
 import nl.avans.moviemenace.logic.MovieManager;
 import nl.avans.moviemenace.logic.TicketManager;
+import nl.avans.moviemenace.ui.account.AccountViewModel;
 
 public class MainActivity extends AppCompatActivity {
-    private final boolean LOGINTEST = true;
+    public static final String DESTINATION_KEY = "destination";
 
-    private DAOFactory factory = new SQLDAOFactory();
+    public static DAOFactory factory = new SQLDAOFactory();
 
     private AppBarConfiguration mAppBarConfiguration;
 
     public static final String BASE_URL = "https://image.tmdb.org/t/p/w500";
 
+    public static MovieEntityManager mem;
+
+    private AccountViewModel accountViewModel;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mem = new MovieEntityManager(getApplication());
         Room.databaseBuilder(this, MovieDB.class, "movieDB");
+
+
+        accountViewModel =
+                new ViewModelProvider(this).get(AccountViewModel.class);
+
+        accountViewModel.setAccount((Account) getIntent().getSerializableExtra(Account.ACCOUNT_KEY));
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -60,8 +78,8 @@ public class MainActivity extends AppCompatActivity {
 
         // navigate to fragments with given destination intent extra, navigate to home by default
         Intent srcIntent = getIntent();
-        if (srcIntent.hasExtra("destination")) {
-            switch (srcIntent.getStringExtra("destination")) {
+        if (srcIntent.hasExtra(DESTINATION_KEY)) {
+            switch (srcIntent.getStringExtra(DESTINATION_KEY)) {
                 case "account":
                     navController.navigate(R.id.nav_account);
                     break;
@@ -84,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-//        new insertMoviesIntoLocalDB().execute();
+        new insertMoviesIntoLocalDB().execute();
 
     }
 
@@ -102,16 +120,15 @@ public class MainActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
-//    public class insertMoviesIntoLocalDB extends AsyncTask<Void, Void, Void> {
-//
-//        @Override
-//        protected Void doInBackground(Void... voids) {
-//            MovieEntityManager mem = new MovieEntityManager(getApplication());
-//            MovieManager mm = new MovieManager(factory);
-//            mem.insertAllMovies(mm.getAllMovies());
-//            return null;
-//        }
-//    }
+    public class insertMoviesIntoLocalDB extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            MovieManager mm = new MovieManager(factory);
+            mem.insertAllMovies(mm.getAllMovies(mem));
+            return null;
+        }
+    }
 
 
 }

@@ -12,7 +12,9 @@ import java.util.List;
 import nl.avans.moviemenace.dataLayer.factory.DAOFactory;
 import nl.avans.moviemenace.dataLayer.factory.SQLDAOFactory;
 import nl.avans.moviemenace.domain.Movie;
+import nl.avans.moviemenace.logic.MovieEntityManager;
 import nl.avans.moviemenace.logic.MovieManager;
+import nl.avans.moviemenace.ui.MainActivity;
 import nl.avans.moviemenace.ui.home.HomeViewModel;
 
 public class FilmsViewModel extends ViewModel {
@@ -34,7 +36,8 @@ public class FilmsViewModel extends ViewModel {
         @Override
         protected List<Movie> doInBackground(Void... voids) {
             List<Movie> test = new ArrayList<>();
-            test = movieManager.getAllMovies();
+            MovieEntityManager mem = MainActivity.mem;
+            test = movieManager.getAllMovies(mem);
             return test;
         }
 

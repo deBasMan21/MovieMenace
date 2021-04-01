@@ -2,22 +2,26 @@ package nl.avans.moviemenace.ui.login;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.time.LocalDate;
 
 import nl.avans.moviemenace.R;
 import nl.avans.moviemenace.domain.Account;
+import nl.avans.moviemenace.logic.AccountManager;
 import nl.avans.moviemenace.ui.MainActivity;
 import nl.avans.moviemenace.ui.RegisterActivity;
 import nl.avans.moviemenace.ui.account.AccountViewModel;
@@ -26,9 +30,15 @@ public class LoginFragment extends Fragment {
     private LoginViewModel loginViewModel;
     private AccountViewModel accountViewModel;
 
+    private EditText mEmailField;
+    private EditText mPasswordField;
+
     private TextView mRegisterTv;
 
     private Button mLoginBn;
+
+    private Account account = null;
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -50,10 +60,11 @@ public class LoginFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         mLoginBn = view.findViewById(R.id.bn_login_login);
+        mEmailField = view.findViewById(R.id.et_login_email);
+        mPasswordField = view.findViewById(R.id.et_login_pass);
         mLoginBn.setOnClickListener((View v) -> {
             // set dummy account to simulate logged in user
-            accountViewModel.setAccount(new Account("email", "name", "pass", "address", "0000AA", "iban", LocalDate.of(2000, 1, 1)));
-            Navigation.findNavController(view).navigate(R.id.nav_account);
+            new loginTask().execute();
         });
 
         mRegisterTv = view.findViewById(R.id.tv_login_register);
@@ -61,5 +72,32 @@ public class LoginFragment extends Fragment {
             startActivity(new Intent(getContext(), RegisterActivity.class));
         });
 
+    }
+
+    public class loginTask extends AsyncTask<Void, Void, Void>{
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            AccountManager accountManager = new AccountManager(MainActivity.factory);
+            account = accountManager.loginWithAccount(mEmailField.getText().toString(), mPasswordField.getText().toString());
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            if(account != null){
+                accountViewModel.setAccount(account);
+//                Navigation.findNavController(view).navigate(R.id.nav_account);
+                startActivity(new Intent(getContext(), MainActivity.class).putExtra(Account.ACCOUNT_KEY, account));
+
+            } else {
+                new AlertDialog.Builder(getActivity())
+                        .setTitle(R.string.login_failed_title)
+                        .setMessage(R.string.login_failed_message)
+                        .setNegativeButton(R.string.back, null)
+                        .show();
+            }
+        }
     }
 }

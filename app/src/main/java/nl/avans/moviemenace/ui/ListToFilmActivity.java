@@ -1,10 +1,14 @@
 package nl.avans.moviemenace.ui;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.SearchView;
 
 import nl.avans.moviemenace.R;
 
@@ -19,5 +23,11 @@ public class ListToFilmActivity extends AppCompatActivity {
         mListToFilmsRv = findViewById(R.id.rv_list_to_films);
         mListToFilmsRv.setAdapter(new ListToFilmsAdapter());
         mListToFilmsRv.setLayoutManager(new GridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false));
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 }

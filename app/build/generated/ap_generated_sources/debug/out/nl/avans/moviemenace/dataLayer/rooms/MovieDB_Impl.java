@@ -32,9 +32,9 @@ public final class MovieDB_Impl extends MovieDB {
     final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(configuration, new RoomOpenHelper.Delegate(1) {
       @Override
       public void createAllTables(SupportSQLiteDatabase _db) {
-        _db.execSQL("CREATE TABLE IF NOT EXISTS `MovieEntity` (`movieID` INTEGER NOT NULL, `title` TEXT, `description` TEXT, `releaseDate` TEXT, `adult` INTEGER NOT NULL, `status` TEXT, `duration` INTEGER NOT NULL, `popularity` INTEGER NOT NULL, PRIMARY KEY(`movieID`))");
+        _db.execSQL("CREATE TABLE IF NOT EXISTS `MovieEntity` (`movieID` INTEGER NOT NULL, `title` TEXT, `description` TEXT, `releaseDate` TEXT, `adult` INTEGER NOT NULL, `status` TEXT, `duration` INTEGER NOT NULL, `popularity` INTEGER NOT NULL, `url` TEXT, PRIMARY KEY(`movieID`))");
         _db.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        _db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '5714105691ec4d144d8ff6bf9028fe2c')");
+        _db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '22f7ddd70a2882fbd9f4e627e7e553c7')");
       }
 
       @Override
@@ -78,7 +78,7 @@ public final class MovieDB_Impl extends MovieDB {
 
       @Override
       protected RoomOpenHelper.ValidationResult onValidateSchema(SupportSQLiteDatabase _db) {
-        final HashMap<String, TableInfo.Column> _columnsMovieEntity = new HashMap<String, TableInfo.Column>(8);
+        final HashMap<String, TableInfo.Column> _columnsMovieEntity = new HashMap<String, TableInfo.Column>(9);
         _columnsMovieEntity.put("movieID", new TableInfo.Column("movieID", "INTEGER", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsMovieEntity.put("title", new TableInfo.Column("title", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsMovieEntity.put("description", new TableInfo.Column("description", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
@@ -87,6 +87,7 @@ public final class MovieDB_Impl extends MovieDB {
         _columnsMovieEntity.put("status", new TableInfo.Column("status", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsMovieEntity.put("duration", new TableInfo.Column("duration", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsMovieEntity.put("popularity", new TableInfo.Column("popularity", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsMovieEntity.put("url", new TableInfo.Column("url", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
         final HashSet<TableInfo.ForeignKey> _foreignKeysMovieEntity = new HashSet<TableInfo.ForeignKey>(0);
         final HashSet<TableInfo.Index> _indicesMovieEntity = new HashSet<TableInfo.Index>(0);
         final TableInfo _infoMovieEntity = new TableInfo("MovieEntity", _columnsMovieEntity, _foreignKeysMovieEntity, _indicesMovieEntity);
@@ -98,7 +99,7 @@ public final class MovieDB_Impl extends MovieDB {
         }
         return new RoomOpenHelper.ValidationResult(true, null);
       }
-    }, "5714105691ec4d144d8ff6bf9028fe2c", "e25c2c22b5e00921ad0cdd56a346e794");
+    }, "22f7ddd70a2882fbd9f4e627e7e553c7", "ab6d93b584066113221761ec4a9e24ad");
     final SupportSQLiteOpenHelper.Configuration _sqliteConfig = SupportSQLiteOpenHelper.Configuration.builder(configuration.context)
         .name(configuration.name)
         .callback(_openCallback)

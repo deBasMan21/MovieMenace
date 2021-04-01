@@ -10,25 +10,24 @@ public class AccountViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    private MutableLiveData<Account> account;
+    private Account account;
 
     public AccountViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("Account fragment");
 
-        account = new MutableLiveData<>();
-        account.setValue(null);
+        account = null;
     }
 
     public void setAccount(Account account) {
-        this.account.setValue(account);
+        this.account = account;
     }
 
     public LiveData<String> getText() {
         return mText;
     }
 
-    public LiveData<Account> getAccount() {
+    public Account getAccount() {
         return account;
     }
 }

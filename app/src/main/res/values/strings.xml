@@ -54,4 +54,10 @@
     <string name="menu_home">Home</string>
     <string name="choose_seats">Stoelen kiezen</string>
     <string name="amount_seats">Aantal stoelen</string>
+    <string name="action_search">Zoeken</string>
+    <string name="pay">Betalen</string>
+    <string name="create_list_empty_alert_title">Missende informatie</string>
+    <string name="create_list_empty_alert_desc">Alstublieft</string>
+    <string name="login_failed_title">Login Mislukt</string>
+    <string name="login_failed_message">Login informatie is verkeerd of er is geen internet verbinding.</string>
 </resources>
