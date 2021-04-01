@@ -8,6 +8,7 @@ import android.view.Menu;
 
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static MovieEntityManager mem;
 
-    private AccountViewModel accountViewModel = new AccountViewModel();
+    private AccountViewModel accountViewModel;
 
 
     @Override
@@ -49,6 +50,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mem = new MovieEntityManager(getApplication());
         Room.databaseBuilder(this, MovieDB.class, "movieDB");
+
+
+        accountViewModel =
+                new ViewModelProvider(this).get(AccountViewModel.class);
 
         accountViewModel.setAccount((Account) getIntent().getSerializableExtra(Account.ACCOUNT_KEY));
 
