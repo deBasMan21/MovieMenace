@@ -13,6 +13,23 @@ import nl.avans.moviemenace.domain.Translation;
 
 public class SQLMovieListDAO extends DatabaseConnection implements MovieListDAO {
     @Override
+    public void createMovieList(String name, String desc, String email) {
+        openConnection();
+        try {
+            String SQL = "INSERT INTO LIST(Name, Description, Email) VALUES('" +
+                    name.replace("'", "''") + "', '" +
+                    desc.replace("'", "''") + "', '" +
+                    email + "')";
+
+            executeSQLStatement(SQL);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+    }
+
+    @Override
     public MovieList getMovieList(int id) {
         openConnection();
         //Creates a  movielist object without any data
