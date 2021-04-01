@@ -106,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+        // chance text in header to profile name and email
         View navHeader = navigationView.getHeaderView(0);
         mNavName = navHeader.findViewById(R.id.tv_nav_header_name);
         mNavEmail = navHeader.findViewById(R.id.tv_nav_header_email);
