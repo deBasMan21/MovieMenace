@@ -62,11 +62,11 @@ public class PurchaseTicketActivity extends AppCompatActivity {
         }
 
         //sorted list to prevent double dates with multiple viewing times
-        List<Viewing> sortedList = new ArrayList<>();
-        for (Viewing viewing: viewingList) {
-            LocalDate unsortedDate = viewing.getDate().toLocalDate();
+        List<Viewing> sortedViewingList = new ArrayList<>();
+        for (Viewing unsortedViewing: viewingList) {
+            LocalDate unsortedDate = unsortedViewing.getDate().toLocalDate();
             boolean exists = false;
-            for (Viewing sortedViewing: sortedList) {
+            for (Viewing sortedViewing: sortedViewingList) {
                 LocalDate sortedDate = sortedViewing.getDate().toLocalDate();
                 if (unsortedDate.compareTo(sortedDate) == 0) {
                     exists = true;
@@ -74,14 +74,14 @@ public class PurchaseTicketActivity extends AppCompatActivity {
                 }
             }
             if (!exists) {
-                sortedList.add(viewing);
+                sortedViewingList.add(unsortedViewing);
             }
         }
 
-        //make date array
-        String[] dates = new String[sortedList.size()];
-        for (int i = 0; i < sortedList.size(); i ++) {
-            Viewing x = sortedList.get(i);
+        //make date array for showing in spinner
+        String[] dates = new String[sortedViewingList.size()];
+        for (int i = 0; i < sortedViewingList.size(); i ++) {
+            Viewing x = sortedViewingList.get(i);
             LocalDateTime dateTime = x.getDate();
             LocalDate date = dateTime.toLocalDate();
             String dateString = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -98,38 +98,46 @@ public class PurchaseTicketActivity extends AppCompatActivity {
 
         //Listener on date selection
         mDateSr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            //the selected index of the spinner == the index of the sorted list and can be different from the original viewingList
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //Revert selected date (from sortingList) into a viewing, must be retrieved from the original list
                 Viewing selectedViewing = null;
+                int selectedIndex = mDateSr.getSelectedItemPosition();
 
                 for (Viewing k: viewingList) {
-                    if (sortedList.get(mDateSr.getSelectedItemPosition()) == k) {
+                    if (sortedViewingList.get(selectedIndex) == k) {
                         selectedViewing = k;
                     }
                 }
+                // Change/save selectedDate each time it changes, for passing the right date to create a ticket
                 selectedDate = selectedViewing.getDate().toLocalDate();
+
                 //Calculate how many seats there are available
                 int availableSeats = ticketManager.checkAvailableSeats(selectedViewing);
+                //Generate amount of spinner items for selecting seats
                 Integer[] seats = new Integer[availableSeats];
                 for (int i = 0; i < seats.length; i++) {
                     seats[i] = i + 1;
                 }
+                //Create seats spinner
                 mSeatsSr = findViewById(R.id.sr_purchase_ticket_seats);
                 ArrayAdapter<Integer> seatsAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, seats);
                 seatsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 mSeatsSr.setAdapter(seatsAdapter);
 
-                //Check different times
+                //Check if the selected viewing has multiple times
                 ArrayList<String> times = new ArrayList<>();
-                LocalDate selectedDate = sortedList.get(mDateSr.getSelectedItemPosition()).getDate().toLocalDate();
-                for (int i = 0; i < viewingList.size(); i ++) {
-                    Viewing x = viewingList.get(i);
+                LocalDate selectedDate = selectedViewing.getDate().toLocalDate();
+                for (Viewing x: viewingList) {
                     if (x.getDate().toLocalDate().compareTo(selectedDate) == 0) {
                         LocalTime time = x.getDate().toLocalTime();
                         String timeString = time.format(DateTimeFormatter.ofPattern("HH:mm"));
                         times.add(timeString);
                     }
                 }
+
+                // Create times spinner
                 mTimesSr = findViewById(R.id.sr_purchase_ticket_times);
                 ArrayAdapter<String> timesAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, times);
                 timesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -137,6 +145,7 @@ public class PurchaseTicketActivity extends AppCompatActivity {
 
                 //Listener on time selection
                 mTimesSr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    // Change/save selectedTime each time it changes, for passing the right date to create a ticket
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                         selectedTime = LocalTime.parse(times.get(mTimesSr.getSelectedItemPosition()));
