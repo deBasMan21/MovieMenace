@@ -45,7 +45,6 @@ public class PopularFilmAdapter extends RecyclerView.Adapter<PopularFilmAdapter.
 
         @Override
         public void onClick(View v) {
-            int index = getAdapterPosition();
             Intent intent = new Intent(context, FilmDetailActivity.class);
             intent.putExtra(FilmDetailActivity.MOVIE_KEY, movieList.get(getAdapterPosition()));
             context.startActivity(intent);
