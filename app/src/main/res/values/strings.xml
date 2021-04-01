@@ -54,4 +54,5 @@
     <string name="menu_home">Home</string>
     <string name="choose_seats">Stoelen kiezen</string>
     <string name="amount_seats">Aantal stoelen</string>
+    <string name="action_search">Zoeken</string>
 </resources>
