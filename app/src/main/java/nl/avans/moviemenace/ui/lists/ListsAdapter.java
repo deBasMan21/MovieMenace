@@ -10,10 +10,24 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
+import nl.avans.moviemenace.domain.Account;
+import nl.avans.moviemenace.domain.Movie;
+import nl.avans.moviemenace.domain.MovieList;
 import nl.avans.moviemenace.ui.ListDetailActivity;
 import nl.avans.moviemenace.R;
 
 public class ListsAdapter extends RecyclerView.Adapter<ListsAdapter.ListsViewHolder> {
+
+    private Account account;
+    private List<MovieList> movieLists;
+
+    public ListsAdapter(List<MovieList> movieLists, Account account) {
+        this.movieLists = movieLists;
+        this.account = account;
+    }
+
     public static class ListsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private Context context;
 
@@ -49,5 +63,11 @@ public class ListsAdapter extends RecyclerView.Adapter<ListsAdapter.ListsViewHol
     @Override
     public int getItemCount() {
         return 5;
+    }
+
+
+    public void setMovieList(List<MovieList> movieLists) {
+        this.movieLists = movieLists;
+        notifyDataSetChanged();
     }
 }

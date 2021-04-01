@@ -60,7 +60,7 @@ public class SQLMovieListDAO extends DatabaseConnection implements MovieListDAO 
         ArrayList<MovieList> movieLists = new ArrayList<>();
         try{
             //This string contains the query to search all movielists from one account
-            String SQL = "SELECT * FROM List WHERE Email = " + email;
+            String SQL = "SELECT * FROM List WHERE Email = '" + email + "'";
             //This executes the query
             executeSQLSelectStatement(SQL);
             //Creates a loop for all the objects that are found and creates the objects for them
