@@ -1,6 +1,8 @@
 package nl.avans.moviemenace.domain;
 
-public class Room {
+import java.io.Serializable;
+
+public class Room implements Serializable {
     private int roomNumber;
     private int numberOfSeats;
     private boolean threeDimensional;

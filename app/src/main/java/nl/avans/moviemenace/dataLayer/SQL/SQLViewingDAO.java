@@ -1,8 +1,11 @@
 package nl.avans.moviemenace.dataLayer.SQL;
 
+import java.sql.Date;
+import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 
 import nl.avans.moviemenace.dataLayer.DatabaseConnection;
@@ -47,17 +50,22 @@ public class SQLViewingDAO extends DatabaseConnection implements ViewingDAO {
         ArrayList<Viewing> viewingsForFilm = new ArrayList<>();
         try{
             //this string contains the sql query to select all upcoming viewings for a film
-            String SQL = "SELECT * FROM Viewing AS V INNER JOIN Room AS R ON R.RoomNumber = V.RoomNumber WHERE GETDATE() >= V.Date AND V.MovieID = " + movieID;
+            String SQL = "SELECT * FROM Viewing AS V INNER JOIN Room AS R ON R.RoomNumber = V.RoomNumber WHERE GETDATE() <= V.Date AND V.MovieID = " + movieID;
             //this executes the query
             executeSQLSelectStatement(SQL);
             //creates a loop
             while(rs.next()){
                 //creates localdattime object to use for the viewing
-                LocalDateTime dateAndTime = LocalDateTime.of(LocalDate.parse(rs.getString("Date")), LocalTime.parse(rs.getString("Time")));
+                Date date = rs.getDate("Date");
+                LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                Time time = rs.getTime("startTime");
+                LocalTime localTime = time.toInstant().atZone(ZoneId.systemDefault()).toLocalTime();
+
+                LocalDateTime dateAndTime = LocalDateTime.of(localDate, localTime);
                 //creates room object to use for the viewing
-                Room room = new Room(rs.getInt("RoomNumber"), rs.getInt("NumberOfSeats"), rs.getBoolean("[3D]"), rs.getInt("NumberOfRows"));
+                Room room = new Room(rs.getInt("RoomNumber"), rs.getInt("NumberOfSeats"), rs.getBoolean("3D"), rs.getInt("NumberOfRows"));
                 //creates the viewing object will all data in it
-                Viewing viewing = new Viewing(rs.getInt("ViewID"), dateAndTime, rs.getDouble("Price"), rs.getBoolean("[3D]"), rs.getInt("MovieID"), room);
+                Viewing viewing = new Viewing(rs.getInt("ViewID"), dateAndTime, rs.getDouble("Price"), rs.getBoolean("3D"), rs.getInt("MovieID"), room);
                 //checks if the viewing is later today or not
                 if(viewing.getDate().isAfter(LocalDateTime.now())){
                     //adds the viewing to the list if its later today

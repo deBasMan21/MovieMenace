@@ -1,12 +1,13 @@
 package nl.avans.moviemenace.domain;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Viewing {
+public class Viewing implements Serializable {
     private int id;
     private LocalDateTime date;
     private double price;

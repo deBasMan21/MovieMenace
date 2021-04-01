@@ -3,6 +3,8 @@ package nl.avans.moviemenace.ui;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -18,9 +20,16 @@ import android.widget.TextView;
 import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.Picasso;
 
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
 import nl.avans.moviemenace.R;
-import nl.avans.moviemenace.domain.Account;
 import nl.avans.moviemenace.domain.Movie;
+import nl.avans.moviemenace.domain.Viewing;
 
 public class FilmDetailActivity extends AppCompatActivity {
     private Movie movie;
@@ -29,9 +38,10 @@ public class FilmDetailActivity extends AppCompatActivity {
     private TextView mDuration;
     private TextView mDescription;
     private TextView mAge;
-    public static String MOVIE_KEY = "MovieKey";
+    public static final String MOVIE_KEY = "MovieKey";
     private Button mPurchaseTicketBn;
-    private Account account;
+    private ViewingViewModel viewingViewModel;
+    private List<Viewing> viewingList;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,9 +51,8 @@ public class FilmDetailActivity extends AppCompatActivity {
         if (intent.hasExtra(MOVIE_KEY)) {
             movie = (Movie) intent.getSerializableExtra(MOVIE_KEY);
         }
-        if (intent.hasExtra(Account.ACCOUNT_KEY)) {
-            account = (Account) intent.getSerializableExtra(Account.ACCOUNT_KEY);
-        }
+
+        final String MOVIE_ID = movie.getId() + "";
 
         mDuration = findViewById(R.id.tv_film_detail_duration_value);
         mDuration.setText(movie.getDuration()+ "");
@@ -58,6 +67,16 @@ public class FilmDetailActivity extends AppCompatActivity {
             mAge.setText("Children");
         }
 
+        viewingViewModel = new ViewModelProvider(this).get(ViewingViewModel.class);
+        viewingViewModel.setMovieId(movie.getId());
+
+        viewingViewModel.getViewingList().observe(this, new Observer<List<Viewing>>() {
+            @Override
+            public void onChanged(List<Viewing> viewings) {
+                viewingList = viewings;
+            }
+        });
+
 
         mFilmToListBn = findViewById(R.id.bn_film_detail_list);
 
@@ -67,23 +86,11 @@ public class FilmDetailActivity extends AppCompatActivity {
 
         mPurchaseTicketBn = findViewById(R.id.bn_film_detail_ticket);
         mPurchaseTicketBn.setOnClickListener((View v) -> {
-            if (account != null) {
-                Intent purchaseTicket = new Intent(v.getContext(), PurchaseTicketActivity.class);
-                purchaseTicket.putExtra(FilmDetailActivity.MOVIE_KEY, movie);
-                purchaseTicket.putExtra(Account.ACCOUNT_KEY, account);
-                startActivity(purchaseTicket);
-            } else {
-                Intent loginIntent = new Intent(v.getContext(), MainActivity.class);
-                loginIntent.putExtra(MainActivity.DESTINATION_KEY, "login");
-                startActivity(loginIntent);
-            }
+            Intent purchaseTicketIntent = new Intent(v.getContext(), PurchaseTicketActivity.class);
+            purchaseTicketIntent.putExtra(MOVIE_KEY, movie);
+            purchaseTicketIntent.putExtra("test", (Serializable) viewingList);
+            startActivity(purchaseTicketIntent);
         });
 
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        finish();
-        return true;
     }
 }

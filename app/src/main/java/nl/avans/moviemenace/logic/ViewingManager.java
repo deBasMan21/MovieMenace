@@ -1,6 +1,7 @@
 package nl.avans.moviemenace.logic;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 import nl.avans.moviemenace.dataLayer.factory.DAOFactory;
 import nl.avans.moviemenace.dataLayer.IDAO.ViewingDAO;
@@ -20,6 +21,22 @@ public class ViewingManager {
         LocalTime startTime = viewing.getDate().toLocalTime();
 
         return startTime.plusMinutes(duration);
+    }
+
+    public Viewing getViewing(int viewID) {
+        return viewingDAO.getViewing(viewID);
+    }
+    public ArrayList<Viewing> getUpcomingViewingsForFilm(int movieID) {
+        return viewingDAO.getUpcomingViewingsForFilm(movieID);
+    }
+    public ArrayList<Viewing> getUpcomingViewingsForRoom(int roomNumber) {
+        return viewingDAO.getUpcomingViewingsForRoom(roomNumber);
+    }
+    public ArrayList<Viewing> getViewingsForToday() {
+        return viewingDAO.getViewingsForToday();
+    }
+    public int getTakenSeats(int viewID) {
+        return viewingDAO.getTakenSeats(viewID);
     }
 
 
