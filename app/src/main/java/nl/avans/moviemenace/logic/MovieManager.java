@@ -29,6 +29,16 @@ public class MovieManager {
         }
     }
 
+    public ArrayList<Movie> getTop10Movies(MovieEntityManager mem){
+        DatabaseConnection db = new DatabaseConnection();
+        db.openConnection();
+        if(db.connectionIsOpen()){
+            return movieDAO.getTop10Movies();
+        } else {
+            return mem.getTop10Movies();
+        }
+    }
+
 
 
 

@@ -37,7 +37,7 @@ public class HomeViewModel extends ViewModel {
         protected List<Movie> doInBackground(Void... voids) {
             List<Movie> test = new ArrayList<>();
             MovieEntityManager mem = MainActivity.mem;
-            test = movieManager.getAllMovies(mem);
+            test = movieManager.getTop10Movies(mem);
             return test;
         }
 

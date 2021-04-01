@@ -97,6 +97,39 @@ public class SQLMovieDAO extends DatabaseConnection implements MovieDAO {
         return movies;
     }
 
+    @Override
+    public ArrayList<Movie> getTop10Movies() {
+        openConnection();
+        //Creates an arraylist and movie object. In this arraylist all the movies with the same title will be stored.
+        ArrayList<Movie> movies = new ArrayList<>();
+        Movie movie = null;
+        try{
+            //This string contains the query where multiple movies can come out
+            String SQL = "SELECT TOP 10 * FROM Movie";
+            //This executes the query
+            executeSQLSelectStatement(SQL);
+            //This is a loop for all the items that are selected in wich this data is parsed to movie objects. These objects are put in the list created above/
+            while (rs.next()) {
+                movie = new Movie(rs.getInt("Id"), rs.getString("Title"),
+                        rs.getString("Description"), rs.getString("ReleaseDate"),
+                        rs.getBoolean("Adult"), rs.getString("Status"), rs.getInt("Duration"),
+                        rs.getInt("Popularity"), rs.getString("URL"));
+//
+                movies.add(movie);
+            }
+            for (Movie currentMovie : movies) {
+                currentMovie.setTranslations(getTranslationsForMovie(currentMovie.getId()));
+            }
+        } catch (Exception e){
+            //Prints out any errors that may occur
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        //This returns the list with movies
+        return movies;
+    }
+
     public HashMap<String, Translation> getTranslationsForMovie(int id){
         openConnection();
         HashMap<String, Translation> translations = new HashMap<>();
