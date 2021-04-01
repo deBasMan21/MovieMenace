@@ -15,6 +15,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import nl.avans.moviemenace.domain.Account;
 import nl.avans.moviemenace.domain.Movie;
 import nl.avans.moviemenace.ui.FilmDetailActivity;
 import nl.avans.moviemenace.R;
@@ -23,9 +24,11 @@ import nl.avans.moviemenace.ui.MainActivity;
 public class FilmsAdapter extends RecyclerView.Adapter<FilmsAdapter.FilmViewHolder> {
 
     private List<Movie> movieList;
+    private Account account;
 
-    public FilmsAdapter(List<Movie> movieList) {
+    public FilmsAdapter(List<Movie> movieList, Account account) {
         this.movieList = movieList;
+        this.account = account;
     }
 
     public class FilmViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -47,6 +50,7 @@ public class FilmsAdapter extends RecyclerView.Adapter<FilmsAdapter.FilmViewHold
         public void onClick(View v) {
             Intent intent = new Intent(context, FilmDetailActivity.class);
             intent.putExtra(FilmDetailActivity.MOVIE_KEY, movieList.get(getAdapterPosition()));
+            intent.putExtra(Account.ACCOUNT_KEY, account);
             context.startActivity(intent);
         }
     }
