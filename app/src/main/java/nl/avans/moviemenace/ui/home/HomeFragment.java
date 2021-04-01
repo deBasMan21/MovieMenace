@@ -43,6 +43,7 @@ public class HomeFragment extends Fragment {
 
     private TextView mDescription;
     private ImageView mHeaderImage;
+    private TextView mTitle;
 
     private ProgressBar mLoadingPb;
 
@@ -80,6 +81,7 @@ public class HomeFragment extends Fragment {
 
         mDescription = view.findViewById(R.id.tv_home_desc);
         mHeaderImage = view.findViewById(R.id.iv_home_banner);
+        mTitle = view.findViewById(R.id.tv_title_trending);
     }
 
 
@@ -95,8 +97,12 @@ public class HomeFragment extends Fragment {
         @Override
         protected void onPostExecute(Movie movie) {
             super.onPostExecute(movie);
-            mDescription.setText(movie.getOverview());
-            Picasso.get().load(MainActivity.BASE_URL + movie.getBanner()).into(mHeaderImage);
+            if(!(movie == null)){
+                mDescription.setText(movie.getOverview());
+                Picasso.get().load(MainActivity.BASE_URL + movie.getBanner()).into(mHeaderImage);
+                mTitle.setText(movie.getTitle());
+            }
+
         }
     }
 
