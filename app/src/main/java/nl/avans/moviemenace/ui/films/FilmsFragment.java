@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
@@ -30,6 +31,7 @@ public class FilmsFragment extends Fragment {
     private RecyclerView mFilmsRv;
     private FilmsAdapter filmsAdapter;
     private List<Movie> movieList = new ArrayList<>();
+    private ProgressBar mLoadingPb;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -41,7 +43,11 @@ public class FilmsFragment extends Fragment {
         accountViewModel =
                 new ViewModelProvider(requireActivity()).get(AccountViewModel.class);
 
-        filmsViewModel.getMovies().observe(getViewLifecycleOwner(), new Observer<List<Movie>>() {
+        View root = inflater.inflate(R.layout.fragment_films, container, false);
+
+        mLoadingPb = root.findViewById(R.id.pb_films);
+
+        filmsViewModel.getMovies(mLoadingPb).observe(getViewLifecycleOwner(), new Observer<List<Movie>>() {
 
             @Override
             public void onChanged(List<Movie> movies) {
@@ -50,10 +56,9 @@ public class FilmsFragment extends Fragment {
                 if (filmsAdapter.getMovieListFull().size() == 0) {
                     filmsAdapter.setMovieListFull(movies);
                 }
+                mLoadingPb.setVisibility(View.INVISIBLE);
             }
         });
-
-        View root = inflater.inflate(R.layout.fragment_films, container, false);
 
         return root;
     }

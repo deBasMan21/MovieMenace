@@ -1,6 +1,8 @@
 package nl.avans.moviemenace.ui.films;
 
 import android.os.AsyncTask;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -23,7 +25,8 @@ public class FilmsViewModel extends ViewModel {
     private DAOFactory factory= new SQLDAOFactory();
     private MovieManager movieManager = new MovieManager(factory);
 
-    public LiveData<List<Movie>> getMovies() {
+    public LiveData<List<Movie>> getMovies(ProgressBar loadingIndicator) {
+        loadingIndicator.setVisibility(View.VISIBLE);
         if (movies == null) {
             movies = new MutableLiveData<List<Movie>>();
             new DatabaseTask().execute();
