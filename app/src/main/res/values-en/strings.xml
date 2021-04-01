@@ -56,7 +56,8 @@
     <string name="create_list_empty_alert_title">Missing information</string>
     <string name="create_list_empty_alert_desc">Please fill in all fields for a movie list.</string>
     <string name="login_failed_title">Login Failed</string>
-    <string name="pay">Pay</string>
+    <string name="pay">Checkout</string>
     <string name="login_failed_message">Login info is invalid or there is no internet connection.</string>
     <string name="back">Back</string>
+    <string name="login_msg">Click here to log in</string>
 </resources>

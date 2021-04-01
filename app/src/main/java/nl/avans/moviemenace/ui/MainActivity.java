@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -43,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
     public static MovieEntityManager mem;
 
     private AccountViewModel accountViewModel;
+
+    private TextView mNavName;
+    private TextView mNavEmail;
 
 
     @Override
@@ -101,6 +106,20 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+        // chance text in header to profile name and email
+        View navHeader = navigationView.getHeaderView(0);
+        mNavName = navHeader.findViewById(R.id.tv_nav_header_name);
+        mNavEmail = navHeader.findViewById(R.id.tv_nav_header_email);
+        if (accountViewModel.getAccount() != null) {
+            mNavName.setText(accountViewModel.getAccount().getName());
+            mNavEmail.setText(accountViewModel.getAccount().getEmail());
+        } else {
+            mNavName.setText("");
+            mNavEmail.setText(R.string.login_msg);
+            mNavEmail.setOnClickListener((View v) -> {
+                navController.navigate(R.id.nav_login);
+            });
+        }
 
         new insertMoviesIntoLocalDB().execute();
 

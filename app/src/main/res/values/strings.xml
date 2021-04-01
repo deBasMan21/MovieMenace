@@ -45,7 +45,7 @@
     <string name="barcode">Barcode van dit ticket</string>
     <string name="use">Inleveren</string>
     <string name="edit">Bijwerken</string>
-    <string name="popular_movies">Top 10 populaire films</string>
+    <string name="popular_movies">Populaire films</string>
     <string name="logo">Logoafbeelding</string>
     <string name="login">Login</string>
     <string name="list">Lijst icoon</string>
@@ -61,4 +61,5 @@
     <string name="login_failed_title">Login Mislukt</string>
     <string name="login_failed_message">Login informatie is verkeerd of er is geen internet verbinding.</string>
     <string name="back">Terug</string>
+    <string name="login_msg">Klik hier om in te loggen</string>
 </resources>
