@@ -80,4 +80,10 @@ public class TicketDetailActivity extends AppCompatActivity {
             return null;
         }
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
+    }
 }

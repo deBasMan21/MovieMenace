@@ -19,6 +19,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.Picasso;
 
 import nl.avans.moviemenace.R;
+import nl.avans.moviemenace.domain.Account;
 import nl.avans.moviemenace.domain.Movie;
 
 public class FilmDetailActivity extends AppCompatActivity {
@@ -30,6 +31,7 @@ public class FilmDetailActivity extends AppCompatActivity {
     private TextView mAge;
     public static String MOVIE_KEY = "MovieKey";
     private Button mPurchaseTicketBn;
+    private Account account;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +40,9 @@ public class FilmDetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent.hasExtra(MOVIE_KEY)) {
             movie = (Movie) intent.getSerializableExtra(MOVIE_KEY);
+        }
+        if (intent.hasExtra("account_temp")) {
+            account = (Account) intent.getSerializableExtra("account_temp");
         }
 
         mDuration = findViewById(R.id.tv_film_detail_duration_value);
@@ -62,8 +67,16 @@ public class FilmDetailActivity extends AppCompatActivity {
 
         mPurchaseTicketBn = findViewById(R.id.bn_film_detail_ticket);
         mPurchaseTicketBn.setOnClickListener((View v) -> {
-            startActivity(new Intent(v.getContext(), PurchaseTicketActivity.class));
+            if (account != null) {
+                startActivity(new Intent(v.getContext(), PurchaseTicketActivity.class).putExtra("account_temp", account));
+            }
         });
 
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 }

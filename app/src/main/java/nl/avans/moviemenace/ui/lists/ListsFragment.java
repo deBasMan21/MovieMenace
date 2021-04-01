@@ -47,11 +47,9 @@ public class ListsFragment extends Fragment {
 
         // navigate to login fragment if no user i slogged in
         NavController navController = Navigation.findNavController(view);
-        accountViewModel.getAccount().observe(getViewLifecycleOwner(), account -> {
-            if (account == null) {
-                navController.navigate(R.id.nav_login);
-            }
-        });
+        if (accountViewModel.getAccount() == null) {
+            navController.navigate(R.id.nav_login);
+        }
 
         mAddFb = view.findViewById(R.id.fb_lists_add);
         mAddFb.setOnClickListener((View v) -> {

@@ -31,4 +31,10 @@ public class ListDetailActivity extends AppCompatActivity {
         mListFilmsRv.setAdapter(new ListFilmAdapter());
         mListFilmsRv.setLayoutManager(new GridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false));
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
+    }
 }

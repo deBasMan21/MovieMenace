@@ -49,4 +49,10 @@ public class RegisterActivity extends AppCompatActivity {
             .show();
         });
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
+    }
 }

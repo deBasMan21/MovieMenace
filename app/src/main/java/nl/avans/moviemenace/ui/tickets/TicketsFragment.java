@@ -43,11 +43,9 @@ public class TicketsFragment extends Fragment {
 
         // navigate to login fragment if no user i slogged in
         NavController navController = Navigation.findNavController(view);
-        accountViewModel.getAccount().observe(getViewLifecycleOwner(), account -> {
-            if (account == null) {
-                navController.navigate(R.id.nav_login);
-            }
-        });
+        if (accountViewModel.getAccount() == null) {
+            navController.navigate(R.id.nav_login);
+        }
 
         mTicketsRv = view.findViewById(R.id.rv_tickets);
         mTicketsRv.setAdapter(new TicketsAdapter());

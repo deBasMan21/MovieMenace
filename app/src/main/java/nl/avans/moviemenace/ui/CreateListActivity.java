@@ -22,4 +22,10 @@ public class CreateListActivity extends AppCompatActivity {
             startActivity(new Intent(v.getContext(), FilmDetailActivity.class));
         });
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
+    }
 }

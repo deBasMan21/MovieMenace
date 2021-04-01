@@ -1,5 +1,6 @@
 package nl.avans.moviemenace.domain;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +9,7 @@ import nl.avans.moviemenace.domain.validation.Email;
 import nl.avans.moviemenace.domain.validation.Password;
 import nl.avans.moviemenace.domain.validation.ZipCode;
 
-public class Account {
+public class Account implements Serializable {
 
     private Email email;
     private String name;

@@ -44,11 +44,9 @@ public class AccountFragment extends Fragment {
 
         // navigate to login fragment if no user is logged in
         NavController navController = Navigation.findNavController(view);
-        accountViewModel.getAccount().observe(getViewLifecycleOwner(), account -> {
-            if (account == null) {
-                navController.navigate(R.id.nav_login);
-            }
-        });
+        if (accountViewModel.getAccount() == null) {
+            navController.navigate(R.id.nav_login);
+        }
 
         mEditBn = view.findViewById(R.id.bn_account_edit);
         mEditBn.setOnClickListener((View v) -> {
