@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -43,21 +44,26 @@ public class HomeFragment extends Fragment {
     private TextView mDescription;
     private ImageView mHeaderImage;
 
+    private ProgressBar mLoadingPb;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
         accountViewModel =
                 new ViewModelProvider(requireActivity()).get(AccountViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_home, container, false);
 
-        homeViewModel.getMovies().observe(getViewLifecycleOwner(), new Observer<List<Movie>>() {
+        mLoadingPb = root.findViewById(R.id.pb_home_popular);
+
+        homeViewModel.getMovies(mLoadingPb).observe(getViewLifecycleOwner(), new Observer<List<Movie>>() {
             @Override
             public void onChanged(List<Movie> movies) {
                 movieList =  movies;
                 popularFilmAdapter.setMovieList(movies);
+                mLoadingPb.setVisibility(View.INVISIBLE);
             }
         });
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
 
         new MajorFilmDatabaseTask().execute();
 
