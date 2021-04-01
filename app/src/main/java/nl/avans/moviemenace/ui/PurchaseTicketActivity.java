@@ -12,6 +12,7 @@ import android.widget.Spinner;
 import nl.avans.moviemenace.R;
 import nl.avans.moviemenace.domain.Account;
 import nl.avans.moviemenace.domain.Movie;
+import nl.avans.moviemenace.ui.tickets.ChooseSeatsActivity;
 
 public class PurchaseTicketActivity extends AppCompatActivity {
     private Account account;
@@ -65,7 +66,7 @@ public class PurchaseTicketActivity extends AppCompatActivity {
 
         mConfBn = findViewById(R.id.bn_purchase_ticket_conf);
         mConfBn.setOnClickListener((View v) -> {
-            startActivity(new Intent(v.getContext(), MainActivity.class).putExtra(MainActivity.DESTINATION_KEY, "tickets"));
+            startActivity(new Intent(v.getContext(), ChooseSeatsActivity.class).putExtra("amount",(int) mSeatsSr.getSelectedItem()));
         });
     }
 }
