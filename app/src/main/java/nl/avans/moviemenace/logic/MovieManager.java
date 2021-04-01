@@ -39,6 +39,16 @@ public class MovieManager {
         }
     }
 
+    public Movie getMovie(MovieEntityManager mem, int id){
+        DatabaseConnection db = new DatabaseConnection();
+        db.openConnection();
+        if(db.connectionIsOpen()){
+            return movieDAO.getMovie(id);
+        } else {
+            return mem.getMovie(id);
+        }
+    }
+
 
 
 

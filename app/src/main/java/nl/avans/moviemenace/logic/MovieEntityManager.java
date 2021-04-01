@@ -37,6 +37,10 @@ public class MovieEntityManager {
         return convertEntityToMovie(movieDAO.getTop10Movies());
     }
 
+    public Movie getMovie(int id){
+        return convertOneEntityToMovie(movieDAO.getMovieByID(id));
+    }
+
     public MovieEntity[] convertMoviesToEntity(List<Movie> movies){
         MovieEntity[] moviesParsed = new MovieEntity[movies.size()];
         for(int i = 0; i < movies.size(); i++){
@@ -52,5 +56,9 @@ public class MovieEntityManager {
             parsedMovies.add(new Movie(movie.movieID, movie.title, movie.description, movie.releaseDate, movie.adult, movie.status, movie.duration, movie.popularity, movie.url));
         }
         return parsedMovies;
+    }
+
+    public Movie convertOneEntityToMovie(MovieEntity movie){
+        return new Movie(movie.movieID, movie.title, movie.description, movie.releaseDate, movie.adult, movie.status, movie.duration, movie.popularity, movie.url);
     }
 }
