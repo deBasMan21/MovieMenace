@@ -83,7 +83,7 @@ public class HomeFragment extends Fragment {
         protected Movie doInBackground(Void... voids) {
             MovieManager mm = new MovieManager(MainActivity.factory);
             MovieEntityManager mem = MainActivity.mem;
-            return mm.getMovie(mem, 671);
+            return mm.getRandomMovie(mem);
         }
 
         @Override
