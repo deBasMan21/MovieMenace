@@ -10,8 +10,13 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 import nl.avans.moviemenace.R;
+import nl.avans.moviemenace.domain.Account;
+import nl.avans.moviemenace.domain.Movie;
 
 public class PurchaseTicketActivity extends AppCompatActivity {
+    private Account account;
+    private Movie movie;
+
     Spinner mDateSr;
     Spinner mTimesSr;
     Spinner mSeatsSr;
@@ -22,6 +27,14 @@ public class PurchaseTicketActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_purchase_ticket);
+
+        Intent intent = getIntent();
+        if (intent.hasExtra(FilmDetailActivity.MOVIE_KEY)) {
+            movie = (Movie) intent.getSerializableExtra(FilmDetailActivity.MOVIE_KEY);
+        }
+        if (intent.hasExtra(Account.ACCOUNT_KEY)) {
+            account = (Account) intent.getSerializableExtra(Account.ACCOUNT_KEY);
+        }
 
         String[] dummyDates = new String[] {
                 "Maandag 1 januari", "Dinsdag 2 februari"
