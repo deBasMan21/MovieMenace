@@ -1,6 +1,8 @@
 package nl.avans.moviemenace.domain.validation;
 
-public class ZipCode {
+import java.io.Serializable;
+
+public class ZipCode implements Serializable {
     private String zipCodeValue;
 
     public ZipCode(String zipCode) {
