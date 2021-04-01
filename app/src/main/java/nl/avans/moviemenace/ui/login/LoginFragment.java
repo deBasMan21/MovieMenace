@@ -93,9 +93,9 @@ public class LoginFragment extends Fragment {
 
             } else {
                 new AlertDialog.Builder(getActivity())
-                        .setTitle("Login failed")
-                        .setMessage("Login info is invalid")
-                        .setNegativeButton("Back", null)
+                        .setTitle(R.string.login_failed_title)
+                        .setMessage(R.string.login_failed_message)
+                        .setNegativeButton(R.string.back, null)
                         .show();
             }
         }
