@@ -78,7 +78,7 @@ public class ListsFragment extends Fragment {
         });
 
         mListsRv = view.findViewById(R.id.rv_lists);
-        mListsRv.setAdapter(new ListsAdapter(movieLists, accountViewModel.getAccount()));
+        mListsRv.setAdapter(mMyListsAdapter = new ListsAdapter(movieLists, accountViewModel.getAccount()));
         mListsRv.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false));
     }
 
