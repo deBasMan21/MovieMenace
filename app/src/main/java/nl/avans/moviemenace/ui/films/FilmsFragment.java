@@ -1,11 +1,13 @@
 package nl.avans.moviemenace.ui.films;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 
@@ -16,6 +18,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.OnConflictStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,8 +79,9 @@ public class FilmsFragment extends Fragment {
     public void onPrepareOptionsMenu(@NonNull Menu menu) {
         super.onPrepareOptionsMenu(menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
-        SearchView searchView = (SearchView) searchItem.getActionView();
+        MenuItem filter = menu.findItem(R.id.filter);
 
+        SearchView searchView = (SearchView) searchItem.getActionView();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -90,7 +94,24 @@ public class FilmsFragment extends Fragment {
                 return false;
             }
         });
-
         searchItem.setVisible(true);
+        filter.setVisible(true);
+        filter.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                DatePickerDialog dp = new DatePickerDialog(getContext());
+                dp.show();
+
+                dp.setOnDateSetListener(new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
+                    }
+                });
+                return true;
+            }
+        });
+
     }
+
 }

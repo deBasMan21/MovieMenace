@@ -96,7 +96,7 @@ public class HomeFragment extends Fragment {
         protected void onPostExecute(Movie movie) {
             super.onPostExecute(movie);
             mDescription.setText(movie.getOverview());
-            Picasso.get().load(MainActivity.BASE_URL + movie.getUrl()).into(mHeaderImage);
+            Picasso.get().load(MainActivity.BASE_URL + movie.getBanner()).into(mHeaderImage);
         }
     }
 

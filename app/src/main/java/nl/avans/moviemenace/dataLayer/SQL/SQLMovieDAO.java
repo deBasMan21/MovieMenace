@@ -23,7 +23,7 @@ public class SQLMovieDAO extends DatabaseConnection implements MovieDAO {
             executeSQLSelectStatement(SQL);
             //The selected movie will be filled in with data
             rs.next();
-            movie = new Movie(rs.getInt("Id"), rs.getString("Title"), rs.getString("Description"),rs.getString("ReleaseDate"), rs.getBoolean("Adult"), rs.getString("Status"), rs.getInt("Duration"), rs.getInt("Popularity"), rs.getString("URL"));
+            movie = new Movie(rs.getInt("Id"), rs.getString("Title"), rs.getString("Description"),rs.getString("ReleaseDate"), rs.getBoolean("Adult"), rs.getString("Status"), rs.getInt("Duration"), rs.getInt("Popularity"), rs.getString("URL"), rs.getString("Banner"));
             movie.setTranslations(getTranslationsForMovie(id));
         } catch (Exception e){
             //Prints out any errors that may occur
@@ -50,7 +50,8 @@ public class SQLMovieDAO extends DatabaseConnection implements MovieDAO {
             while (rs.next()) {
                 movie = new Movie(rs.getInt("Id"), rs.getString("Title"),
                         rs.getString("Description"), rs.getString("ReleaseDate"),
-                        rs.getBoolean("Adult"), rs.getString("Status"), rs.getInt("Duration"), rs.getInt("Popularity"), rs.getString("URL"));
+                        rs.getBoolean("Adult"), rs.getString("Status"),
+                        rs.getInt("Duration"), rs.getInt("Popularity"), rs.getString("URL"), rs.getString("Banner"));
                 movie.setTranslations(getTranslationsForMovie(rs.getInt("Id")));
                 movies.add(movie);
             }
@@ -80,7 +81,7 @@ public class SQLMovieDAO extends DatabaseConnection implements MovieDAO {
                 movie = new Movie(rs.getInt("Id"), rs.getString("Title"),
                         rs.getString("Description"), rs.getString("ReleaseDate"),
                         rs.getBoolean("Adult"), rs.getString("Status"), rs.getInt("Duration"),
-                        rs.getInt("Popularity"), rs.getString("URL"));
+                        rs.getInt("Popularity"), rs.getString("URL"), rs.getString("Banner"));
 //
                 movies.add(movie);
             }
@@ -113,7 +114,7 @@ public class SQLMovieDAO extends DatabaseConnection implements MovieDAO {
                 movie = new Movie(rs.getInt("Id"), rs.getString("Title"),
                         rs.getString("Description"), rs.getString("ReleaseDate"),
                         rs.getBoolean("Adult"), rs.getString("Status"), rs.getInt("Duration"),
-                        rs.getInt("Popularity"), rs.getString("URL"));
+                        rs.getInt("Popularity"), rs.getString("URL"), rs.getString("Banner"));
 //
                 movies.add(movie);
             }
@@ -144,7 +145,7 @@ public class SQLMovieDAO extends DatabaseConnection implements MovieDAO {
             executeSQLSelectStatement(SQL);
             //The selected movie will be filled in with data
             rs.next();
-            movie = new Movie(rs.getInt("Id"), rs.getString("Title"), rs.getString("Description"),rs.getString("ReleaseDate"), rs.getBoolean("Adult"), rs.getString("Status"), rs.getInt("Duration"), rs.getInt("Popularity"), rs.getString("URL"));
+            movie = new Movie(rs.getInt("Id"), rs.getString("Title"), rs.getString("Description"),rs.getString("ReleaseDate"), rs.getBoolean("Adult"), rs.getString("Status"), rs.getInt("Duration"), rs.getInt("Popularity"), rs.getString("URL"), rs.getString("Banner"));
             movie.setTranslations(getTranslationsForMovie(rs.getInt("Id")));
         } catch (Exception e){
             //Prints out any errors that may occur

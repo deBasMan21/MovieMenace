@@ -45,7 +45,7 @@ public class MovieEntityManager {
         MovieEntity[] moviesParsed = new MovieEntity[movies.size()];
         for(int i = 0; i < movies.size(); i++){
             Movie movie = movies.get(i);
-            moviesParsed[i] = new MovieEntity(movie.getId(), movie.getTitle(), movie.getOverview(), movie.getRelease_date().toString(), movie.isAdult(), movie.getStatus(), movie.getDuration(), movie.getPopularity(), movie.getUrl());
+            moviesParsed[i] = new MovieEntity(movie.getId(), movie.getTitle(), movie.getOverview(), movie.getRelease_date().toString(), movie.isAdult(), movie.getStatus(), movie.getDuration(), movie.getPopularity(), movie.getUrl(), movie.getBanner());
         }
         return moviesParsed;
     }
@@ -53,12 +53,12 @@ public class MovieEntityManager {
     public ArrayList<Movie> convertEntityToMovie(List<MovieEntity> movies){
         ArrayList<Movie> parsedMovies = new ArrayList<>();
         for (MovieEntity movie : movies) {
-            parsedMovies.add(new Movie(movie.movieID, movie.title, movie.description, movie.releaseDate, movie.adult, movie.status, movie.duration, movie.popularity, movie.url));
+            parsedMovies.add(new Movie(movie.movieID, movie.title, movie.description, movie.releaseDate, movie.adult, movie.status, movie.duration, movie.popularity, movie.url, movie.banner));
         }
         return parsedMovies;
     }
 
     public Movie convertOneEntityToMovie(MovieEntity movie){
-        return new Movie(movie.movieID, movie.title, movie.description, movie.releaseDate, movie.adult, movie.status, movie.duration, movie.popularity, movie.url);
+        return new Movie(movie.movieID, movie.title, movie.description, movie.releaseDate, movie.adult, movie.status, movie.duration, movie.popularity, movie.url, movie.banner);
     }
 }

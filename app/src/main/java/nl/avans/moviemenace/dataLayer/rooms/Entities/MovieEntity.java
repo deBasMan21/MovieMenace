@@ -33,7 +33,10 @@ public class MovieEntity {
     @ColumnInfo
     public String url;
 
-    public MovieEntity(int movieID, String title, String description, String releaseDate, boolean adult, String status, int duration, int popularity, String url) {
+    @ColumnInfo
+    public String banner;
+
+    public MovieEntity(int movieID, String title, String description, String releaseDate, boolean adult, String status, int duration, int popularity, String url, String banner) {
         this.movieID = movieID;
         this.title = title;
         this.description = description;
@@ -43,5 +46,6 @@ public class MovieEntity {
         this.duration = duration;
         this.popularity = popularity;
         this.url = url;
+        this.banner = banner;
     }
 }
