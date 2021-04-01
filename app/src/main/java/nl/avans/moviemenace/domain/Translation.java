@@ -1,6 +1,8 @@
 package nl.avans.moviemenace.domain;
 
-public class Translation {
+import java.io.Serializable;
+
+public class Translation implements Serializable {
     private int movieID;
     private String title;
     private String description;
