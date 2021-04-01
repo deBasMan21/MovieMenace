@@ -9,4 +9,5 @@ public interface MovieDAO {
     ArrayList<Movie> getMovieByTitle(String title);
     ArrayList<Movie> getAllMovies();
     ArrayList<Movie> getTop10Movies();
+    Movie getRandomMovie();
 }

@@ -129,6 +129,32 @@ public class SQLMovieDAO extends DatabaseConnection implements MovieDAO {
         //This returns the list with movies
         return movies;
     }
+    //SELECT TOP 1 * FROM Movie
+    //ORDER BY NEWID()
+
+    @Override
+    public Movie getRandomMovie() {
+        openConnection();
+        //Creates a movie object without any data in it
+        Movie movie = null;
+        try{
+            //This string contains the select query for a movie
+            String SQL = "SELECT TOP 1 * FROM Movie ORDER BY NEWID()";
+            //This executes the query
+            executeSQLSelectStatement(SQL);
+            //The selected movie will be filled in with data
+            rs.next();
+            movie = new Movie(rs.getInt("Id"), rs.getString("Title"), rs.getString("Description"),rs.getString("ReleaseDate"), rs.getBoolean("Adult"), rs.getString("Status"), rs.getInt("Duration"), rs.getInt("Popularity"), rs.getString("URL"));
+            movie.setTranslations(getTranslationsForMovie(rs.getInt("Id")));
+        } catch (Exception e){
+            //Prints out any errors that may occur
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        //Returns the movie object created before
+        return movie;
+    }
 
     public HashMap<String, Translation> getTranslationsForMovie(int id){
         openConnection();

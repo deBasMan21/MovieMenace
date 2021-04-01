@@ -49,6 +49,16 @@ public class MovieManager {
         }
     }
 
+    public Movie getRandomMovie(MovieEntityManager mem){
+        DatabaseConnection db = new DatabaseConnection();
+        db.openConnection();
+        if(db.connectionIsOpen()){
+            return movieDAO.getRandomMovie();
+        } else {
+            return mem.getMovie(671);
+        }
+    }
+
 
 
 
