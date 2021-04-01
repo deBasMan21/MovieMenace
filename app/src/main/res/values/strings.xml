@@ -55,4 +55,5 @@
     <string name="choose_seats">Stoelen kiezen</string>
     <string name="amount_seats">Aantal stoelen</string>
     <string name="action_search">Zoeken</string>
+    <string name="pay">Betalen</string>
 </resources>

@@ -12,7 +12,6 @@ import android.widget.Spinner;
 import nl.avans.moviemenace.R;
 import nl.avans.moviemenace.domain.Account;
 import nl.avans.moviemenace.domain.Movie;
-import nl.avans.moviemenace.ui.tickets.ChooseSeatsActivity;
 
 public class PurchaseTicketActivity extends AppCompatActivity {
     private Account account;

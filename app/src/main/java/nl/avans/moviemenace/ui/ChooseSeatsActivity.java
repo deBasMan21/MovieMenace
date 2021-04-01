@@ -1,4 +1,4 @@
-package nl.avans.moviemenace.ui.tickets;
+package nl.avans.moviemenace.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
