@@ -1,6 +1,8 @@
 package nl.avans.moviemenace.domain.validation;
 
-public class Password {
+import java.io.Serializable;
+
+public class Password implements Serializable {
 
     private String Password;
 

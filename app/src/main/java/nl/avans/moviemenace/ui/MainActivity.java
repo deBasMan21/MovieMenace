@@ -29,7 +29,7 @@ import nl.avans.moviemenace.logic.MovieManager;
 import nl.avans.moviemenace.logic.TicketManager;
 
 public class MainActivity extends AppCompatActivity {
-    private final boolean LOGINTEST = true;
+    public static final String DESTINATION_KEY = "destination";
 
     private DAOFactory factory = new SQLDAOFactory();
 
@@ -67,8 +67,8 @@ public class MainActivity extends AppCompatActivity {
 
         // navigate to fragments with given destination intent extra, navigate to home by default
         Intent srcIntent = getIntent();
-        if (srcIntent.hasExtra("destination")) {
-            switch (srcIntent.getStringExtra("destination")) {
+        if (srcIntent.hasExtra(DESTINATION_KEY)) {
+            switch (srcIntent.getStringExtra(DESTINATION_KEY)) {
                 case "account":
                     navController.navigate(R.id.nav_account);
                     break;

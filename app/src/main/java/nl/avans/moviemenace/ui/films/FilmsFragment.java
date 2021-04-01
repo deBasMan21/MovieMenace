@@ -21,10 +21,12 @@ import java.util.List;
 
 import nl.avans.moviemenace.R;
 import nl.avans.moviemenace.domain.Movie;
+import nl.avans.moviemenace.ui.account.AccountViewModel;
 
 public class FilmsFragment extends Fragment {
 
     private FilmsViewModel filmsViewModel;
+    private AccountViewModel accountViewModel;
     private RecyclerView mFilmsRv;
     private FilmsAdapter filmsAdapter;
     private List<Movie> movieList = new ArrayList<>();
@@ -36,6 +38,8 @@ public class FilmsFragment extends Fragment {
 
         filmsViewModel =
                 new ViewModelProvider(this).get(FilmsViewModel.class);
+        accountViewModel =
+                new ViewModelProvider(requireActivity()).get(AccountViewModel.class);
 
         filmsViewModel.getMovies().observe(getViewLifecycleOwner(), new Observer<List<Movie>>() {
 
@@ -59,9 +63,8 @@ public class FilmsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         mFilmsRv = view.findViewById(R.id.rv_films);
-        mFilmsRv.setAdapter(filmsAdapter = new FilmsAdapter(movieList));
-        mFilmsRv.setLayoutManager(new GridLayoutManager(this.getContext(), 3,
-                GridLayoutManager.VERTICAL, false));
+        mFilmsRv.setAdapter(filmsAdapter = new FilmsAdapter(movieList, accountViewModel.getAccount()));
+        mFilmsRv.setLayoutManager(new GridLayoutManager(this.getContext(), 3, GridLayoutManager.VERTICAL, false));
     }
 
     @Override

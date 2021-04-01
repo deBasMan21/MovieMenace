@@ -10,6 +10,7 @@ import nl.avans.moviemenace.domain.validation.Password;
 import nl.avans.moviemenace.domain.validation.ZipCode;
 
 public class Account implements Serializable {
+    public static final String ACCOUNT_KEY = "AccountKey";
 
     private Email email;
     private String name;

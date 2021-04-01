@@ -41,8 +41,8 @@ public class FilmDetailActivity extends AppCompatActivity {
         if (intent.hasExtra(MOVIE_KEY)) {
             movie = (Movie) intent.getSerializableExtra(MOVIE_KEY);
         }
-        if (intent.hasExtra("account_temp")) {
-            account = (Account) intent.getSerializableExtra("account_temp");
+        if (intent.hasExtra(Account.ACCOUNT_KEY)) {
+            account = (Account) intent.getSerializableExtra(Account.ACCOUNT_KEY);
         }
 
         mDuration = findViewById(R.id.tv_film_detail_duration_value);
@@ -68,7 +68,14 @@ public class FilmDetailActivity extends AppCompatActivity {
         mPurchaseTicketBn = findViewById(R.id.bn_film_detail_ticket);
         mPurchaseTicketBn.setOnClickListener((View v) -> {
             if (account != null) {
-                startActivity(new Intent(v.getContext(), PurchaseTicketActivity.class).putExtra("account_temp", account));
+                Intent purchaseTicket = new Intent(v.getContext(), PurchaseTicketActivity.class);
+                purchaseTicket.putExtra(FilmDetailActivity.MOVIE_KEY, movie);
+                purchaseTicket.putExtra(Account.ACCOUNT_KEY, account);
+                startActivity(purchaseTicket);
+            } else {
+                Intent loginIntent = new Intent(v.getContext(), MainActivity.class);
+                loginIntent.putExtra(MainActivity.DESTINATION_KEY, "login");
+                startActivity(loginIntent);
             }
         });
 

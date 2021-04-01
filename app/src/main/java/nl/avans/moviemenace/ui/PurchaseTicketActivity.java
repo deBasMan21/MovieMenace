@@ -52,7 +52,7 @@ public class PurchaseTicketActivity extends AppCompatActivity {
 
         mConfBn = findViewById(R.id.bn_purchase_ticket_conf);
         mConfBn.setOnClickListener((View v) -> {
-            startActivity(new Intent(v.getContext(), MainActivity.class).putExtra("destination", "tickets"));
+            startActivity(new Intent(v.getContext(), MainActivity.class).putExtra(MainActivity.DESTINATION_KEY, "tickets"));
         });
     }
 }
