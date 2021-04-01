@@ -48,7 +48,7 @@ public class ListsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // navigate to login fragment if no user i slogged in
+        // Navigates to login fragment if no user is logged in.
         NavController navController = Navigation.findNavController(view);
         if (accountViewModel.getAccount() == null) {
             navController.navigate(R.id.nav_login);
@@ -56,7 +56,7 @@ public class ListsFragment extends Fragment {
 
         mAddFb = view.findViewById(R.id.fb_lists_add);
         mAddFb.setOnClickListener((View v) -> {
-            startActivity(new Intent(getContext(), CreateListActivity.class));
+            startActivity(new Intent(getContext(), CreateListActivity.class).putExtra("loggedInAccount", accountViewModel.getAccount()));
         });
 
         mListsRv = view.findViewById(R.id.rv_lists);

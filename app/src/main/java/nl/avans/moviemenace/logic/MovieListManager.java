@@ -15,6 +15,10 @@ public class MovieListManager {
         this.movieListDAO = daoFactory.createMovieListDAO();
     }
 
+    public void createList(String name, String desc, String email) {
+        movieListDAO.createMovieList(name, desc, email);
+    }
+
     public MovieList getMovieList(int id) {
         return movieListDAO.getMovieList(id);
     }
