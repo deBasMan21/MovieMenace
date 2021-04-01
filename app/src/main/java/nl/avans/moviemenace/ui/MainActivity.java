@@ -1,5 +1,6 @@
 package nl.avans.moviemenace.ui;
 
+import android.app.Application;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -16,10 +17,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.room.Room;
 
+import java.util.ArrayList;
+
 import nl.avans.moviemenace.R;
 import nl.avans.moviemenace.dataLayer.factory.DAOFactory;
 import nl.avans.moviemenace.dataLayer.rooms.MovieDB;
 import nl.avans.moviemenace.dataLayer.factory.SQLDAOFactory;
+import nl.avans.moviemenace.domain.Movie;
 import nl.avans.moviemenace.logic.MovieEntityManager;
 import nl.avans.moviemenace.logic.MovieManager;
 import nl.avans.moviemenace.logic.TicketManager;
@@ -33,10 +37,13 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String BASE_URL = "https://image.tmdb.org/t/p/w500";
 
+    public static MovieEntityManager mem;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mem = new MovieEntityManager(getApplication());
         Room.databaseBuilder(this, MovieDB.class, "movieDB");
 
         setContentView(R.layout.activity_main);
@@ -84,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-//        new insertMoviesIntoLocalDB().execute();
+        new insertMoviesIntoLocalDB().execute();
 
     }
 
@@ -102,16 +109,15 @@ public class MainActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
-//    public class insertMoviesIntoLocalDB extends AsyncTask<Void, Void, Void> {
-//
-//        @Override
-//        protected Void doInBackground(Void... voids) {
-//            MovieEntityManager mem = new MovieEntityManager(getApplication());
-//            MovieManager mm = new MovieManager(factory);
-//            mem.insertAllMovies(mm.getAllMovies());
-//            return null;
-//        }
-//    }
+    public class insertMoviesIntoLocalDB extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            MovieManager mm = new MovieManager(factory);
+            mem.insertAllMovies(mm.getAllMovies(mem));
+            return null;
+        }
+    }
 
 
 }

@@ -2,6 +2,7 @@ package nl.avans.moviemenace.logic;
 
 import android.app.Application;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import nl.avans.moviemenace.dataLayer.rooms.Entities.MovieEntity;
@@ -25,14 +26,33 @@ public class MovieEntityManager {
                 movieDAO.insertMovies(convertMoviesToEntity(movies));
             }
         });
+
+    }
+
+    public ArrayList<Movie> getAllMovies(){
+//        movieDB.databaseWriteExecuter.execute(new Runnable() {
+//            @Override
+//            public void run() {
+//                movieDAO.getAllMovies();
+//            }
+//        });
+        return convertEntityToMovie(movieDAO.getAllMovies());
     }
 
     public MovieEntity[] convertMoviesToEntity(List<Movie> movies){
         MovieEntity[] moviesParsed = new MovieEntity[movies.size()];
         for(int i = 0; i < movies.size(); i++){
             Movie movie = movies.get(i);
-            moviesParsed[i] = new MovieEntity(movie.getId(), movie.getTitle(), movie.getOverview(), movie.getRelease_date().toString(), movie.isAdult(), movie.getStatus(), movie.getDuration(), movie.getPopularity());
+            moviesParsed[i] = new MovieEntity(movie.getId(), movie.getTitle(), movie.getOverview(), movie.getRelease_date().toString(), movie.isAdult(), movie.getStatus(), movie.getDuration(), movie.getPopularity(), movie.getUrl());
         }
         return moviesParsed;
+    }
+
+    public ArrayList<Movie> convertEntityToMovie(List<MovieEntity> movies){
+        ArrayList<Movie> parsedMovies = new ArrayList<>();
+        for (MovieEntity movie : movies) {
+            parsedMovies.add(new Movie(movie.movieID, movie.title, movie.description, movie.releaseDate, movie.adult, movie.status, movie.duration, movie.popularity, movie.url));
+        }
+        return parsedMovies;
     }
 }

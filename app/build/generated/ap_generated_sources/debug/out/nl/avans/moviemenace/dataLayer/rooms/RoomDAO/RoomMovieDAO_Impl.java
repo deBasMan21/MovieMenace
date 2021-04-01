@@ -25,7 +25,7 @@ public final class RoomMovieDAO_Impl implements RoomMovieDAO {
     this.__insertionAdapterOfMovieEntity = new EntityInsertionAdapter<MovieEntity>(__db) {
       @Override
       public String createQuery() {
-        return "INSERT OR REPLACE INTO `MovieEntity` (`movieID`,`title`,`description`,`releaseDate`,`adult`,`status`,`duration`,`popularity`) VALUES (?,?,?,?,?,?,?,?)";
+        return "INSERT OR REPLACE INTO `MovieEntity` (`movieID`,`title`,`description`,`releaseDate`,`adult`,`status`,`duration`,`popularity`,`url`) VALUES (?,?,?,?,?,?,?,?,?)";
       }
 
       @Override
@@ -56,6 +56,11 @@ public final class RoomMovieDAO_Impl implements RoomMovieDAO {
         }
         stmt.bindLong(7, value.duration);
         stmt.bindLong(8, value.popularity);
+        if (value.url == null) {
+          stmt.bindNull(9);
+        } else {
+          stmt.bindString(9, value.url);
+        }
       }
     };
   }
@@ -89,6 +94,7 @@ public final class RoomMovieDAO_Impl implements RoomMovieDAO {
       final int _cursorIndexOfStatus = CursorUtil.getColumnIndexOrThrow(_cursor, "status");
       final int _cursorIndexOfDuration = CursorUtil.getColumnIndexOrThrow(_cursor, "duration");
       final int _cursorIndexOfPopularity = CursorUtil.getColumnIndexOrThrow(_cursor, "popularity");
+      final int _cursorIndexOfUrl = CursorUtil.getColumnIndexOrThrow(_cursor, "url");
       final MovieEntity _result;
       if(_cursor.moveToFirst()) {
         final int _tmpMovieID;
@@ -109,7 +115,9 @@ public final class RoomMovieDAO_Impl implements RoomMovieDAO {
         _tmpDuration = _cursor.getInt(_cursorIndexOfDuration);
         final int _tmpPopularity;
         _tmpPopularity = _cursor.getInt(_cursorIndexOfPopularity);
-        _result = new MovieEntity(_tmpMovieID,_tmpTitle,_tmpDescription,_tmpReleaseDate,_tmpAdult,_tmpStatus,_tmpDuration,_tmpPopularity);
+        final String _tmpUrl;
+        _tmpUrl = _cursor.getString(_cursorIndexOfUrl);
+        _result = new MovieEntity(_tmpMovieID,_tmpTitle,_tmpDescription,_tmpReleaseDate,_tmpAdult,_tmpStatus,_tmpDuration,_tmpPopularity,_tmpUrl);
       } else {
         _result = null;
       }
@@ -135,6 +143,7 @@ public final class RoomMovieDAO_Impl implements RoomMovieDAO {
       final int _cursorIndexOfStatus = CursorUtil.getColumnIndexOrThrow(_cursor, "status");
       final int _cursorIndexOfDuration = CursorUtil.getColumnIndexOrThrow(_cursor, "duration");
       final int _cursorIndexOfPopularity = CursorUtil.getColumnIndexOrThrow(_cursor, "popularity");
+      final int _cursorIndexOfUrl = CursorUtil.getColumnIndexOrThrow(_cursor, "url");
       final List<MovieEntity> _result = new ArrayList<MovieEntity>(_cursor.getCount());
       while(_cursor.moveToNext()) {
         final MovieEntity _item;
@@ -156,7 +165,9 @@ public final class RoomMovieDAO_Impl implements RoomMovieDAO {
         _tmpDuration = _cursor.getInt(_cursorIndexOfDuration);
         final int _tmpPopularity;
         _tmpPopularity = _cursor.getInt(_cursorIndexOfPopularity);
-        _item = new MovieEntity(_tmpMovieID,_tmpTitle,_tmpDescription,_tmpReleaseDate,_tmpAdult,_tmpStatus,_tmpDuration,_tmpPopularity);
+        final String _tmpUrl;
+        _tmpUrl = _cursor.getString(_cursorIndexOfUrl);
+        _item = new MovieEntity(_tmpMovieID,_tmpTitle,_tmpDescription,_tmpReleaseDate,_tmpAdult,_tmpStatus,_tmpDuration,_tmpPopularity,_tmpUrl);
         _result.add(_item);
       }
       return _result;
