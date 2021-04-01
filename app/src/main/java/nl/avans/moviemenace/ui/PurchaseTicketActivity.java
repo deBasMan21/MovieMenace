@@ -10,8 +10,14 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 import nl.avans.moviemenace.R;
+import nl.avans.moviemenace.domain.Account;
+import nl.avans.moviemenace.domain.Movie;
+import nl.avans.moviemenace.ui.tickets.ChooseSeatsActivity;
 
 public class PurchaseTicketActivity extends AppCompatActivity {
+    private Account account;
+    private Movie movie;
+
     Spinner mDateSr;
     Spinner mTimesSr;
     Spinner mSeatsSr;
@@ -22,6 +28,14 @@ public class PurchaseTicketActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_purchase_ticket);
+
+        Intent intent = getIntent();
+        if (intent.hasExtra(FilmDetailActivity.MOVIE_KEY)) {
+            movie = (Movie) intent.getSerializableExtra(FilmDetailActivity.MOVIE_KEY);
+        }
+        if (intent.hasExtra(Account.ACCOUNT_KEY)) {
+            account = (Account) intent.getSerializableExtra(Account.ACCOUNT_KEY);
+        }
 
         String[] dummyDates = new String[] {
                 "Maandag 1 januari", "Dinsdag 2 februari"
@@ -52,7 +66,7 @@ public class PurchaseTicketActivity extends AppCompatActivity {
 
         mConfBn = findViewById(R.id.bn_purchase_ticket_conf);
         mConfBn.setOnClickListener((View v) -> {
-            startActivity(new Intent(v.getContext(), MainActivity.class).putExtra(MainActivity.DESTINATION_KEY, "tickets"));
+            startActivity(new Intent(v.getContext(), ChooseSeatsActivity.class).putExtra("amount",(int) mSeatsSr.getSelectedItem()));
         });
     }
 }
