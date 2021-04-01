@@ -53,5 +53,7 @@
     <string name="choose_seats">Choose seats</string>
     <string name="amount_seats">Number of seats</string>
     <string name="action_search">Search</string>
+    <string name="create_list_empty_alert_title">Missing information</string>
+    <string name="create_list_empty_alert_desc">Please fill in all fields for a movie list.</string>
     <string name="login_msg">Click here to log in</string>
 </resources>

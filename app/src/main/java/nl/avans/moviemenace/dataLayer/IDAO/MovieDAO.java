@@ -8,4 +8,5 @@ public interface MovieDAO {
     Movie getMovie(int id);
     ArrayList<Movie> getMovieByTitle(String title);
     ArrayList<Movie> getAllMovies();
+    ArrayList<Movie> getTop10Movies();
 }
