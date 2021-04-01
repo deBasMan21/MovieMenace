@@ -105,7 +105,7 @@ public class SQLMovieDAO extends DatabaseConnection implements MovieDAO {
         Movie movie = null;
         try{
             //This string contains the query where multiple movies can come out
-            String SQL = "SELECT TOP 10 * FROM Movie";
+            String SQL = "SELECT TOP 10 * FROM Movie ORDER BY Popularity DESC";
             //This executes the query
             executeSQLSelectStatement(SQL);
             //This is a loop for all the items that are selected in wich this data is parsed to movie objects. These objects are put in the list created above/

@@ -34,7 +34,7 @@ public class MovieEntityManager {
     }
 
     public ArrayList<Movie> getTop10Movies(){
-        return convertEntityToMovie(movieDAO.getAllMovies());
+        return convertEntityToMovie(movieDAO.getTop10Movies());
     }
 
     public MovieEntity[] convertMoviesToEntity(List<Movie> movies){
