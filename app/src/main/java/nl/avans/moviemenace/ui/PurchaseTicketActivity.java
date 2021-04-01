@@ -65,7 +65,16 @@ public class PurchaseTicketActivity extends AppCompatActivity {
 
         mConfBn = findViewById(R.id.bn_purchase_ticket_conf);
         mConfBn.setOnClickListener((View v) -> {
-            startActivity(new Intent(v.getContext(), ChooseSeatsActivity.class).putExtra("amount",(int) mSeatsSr.getSelectedItem()));
+            Intent chooseSeatsIntent = new Intent(v.getContext(), ChooseSeatsActivity.class);
+            chooseSeatsIntent.putExtra(ChooseSeatsActivity.SEATS_AMOUNT_KEY, (int) mSeatsSr.getSelectedItem());
+            chooseSeatsIntent.putExtra(Account.ACCOUNT_KEY, account);
+            startActivity(chooseSeatsIntent);
         });
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 }
