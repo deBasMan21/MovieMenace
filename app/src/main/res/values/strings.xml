@@ -56,4 +56,5 @@
     <string name="amount_seats">Aantal stoelen</string>
     <string name="action_search">Zoeken</string>
     <string name="pay">Betalen</string>
+    <string name="login_msg">Klik hier om in te loggen</string>
 </resources>
