@@ -45,7 +45,7 @@
     <string name="barcode">Barcode for this ticket</string>
     <string name="use">Use</string>
     <string name="edit">Edit</string>
-    <string name="popular_movies">Popular films</string>
+    <string name="popular_movies">Top 10 popular movies</string>
     <string name="logo">Logo image</string>
     <string name="login">Login</string>
     <string name="list">List icon</string>
