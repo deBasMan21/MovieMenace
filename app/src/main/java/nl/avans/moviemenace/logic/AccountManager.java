@@ -26,4 +26,12 @@ public class AccountManager {
     public String getPassword(String email) {
         return accountDAO.getPassword(email);
     }
+
+    public Account loginWithAccount(String email, String password){
+        Account account = null;
+        if(password.equals(getPassword(email))){
+            account = getAccount(email);
+        }
+        return account;
+    }
 }
