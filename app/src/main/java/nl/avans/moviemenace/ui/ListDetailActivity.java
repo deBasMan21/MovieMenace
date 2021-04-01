@@ -41,7 +41,7 @@ public class ListDetailActivity extends AppCompatActivity {
         return true;
     }
 
-    // TODO Add a filter to custom lists when adapter gets list of movies in code.
+    // TODO Add a filter to custom lists when adapter gets list of movies in code. - Stefan
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
