@@ -15,23 +15,23 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
+        android:contentDescription="@string/logo"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/logo_mm_full_foreground"
-        android:contentDescription="@string/logo" />
+        app:srcCompat="@mipmap/logo_mm_full_foreground" />
 
     <EditText
         android:id="@+id/et_login_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:importantForAutofill="no"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="@+id/iv_login_banner"
         app:layout_constraintStart_toStartOf="@+id/iv_login_banner"
-        app:layout_constraintTop_toBottomOf="@+id/tv_login_email"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_login_email" />
 
     <TextView
         android:id="@+id/tv_login_email"
@@ -56,11 +56,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:importantForAutofill="no"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="@+id/et_login_email"
         app:layout_constraintStart_toStartOf="@+id/et_login_email"
-        app:layout_constraintTop_toBottomOf="@+id/tv_login_pass"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_login_pass" />
 
     <TextView
         android:id="@+id/tv_login_register"
@@ -68,6 +68,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:focusable="false"
         android:text="@string/login_register"
         android:textAlignment="center"
         android:textSize="12sp"
