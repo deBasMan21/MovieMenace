@@ -45,7 +45,8 @@ public class HomeFragment extends Fragment {
     private ImageView mHeaderImage;
     private TextView mTitle;
 
-    private ProgressBar mLoadingPb;
+    private ProgressBar mLoadingPopularPb;
+    private ProgressBar mLoadingHeaderPb;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -55,14 +56,15 @@ public class HomeFragment extends Fragment {
                 new ViewModelProvider(requireActivity()).get(AccountViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
-        mLoadingPb = root.findViewById(R.id.pb_home_popular);
+        mLoadingPopularPb = root.findViewById(R.id.pb_home_popular);
+        mLoadingHeaderPb = root.findViewById(R.id.pb_home_header);
 
-        homeViewModel.getMovies(mLoadingPb).observe(getViewLifecycleOwner(), new Observer<List<Movie>>() {
+        homeViewModel.getMovies(mLoadingPopularPb).observe(getViewLifecycleOwner(), new Observer<List<Movie>>() {
             @Override
             public void onChanged(List<Movie> movies) {
                 movieList =  movies;
                 popularFilmAdapter.setMovieList(movies);
-                mLoadingPb.setVisibility(View.INVISIBLE);
+                mLoadingPopularPb.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -89,6 +91,7 @@ public class HomeFragment extends Fragment {
 
         @Override
         protected Movie doInBackground(Void... voids) {
+            mLoadingHeaderPb.setVisibility(View.VISIBLE);
             MovieManager mm = new MovieManager(MainActivity.factory);
             MovieEntityManager mem = MainActivity.mem;
             return mm.getRandomMovie(mem);
@@ -98,6 +101,7 @@ public class HomeFragment extends Fragment {
         protected void onPostExecute(Movie movie) {
             super.onPostExecute(movie);
             if(!(movie == null)){
+                mLoadingHeaderPb.setVisibility(View.INVISIBLE);
                 mDescription.setText(movie.getOverview());
                 Picasso.get().load(MainActivity.BASE_URL + movie.getBanner()).into(mHeaderImage);
                 mTitle.setText(movie.getTitle());
