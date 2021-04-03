@@ -12,22 +12,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.NumberPicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ExecutionException;
-import java.util.zip.Inflater;
 
 import nl.avans.moviemenace.R;
-import nl.avans.moviemenace.dataLayer.factory.DAOFactory;
-import nl.avans.moviemenace.dataLayer.factory.SQLDAOFactory;
 import nl.avans.moviemenace.domain.Account;
 import nl.avans.moviemenace.domain.Ticket;
 import nl.avans.moviemenace.domain.Viewing;
@@ -42,7 +33,7 @@ public class ChooseSeatsActivity extends AppCompatActivity {
     private TextView hall;
     private Button mConfBn;
     private Viewing viewing;
-    private List<View> viewList= new ArrayList<>();;
+    private List<View> viewList= new ArrayList<>();
     private TicketManager ticketManager;
 
 
@@ -94,7 +85,11 @@ public class ChooseSeatsActivity extends AppCompatActivity {
 
                 @Override
                 public void afterTextChanged(Editable s) {
-                    if (checkIfAllfilled()) {
+                    if (s.toString().contains("-")) {
+                        ageInput.setText("");
+                        return;
+                    }
+                    if (allFilled()) {
                         calculateTotalPrice();
                     }
                 }
@@ -102,6 +97,7 @@ public class ChooseSeatsActivity extends AppCompatActivity {
             ArrayAdapter<Integer> seatsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, availableSeatNumbers);
             seatsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             mSeatsSr.setAdapter(seatsAdapter);
+
             viewList.add(v);
             mTicketListLl.addView(v);
         }
@@ -110,18 +106,40 @@ public class ChooseSeatsActivity extends AppCompatActivity {
         mConfBn = findViewById(R.id.bn_choose_seats_conf);
         ArrayList<Ticket> createdTickets = new ArrayList<>();
         mConfBn.setOnClickListener((View v) -> {
+            //Prepare errormessage
+            TextView errorMessage = findViewById(R.id.error_seat_selection);
+            errorMessage.setVisibility(View.VISIBLE);
+
+            //gather filled-in information and create tickets
+            ArrayList<Integer> selectedSeatNumbers = new ArrayList<>();
             for (View x: viewList) {
+                //inflate items
                 Spinner seat = x.findViewById(R.id.spinner);
+                EditText editText = x.findViewById(R.id.editTextNumberSigned);
+                if (!editText.getText().toString().equals("") && !ticketManager.validateAge(Integer.valueOf(editText.getText().toString()))) {
+                    errorMessage.setText(R.string.wrong_age);
+                    return;
+                }
+                selectedSeatNumbers.add(Integer.valueOf(seat.getSelectedItem().toString()));
                 int seatNumber = availableSeatNumbers.get(seat.getSelectedItemPosition());
                 int rowNumber = ticketManager.getRow(viewing, seatNumber);
                 Ticket ticket = new Ticket(seatNumber, account.getEmail(), viewing.getId(), "VALID", rowNumber);
                 createdTickets.add(ticket);
             }
-            new DatabaseTask().execute(createdTickets);
-            Intent ticketsIntent = new Intent(v.getContext(), MainActivity.class);
-            ticketsIntent.putExtra(MainActivity.DESTINATION_KEY, "tickets");
-            ticketsIntent.putExtra(Account.ACCOUNT_KEY, account);
-            startActivity(ticketsIntent);
+            //check for errors, else create tickets and redirect user.
+            if (ticketManager.hasDoubleSeatNumbers(selectedSeatNumbers)) {
+                //check for double seat selection
+                errorMessage.setText(R.string.double_seats_selected);
+            } else if (!allFilled()) {
+                //check for empty age inputs
+                errorMessage.setText(R.string.missing_age_input);
+            } else {
+                new DatabaseTask().execute(createdTickets);
+                Intent ticketsIntent = new Intent(v.getContext(), MainActivity.class);
+                ticketsIntent.putExtra(MainActivity.DESTINATION_KEY, "tickets");
+                ticketsIntent.putExtra(Account.ACCOUNT_KEY, account);
+                startActivity(ticketsIntent);
+            }
         });
     }
 
@@ -131,17 +149,16 @@ public class ChooseSeatsActivity extends AppCompatActivity {
         return true;
     }
 
-    public boolean checkIfAllfilled() {
-        boolean allFilled = true;
+    public boolean allFilled() {
+        boolean filled = true;
         for (View x : viewList) {
-            EditText test = x.findViewById(R.id.editTextNumberSigned);
-            String ehudh = test.getText().toString();
-            if (test.getText().toString().equals("")) {
-                allFilled = false;
+            EditText editText = x.findViewById(R.id.editTextNumberSigned);
+            if (editText.getText().toString().equals("")) {
+                filled = false;
                 break;
             }
         }
-        return allFilled;
+        return filled;
     }
 
     public void calculateTotalPrice() {
@@ -151,7 +168,7 @@ public class ChooseSeatsActivity extends AppCompatActivity {
             int age = Integer.valueOf(test.getText().toString());
             result += ticketManager.calculatePrice(age, viewing);
         }
-        totalPrice.setText(result + "");
+        totalPrice.setText(result + ",-");
     }
 
     public class DatabaseTask extends AsyncTask< ArrayList<Ticket>, Void, Void> {

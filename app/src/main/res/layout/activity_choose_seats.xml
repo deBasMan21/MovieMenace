@@ -34,6 +34,16 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_choose_seats_hall"
             app:srcCompat="@drawable/ic_image_placeholder" />
 
+        <TextView
+            android:id="@+id/seats_placeholder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_choose_seats_hall_preview"
+            android:text="@string/seat_number"/>
+
+
         <LinearLayout
             android:id="@+id/ll_choose_seats_ticket_list"
             android:layout_width="match_parent"
@@ -42,6 +52,18 @@
             android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@+id/iv_choose_seats_hall_preview" />
 
+        <TextView
+            android:id="@+id/error_seat_selection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/ll_choose_seats_ticket_list"
+            app:layout_constraintBottom_toTopOf="@id/bn_choose_seats_conf"
+            android:gravity="right"
+            android:textColor="@color/red_200"
+            android:textSize="12sp"
+            android:textStyle="italic"
+            android:visibility="invisible"
+            />
         <Button
             android:id="@+id/bn_choose_seats_conf"
             android:layout_width="wrap_content"

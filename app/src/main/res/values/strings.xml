@@ -64,4 +64,9 @@
     <string name="login_msg">Klik hier om in te loggen</string>
     <string name="room_number">Zaal: </string>
     <string name="fill_all_fields">Vul alle velden in</string>
+    <string name="double_seats_selected">Fout: dubbele zitplaatsen geselecteerd</string>
+    <string name="missing_age_input">Fout: leeftijd is niet overal ingevuld</string>
+    <string name="wrong_age">Fout: leeftijd moet tussen de 1 en 125 zijn</string>
+    <string name="age">Leeftijd</string>
+    <string name="seat_number">Stoelnummer</string>
 </resources>

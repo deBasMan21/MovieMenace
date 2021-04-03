@@ -1,6 +1,8 @@
 package nl.avans.moviemenace.logic;
 
 import android.os.AsyncTask;
+import android.view.View;
+import android.widget.Spinner;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -27,6 +29,13 @@ public class TicketManager implements Serializable {
         return true;
     }
 
+    // Validate age
+    public boolean validateAge(int age) {
+        if (age <= 0 || age > 125) {
+            return false;
+        }
+        return true;
+    }
     // Calculating price incl. discount (trigger after selecting seats)
     public double calculatePrice(int age, Viewing viewing) {
         double price = viewing.getPrice();
@@ -103,6 +112,17 @@ public class TicketManager implements Serializable {
             }
         }
         return -1;
+    }
+
+    public boolean hasDoubleSeatNumbers(ArrayList<Integer> list) {
+        ArrayList<Integer> check = new ArrayList<>();
+        for (int x: list) {
+            if (check.contains(x)) {
+                return true;
+            }
+            check.add(x);
+        }
+        return false;
     }
 
     public ArrayList<Ticket> getAllTicketsForAccount(String email) {
