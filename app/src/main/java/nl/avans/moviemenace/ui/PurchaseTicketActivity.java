@@ -21,10 +21,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import nl.avans.moviemenace.R;
 import nl.avans.moviemenace.dataLayer.factory.DAOFactory;
 import nl.avans.moviemenace.dataLayer.factory.SQLDAOFactory;
+import nl.avans.moviemenace.domain.Account;
 import nl.avans.moviemenace.domain.Movie;
 import nl.avans.moviemenace.domain.Viewing;
 import nl.avans.moviemenace.logic.TicketManager;
@@ -40,17 +42,25 @@ public class PurchaseTicketActivity extends AppCompatActivity {
     private int movieId;
     private ViewingViewModel viewingViewModel;
     private List<Viewing> viewingList;
-    private DAOFactory factory = new SQLDAOFactory();
-    private TicketManager ticketManager = new TicketManager(factory);
+    private TicketManager ticketManager;
     private Context context;
     private LocalDate selectedDate;
     private LocalTime selectedTime;
+    private int selectedSeats;
+    private Viewing selectedViewing;
+    private Account account;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_purchase_ticket);
         this.context = this;
+        this.account = MainActivity.account;
+        if (account == null) {
+            startActivity(new Intent(this, MainActivity.class).putExtra(MainActivity.DESTINATION_KEY, "login"));
+        }
 
         Intent intent = getIntent();
         if (intent.hasExtra(FilmDetailActivity.MOVIE_KEY)) {
@@ -59,6 +69,9 @@ public class PurchaseTicketActivity extends AppCompatActivity {
         }
         if (intent.hasExtra("test")) {
             viewingList  = (List<Viewing>) intent.getSerializableExtra("test");
+        }
+        if (intent.hasExtra(TicketManager.TICKETMANAGER_KEY)) {
+            ticketManager = (TicketManager) intent.getSerializableExtra(TicketManager.TICKETMANAGER_KEY);
         }
 
         //sorted list to prevent double dates with multiple viewing times
@@ -102,7 +115,6 @@ public class PurchaseTicketActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 //Revert selected date (from sortingList) into a viewing, must be retrieved from the original list
-                Viewing selectedViewing = null;
                 int selectedIndex = mDateSr.getSelectedItemPosition();
 
                 for (Viewing k: viewingList) {
@@ -115,6 +127,7 @@ public class PurchaseTicketActivity extends AppCompatActivity {
 
                 //Calculate how many seats there are available
                 int availableSeats = ticketManager.checkAvailableSeats(selectedViewing);
+
                 //Generate amount of spinner items for selecting seats
                 Integer[] seats = new Integer[availableSeats];
                 for (int i = 0; i < seats.length; i++) {
@@ -125,6 +138,17 @@ public class PurchaseTicketActivity extends AppCompatActivity {
                 ArrayAdapter<Integer> seatsAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, seats);
                 seatsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 mSeatsSr.setAdapter(seatsAdapter);
+                mSeatsSr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        selectedSeats = seats[mSeatsSr.getSelectedItemPosition()];
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
 
                 //Check if the selected viewing has multiple times
                 ArrayList<String> times = new ArrayList<>();
@@ -172,7 +196,12 @@ public class PurchaseTicketActivity extends AppCompatActivity {
 
         mConfBn = findViewById(R.id.bn_purchase_ticket_conf);
         mConfBn.setOnClickListener((View v) -> {
-            startActivity(new Intent(v.getContext(), ChooseSeatsActivity.class));
+            Intent newIntent = new Intent(v.getContext(), ChooseSeatsActivity.class);
+            newIntent.putExtra(ChooseSeatsActivity.SEATS_AMOUNT_KEY, selectedSeats);
+            newIntent.putExtra(Account.ACCOUNT_KEY, account);
+            newIntent.putExtra(Viewing.VIEWING_KEY, selectedViewing);
+            newIntent.putExtra(TicketManager.TICKETMANAGER_KEY, ticketManager);
+            startActivity(newIntent);
         });
     }
 

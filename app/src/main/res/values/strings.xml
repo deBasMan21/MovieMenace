@@ -62,4 +62,5 @@
     <string name="login_failed_message">Login informatie is verkeerd of er is geen internet verbinding.</string>
     <string name="back">Terug</string>
     <string name="login_msg">Klik hier om in te loggen</string>
+    <string name="room_number">Zaal: </string>
 </resources>

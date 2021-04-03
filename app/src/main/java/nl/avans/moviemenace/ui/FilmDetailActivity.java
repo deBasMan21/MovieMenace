@@ -28,8 +28,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import nl.avans.moviemenace.R;
+import nl.avans.moviemenace.dataLayer.factory.DAOFactory;
+import nl.avans.moviemenace.dataLayer.factory.SQLDAOFactory;
 import nl.avans.moviemenace.domain.Movie;
 import nl.avans.moviemenace.domain.Viewing;
+import nl.avans.moviemenace.logic.TicketManager;
 
 public class FilmDetailActivity extends AppCompatActivity {
     private Movie movie;
@@ -42,6 +45,8 @@ public class FilmDetailActivity extends AppCompatActivity {
     private Button mPurchaseTicketBn;
     private ViewingViewModel viewingViewModel;
     private List<Viewing> viewingList;
+    private DAOFactory daoFactory = new SQLDAOFactory();
+    private TicketManager ticketManager = new TicketManager(daoFactory);
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +58,8 @@ public class FilmDetailActivity extends AppCompatActivity {
         }
 
         final String MOVIE_ID = movie.getId() + "";
+        //preload tickets
+        ticketManager.loadAllTickets();
 
         mDuration = findViewById(R.id.tv_film_detail_duration_value);
         mDuration.setText(movie.getDuration()+ "");
@@ -89,6 +96,7 @@ public class FilmDetailActivity extends AppCompatActivity {
             Intent purchaseTicketIntent = new Intent(v.getContext(), PurchaseTicketActivity.class);
             purchaseTicketIntent.putExtra(MOVIE_KEY, movie);
             purchaseTicketIntent.putExtra("test", (Serializable) viewingList);
+            purchaseTicketIntent.putExtra(TicketManager.TICKETMANAGER_KEY, ticketManager);
             startActivity(purchaseTicketIntent);
         });
 

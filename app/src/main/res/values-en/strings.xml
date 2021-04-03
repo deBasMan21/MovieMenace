@@ -60,4 +60,5 @@
     <string name="login_failed_message">Login info is invalid or there is no internet connection.</string>
     <string name="back">Back</string>
     <string name="login_msg">Click here to log in</string>
+    <string name="room_number">Room: </string>
 </resources>

@@ -1,6 +1,8 @@
 package nl.avans.moviemenace.domain;
 
-public class Ticket {
+import java.io.Serializable;
+
+public class Ticket implements Serializable {
     private int chairNumber;
     private String email;
     private int viewID;

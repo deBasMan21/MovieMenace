@@ -1,5 +1,6 @@
 package nl.avans.moviemenace.dataLayer.SQL;
 
+import java.sql.Array;
 import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDate;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import nl.avans.moviemenace.dataLayer.DatabaseConnection;
 import nl.avans.moviemenace.dataLayer.IDAO.ViewingDAO;
 import nl.avans.moviemenace.domain.Room;
+import nl.avans.moviemenace.domain.Ticket;
 import nl.avans.moviemenace.domain.Viewing;
 
 public class SQLViewingDAO extends DatabaseConnection implements ViewingDAO {
@@ -147,24 +149,4 @@ public class SQLViewingDAO extends DatabaseConnection implements ViewingDAO {
         return viewingsForDate;
     }
 
-    @Override
-    public int getTakenSeats(int viewID) {
-        openConnection();
-        int takenSeats = 0;
-
-        try {
-            // Retrieve ticket count for a viewing
-            String SQL = "SELECT COUNT(*) AS takenSeats FROM Tickets WHERE ViewID =" + "'" + viewID + "'";
-            executeSQLSelectStatement(SQL);
-
-            takenSeats = rs.getInt("takenSeats");
-        } catch (Exception e) {
-            //Prints out any errors that may occur
-            e.printStackTrace();
-        } finally {
-            closeConnection();
-        }
-
-        return takenSeats;
-    }
 }

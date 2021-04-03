@@ -58,12 +58,13 @@ public class DatabaseConnection {
         boolean open = false;
 
         if (connection != null && statement != null) {
-            try {
-                open = !connection.isClosed() && !statement.isClosed();
-            } catch (SQLException e) {
-                System.out.println(e);
-                open = false;
-            }
+//            try {
+//                open = !connection.isClosed() && !statement.isClosed();
+//            } catch (SQLException e) {
+//                System.out.println(e);
+//                open = false;
+//            }
+            return true;
         }
         // Else, at least one the connection or statement fields is null, so
         // no valid connection.

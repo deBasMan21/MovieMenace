@@ -14,6 +14,7 @@ public class Viewing implements Serializable {
     private boolean threeDimensional;
     private int movie;
     private Room room;
+    public static final String VIEWING_KEY = "viewingKey";
 
 
     public Viewing(int id, LocalDateTime date, double price, boolean threeDimensional,

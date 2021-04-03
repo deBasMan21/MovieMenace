@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView mNavName;
     private TextView mNavEmail;
 
+    public static Account account;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
         if (accountViewModel.getAccount() != null) {
             mNavName.setText(accountViewModel.getAccount().getName());
             mNavEmail.setText(accountViewModel.getAccount().getEmail());
+            account = accountViewModel.getAccount();
         } else {
             mNavName.setText("");
             mNavEmail.setText(R.string.login_msg);

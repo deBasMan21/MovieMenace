@@ -1,20 +1,29 @@
 package nl.avans.moviemenace.dataLayer.SQL;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import nl.avans.moviemenace.dataLayer.DatabaseConnection;
 import nl.avans.moviemenace.dataLayer.IDAO.TicketDAO;
 import nl.avans.moviemenace.domain.Ticket;
 
-public class SQLTicketDAO extends DatabaseConnection implements TicketDAO {
+public class SQLTicketDAO extends DatabaseConnection implements TicketDAO, Serializable {
     @Override
-    public void createTicket(Ticket ticket) {
+    public void createTickets(ArrayList<Ticket> tickets) {
         openConnection();
         try{
+            StringBuilder builder = new StringBuilder();
+            builder.append("INSERT INTO Tickets (ChairNumber, Email, ViewID, Status, RowNumber) VALUES");
+            for (int i = 0; i < tickets.size(); i ++) {
+                Ticket ticket = tickets.get(i);
+                if (i == 0) {
+                    builder.append(" (").append(ticket.getChairNumber() + ", '" + ticket.getEmail() + "'," + ticket.getViewID() + ", '" + ticket.getStatus() + "'," + ticket.getRowNumber() + ")");
+                } else {
+                    builder.append(", (").append(ticket.getChairNumber() + ", '" + ticket.getEmail() + "'," + ticket.getViewID() + ", '" + ticket.getStatus() + "'," + ticket.getRowNumber() + ")");
+                }
+            }
             //this string contains the query to add a ticket to the db
-            String SQL = "INSERT INTO Ticket (ChairNumber, Email, ViewID, Status, RowNumber) VALUES ("
-                    + ticket.getChairNumber() + ", '" + ticket.getEmail() + "', " + ticket.getViewID() + ", '"
-                    + ticket.getStatus() + "', " + ticket.getRowNumber() + ")";
+            String SQL = builder.toString();
             //this executes the query
             executeSQLStatement(SQL);
         } catch (Exception e){
@@ -45,6 +54,31 @@ public class SQLTicketDAO extends DatabaseConnection implements TicketDAO {
         }
         //returns the ticket
         return ticket;
+    }
+
+    @Override
+    public ArrayList<Ticket> getAllTickets() {
+        openConnection();
+        ArrayList<Ticket> list = null;
+
+        try {
+            // Retrieve ticket count for a viewing
+            String SQL = "SELECT * FROM Tickets";
+            executeSQLSelectStatement(SQL);
+
+            list = new ArrayList<>();
+
+            while(rs.next()) {
+                list.add(new Ticket(rs.getInt("ChairNumber"), rs.getString("Email"), rs.getInt("ViewID"), rs.getString("Status"), rs.getInt("RowNumber")));
+            }
+        } catch (Exception e) {
+            //Prints out any errors that may occur
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+
+        return list;
     }
 
     @Override
