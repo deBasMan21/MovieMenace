@@ -73,13 +73,17 @@ public class TicketManager implements Serializable {
         // Check what chairnumbers are available
         ArrayList<Integer> seatNumbers = new ArrayList<>();
         for (int i = 0; i < maxSeats; i ++ ) {
-            if (takenSeats.size() == 0) {
+            if (allTickets.size() == 0) {
                 seatNumbers.add(i);
             } else {
+                boolean containsSeat = false;
                 for (Ticket x : takenSeats) {
-                    if (i != x.getChairNumber()) {
-                        seatNumbers.add(i);
+                    if (i == x.getChairNumber()) {
+                        containsSeat = true;
                     }
+                }
+                if (!containsSeat) {
+                    seatNumbers.add(i);
                 }
             }
         }

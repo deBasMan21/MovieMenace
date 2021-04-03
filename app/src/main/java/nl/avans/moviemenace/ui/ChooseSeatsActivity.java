@@ -67,9 +67,6 @@ public class ChooseSeatsActivity extends AppCompatActivity {
             ticketManager = (TicketManager) intent.getSerializableExtra(TicketManager.TICKETMANAGER_KEY);
         }
 
-        List<Integer> ageList = new ArrayList<>();
-        List<Integer> seatNumberList = new ArrayList<>();
-
 
         //Create list for spinners
         ArrayList<Integer> availableSeatNumbers = ticketManager.getAvailableSeatNumbers(viewing);
@@ -79,12 +76,12 @@ public class ChooseSeatsActivity extends AppCompatActivity {
         totalPrice = findViewById(R.id.tv_choose_seats_price_value);
         mTicketListLl = findViewById(R.id.ll_choose_seats_ticket_list);
         hall = findViewById(R.id.tv_choose_seats_hall);
-        hall.append(viewing.getRoom().getRoomNumber() + "");
+        hall.append(" " + viewing.getRoom().getRoomNumber());
         for (int i = 0; i < seatsAmount; i++) {
             View v = View.inflate(this, R.layout.choose_seat_list_item, null);
             Spinner mSeatsSr = v.findViewById(R.id.spinner);
-            EditText ree = v.findViewById(R.id.editTextNumberSigned);
-            ree.addTextChangedListener(new TextWatcher() {
+            EditText ageInput = v.findViewById(R.id.editTextNumberSigned);
+            ageInput.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 

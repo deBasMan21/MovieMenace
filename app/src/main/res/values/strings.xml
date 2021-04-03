@@ -63,4 +63,5 @@
     <string name="back">Terug</string>
     <string name="login_msg">Klik hier om in te loggen</string>
     <string name="room_number">Zaal: </string>
+    <string name="fill_all_fields">Vul alle velden in</string>
 </resources>
