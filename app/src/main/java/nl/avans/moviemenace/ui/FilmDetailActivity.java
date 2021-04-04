@@ -91,6 +91,11 @@ public class FilmDetailActivity extends AppCompatActivity {
             purchaseTicketIntent.putExtra("test", (Serializable) viewingList);
             startActivity(purchaseTicketIntent);
         });
+    }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 }
