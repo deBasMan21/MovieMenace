@@ -21,5 +21,6 @@
         android:ems="3"
         android:inputType="numberSigned"
         android:layout_marginHorizontal="16dp"
-        android:autofillHints="Leeftijd" />
+        android:hint="@string/age"
+        style="@style/Widget.AppCompat.EditText" />
 </LinearLayout>

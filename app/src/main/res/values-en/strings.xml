@@ -60,4 +60,11 @@
     <string name="login_failed_message">Login info is invalid or there is no internet connection.</string>
     <string name="back">Back</string>
     <string name="login_msg">Click here to log in</string>
+    <string name="room_number">Room: </string>
+    <string name="fill_all_fields">Fill all fields</string>
+    <string name="double_seats_selected">Error: double seatnumbers selected</string>
+    <string name="missing_age_input">Error: age is missing</string>
+    <string name="wrong_age">Error: age must be between 1 and 125</string>
+    <string name="age">Age</string>
+    <string name="seat_number">Seat number</string>
 </resources>

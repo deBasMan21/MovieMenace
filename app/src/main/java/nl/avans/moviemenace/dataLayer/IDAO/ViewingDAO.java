@@ -3,6 +3,7 @@ package nl.avans.moviemenace.dataLayer.IDAO;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import nl.avans.moviemenace.domain.Ticket;
 import nl.avans.moviemenace.domain.Viewing;
 
 public interface ViewingDAO {
@@ -10,5 +11,4 @@ public interface ViewingDAO {
     ArrayList<Viewing> getUpcomingViewingsForFilm(int movieID);
     ArrayList<Viewing> getUpcomingViewingsForRoom(int roomNumber);
     ArrayList<Viewing> getViewingsForToday();
-    int getTakenSeats(int viewID);
 }

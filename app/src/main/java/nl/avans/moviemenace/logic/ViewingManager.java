@@ -35,9 +35,5 @@ public class ViewingManager {
     public ArrayList<Viewing> getViewingsForToday() {
         return viewingDAO.getViewingsForToday();
     }
-    public int getTakenSeats(int viewID) {
-        return viewingDAO.getTakenSeats(viewID);
-    }
-
 
 }
