@@ -1,7 +1,10 @@
 package nl.avans.moviemenace.ui.films;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,8 +14,11 @@ import android.widget.DatePicker;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -72,7 +78,7 @@ public class FilmsFragment extends Fragment {
 
         mFilmsRv = view.findViewById(R.id.rv_films);
         mFilmsRv.setAdapter(filmsAdapter = new FilmsAdapter(movieList, accountViewModel.getAccount()));
-        mFilmsRv.setLayoutManager(new GridLayoutManager(this.getContext(), 3, GridLayoutManager.VERTICAL, false));
+        mFilmsRv.setLayoutManager(new GridLayoutManager(this.getContext(), calculateColumns(118), GridLayoutManager.VERTICAL, false));
     }
 
     @Override
@@ -114,4 +120,9 @@ public class FilmsFragment extends Fragment {
 
     }
 
+    private int calculateColumns(float columnWidthDp) {
+        DisplayMetrics displayMetrics = getContext().getResources().getDisplayMetrics();
+        float screenWidthDp = displayMetrics.widthPixels / displayMetrics.density;
+        return (int) (screenWidthDp / columnWidthDp + 0.5);
+    }
 }
