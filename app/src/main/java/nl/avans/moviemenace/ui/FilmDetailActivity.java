@@ -41,6 +41,7 @@ public class FilmDetailActivity extends AppCompatActivity {
     private TextView mDuration;
     private TextView mDescription;
     private TextView mAge;
+    private TextView mTitle;
     public static final String MOVIE_KEY = "MovieKey";
     private Button mPurchaseTicketBn;
     private ViewingViewModel viewingViewModel;
@@ -65,6 +66,8 @@ public class FilmDetailActivity extends AppCompatActivity {
         mDuration.setText(movie.getDuration()+ "");
         mDescription = findViewById(R.id.tv_film_detail_desc);
         mDescription.setText(movie.getOverview());
+        mTitle = findViewById(R.id.tv_detail_title);
+        mTitle.setText(movie.getTitle());
         mPoster = findViewById(R.id.iv_film_detail_poster);
         Picasso.get().load(MainActivity.BASE_URL + movie.getUrl()).into(mPoster);
         mAge = findViewById(R.id.tv_film_detail_agerating_value);

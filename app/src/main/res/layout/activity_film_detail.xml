@@ -18,15 +18,30 @@
         android:contentDescription="@string/poster" />
 
     <TextView
+        android:id="@+id/tv_detail_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        android:layout_marginStart="16dp"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tv_film_detail_duration"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_film_detail_poster"
+        app:layout_constraintTop_toTopOf="@+id/iv_film_detail_poster" />
+
+    <TextView
         android:id="@+id/tv_film_detail_duration"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:text="@string/duration"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_detail_title"
         app:layout_constraintStart_toEndOf="@+id/iv_film_detail_poster"
-        app:layout_constraintTop_toTopOf="@+id/iv_film_detail_poster" />
+        tools:layout_editor_absoluteY="32dp" />
 
     <TextView
         android:id="@+id/tv_film_detail_duration_value"
