@@ -1,5 +1,6 @@
 package nl.avans.moviemenace.ui.home;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -30,6 +31,7 @@ import nl.avans.moviemenace.domain.Account;
 import nl.avans.moviemenace.domain.Movie;
 import nl.avans.moviemenace.logic.MovieEntityManager;
 import nl.avans.moviemenace.logic.MovieManager;
+import nl.avans.moviemenace.ui.FilmDetailActivity;
 import nl.avans.moviemenace.ui.MainActivity;
 import nl.avans.moviemenace.ui.account.AccountViewModel;
 
@@ -40,6 +42,7 @@ public class HomeFragment extends Fragment {
     private RecyclerView mPopularRv;
     private PopularFilmAdapter popularFilmAdapter;
     private List<Movie> movieList = new ArrayList<>();
+    private Movie movieInBanner;
 
     private TextView mDescription;
     private ImageView mHeaderImage;
@@ -83,6 +86,12 @@ public class HomeFragment extends Fragment {
 
         mDescription = view.findViewById(R.id.tv_home_desc);
         mHeaderImage = view.findViewById(R.id.iv_home_banner);
+        mHeaderImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(v.getContext(), FilmDetailActivity.class).putExtra(FilmDetailActivity.MOVIE_KEY, movieInBanner));
+            }
+        });
         mTitle = view.findViewById(R.id.tv_title_trending);
     }
 
@@ -101,6 +110,7 @@ public class HomeFragment extends Fragment {
         protected void onPostExecute(Movie movie) {
             super.onPostExecute(movie);
             if(!(movie == null)){
+                movieInBanner = movie;
                 mLoadingHeaderPb.setVisibility(View.INVISIBLE);
                 mDescription.setText(movie.getOverview());
                 Picasso.get().load(MainActivity.BASE_URL + movie.getBanner()).into(mHeaderImage);
