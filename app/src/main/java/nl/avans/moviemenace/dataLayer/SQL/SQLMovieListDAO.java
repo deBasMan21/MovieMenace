@@ -68,15 +68,13 @@ public class SQLMovieListDAO extends DatabaseConnection implements MovieListDAO 
                 //movielist is created with all its data
                 MovieList movieList = new MovieList(rs.getInt("ID"), rs.getString("Name"), rs.getString("Description"), rs.getString("Email"));
                 //movies are added to the movielist with the method: getMoviesForList(id)
-                movieList.setMovies(getMoviesForList(rs.getInt("ID")));
+                //movieList.setMovies(getMoviesForList(rs.getInt("ID")));
                 //the movielist including the movies is added to the arraylist
                 movieLists.add(movieList);
             }
         } catch (Exception e){
             //Prints out any errors that may occur
             e.printStackTrace();
-        } finally {
-            closeConnection();
         }
         //Returns the list with movielists
         return movieLists;
@@ -107,8 +105,6 @@ public class SQLMovieListDAO extends DatabaseConnection implements MovieListDAO 
         } catch (Exception e){
             //Prints out any errors that may occur
             e.printStackTrace();
-        } finally {
-            closeConnection();
         }
         //returns the list with the movies for a specific movielist
         return moviesInList;

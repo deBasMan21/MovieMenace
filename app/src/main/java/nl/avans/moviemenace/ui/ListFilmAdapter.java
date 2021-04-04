@@ -11,11 +11,25 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import nl.avans.moviemenace.R;
-import nl.avans.moviemenace.ui.FilmDetailActivity;
+import com.squareup.picasso.Picasso;
 
-public class ListFilmAdapter extends RecyclerView.Adapter {
-    public static class ListFilmsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+import java.util.List;
+
+import nl.avans.moviemenace.R;
+import nl.avans.moviemenace.domain.Account;
+import nl.avans.moviemenace.domain.Movie;
+
+public class ListFilmAdapter extends RecyclerView.Adapter<ListFilmAdapter.ListFilmsViewHolder> {
+
+    private List<Movie> movies;
+    private Account account;
+
+    public ListFilmAdapter(List<Movie> movies, Account account) {
+        this.movies = movies;
+        this.account = account;
+    }
+
+    public class ListFilmsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private Context context;
 
         private ImageView mPosterIv;
@@ -32,13 +46,16 @@ public class ListFilmAdapter extends RecyclerView.Adapter {
 
         @Override
         public void onClick(View v) {
-            context.startActivity(new Intent(context, FilmDetailActivity.class));
+            Intent intent = new Intent(context, FilmDetailActivity.class);
+            intent.putExtra(FilmDetailActivity.MOVIE_KEY, movies.get(getAdapterPosition()));
+            intent.putExtra(Account.ACCOUNT_KEY, account);
+            context.startActivity(intent);
         }
     }
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ListFilmsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.viewholder_film, parent, false);
 
@@ -46,12 +63,14 @@ public class ListFilmAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-
+    public void onBindViewHolder(@NonNull ListFilmsViewHolder holder, int position) {
+        Movie movie = movies.get(position);
+        holder.mTitleTv.setText(movie.getTitle());
+        Picasso.get().load(MainActivity.BASE_URL + movie.getUrl()).into(holder.mPosterIv);
     }
 
     @Override
     public int getItemCount() {
-        return 8;
+        return movies.size();
     }
 }

@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
+import nl.avans.moviemenace.dataLayer.DatabaseConnection;
 import nl.avans.moviemenace.dataLayer.factory.DAOFactory;
 import nl.avans.moviemenace.dataLayer.factory.SQLDAOFactory;
 import nl.avans.moviemenace.domain.Account;
@@ -39,6 +40,10 @@ public class ListsViewModel extends ViewModel {
 
         @Override
         protected List<MovieList> doInBackground(Account... accounts) {
+            DatabaseConnection db = new DatabaseConnection();
+            if (!db.connectionIsOpen()) {
+                db.openConnection();
+            }
             Account account = accounts[0];
             List<MovieList> movieLists = new ArrayList<>();
             if (account == null) {
@@ -51,6 +56,7 @@ public class ListsViewModel extends ViewModel {
                 movies = movieListManager.getMoviesForList(movieList.getId());
                 movieList.setMovies(movies);
             }
+            db.closeConnection();
             return movieLists;
         }
 

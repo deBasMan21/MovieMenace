@@ -28,7 +28,7 @@ public class ListsAdapter extends RecyclerView.Adapter<ListsAdapter.ListsViewHol
         this.account = account;
     }
 
-    public static class ListsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ListsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private Context context;
 
         private TextView mTitleTv;
@@ -43,7 +43,10 @@ public class ListsAdapter extends RecyclerView.Adapter<ListsAdapter.ListsViewHol
 
         @Override
         public void onClick(View v) {
-            context.startActivity(new Intent(context, ListDetailActivity.class));
+            Intent intent = new Intent(context, ListDetailActivity.class);
+            intent.putExtra(ListsFragment.LIST_KEY, movieLists.get(getAdapterPosition()));
+            intent.putExtra(Account.ACCOUNT_KEY, account);
+            context.startActivity(intent);
         }
     }
 
@@ -57,12 +60,13 @@ public class ListsAdapter extends RecyclerView.Adapter<ListsAdapter.ListsViewHol
 
     @Override
     public void onBindViewHolder(@NonNull ListsViewHolder holder, int position) {
-
+        MovieList movieList = movieLists.get(position);
+        holder.mTitleTv.setText(movieList.getName());
     }
 
     @Override
     public int getItemCount() {
-        return 5;
+        return movieLists.size();
     }
 
 

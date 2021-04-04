@@ -33,6 +33,8 @@ public class ListsFragment extends Fragment {
     private ListsViewModel listsViewModel;
     private AccountViewModel accountViewModel;
 
+    public static final String LIST_KEY = "ListKey";
+
     private List<MovieList> movieLists = new ArrayList<>();
 
     private RecyclerView mListsRv;
@@ -49,7 +51,8 @@ public class ListsFragment extends Fragment {
 
         listsViewModel.setAccount(accountViewModel.getAccount());
 
-        listsViewModel.getMovieLists().observe(getViewLifecycleOwner(), new Observer<List<MovieList>>() {
+        listsViewModel.getMovieLists().observe(getViewLifecycleOwner(),
+                new Observer<List<MovieList>>() {
             @Override
             public void onChanged(List<MovieList> newMovieLists) {
                 movieLists = newMovieLists;
@@ -73,13 +76,15 @@ public class ListsFragment extends Fragment {
         }
 
         mAddFb = view.findViewById(R.id.fb_lists_add);
-        mAddFb.setOnClickListener((View v) -> {
-            startActivity(new Intent(getContext(), CreateListActivity.class).putExtra("loggedInAccount", accountViewModel.getAccount()));
-        });
+        mAddFb.setOnClickListener((View v) -> startActivity(new Intent(getContext(),
+                CreateListActivity.class).putExtra("loggedInAccount",
+                accountViewModel.getAccount())));
 
         mListsRv = view.findViewById(R.id.rv_lists);
-        mListsRv.setAdapter(mMyListsAdapter = new ListsAdapter(movieLists, accountViewModel.getAccount()));
-        mListsRv.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false));
+        mListsRv.setAdapter(mMyListsAdapter = new ListsAdapter(movieLists,
+                accountViewModel.getAccount()));
+        mListsRv.setLayoutManager(new LinearLayoutManager(this.getContext(),
+                LinearLayoutManager.VERTICAL, false));
     }
 
 }
