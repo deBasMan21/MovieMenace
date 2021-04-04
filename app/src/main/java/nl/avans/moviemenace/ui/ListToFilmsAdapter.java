@@ -6,6 +6,8 @@ import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import nl.avans.moviemenace.R;
@@ -27,9 +30,10 @@ import nl.avans.moviemenace.domain.MovieList;
 import nl.avans.moviemenace.logic.MovieListManager;
 import nl.avans.moviemenace.ui.lists.ListsFragment;
 
-public class ListToFilmsAdapter extends RecyclerView.Adapter<ListToFilmsAdapter.ListToFilmsViewHolder> {
+public class ListToFilmsAdapter extends RecyclerView.Adapter<ListToFilmsAdapter.ListToFilmsViewHolder> implements Filterable {
 
     private List<Movie> movies;
+    private List<Movie> moviesFull;
     private MovieList movieList;
     private Account account;
 
@@ -37,7 +41,42 @@ public class ListToFilmsAdapter extends RecyclerView.Adapter<ListToFilmsAdapter.
         this.movies = movies;
         this.movieList = movieList;
         this.account = account;
+        this.moviesFull = new ArrayList<>();
     }
+
+    @Override
+    public Filter getFilter() {
+        return ListToFilmFilter;
+    }
+
+    private Filter ListToFilmFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<Movie> filteredList = new ArrayList<>();
+
+            String filterPattern = constraint.toString().toLowerCase().trim();
+
+            if (constraint.length() == 0) {
+                filteredList.addAll(moviesFull);
+            } else {
+                for (Movie movie : moviesFull) {
+                    if (movie.getTitle().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(movie);
+                    }
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            movies.clear();
+            movies.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
 
     public class ListToFilmsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private Context context;
@@ -86,6 +125,10 @@ public class ListToFilmsAdapter extends RecyclerView.Adapter<ListToFilmsAdapter.
     @Override
     public int getItemCount() {
         return movies.size();
+    }
+
+    public void setMoviesFull(List<Movie> movies) {
+        this.moviesFull = movies;
     }
 
     public class DatabaseTask extends AsyncTask<Integer[], Void, Void> {

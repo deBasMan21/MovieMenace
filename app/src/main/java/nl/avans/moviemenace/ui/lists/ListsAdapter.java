@@ -5,11 +5,14 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import nl.avans.moviemenace.domain.Account;
@@ -18,15 +21,51 @@ import nl.avans.moviemenace.domain.MovieList;
 import nl.avans.moviemenace.ui.ListDetailActivity;
 import nl.avans.moviemenace.R;
 
-public class ListsAdapter extends RecyclerView.Adapter<ListsAdapter.ListsViewHolder> {
+public class ListsAdapter extends RecyclerView.Adapter<ListsAdapter.ListsViewHolder> implements Filterable {
 
     private Account account;
     private List<MovieList> movieLists;
+    private List<MovieList> movieListsFull;
 
     public ListsAdapter(List<MovieList> movieLists, Account account) {
         this.movieLists = movieLists;
         this.account = account;
+        this.movieListsFull = new ArrayList<>();
     }
+
+    @Override
+    public Filter getFilter() {
+        return null;
+    }
+
+    private Filter myListFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<MovieList> filteredList = new ArrayList<>();
+
+            String filterPattern = constraint.toString().toLowerCase().trim();
+
+            if (constraint.length() == 0) {
+                filteredList.addAll(movieListsFull);
+            } else {
+                for (MovieList movieList : movieListsFull) {
+                    if (movieList.getName().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(movieList);
+                    }
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            movieLists.clear();
+            movieLists.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
 
     public class ListsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private Context context;
@@ -73,5 +112,9 @@ public class ListsAdapter extends RecyclerView.Adapter<ListsAdapter.ListsViewHol
     public void setMovieList(List<MovieList> movieLists) {
         this.movieLists = movieLists;
         notifyDataSetChanged();
+    }
+
+    public void setMovieListsFull(List<MovieList> movieListsFull) {
+        this.movieListsFull = movieListsFull;
     }
 }
