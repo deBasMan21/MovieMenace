@@ -29,6 +29,18 @@ public class SQLMovieListDAO extends DatabaseConnection implements MovieListDAO 
         }
     }
 
+    public void addMovieToList(int listID, int movieID) {
+        openConnection();
+        try {
+            String SQL = "INSERT INTO ListContent(ListID, MovieID) VALUES(";
+            SQL = SQL + listID + ", " + movieID + ")";
+
+            executeSQLStatement(SQL);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public MovieList getMovieList(int id) {
         openConnection();
@@ -67,8 +79,6 @@ public class SQLMovieListDAO extends DatabaseConnection implements MovieListDAO 
             while(rs.next()){
                 //movielist is created with all its data
                 MovieList movieList = new MovieList(rs.getInt("ID"), rs.getString("Name"), rs.getString("Description"), rs.getString("Email"));
-                //movies are added to the movielist with the method: getMoviesForList(id)
-                //movieList.setMovies(getMoviesForList(rs.getInt("ID")));
                 //the movielist including the movies is added to the arraylist
                 movieLists.add(movieList);
             }
@@ -97,8 +107,6 @@ public class SQLMovieListDAO extends DatabaseConnection implements MovieListDAO 
                         rs.getString("Description"), rs.getString("ReleaseDate"),
                         rs.getBoolean("Adult"), rs.getString("Status") ,rs.getInt("Duration"),
                         rs.getInt("Popularity"), rs.getString("URL"), rs.getString("Banner"));
-
-                movie.setTranslations(getTranslationsForMovie(rs.getInt("Id")));
                 //adds movie items to the list
                 moviesInList.add(movie);
             }

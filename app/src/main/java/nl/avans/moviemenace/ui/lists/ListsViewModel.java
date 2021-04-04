@@ -54,6 +54,9 @@ public class ListsViewModel extends ViewModel {
             List<Movie> movies = new ArrayList<>();
             for (MovieList movieList : movieLists) {
                 movies = movieListManager.getMoviesForList(movieList.getId());
+                for (Movie movie : movies) {
+                    movie.setTranslations(movieListManager.getTranslationsForMovie(movie.getId()));
+                }
                 movieList.setMovies(movies);
             }
             db.closeConnection();
