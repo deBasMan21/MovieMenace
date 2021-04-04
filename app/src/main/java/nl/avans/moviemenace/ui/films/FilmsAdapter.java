@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +30,7 @@ public class FilmsAdapter extends RecyclerView.Adapter<FilmsAdapter.FilmViewHold
     private List<Movie> movieList;
     private Account account;
     private List<Movie> movieListFull;
+    private LocalDate filterDate = null;
 
     public FilmsAdapter(List<Movie> movieList, Account account) {
         this.movieList = movieList;
@@ -48,11 +50,26 @@ public class FilmsAdapter extends RecyclerView.Adapter<FilmsAdapter.FilmViewHold
 
             String filterPattern = constraint.toString().toLowerCase().trim();
 
-            if (constraint.length() == 0) {
+
+            if (constraint.length() == 0 && filterDate == null) {
                 filteredList.addAll(movieListFull);
-            } else {
+            } else if (constraint.length() != 0 && filterDate == null){
                 for (Movie movie : movieListFull) {
                     if (movie.getTitle().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(movie);
+                    }
+                }
+            } else if (constraint.length() == 0 && filterDate != null){
+                for (Movie movie : movieListFull) {
+                    LocalDate date = LocalDate.parse(movie.getRelease_date());
+                    if (date.isBefore(filterDate)) {
+                        filteredList.add(movie);
+                    }
+                }
+            } else if(constraint.length() != 0 && filterDate != null){
+                for (Movie movie: movieListFull) {
+                    LocalDate date = LocalDate.parse(movie.getRelease_date());
+                    if(date.isBefore(filterDate) && movie.getTitle().toLowerCase().contains(filterPattern)){
                         filteredList.add(movie);
                     }
                 }
@@ -126,5 +143,9 @@ public class FilmsAdapter extends RecyclerView.Adapter<FilmsAdapter.FilmViewHold
 
     public void setMovieListFull(List<Movie> movieList) {
         this.movieListFull.addAll(movieList);
+    }
+
+    public void setFilterDate(LocalDate date){
+        filterDate = date;
     }
 }

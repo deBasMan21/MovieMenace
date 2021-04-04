@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.OnConflictStrategy;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +42,8 @@ public class FilmsFragment extends Fragment {
     private FilmsAdapter filmsAdapter;
     private List<Movie> movieList = new ArrayList<>();
     private ProgressBar mLoadingPb;
+    private String searchString = "";
+    private LocalDate searchDate = null;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -84,6 +87,7 @@ public class FilmsFragment extends Fragment {
     @Override
     public void onPrepareOptionsMenu(@NonNull Menu menu) {
         super.onPrepareOptionsMenu(menu);
+
         MenuItem searchItem = menu.findItem(R.id.action_search);
         MenuItem filter = menu.findItem(R.id.filter);
 
@@ -97,6 +101,7 @@ public class FilmsFragment extends Fragment {
             @Override
             public boolean onQueryTextChange(String newText) {
                 filmsAdapter.getFilter().filter(newText);
+                setSearchString(newText);
                 return false;
             }
         });
@@ -106,12 +111,17 @@ public class FilmsFragment extends Fragment {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 DatePickerDialog dp = new DatePickerDialog(getContext());
+                if(searchDate != null){
+                    dp.updateDate(searchDate.getYear(), searchDate.getMonthValue(), searchDate.getDayOfMonth());
+                }
                 dp.show();
 
                 dp.setOnDateSetListener(new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-
+                        searchDate = LocalDate.of(year, month, dayOfMonth);
+                        filmsAdapter.setFilterDate(LocalDate.of(year, month, dayOfMonth));
+                        filmsAdapter.getFilter().filter(searchString);
                     }
                 });
                 return true;
@@ -124,5 +134,9 @@ public class FilmsFragment extends Fragment {
         DisplayMetrics displayMetrics = getContext().getResources().getDisplayMetrics();
         float screenWidthDp = displayMetrics.widthPixels / displayMetrics.density;
         return (int) (screenWidthDp / columnWidthDp + 0.5);
+    }
+
+    private void setSearchString(String searchQuery){
+        this.searchString = searchQuery;
     }
 }
