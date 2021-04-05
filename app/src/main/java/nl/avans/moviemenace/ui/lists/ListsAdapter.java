@@ -35,7 +35,7 @@ public class ListsAdapter extends RecyclerView.Adapter<ListsAdapter.ListsViewHol
 
     @Override
     public Filter getFilter() {
-        return null;
+        return myListFilter;
     }
 
     private Filter myListFilter = new Filter() {
@@ -114,7 +114,11 @@ public class ListsAdapter extends RecyclerView.Adapter<ListsAdapter.ListsViewHol
         notifyDataSetChanged();
     }
 
-    public void setMovieListsFull(List<MovieList> movieListsFull) {
-        this.movieListsFull = movieListsFull;
+    public List<MovieList> getMovieListsFull() {
+        return movieListsFull;
+    }
+
+    public void setMovieListsFull(List<MovieList> movieLists) {
+        this.movieListsFull.addAll(movieLists);
     }
 }
