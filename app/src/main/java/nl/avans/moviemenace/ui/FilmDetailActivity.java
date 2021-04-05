@@ -33,6 +33,7 @@ import nl.avans.moviemenace.dataLayer.factory.DAOFactory;
 import nl.avans.moviemenace.dataLayer.factory.SQLDAOFactory;
 import nl.avans.moviemenace.domain.Movie;
 import nl.avans.moviemenace.domain.Viewing;
+import nl.avans.moviemenace.logic.LanguageHelper;
 import nl.avans.moviemenace.logic.TicketManager;
 
 public class FilmDetailActivity extends AppCompatActivity {
@@ -70,7 +71,7 @@ public class FilmDetailActivity extends AppCompatActivity {
         mPoster = findViewById(R.id.iv_film_detail_poster);
         mAge = findViewById(R.id.tv_film_detail_agerating_value);
 
-        if(Locale.getDefault().equals(Locale.US)){
+        if(LanguageHelper.isLanguage("en_US")){
             mDuration.setText(movie.getDuration()+ "");
             mDescription.setText(movie.getOverview());
             mTitle.setText(movie.getTitle());
