@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.Locale;
 
 import nl.avans.moviemenace.R;
+import nl.avans.moviemenace.domain.Account;
 import nl.avans.moviemenace.logic.LanguageHelper;
 import nl.avans.moviemenace.ui.home.HomeFragment;
 
