@@ -69,4 +69,12 @@
     <string name="wrong_age">Fout: leeftijd moet tussen de 1 en 125 zijn</string>
     <string name="age">Leeftijd</string>
     <string name="seat_number">Stoelnummer</string>
+    <string name="settings">Instellingen</string>
+    <string name="language">Taal</string>
+    <string name="mode">Kleur modus</string>
+    <string name="dark_mode">Donkere modus</string>
+    <string name="light_mode">Lichte modus</string>
+    <string name="dutch">Nederlands</string>
+    <string name="english">Engels</string>
+    <string name="title_activity_settings">Instellingen</string>
 </resources>
