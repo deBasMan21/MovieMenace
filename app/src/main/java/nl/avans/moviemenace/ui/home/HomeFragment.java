@@ -74,6 +74,8 @@ public class HomeFragment extends Fragment {
 
         new MajorFilmDatabaseTask().execute();
 
+        System.out.println(Locale.getDefault().toString());
+
         return root;
     }
 

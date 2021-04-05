@@ -87,5 +87,15 @@
             android:id="@+id/rb_color_dark"/>
     </RadioGroup>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/logout"
+        android:id="@+id/bn_account_logout"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rg_color_mode" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

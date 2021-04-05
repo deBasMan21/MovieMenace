@@ -69,6 +69,7 @@ public class FilmDetailActivity extends AppCompatActivity {
         mTitle = findViewById(R.id.tv_detail_title);
         mPoster = findViewById(R.id.iv_film_detail_poster);
         mAge = findViewById(R.id.tv_film_detail_agerating_value);
+
         if(Locale.getDefault().equals(Locale.US)){
             mDuration.setText(movie.getDuration()+ "");
             mDescription.setText(movie.getOverview());

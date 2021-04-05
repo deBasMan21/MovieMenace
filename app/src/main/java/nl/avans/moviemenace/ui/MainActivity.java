@@ -1,7 +1,9 @@
 package nl.avans.moviemenace.ui;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -44,8 +46,9 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String BASE_URL = "https://image.tmdb.org/t/p/w500";
 
-    public static Locale language = Locale.getDefault();
+    public static Locale language;
     public static boolean darkMode = false;
+    public static SharedPreferences sharedPreferences;
 
     public static MovieEntityManager mem;
 
@@ -62,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
         mem = new MovieEntityManager(getApplication());
         Room.databaseBuilder(this, MovieDB.class, "movieDB");
 
+        sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+        language = Locale.forLanguageTag(sharedPreferences.getString("Language", Locale.US.toString()));
 
         accountViewModel =
                 new ViewModelProvider(this).get(AccountViewModel.class);

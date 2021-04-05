@@ -1,7 +1,11 @@
 package nl.avans.moviemenace.ui;
 
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -22,6 +26,8 @@ public class SettingsActivity extends AppCompatActivity {
     private RadioGroup mRgLanguage;
     private RadioGroup mRgColor;
 
+    private Button mLogoutButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +43,8 @@ public class SettingsActivity extends AppCompatActivity {
 
         mRgLanguage = findViewById(R.id.rg_language);
         mRgColor = findViewById(R.id.rg_color_mode);
+
+        mLogoutButton = findViewById(R.id.bn_account_logout);
 
         if(Locale.getDefault().equals(Locale.US)){
             mRgLanguage.check(R.id.rb_language_en);
@@ -54,11 +62,31 @@ public class SettingsActivity extends AppCompatActivity {
                 mRgColor.check(R.id.rb_color_light);
                 break;
         }
+
+        mLogoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.account = null;
+            }
+        });
+
+        mRbLanguageEn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Locale.setDefault(Locale.US);
+            }
+        });
+        mRbLanguageNl.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Locale.setDefault(Locale.forLanguageTag("nl_NL"));
+            }
+        });
     }
 
-    public static class SettingsFragment extends PreferenceFragmentCompat {
-        @Override
-        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-        }
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 }
