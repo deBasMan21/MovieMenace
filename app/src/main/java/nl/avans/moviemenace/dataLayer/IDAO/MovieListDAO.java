@@ -10,6 +10,7 @@ import nl.avans.moviemenace.domain.Translation;
 public interface MovieListDAO {
     void createMovieList(String name, String desc, String email);
     void addMovieToList(int listID, int movieID);
+    void deleteMovieFromList(int listID, int movieID);
     MovieList getMovieList(int id);
     ArrayList<MovieList> getMovieListsForAccount(String email);
     ArrayList<Movie> getMoviesForList(int listID);

@@ -26,6 +26,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 
 import nl.avans.moviemenace.R;
 import nl.avans.moviemenace.dataLayer.factory.DAOFactory;
@@ -53,6 +54,7 @@ public class FilmDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_film_detail);
 
+
         Intent intent = getIntent();
         if (intent.hasExtra(MOVIE_KEY)) {
             movie = (Movie) intent.getSerializableExtra(MOVIE_KEY);
@@ -63,14 +65,23 @@ public class FilmDetailActivity extends AppCompatActivity {
         ticketManager.loadAllTickets();
 
         mDuration = findViewById(R.id.tv_film_detail_duration_value);
-        mDuration.setText(movie.getDuration()+ "");
         mDescription = findViewById(R.id.tv_film_detail_desc);
-        mDescription.setText(movie.getOverview());
         mTitle = findViewById(R.id.tv_detail_title);
-        mTitle.setText(movie.getTitle());
         mPoster = findViewById(R.id.iv_film_detail_poster);
-        Picasso.get().load(MainActivity.BASE_URL + movie.getUrl()).into(mPoster);
         mAge = findViewById(R.id.tv_film_detail_agerating_value);
+
+        if(Locale.getDefault().equals(Locale.US)){
+            mDuration.setText(movie.getDuration()+ "");
+            mDescription.setText(movie.getOverview());
+            mTitle.setText(movie.getTitle());
+            Picasso.get().load(MainActivity.BASE_URL + movie.getUrl()).into(mPoster);
+        } else {
+            mDuration.setText(movie.getDuration()+ "");
+            mDescription.setText(movie.getTranslations().get("Dutch").getDescription());
+            mTitle.setText(movie.getTranslations().get("Dutch").getTitle());
+            Picasso.get().load(MainActivity.BASE_URL + movie.getTranslations().get("Dutch").getUrl()).into(mPoster);
+        }
+
         if (movie.isAdult()) {
             mAge.setText("Adult");
         } else {

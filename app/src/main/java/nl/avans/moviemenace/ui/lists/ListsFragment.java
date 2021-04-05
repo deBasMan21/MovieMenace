@@ -64,6 +64,9 @@ public class ListsFragment extends Fragment {
                     public void onChanged(List<MovieList> newMovieLists) {
                         movieLists = newMovieLists;
                         mMyListsAdapter.setMovieList(newMovieLists);
+                        if (mMyListsAdapter.getMovieListsFull().size() == 0) {
+                            mMyListsAdapter.setMovieListsFull(movieLists);
+                        }
                         mProgressBar.setVisibility(View.INVISIBLE);
                     }
                 });
@@ -91,34 +94,30 @@ public class ListsFragment extends Fragment {
                 accountViewModel.getAccount())));
 
         mListsRv = view.findViewById(R.id.rv_lists);
-        mMyListsAdapter = new ListsAdapter(movieLists, accountViewModel.getAccount());
-        mListsRv.setAdapter(mMyListsAdapter);
-        mMyListsAdapter.setMovieListsFull(movieLists);
+        mListsRv.setAdapter(mMyListsAdapter = new ListsAdapter(movieLists, accountViewModel.getAccount()));
         mListsRv.setLayoutManager(new LinearLayoutManager(this.getContext(),
                 LinearLayoutManager.VERTICAL, false));
     }
 
-    // TODO - Find out what breaks this. - Stefan
+    @Override
+    public void onPrepareOptionsMenu(@NonNull Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
 
-//    @Override
-//    public void onPrepareOptionsMenu(@NonNull Menu menu) {
-//        super.onPrepareOptionsMenu(menu);
-//        MenuItem searchItem = menu.findItem(R.id.action_search);
-//
-//        SearchView searchView = (SearchView) searchItem.getActionView();
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                mMyListsAdapter.getFilter().filter(newText);
-//                return false;
-//            }
-//        });
-//        searchItem.setVisible(true);
-//    }
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                mMyListsAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+        searchItem.setVisible(true);
+    }
 
 }

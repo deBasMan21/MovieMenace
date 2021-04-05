@@ -2,9 +2,11 @@ package nl.avans.moviemenace.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
@@ -16,23 +18,31 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import nl.avans.moviemenace.R;
+import nl.avans.moviemenace.dataLayer.DatabaseConnection;
+import nl.avans.moviemenace.dataLayer.factory.DAOFactory;
+import nl.avans.moviemenace.dataLayer.factory.SQLDAOFactory;
 import nl.avans.moviemenace.domain.Account;
 import nl.avans.moviemenace.domain.Movie;
+import nl.avans.moviemenace.logic.MovieListManager;
 
 public class ListFilmAdapter extends RecyclerView.Adapter<ListFilmAdapter.ListFilmsViewHolder> implements Filterable {
+
+    DAOFactory daoFactory = new SQLDAOFactory();
+    MovieListManager movieListManager = new MovieListManager(daoFactory);
 
     private List<Movie> movies;
     private List<Movie> moviesFull;
     private Account account;
+    private int movieListID;
 
-    public ListFilmAdapter(List<Movie> movies, Account account) {
+    public ListFilmAdapter(List<Movie> movies, Account account, int movieListID) {
         this.movies = movies;
-        this.moviesFull = movies;
         this.account = account;
+        this.movieListID = movieListID;
+        this.moviesFull = new ArrayList<>();
     }
 
     @Override
@@ -74,22 +84,36 @@ public class ListFilmAdapter extends RecyclerView.Adapter<ListFilmAdapter.ListFi
 
         private ImageView mPosterIv;
         private TextView mTitleTv;
+        private TextView mDescTv;
+        private Button mDeleteButton;
 
         public ListFilmsViewHolder(@NonNull View itemView) {
             super(itemView);
             context = itemView.getContext();
             itemView.setOnClickListener(this);
 
-            mPosterIv = itemView.findViewById(R.id.iv_film_viewholder_poster);
-            mTitleTv = itemView.findViewById(R.id.tv_film_viewholder_title);
+            mPosterIv = itemView.findViewById(R.id.iv_list_film_viewholder_poster);
+            mTitleTv = itemView.findViewById(R.id.tv_list_film_viewholder_title);
+            mDescTv = itemView.findViewById(R.id.tv__list_film_viewholder_desc);
+            mDeleteButton = itemView.findViewById(R.id.bn_list_film_viewholder_delete);
+
+            mDeleteButton.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(context, FilmDetailActivity.class);
-            intent.putExtra(FilmDetailActivity.MOVIE_KEY, movies.get(getAdapterPosition()));
-            intent.putExtra(Account.ACCOUNT_KEY, account);
-            context.startActivity(intent);
+            Movie movie = movies.get(getAdapterPosition());
+            int viewID = v.getId();
+            if (viewID == R.id.cl_list_film_viewholder_info_box) {
+                Intent intent = new Intent(context, FilmDetailActivity.class);
+                intent.putExtra(FilmDetailActivity.MOVIE_KEY, movie);
+                intent.putExtra(Account.ACCOUNT_KEY, account);
+                context.startActivity(intent);
+            } else if (viewID == R.id.bn_list_film_viewholder_delete) {
+                movies.remove(movie);
+                new DatabaseTask().execute(movie);
+                notifyDataSetChanged();
+            }
         }
     }
 
@@ -97,7 +121,7 @@ public class ListFilmAdapter extends RecyclerView.Adapter<ListFilmAdapter.ListFi
     @Override
     public ListFilmsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.viewholder_film, parent, false);
+                .inflate(R.layout.viewholder_list_film, parent, false);
 
         return new ListFilmsViewHolder(view);
     }
@@ -106,6 +130,7 @@ public class ListFilmAdapter extends RecyclerView.Adapter<ListFilmAdapter.ListFi
     public void onBindViewHolder(@NonNull ListFilmsViewHolder holder, int position) {
         Movie movie = movies.get(position);
         holder.mTitleTv.setText(movie.getTitle());
+        holder.mDescTv.setText(movie.getOverview());
         Picasso.get().load(MainActivity.BASE_URL + movie.getUrl()).into(holder.mPosterIv);
     }
 
@@ -116,5 +141,24 @@ public class ListFilmAdapter extends RecyclerView.Adapter<ListFilmAdapter.ListFi
 
     public List<Movie> getMoviesFull() {
         return moviesFull;
+    }
+
+    public void setMoviesFull(List<Movie> movies) {
+        this.moviesFull.addAll(movies);
+    }
+
+    public class DatabaseTask extends AsyncTask<Movie, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Movie... movies) {
+            DatabaseConnection db = new DatabaseConnection();
+            if (!db.connectionIsOpen()) {
+                db.openConnection();
+            }
+            Movie movie = movies[0];
+            movieListManager.deleteMovieFromList(movieListID, movie.getId());
+            db.closeConnection();
+            return null;
+        }
     }
 }

@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.ListFragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
@@ -66,10 +67,10 @@ public class ListDetailActivity extends AppCompatActivity {
         movies = new ArrayList<>();
         movies.addAll(movieList.getMovies());
         mListFilmsRv = findViewById(R.id.rv_list_films);
-        mListFilmAdapter = new ListFilmAdapter(movies, account);
+        mListFilmAdapter = new ListFilmAdapter(movies, account, movieList.getId());
+        mListFilmAdapter.setMoviesFull(movies);
         mListFilmsRv.setAdapter(mListFilmAdapter);
-        mListFilmsRv.setLayoutManager(new GridLayoutManager(this, 3, GridLayoutManager.VERTICAL,
-                false));
+        mListFilmsRv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
     }
 
     @Override
