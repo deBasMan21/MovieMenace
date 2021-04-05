@@ -1,8 +1,10 @@
 package nl.avans.moviemenace.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -48,8 +50,16 @@ public class ChooseSeatsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_choose_seats);
 
         mChairs = findViewById(R.id.iv_choose_seats_hall_preview);
-        Picasso.get().load("https://i.ibb.co/ThyWgj3/Artboard-1.png").into(mChairs);
-
+        Configuration configuration = getResources().getConfiguration();
+        int currentNightMode = configuration.uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        switch (currentNightMode) {
+            case Configuration.UI_MODE_NIGHT_YES:
+                Picasso.get().load("https://i.ibb.co/7tb8tJ6/Artboard-2.png").into(mChairs);
+                break;
+            default:
+                Picasso.get().load("https://i.ibb.co/ThyWgj3/Artboard-1.png").into(mChairs);
+                break;
+        }
 
         Intent intent = getIntent();
         if (intent.hasExtra(ChooseSeatsActivity.SEATS_AMOUNT_KEY)) {
