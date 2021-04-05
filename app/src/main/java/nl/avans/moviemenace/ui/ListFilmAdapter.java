@@ -74,14 +74,16 @@ public class ListFilmAdapter extends RecyclerView.Adapter<ListFilmAdapter.ListFi
 
         private ImageView mPosterIv;
         private TextView mTitleTv;
+        private TextView mDescTv;
 
         public ListFilmsViewHolder(@NonNull View itemView) {
             super(itemView);
             context = itemView.getContext();
             itemView.setOnClickListener(this);
 
-            mPosterIv = itemView.findViewById(R.id.iv_film_viewholder_poster);
-            mTitleTv = itemView.findViewById(R.id.tv_film_viewholder_title);
+            mPosterIv = itemView.findViewById(R.id.iv_list_film_viewholder_poster);
+            mTitleTv = itemView.findViewById(R.id.tv_list_film_viewholder_title);
+            mDescTv = itemView.findViewById(R.id.tv__list_film_viewholder_desc);
         }
 
         @Override
@@ -97,7 +99,7 @@ public class ListFilmAdapter extends RecyclerView.Adapter<ListFilmAdapter.ListFi
     @Override
     public ListFilmsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.viewholder_film, parent, false);
+                .inflate(R.layout.viewholder_list_film, parent, false);
 
         return new ListFilmsViewHolder(view);
     }
@@ -106,6 +108,7 @@ public class ListFilmAdapter extends RecyclerView.Adapter<ListFilmAdapter.ListFi
     public void onBindViewHolder(@NonNull ListFilmsViewHolder holder, int position) {
         Movie movie = movies.get(position);
         holder.mTitleTv.setText(movie.getTitle());
+        holder.mDescTv.setText(movie.getOverview());
         Picasso.get().load(MainActivity.BASE_URL + movie.getUrl()).into(holder.mPosterIv);
     }
 
