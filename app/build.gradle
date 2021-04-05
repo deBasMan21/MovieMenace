@@ -42,6 +42,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
     implementation files('C:/sqljdbc_9.2.1.0_enu/sqljdbc_9.2/enu/mssql-jdbc-9.2.1.jre11')
+    implementation 'androidx.preference:preference:1.1.1'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.MovieManager.ext:junit:1.1.2'
     androidTestImplementation 'androidx.MovieManager.espresso:espresso-core:3.3.0'

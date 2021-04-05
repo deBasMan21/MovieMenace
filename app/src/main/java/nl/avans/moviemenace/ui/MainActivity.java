@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -21,6 +22,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.room.Room;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import nl.avans.moviemenace.R;
 import nl.avans.moviemenace.dataLayer.factory.DAOFactory;
@@ -41,6 +43,9 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
 
     public static final String BASE_URL = "https://image.tmdb.org/t/p/w500";
+
+    public static Locale language = Locale.getDefault();
+    public static boolean darkMode = false;
 
     public static MovieEntityManager mem;
 
@@ -131,6 +136,14 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+        MenuItem mi = menu.findItem(R.id.action_settings);
+        mi.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
+                return false;
+            }
+        });
         return true;
     }
 

@@ -3,6 +3,7 @@ package nl.avans.moviemenace.ui;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -11,9 +12,12 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,12 +39,17 @@ public class ChooseSeatsActivity extends AppCompatActivity {
     private Viewing viewing;
     private List<View> viewList= new ArrayList<>();
     private TicketManager ticketManager;
+    private ImageView mChairs;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_seats);
+
+        mChairs = findViewById(R.id.iv_choose_seats_hall_preview);
+        Picasso.get().load("https://i.ibb.co/ThyWgj3/Artboard-1.png").into(mChairs);
+
 
         Intent intent = getIntent();
         if (intent.hasExtra(ChooseSeatsActivity.SEATS_AMOUNT_KEY)) {
@@ -67,6 +76,7 @@ public class ChooseSeatsActivity extends AppCompatActivity {
         totalPrice = findViewById(R.id.tv_choose_seats_price_value);
         mTicketListLl = findViewById(R.id.ll_choose_seats_ticket_list);
         hall = findViewById(R.id.tv_choose_seats_hall);
+
         hall.append(" " + viewing.getRoom().getRoomNumber());
         for (int i = 0; i < seatsAmount; i++) {
             View v = View.inflate(this, R.layout.choose_seat_list_item, null);
@@ -102,6 +112,7 @@ public class ChooseSeatsActivity extends AppCompatActivity {
             mTicketListLl.addView(v);
         }
 
+
         //Finishing ticket creation
         mConfBn = findViewById(R.id.bn_choose_seats_conf);
         ArrayList<Ticket> createdTickets = new ArrayList<>();
@@ -109,6 +120,7 @@ public class ChooseSeatsActivity extends AppCompatActivity {
             //Prepare errormessage
             TextView errorMessage = findViewById(R.id.error_seat_selection);
             errorMessage.setVisibility(View.VISIBLE);
+
 
             //gather filled-in information and create tickets
             ArrayList<Integer> selectedSeatNumbers = new ArrayList<>();

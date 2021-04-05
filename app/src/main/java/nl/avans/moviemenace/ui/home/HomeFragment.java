@@ -25,6 +25,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import nl.avans.moviemenace.R;
 import nl.avans.moviemenace.domain.Account;
@@ -109,12 +110,19 @@ public class HomeFragment extends Fragment {
         @Override
         protected void onPostExecute(Movie movie) {
             super.onPostExecute(movie);
+            mLoadingHeaderPb.setVisibility(View.INVISIBLE);
             if(!(movie == null)){
                 movieInBanner = movie;
-                mLoadingHeaderPb.setVisibility(View.INVISIBLE);
-                mDescription.setText(movie.getOverview());
-                Picasso.get().load(MainActivity.BASE_URL + movie.getBanner()).into(mHeaderImage);
-                mTitle.setText(movie.getTitle());
+                if(Locale.getDefault().equals(Locale.US)){
+                    mDescription.setText(movie.getOverview());
+                    Picasso.get().load(MainActivity.BASE_URL + movie.getBanner()).into(mHeaderImage);
+                    mTitle.setText(movie.getTitle());
+                } else {
+                    mDescription.setText(movie.getTranslations().get("Dutch").getDescription());
+                    Picasso.get().load(MainActivity.BASE_URL + movie.getTranslations().get("Dutch").getUrl()).into(mHeaderImage);
+                    mTitle.setText(movie.getTranslations().get("Dutch").getTitle());
+                }
+
             }
 
         }
