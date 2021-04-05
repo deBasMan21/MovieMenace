@@ -2,9 +2,11 @@ package nl.avans.moviemenace.ui.lists;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
@@ -15,13 +17,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import nl.avans.moviemenace.dataLayer.DatabaseConnection;
+import nl.avans.moviemenace.dataLayer.factory.DAOFactory;
+import nl.avans.moviemenace.dataLayer.factory.SQLDAOFactory;
 import nl.avans.moviemenace.domain.Account;
 import nl.avans.moviemenace.domain.Movie;
 import nl.avans.moviemenace.domain.MovieList;
+import nl.avans.moviemenace.logic.MovieListManager;
 import nl.avans.moviemenace.ui.ListDetailActivity;
 import nl.avans.moviemenace.R;
 
 public class ListsAdapter extends RecyclerView.Adapter<ListsAdapter.ListsViewHolder> implements Filterable {
+    DAOFactory daoFactory = new SQLDAOFactory();
+    MovieListManager movieListManager = new MovieListManager(daoFactory);
 
     private Account account;
     private List<MovieList> movieLists;
@@ -71,6 +79,7 @@ public class ListsAdapter extends RecyclerView.Adapter<ListsAdapter.ListsViewHol
         private Context context;
 
         private TextView mTitleTv;
+        private Button mDeleteListBn;
 
         public ListsViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -78,14 +87,26 @@ public class ListsAdapter extends RecyclerView.Adapter<ListsAdapter.ListsViewHol
             itemView.setOnClickListener(this);
 
             mTitleTv = itemView.findViewById(R.id.tv_list_viewholder_title);
+            mDeleteListBn = itemView.findViewById(R.id.bn_list_viewholder_delete);
+
+            mDeleteListBn.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(context, ListDetailActivity.class);
-            intent.putExtra(ListsFragment.LIST_KEY, movieLists.get(getAdapterPosition()));
-            intent.putExtra(Account.ACCOUNT_KEY, account);
-            context.startActivity(intent);
+            MovieList movieList = movieLists.get(getAdapterPosition());
+            int viewID = v.getId();
+//            if (viewID == R.id.iv_list_viewholder_ic || viewID == R.id.tv_list_viewholder_title) {
+            if (viewID == R.id.bn_list_viewholder_delete) {
+                movieLists.remove(movieList);
+                new DatabaseTask().execute(movieList);
+                notifyDataSetChanged();
+            } else {
+                Intent intent = new Intent(context, ListDetailActivity.class);
+                intent.putExtra(ListsFragment.LIST_KEY, movieList);
+                intent.putExtra(Account.ACCOUNT_KEY, account);
+                context.startActivity(intent);
+            }
         }
     }
 
@@ -120,5 +141,20 @@ public class ListsAdapter extends RecyclerView.Adapter<ListsAdapter.ListsViewHol
 
     public void setMovieListsFull(List<MovieList> movieLists) {
         this.movieListsFull.addAll(movieLists);
+    }
+
+    public class DatabaseTask extends AsyncTask<MovieList, Void, Void> {
+
+        @Override
+        protected Void doInBackground(MovieList... movieLists) {
+            DatabaseConnection db = new DatabaseConnection();
+            if (!db.connectionIsOpen()) {
+                db.openConnection();
+            }
+            MovieList movieList = movieLists[0];
+            movieListManager.deleteMovieList(movieList.getId());
+            db.closeConnection();
+            return null;
+        }
     }
 }
