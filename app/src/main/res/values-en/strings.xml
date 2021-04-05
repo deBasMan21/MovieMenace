@@ -67,4 +67,17 @@
     <string name="wrong_age">Error: age must be between 1 and 125</string>
     <string name="age">Age</string>
     <string name="seat_number">Seat number</string>
+    <string name="register_name_placeholder">Name</string>
+    <string name="register_place_placeholder">Place</string>
+    <string name="register_address_placeholder">Street name, number</string>
+    <string name="email_example_placeholder">example@email.com</string>
+    <string name="zip_code_example_placeholder">1234</string>
+    <string name="zip_code_example_placeholder_2">AB</string>
+    <string name="password_placeholder">At least 8 characters</string>
+    <string name="register_email_error">Invalid e-mail</string>
+    <string name="register_zip_code_error">Invalid postcode</string>
+    <string name="register_birthday_error">Birthday must be in the past</string>
+    <string name="register_password_error">The password you entered is too short</string>
+    <string name="register_repeat_password_error">The confirmation password needs to be identical to the password</string>
+    <string name="register_empty_error">Field cannot be empty</string>
 </resources>

@@ -69,4 +69,17 @@
     <string name="wrong_age">Fout: leeftijd moet tussen de 1 en 125 zijn</string>
     <string name="age">Leeftijd</string>
     <string name="seat_number">Stoelnummer</string>
+    <string name="register_name_placeholder">Naam</string>
+    <string name="register_place_placeholder">Plaatsnaam</string>
+    <string name="register_address_placeholder">straatnaam, nummer</string>
+    <string name="email_example_placeholder">voorbeeld@email.nl</string>
+    <string name="zip_code_example_placeholder">1234</string>
+    <string name="zip_code_example_placeholder_2">AB</string>
+    <string name="password_placeholder">Minimaal 8 karakters</string>
+    <string name="register_email_error">Ongeldig e-mailadres</string>
+    <string name="register_zip_code_error">Ongeldige postcode</string>
+    <string name="register_birthday_error">Ongeldige geboortedatum</string>
+    <string name="register_password_error">Wachtwoord moet minimaal 8 karakters bevatten</string>
+    <string name="register_repeat_password_error">Wachtwoorden komen niet overeen</string>
+    <string name="register_empty_error">Veld mag niet leeg zijn</string>
 </resources>

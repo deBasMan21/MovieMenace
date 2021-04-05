@@ -19,7 +19,7 @@ public class Email implements Serializable {
         }
     }
 
-    public boolean checkEmail(String mailAddress) {
+    public static boolean checkEmail(String mailAddress) {
         String[] parts = mailAddress.split("@");
 
         // contains no @ or dot
@@ -31,7 +31,7 @@ public class Email implements Serializable {
             return false;
         }
         // subdomain-tld delimiter
-        if (parts[1].split("\\.").length > 2) {
+        if (parts[1].split("\\.").length > 3) {
             return false;
         }
         // no subdomain part
