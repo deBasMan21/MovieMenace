@@ -29,6 +29,17 @@ public class SQLMovieListDAO extends DatabaseConnection implements MovieListDAO 
         }
     }
 
+    @Override
+    public void deleteMovieList(int listID) {
+        openConnection();
+        try {
+            String SQL = "DELETE FROM List WHERE ID = " + listID;
+            executeSQLStatement(SQL);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void addMovieToList(int listID, int movieID) {
         openConnection();
         try {
