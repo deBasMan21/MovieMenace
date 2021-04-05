@@ -8,19 +8,21 @@
     android:paddingHorizontal="24dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_list_viewholder_title_box"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginVertical="10dp">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="6dp">
 
         <ImageView
             android:id="@+id/iv_list_viewholder_ic"
             android:layout_width="64dp"
             android:layout_height="64dp"
+            android:contentDescription="@string/list"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_menu_lists"
-            app:tint="@color/black"
-            android:contentDescription="@string/list" />
+            app:tint="@color/black" />
 
         <TextView
             android:id="@+id/tv_list_viewholder_title"
@@ -35,12 +37,34 @@
             app:layout_constraintStart_toEndOf="@+id/iv_list_viewholder_ic"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="RtlHardcoded" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="8dp">
+
+        <Button
+            android:id="@+id/bn_list_viewholder_delete"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/black"
+            android:drawableLeft="@drawable/ic_baseline_trashcan"
+            android:drawableTint="@color/white"
+            android:text="@string/delete_list"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="8dp"
-        app:srcCompat="@drawable/div_dashed"
         android:layout_marginHorizontal="40dp"
-        tools:ignore="ContentDescription" />
+        app:srcCompat="@drawable/div_dashed"
+        tools:ignore="ContentDescription"/>
 </LinearLayout>
