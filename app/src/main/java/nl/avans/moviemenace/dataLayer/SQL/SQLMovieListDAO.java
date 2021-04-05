@@ -135,4 +135,16 @@ public class SQLMovieListDAO extends DatabaseConnection implements MovieListDAO 
         return translations;
     }
 
+    public void deleteMovieFromList(int movieID, int listId){
+        openConnection();
+        try{
+            String SQL = "DELETE * FROM Listcontent WHERE MovieID = " + movieID + " AND ListID = " + listId;
+            executeSQLStatement(SQL);
+        } catch (Exception e){
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+    }
+
 }
