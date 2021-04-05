@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import nl.avans.moviemenace.R;
@@ -34,6 +35,7 @@ public class ListDetailActivity extends AppCompatActivity {
     private FloatingActionButton mAddFb;
 
     private MovieList movieList;
+    private List<Movie> movies;
     private Account account;
 
     @Override
@@ -61,9 +63,10 @@ public class ListDetailActivity extends AppCompatActivity {
         if (intent.getSerializableExtra(Account.ACCOUNT_KEY) != null) {
             account = (Account) intent.getSerializableExtra(Account.ACCOUNT_KEY);
         }
-
+        movies = new ArrayList<>();
+        movies.addAll(movieList.getMovies());
         mListFilmsRv = findViewById(R.id.rv_list_films);
-        mListFilmAdapter = new ListFilmAdapter(movieList.getMovies(), account);
+        mListFilmAdapter = new ListFilmAdapter(movies, account);
         mListFilmsRv.setAdapter(mListFilmAdapter);
         mListFilmsRv.setLayoutManager(new GridLayoutManager(this, 3, GridLayoutManager.VERTICAL,
                 false));
@@ -91,7 +94,6 @@ public class ListDetailActivity extends AppCompatActivity {
         super.onPostResume();
     }
 
-    // TODO Add a filter to custom lists when adapter gets list of movies in code. - Stefan
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -99,6 +101,18 @@ public class ListDetailActivity extends AppCompatActivity {
 
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                mListFilmAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
 
         searchItem.setVisible(true);
         return true;
