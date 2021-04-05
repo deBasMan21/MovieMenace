@@ -40,4 +40,8 @@ public class MovieListManager {
     public HashMap<String, Translation> getTranslationsForMovie(int id) {
         return movieListDAO.getTranslationsForMovie(id);
     }
+
+    public void deleteMovieFromList(int movieId, int listId) {
+        movieListDAO.deleteMovieFromList(movieId, listId);
+    }
 }

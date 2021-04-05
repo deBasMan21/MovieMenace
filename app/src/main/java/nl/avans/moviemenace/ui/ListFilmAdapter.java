@@ -2,9 +2,11 @@ package nl.avans.moviemenace.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
@@ -16,23 +18,31 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import nl.avans.moviemenace.R;
+import nl.avans.moviemenace.dataLayer.DatabaseConnection;
+import nl.avans.moviemenace.dataLayer.factory.DAOFactory;
+import nl.avans.moviemenace.dataLayer.factory.SQLDAOFactory;
 import nl.avans.moviemenace.domain.Account;
 import nl.avans.moviemenace.domain.Movie;
+import nl.avans.moviemenace.logic.MovieListManager;
 
 public class ListFilmAdapter extends RecyclerView.Adapter<ListFilmAdapter.ListFilmsViewHolder> implements Filterable {
 
     private List<Movie> movies;
     private List<Movie> moviesFull;
+    private int listId;
     private Account account;
 
-    public ListFilmAdapter(List<Movie> movies, Account account) {
+    private DAOFactory daoFactory = new SQLDAOFactory();
+    private MovieListManager movieListManager = new MovieListManager(daoFactory);
+
+    public ListFilmAdapter(List<Movie> movies, Account account, int listId) {
         this.movies = movies;
         this.moviesFull = movies;
         this.account = account;
+        this.listId = listId;
     }
 
     @Override
@@ -76,6 +86,8 @@ public class ListFilmAdapter extends RecyclerView.Adapter<ListFilmAdapter.ListFi
         private TextView mTitleTv;
         private TextView mDescTv;
 
+        private Button mDeleteBn;
+
         public ListFilmsViewHolder(@NonNull View itemView) {
             super(itemView);
             context = itemView.getContext();
@@ -83,7 +95,15 @@ public class ListFilmAdapter extends RecyclerView.Adapter<ListFilmAdapter.ListFi
 
             mPosterIv = itemView.findViewById(R.id.iv_list_film_viewholder_poster);
             mTitleTv = itemView.findViewById(R.id.tv_list_film_viewholder_title);
-            mDescTv = itemView.findViewById(R.id.tv__list_film_viewholder_desc);
+            mDescTv = itemView.findViewById(R.id.tv_list_film_viewholder_desc);
+
+            mDeleteBn = itemView.findViewById(R.id.bn_list_film_viewholder_delete);
+
+            mDeleteBn.setOnClickListener((View v) -> {
+                new DatabaseTask().execute(movies.get(getAdapterPosition()));
+                movies.remove(getAdapterPosition());
+                notifyDataSetChanged();
+            });
         }
 
         @Override
@@ -120,4 +140,21 @@ public class ListFilmAdapter extends RecyclerView.Adapter<ListFilmAdapter.ListFi
     public List<Movie> getMoviesFull() {
         return moviesFull;
     }
+
+    public class DatabaseTask extends AsyncTask<Movie, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Movie... movies) {
+            DatabaseConnection db = new DatabaseConnection();
+            if (!db.connectionIsOpen()) {
+                db.openConnection();
+            }
+            Movie movie = movies[0];
+            movieListManager.deleteMovieFromList(movie.getId(), listId);
+            db.closeConnection();
+            return null;
+        }
+    }
 }
+
+

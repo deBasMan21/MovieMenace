@@ -67,7 +67,7 @@ public class ListDetailActivity extends AppCompatActivity {
         movies = new ArrayList<>();
         movies.addAll(movieList.getMovies());
         mListFilmsRv = findViewById(R.id.rv_list_films);
-        mListFilmAdapter = new ListFilmAdapter(movies, account);
+        mListFilmAdapter = new ListFilmAdapter(movies, account, movieList.getId());
         mListFilmsRv.setAdapter(mListFilmAdapter);
         mListFilmsRv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
     }
