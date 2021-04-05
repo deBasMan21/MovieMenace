@@ -9,6 +9,7 @@
     android:paddingTop="16dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_list_film_viewholder_info_box"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -47,6 +48,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
+        style="?android:attr/buttonBarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -54,21 +56,25 @@
 
         <Button
             android:id="@+id/bn_list_film_viewholder_ticket"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
             android:layout_weight="1"
             android:backgroundTint="@color/black"
-            android:text="@string/buy_ticket" />
+            android:text="@string/buy_ticket"
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/bn_list_film_viewholder_delete"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
             android:layout_weight="1"
             android:backgroundTint="@color/black"
-            android:text="@string/delete_from_list" />
+            android:text="@string/delete_from_list"
+            android:textColor="@color/white" />
     </LinearLayout>
 
     <ImageView

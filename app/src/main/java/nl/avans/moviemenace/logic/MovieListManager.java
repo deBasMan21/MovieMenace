@@ -25,6 +25,10 @@ public class MovieListManager {
         movieListDAO.addMovieToList(listID, movieID);
     }
 
+    public void deleteMovieFromList(int listID, int movieID) {
+        movieListDAO.deleteMovieFromList(listID, movieID);
+    }
+
     public MovieList getMovieList(int id) {
         return movieListDAO.getMovieList(id);
     }
