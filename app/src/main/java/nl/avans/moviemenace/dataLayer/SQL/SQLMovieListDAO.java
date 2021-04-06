@@ -158,4 +158,19 @@ public class SQLMovieListDAO extends DatabaseConnection implements MovieListDAO 
         return translations;
     }
 
+    @Override
+    public boolean listHasMovie(int listID, int movieID) {
+        try {
+            if (!connectionIsOpen()) {
+                openConnection();
+            }
+            String SQL = "SELECT * FROM Listcontent WHERE ListID = " + listID + " AND MovieID = " + movieID;
+            rs = executeSQLSelectStatement(SQL);
+            return rs.next();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }

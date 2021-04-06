@@ -45,19 +45,11 @@ public class ListsViewModel extends ViewModel {
                 db.openConnection();
             }
             Account account = accounts[0];
-            List<MovieList> movieLists = new ArrayList<>();
+            List<MovieList> movieLists;
             if (account == null) {
                 movieLists = movieListManager.getMovieListsForAccount("");
             } else {
                 movieLists = movieListManager.getMovieListsForAccount(account.getEmail());
-            }
-            List<Movie> movies = new ArrayList<>();
-            for (MovieList movieList : movieLists) {
-                movies = movieListManager.getMoviesForList(movieList.getId());
-                for (Movie movie : movies) {
-                    movie.setTranslations(movieListManager.getTranslationsForMovie(movie.getId()));
-                }
-                movieList.setMovies(movies);
             }
             db.closeConnection();
             return movieLists;

@@ -1,6 +1,8 @@
 package nl.avans.moviemenace.ui;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -12,12 +14,14 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import java.util.Locale;
 
 import nl.avans.moviemenace.R;
+import nl.avans.moviemenace.dataLayer.DatabaseConnection;
 import nl.avans.moviemenace.domain.Account;
 import nl.avans.moviemenace.logic.LanguageHelper;
 import nl.avans.moviemenace.ui.home.HomeFragment;
@@ -41,10 +45,7 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_activity);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+        this.setTitle("");
 
         mRbColorDark = findViewById(R.id.rb_color_dark);
         mRbColorLight = findViewById(R.id.rb_color_light);
@@ -61,7 +62,7 @@ public class SettingsActivity extends AppCompatActivity {
         }
         mBackButton = findViewById(R.id.bn_account_confirm);
 
-        if(LanguageHelper.isLanguage("us_EN")){
+        if(LanguageHelper.isLanguage("en_US")){
             mRgLanguage.check(R.id.rb_language_en);
         } else {
             mRgLanguage.check(R.id.rb_language_nl);
@@ -104,7 +105,7 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    LanguageHelper.setLanguage("us_EN");
+                    LanguageHelper.setLanguage("en_US");
                     Locale locale = new Locale("en");
                     Locale.setDefault(locale);
                     Configuration config = new Configuration();
@@ -118,12 +119,24 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    LanguageHelper.setLanguage("nl_NL");
-                    Locale locale = new Locale("nl");
-                    Locale.setDefault(locale);
-                    Configuration config = new Configuration();
-                    config.locale = locale;
-                    getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+                    DatabaseConnection db = new DatabaseConnection();
+                    if(db.openConnection()){
+                        db.closeConnection();
+                        LanguageHelper.setLanguage("nl_NL");
+                        Locale locale = new Locale("nl");
+                        Locale.setDefault(locale);
+                        Configuration config = new Configuration();
+                        config.locale = locale;
+                        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+                    } else {
+                        errorMessage();
+                        LanguageHelper.setLanguage("nl_NL");
+                        Locale locale = new Locale("nl");
+                        Locale.setDefault(locale);
+                        Configuration config = new Configuration();
+                        config.locale = locale;
+                        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+                    }
                 }
 
             }
@@ -147,4 +160,16 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
     }
+
+
+
+    public void errorMessage(){
+        new AlertDialog.Builder(this).setTitle(R.string.warning).setMessage(R.string.error_language_change_without_connection).setPositiveButton("Oke", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        }).show();
+    }
+
 }

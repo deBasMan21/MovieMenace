@@ -35,7 +35,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText mPassword;
     private EditText mPasswordValidation;
     private EditText mName;
-    private EditText mPlace;
+    private EditText mIban;
     private EditText mAddress;
     private Calendar calendar;
     private TextView emailError;
@@ -44,7 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
     private TextView passwordError;
     private TextView passwordValidationError;
     private TextView nameError;
-    private TextView placeError;
+    private TextView ibanError;
     private TextView adressError;
     private DAOFactory factory = new SQLDAOFactory();
     private AccountManager accountManager = new AccountManager(factory);
@@ -55,9 +55,9 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         mName = findViewById(R.id.et_register_name);
-        mPlace = findViewById(R.id.et_register_place);
         mAddress = findViewById(R.id.et_register_address);
         mEmailEt = findViewById(R.id.et_register_email);
+        mIban = findViewById(R.id.et_register_iban);
         mZipCodeFirstPart = findViewById(R.id.et_register_post_num);
         mZipCodeSecondPart = findViewById(R.id.et_register_post_char);
         mPassword = findViewById(R.id.et_register_pass);
@@ -68,8 +68,8 @@ public class RegisterActivity extends AppCompatActivity {
         passwordError = findViewById(R.id.tv_register_password_error);
         passwordValidationError = findViewById(R.id.tv_register_password_confirmation_error);
         nameError = findViewById(R.id.tv_register_name_error);
-        placeError = findViewById(R.id.tv_register_place_error);
         adressError = findViewById(R.id.tv_register_address_error);
+        ibanError = findViewById(R.id.tv_register_iban_error);
 
 
         mBirthEt = findViewById(R.id.et_register_birth);
@@ -108,8 +108,8 @@ public class RegisterActivity extends AppCompatActivity {
             passwordError.setVisibility(View.INVISIBLE);
             passwordValidationError.setVisibility(View.INVISIBLE);
             nameError.setVisibility(View.INVISIBLE);
-            placeError.setVisibility(View.INVISIBLE);
             adressError.setVisibility(View.INVISIBLE);
+            ibanError.setVisibility(View.INVISIBLE);
 
             //validate input
             boolean correctInput = true;
@@ -120,11 +120,6 @@ public class RegisterActivity extends AppCompatActivity {
                 nameError.setVisibility(View.VISIBLE);
             }
 
-            //place validation
-            if (mPlace.getText().toString().equals("")) {
-                correctInput = false;
-                placeError.setVisibility(View.VISIBLE);
-            }
 
             //address validation
             if ( mAddress.getText().toString().equals("")) {
@@ -136,6 +131,12 @@ public class RegisterActivity extends AppCompatActivity {
             if (!Email.checkEmail(email)) {
                 correctInput = false;
                 emailError.setVisibility(View.VISIBLE);
+            }
+
+            //Iban validation
+            if (mIban.getText().toString().equals("")) {
+                correctInput = false;
+                ibanError.setVisibility(View.VISIBLE);
             }
 
             //zip code validation
@@ -163,7 +164,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             //Final decision
             if (correctInput) {
-                Account account = new Account(email, mName.getText().toString(), password, mPlace.getText().toString(), zipCode, " " , birthDay);
+                Account account = new Account(email, mName.getText().toString(), password, mAddress.getText().toString(), zipCode, mIban.getText().toString() , birthDay);
                 DatabaseTask task = new DatabaseTask();
                 task.execute(account);
                 startActivity(new Intent(v.getContext(), MainActivity.class).putExtra(MainActivity.DESTINATION_KEY, "login"));

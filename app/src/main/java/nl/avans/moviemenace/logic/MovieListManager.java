@@ -29,6 +29,10 @@ public class MovieListManager {
         movieListDAO.addMovieToList(listID, movieID);
     }
 
+    public void deleteMovieFromList(int listID, int movieID) {
+        movieListDAO.deleteMovieFromList(listID, movieID);
+    }
+
     public MovieList getMovieList(int id) {
         return movieListDAO.getMovieList(id);
     }
@@ -45,7 +49,7 @@ public class MovieListManager {
         return movieListDAO.getTranslationsForMovie(id);
     }
 
-    public void deleteMovieFromList(int movieId, int listId) {
-        movieListDAO.deleteMovieFromList(movieId, listId);
+    public boolean listHasMovie(int listID, int movieID) {
+        return movieListDAO.listHasMovie(listID, movieID);
     }
 }

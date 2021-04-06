@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_custom_list"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -42,6 +43,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
+        android:id="@+id/ll_list_button_bar"
         style="?android:attr/buttonBarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -57,7 +59,7 @@
             android:drawableLeft="@drawable/ic_baseline_trashcan"
             android:drawableTint="@color/white"
             android:text="@string/delete_list"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white" />
 
     </LinearLayout>
 
@@ -66,5 +68,5 @@
         android:layout_height="8dp"
         android:layout_marginHorizontal="40dp"
         app:srcCompat="@drawable/div_dashed"
-        tools:ignore="ContentDescription"/>
+        tools:ignore="ContentDescription" />
 </LinearLayout>

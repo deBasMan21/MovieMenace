@@ -113,14 +113,14 @@ public class HomeFragment extends Fragment {
             mLoadingHeaderPb.setVisibility(View.INVISIBLE);
             if(!(movie == null)){
                 movieInBanner = movie;
-                if(LanguageHelper.isLanguage("us_EN")){
-                    mDescription.setText(movie.getOverview());
-                    Picasso.get().load(MainActivity.BASE_URL + movie.getBanner()).into(mHeaderImage);
-                    mTitle.setText(movie.getTitle());
-                } else {
+                if(LanguageHelper.isLanguage("nl_NL") && movie.getTranslations() != null){
                     mDescription.setText(movie.getTranslations().get("Dutch").getDescription());
                     Picasso.get().load(MainActivity.BASE_URL + movie.getTranslations().get("Dutch").getUrl()).into(mHeaderImage);
                     mTitle.setText(movie.getTranslations().get("Dutch").getTitle());
+                } else {
+                    mDescription.setText(movie.getOverview());
+                    Picasso.get().load(MainActivity.BASE_URL + movie.getBanner()).into(mHeaderImage);
+                    mTitle.setText(movie.getTitle());
                 }
             }
         }

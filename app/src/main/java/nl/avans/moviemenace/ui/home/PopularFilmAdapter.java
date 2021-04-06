@@ -68,7 +68,11 @@ public class PopularFilmAdapter extends RecyclerView.Adapter<PopularFilmAdapter.
     public void onBindViewHolder(@NonNull PopularFilmViewHolder holder, int position) {
         Movie movie = movieList.get(position);
         holder.mTitleTv.setText(movie.getTitle());
-        Picasso.get().load(MainActivity.BASE_URL + movie.getUrl()).into(holder.mPosterIv);
+        if(movie.getTitle().equals("Avans Endgame")){
+            Picasso.get().load("https://i.ibb.co/qNKQXP1/Microsoft-Teams-image.jpg").into(holder.mPosterIv);
+        } else{
+            Picasso.get().load(MainActivity.BASE_URL + movie.getUrl()).into(holder.mPosterIv);
+        }
     }
 
     @Override

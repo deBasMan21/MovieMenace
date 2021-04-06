@@ -20,7 +20,7 @@
     <string name="list_desc_hint">Description for the list</string>
     <string name="conf">Confirm</string>
     <string name="email">Email</string>
-    <string name="place">Place</string>
+    <string name="iban">Iban</string>
     <string name="address">Address</string>
     <string name="post">Zip code</string>
     <string name="poster">Movie poster</string>
@@ -68,7 +68,7 @@
     <string name="age">Age</string>
     <string name="seat_number">Seat number</string>
     <string name="register_name_placeholder">Name</string>
-    <string name="register_place_placeholder">Place</string>
+    <string name="register_iban_placeholder">NL99 BANK 0123456789</string>
     <string name="register_address_placeholder">Street name, number</string>
     <string name="email_example_placeholder">example@email.com</string>
     <string name="zip_code_example_placeholder">1234</string>
@@ -91,4 +91,10 @@
     <string name="delete_from_list">Delete from list</string>
     <string name="logout">Log out</string>
     <string name="delete_list">Delete list</string>
+    <string name="error_no_viewings">No upcoming viewings found</string>
+    <string name="error_no_viewings_desc">In the upcoming week there are no viewings for this movie. Come back later to see the schedule for the future.</string>
+    <string name="warning">Warning!</string>
+    <string name="error_language_change_without_connection">There is no internet connection so only the UI will change language. When there is a connection established the resting parts will be translated.</string>
+    <string name="adult">Adult</string>
+    <string name="children">Children</string>
 </resources>

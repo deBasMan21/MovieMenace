@@ -20,7 +20,7 @@
     <string name="list_desc_hint">Beschrijving voor de lijst</string>
     <string name="conf">Bevestigen</string>
     <string name="email">Email</string>
-    <string name="place">Plaats</string>
+    <string name="iban">Iban</string>
     <string name="address">Adres</string>
     <string name="post">Postcode</string>
     <string name="poster">Film poster</string>
@@ -81,7 +81,7 @@
     <string name="delete_list">Verwijder lijst</string>
     <string name="logout">Log uit</string>
     <string name="register_name_placeholder">Naam</string>
-    <string name="register_place_placeholder">Plaatsnaam</string>
+    <string name="register_iban_placeholder">NL99 BANK 0123456789</string>
     <string name="register_address_placeholder">straatnaam, nummer</string>
     <string name="email_example_placeholder">voorbeeld@email.nl</string>
     <string name="zip_code_example_placeholder">1234</string>
@@ -93,4 +93,10 @@
     <string name="register_password_error">Wachtwoord moet minimaal 8 karakters bevatten</string>
     <string name="register_repeat_password_error">Wachtwoorden komen niet overeen</string>
     <string name="register_empty_error">Veld mag niet leeg zijn</string>
+    <string name="error_no_viewings">Geen aankomende kijkmomenten</string>
+    <string name="error_no_viewings_desc">In de aankomende week zijn er geen momenten om deze film te bekijken. Kom later terug voor het programma van toekomstige weken.</string>
+    <string name="warning">Waarschuwing!</string>
+    <string name="error_language_change_without_connection">Er is geen internetverbinding dus alleen de UI zal van taal veranderen. Wanneer er weer een verbinding is vastgesteld zullen de overige onderdelen vertalen.</string>
+    <string name="adult">Volwassen</string>
+    <string name="children">Kinderen</string>
 </resources>
