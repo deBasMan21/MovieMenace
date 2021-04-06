@@ -1,10 +1,10 @@
 package nl.avans.moviemenace.ui;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,24 +13,18 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 import nl.avans.moviemenace.R;
-import nl.avans.moviemenace.dataLayer.factory.DAOFactory;
-import nl.avans.moviemenace.dataLayer.factory.SQLDAOFactory;
 import nl.avans.moviemenace.domain.Account;
 import nl.avans.moviemenace.domain.Movie;
 import nl.avans.moviemenace.domain.Viewing;
 import nl.avans.moviemenace.logic.TicketManager;
-import nl.avans.moviemenace.ui.home.HomeViewModel;
 
 public class PurchaseTicketActivity extends AppCompatActivity {
     Spinner mDateSr;
@@ -196,12 +190,22 @@ public class PurchaseTicketActivity extends AppCompatActivity {
 
         mConfBn = findViewById(R.id.bn_purchase_ticket_conf);
         mConfBn.setOnClickListener((View v) -> {
-            Intent newIntent = new Intent(v.getContext(), ChooseSeatsActivity.class);
-            newIntent.putExtra(ChooseSeatsActivity.SEATS_AMOUNT_KEY, selectedSeats);
-            newIntent.putExtra(Account.ACCOUNT_KEY, account);
-            newIntent.putExtra(Viewing.VIEWING_KEY, selectedViewing);
-            newIntent.putExtra(TicketManager.TICKETMANAGER_KEY, ticketManager);
-            startActivity(newIntent);
+            if(selectedDate == null){
+                new AlertDialog.Builder(this).setTitle(R.string.error_no_viewings).setMessage(R.string.error_no_viewings_desc).setPositiveButton("Oke", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                }).show();
+            } else{
+                Intent newIntent = new Intent(v.getContext(), ChooseSeatsActivity.class);
+                newIntent.putExtra(ChooseSeatsActivity.SEATS_AMOUNT_KEY, selectedSeats);
+                newIntent.putExtra(Account.ACCOUNT_KEY, account);
+                newIntent.putExtra(Viewing.VIEWING_KEY, selectedViewing);
+                newIntent.putExtra(TicketManager.TICKETMANAGER_KEY, ticketManager);
+                startActivity(newIntent);
+            }
+
         });
     }
 
