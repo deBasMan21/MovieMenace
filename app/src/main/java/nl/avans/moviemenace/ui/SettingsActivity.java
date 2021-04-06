@@ -1,5 +1,6 @@
 package nl.avans.moviemenace.ui;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -41,10 +42,7 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_activity);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+        this.setTitle("");
 
         mRbColorDark = findViewById(R.id.rb_color_dark);
         mRbColorLight = findViewById(R.id.rb_color_light);
@@ -147,4 +145,6 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }
