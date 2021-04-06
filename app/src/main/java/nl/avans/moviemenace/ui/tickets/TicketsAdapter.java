@@ -35,6 +35,7 @@ import nl.avans.moviemenace.logic.MovieEntityManager;
 import nl.avans.moviemenace.logic.MovieManager;
 import nl.avans.moviemenace.logic.TicketManager;
 import nl.avans.moviemenace.logic.ViewingManager;
+import nl.avans.moviemenace.ui.FilmDetailActivity;
 import nl.avans.moviemenace.ui.TicketDetailActivity;
 
 public class TicketsAdapter extends RecyclerView.Adapter<TicketsAdapter.TicketsViewHolder> {
@@ -65,6 +66,8 @@ public class TicketsAdapter extends RecyclerView.Adapter<TicketsAdapter.TicketsV
     public static class TicketsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private Context context;
         private Ticket ticket;
+        private Viewing viewing;
+        private Movie movie;
         private Account account;
 
         private TextView mTitleTv;
@@ -93,8 +96,10 @@ public class TicketsAdapter extends RecyclerView.Adapter<TicketsAdapter.TicketsV
             Intent ticketIntent = new Intent(context, TicketDetailActivity.class);
             ticketIntent.putExtra(Ticket.TICKET_KEY, ticket);
             ticketIntent.putExtra(Account.ACCOUNT_KEY, account);
+            ticketIntent.putExtra(FilmDetailActivity.MOVIE_KEY, movie);
+            ticketIntent.putExtra(Viewing.VIEWING_KEY, viewing);
 
-            context.startActivity(new Intent(context, TicketDetailActivity.class));
+            context.startActivity(ticketIntent);
         }
     }
 
@@ -115,9 +120,12 @@ public class TicketsAdapter extends RecyclerView.Adapter<TicketsAdapter.TicketsV
         holder.account = account;
         holder.ticket = ticket;
         Viewing viewing = viewings.get(position);
+        holder.viewing = viewing;
+        Movie movie = movies.get(position);
+        holder.movie = movie;
         Room room = viewing.getRoom();
         Cinema cinema = room.getCinema();
-        holder.mTitleTv.setText(movies.get(position).getTitle());
+        holder.mTitleTv.setText(movie.getTitle());
         holder.mLocationTv.setText(cinema.getName() + " - " + context.getString(R.string.room_num) + " " + room.getRoomNumber());
         holder.mRowSeatTv.setText(context.getString(R.string.row_num) + " " + ticket.getRowNumber() + " - " + context.getString(R.string.seat_num) + " " + ticket.getChairNumber());
         holder.mDateTimeTv.setText(viewing.getDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)) + " - " + viewing.getDate().format(DateTimeFormatter.ofPattern("HH:mm")));

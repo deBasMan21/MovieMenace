@@ -1,6 +1,8 @@
 package nl.avans.moviemenace.domain;
 
-public class Cinema {
+import java.io.Serializable;
+
+public class Cinema implements Serializable {
     private String name;
     private String place;
     private int numberOfRooms;
