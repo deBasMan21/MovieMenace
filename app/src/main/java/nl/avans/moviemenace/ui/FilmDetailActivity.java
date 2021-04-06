@@ -10,11 +10,17 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
@@ -98,6 +104,22 @@ public class FilmDetailActivity extends AppCompatActivity {
         } else {
             mAge.setText(R.string.children);
         }
+
+        mPoster.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                Dialog builder = new Dialog(FilmDetailActivity.this);
+                ImageView imageView = new ImageView(FilmDetailActivity.this);
+                if (movie.getTitle().equals("Avans Endgame")) {
+                    Picasso.get().load("https://i.ibb.co/qNKQXP1/Microsoft-Teams-image.jpg").resize(900, 1200).into(imageView);
+                } else {
+                    Picasso.get().load(MainActivity.BASE_URL + movie.getTranslations().get("Dutch").getUrl()).resize(900, 1200).into(imageView);
+                }
+                builder.addContentView(imageView, new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                builder.show();
+                return false;
+            }
+        });
 
         viewingViewModel = new ViewModelProvider(this).get(ViewingViewModel.class);
         viewingViewModel.setMovieId(movie.getId());
