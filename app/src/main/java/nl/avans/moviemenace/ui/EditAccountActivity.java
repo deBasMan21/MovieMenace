@@ -52,7 +52,7 @@ public class EditAccountActivity extends AppCompatActivity {
         mPostNumEt = findViewById(R.id.et_edit_account_post_num);
         mPostNumEt.setText(MainActivity.account.getZipCode().substring(0, 4));
         mPostCharEt = findViewById(R.id.et_edit_account_post_char);
-        mPostCharEt.setText(MainActivity.account.getZipCode().substring(4));
+        mPostCharEt.setText(MainActivity.account.getZipCode().substring(5));
         emailError = findViewById(R.id.tv_edit_email_error);
         zipCodeError = findViewById(R.id.tv_edit_post_error);
         nameError = findViewById(R.id.tv_edit_name_error);
