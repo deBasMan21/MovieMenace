@@ -48,7 +48,7 @@ public class TicketsFragment extends Fragment {
         }
 
         mTicketsRv = view.findViewById(R.id.rv_tickets);
-        mTicketsRv.setAdapter(new TicketsAdapter());
+        mTicketsRv.setAdapter(new TicketsAdapter(accountViewModel.getAccount()));
         mTicketsRv.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false));
     }
 }

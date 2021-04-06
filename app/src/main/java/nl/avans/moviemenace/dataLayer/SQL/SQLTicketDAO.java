@@ -88,7 +88,7 @@ public class SQLTicketDAO extends DatabaseConnection implements TicketDAO, Seria
         ArrayList<Ticket> tickets = new ArrayList<>();
         try{
             //this string contains the query to select all the tickets for an account
-            String SQL = "SELECT * FROM Ticket WHERE Email = '" + email + "'";
+            String SQL = "SELECT * FROM Tickets WHERE Email = '" + email + "'";
             //this executes the query
             executeSQLSelectStatement(SQL);
             //this creates a loop. within it the ticket objects are created and put into the list

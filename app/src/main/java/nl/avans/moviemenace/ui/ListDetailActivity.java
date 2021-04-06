@@ -64,8 +64,7 @@ public class ListDetailActivity extends AppCompatActivity {
         if (intent.getSerializableExtra(Account.ACCOUNT_KEY) != null) {
             account = (Account) intent.getSerializableExtra(Account.ACCOUNT_KEY);
         }
-        movies = new ArrayList<>();
-        movies.addAll(movieList.getMovies());
+        movies = movieList.getMovies();
         mListFilmsRv = findViewById(R.id.rv_list_films);
         mListFilmAdapter = new ListFilmAdapter(movies, account, movieList);
         mListFilmAdapter.setMoviesFull(movies);
