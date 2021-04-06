@@ -9,10 +9,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
 
@@ -22,21 +24,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nl.avans.moviemenace.R;
+import nl.avans.moviemenace.dataLayer.factory.DAOFactory;
+import nl.avans.moviemenace.dataLayer.factory.SQLDAOFactory;
 import nl.avans.moviemenace.domain.Account;
 import nl.avans.moviemenace.domain.Movie;
 import nl.avans.moviemenace.domain.MovieList;
+import nl.avans.moviemenace.logic.MovieListManager;
 import nl.avans.moviemenace.ui.account.AccountFragment;
 import nl.avans.moviemenace.ui.lists.ListsFragment;
 
 public class ListDetailActivity extends AppCompatActivity {
+    DAOFactory daoFactory = new SQLDAOFactory();
+    MovieListManager movieListManager = new MovieListManager(daoFactory);
+
     private TextView mListTitle;
     private TextView mListDesc;
     private RecyclerView mListFilmsRv;
     private ListFilmAdapter mListFilmAdapter;
     private FloatingActionButton mAddFb;
+    private ProgressBar mProgressBar;
 
     private MovieList movieList;
-    private List<Movie> movies;
+    private List<Movie> movies = new ArrayList<>();
     private Account account;
 
     @Override
@@ -46,6 +55,7 @@ public class ListDetailActivity extends AppCompatActivity {
 
         mListTitle = findViewById(R.id.tv_list_detail_title);
         mListDesc = findViewById(R.id.tv_list_detail_desc);
+        mProgressBar = findViewById(R.id.pb_list_detail);
 
         mAddFb = findViewById(R.id.fb_list_detail_add);
         mAddFb.setOnClickListener((View v) -> {
@@ -64,13 +74,12 @@ public class ListDetailActivity extends AppCompatActivity {
         if (intent.getSerializableExtra(Account.ACCOUNT_KEY) != null) {
             account = (Account) intent.getSerializableExtra(Account.ACCOUNT_KEY);
         }
-        movies = new ArrayList<>();
-        movies.addAll(movieList.getMovies());
         mListFilmsRv = findViewById(R.id.rv_list_films);
         mListFilmAdapter = new ListFilmAdapter(movies, account, movieList);
-        mListFilmAdapter.setMoviesFull(movies);
         mListFilmsRv.setAdapter(mListFilmAdapter);
         mListFilmsRv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+
+        new DatabaseTask().execute();
     }
 
     @Override
@@ -117,5 +126,33 @@ public class ListDetailActivity extends AppCompatActivity {
 
         searchItem.setVisible(true);
         return true;
+    }
+
+    private void setMovies(List<Movie> movies) {
+        this.movieList.setMovies(movies);
+        this.movies.addAll(movieList.getMovies());
+        mListFilmAdapter.setMoviesFull(movies);
+        mListFilmAdapter.notifyDataSetChanged();
+        mProgressBar.setVisibility(View.INVISIBLE);
+    }
+
+    public class DatabaseTask extends AsyncTask<Void, Void, List<Movie>> {
+
+        @Override
+        protected List<Movie> doInBackground(Void... voids) {
+
+            List<Movie> movies;
+            movies = movieListManager.getMoviesForList(movieList.getId());
+            for (Movie movie : movies) {
+                movie.setTranslations(movieListManager.getTranslationsForMovie(movie.getId()));
+            }
+            return movies;
+        }
+
+        @Override
+        protected void onPostExecute(List<Movie> movies) {
+            super.onPostExecute(movies);
+            setMovies(movies);
+        }
     }
 }
