@@ -61,7 +61,7 @@ public class SettingsActivity extends AppCompatActivity {
         }
         mBackButton = findViewById(R.id.bn_account_confirm);
 
-        if(LanguageHelper.isLanguage("us_EN")){
+        if(LanguageHelper.isLanguage("en_US")){
             mRgLanguage.check(R.id.rb_language_en);
         } else {
             mRgLanguage.check(R.id.rb_language_nl);
@@ -104,7 +104,7 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    LanguageHelper.setLanguage("us_EN");
+                    LanguageHelper.setLanguage("en_US");
                     Locale locale = new Locale("en");
                     Locale.setDefault(locale);
                     Configuration config = new Configuration();
