@@ -124,7 +124,7 @@
         android:id="@+id/tv_edit_post_error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/register_empty_error"
+        android:text="@string/register_zip_code_error"
         android:textColor="@color/red_200"
         android:textSize="12sp"
         android:textStyle="italic"

@@ -29,15 +29,17 @@ public class SQLViewingDAO extends DatabaseConnection implements ViewingDAO {
             String SQL = "SELECT * FROM Viewing AS V INNER JOIN Room AS R ON R.RoomNumber = V.RoomNumber WHERE ViewID = " + viewID;
             //this executes the query
             executeSQLSelectStatement(SQL);
-            //creates localdatetime object to use in the viewing object
-            LocalDateTime dateAndTime = LocalDateTime.of(LocalDate.parse(rs.getString("Date")), LocalTime.parse(rs.getString("Time")));
-            //creates room object to use in the viewing object
-            Room room = new Room(rs.getInt("RoomNumber"), rs.getInt("NumberOfSeats"), rs.getBoolean("[3D]"), rs.getInt("NumberOfRows"));
-            //adds the data to the viewing
-            viewing = new Viewing(rs.getInt("ViewID"), dateAndTime, rs.getDouble("Price"), rs.getBoolean("[3D]"), rs.getInt("MovieID"), room);
+            while (rs.next()) {
+                //creates localdatetime object to use in the viewing object
+                LocalDateTime dateAndTime = LocalDateTime.of(LocalDate.parse(rs.getString("Date")), LocalTime.parse(rs.getString("StartTime")));
+                //creates room object to use in the viewing object
+                Room room = new Room(rs.getInt("RoomNumber"), rs.getInt("NumberOfSeats"), rs.getBoolean("3D"), rs.getInt("NumberOfRows"));
+                //adds the data to the viewing
+                viewing = new Viewing(rs.getInt("ViewID"), dateAndTime, rs.getDouble("Price"), rs.getBoolean("3D"), rs.getInt("MovieID"), room);
+            }
         } catch (Exception e){
-            //Prints out any errors that may occur
-            e.printStackTrace();
+        //Prints out any errors that may occur
+        e.printStackTrace();
         } finally {
             closeConnection();
         }
