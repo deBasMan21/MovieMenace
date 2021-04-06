@@ -15,8 +15,10 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import nl.avans.moviemenace.domain.Account;
 import nl.avans.moviemenace.ui.EditAccountActivity;
 import nl.avans.moviemenace.R;
+import nl.avans.moviemenace.ui.MainActivity;
 
 public class AccountFragment extends Fragment {
     private AccountViewModel accountViewModel;
@@ -25,6 +27,7 @@ public class AccountFragment extends Fragment {
     private TextView mEmailTv;
     private TextView mBirthTv;
     private TextView mAddressTv;
+    private Account account;
 
     private Button mEditBn;
 
@@ -35,6 +38,8 @@ public class AccountFragment extends Fragment {
                 new ViewModelProvider(requireActivity()).get(AccountViewModel.class);
         View root = inflater.inflate(R.layout.fragment_account, container, false);
 
+        account = MainActivity.account;
+
         return root;
     }
 
@@ -44,9 +49,18 @@ public class AccountFragment extends Fragment {
 
         // navigate to login fragment if no user is logged in
         NavController navController = Navigation.findNavController(view);
-        if (accountViewModel.getAccount() == null) {
+        if (account == null) {
             navController.navigate(R.id.nav_login);
+            return;
         }
+
+        mNameTv = view.findViewById(R.id.email);
+        mBirthTv = view.findViewById(R.id.tv_account_birth);
+        mAddressTv = view.findViewById(R.id.tv_account_address);
+        mNameTv.append(": " + account.getName());
+        mBirthTv.append(": " + account.getDateOfBirth());
+        mAddressTv.append(": " + account.getAddress());
+
 
         mEditBn = view.findViewById(R.id.bn_account_edit);
         mEditBn.setOnClickListener((View v) -> {

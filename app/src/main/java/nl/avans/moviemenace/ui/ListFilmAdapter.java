@@ -26,23 +26,24 @@ import nl.avans.moviemenace.dataLayer.factory.DAOFactory;
 import nl.avans.moviemenace.dataLayer.factory.SQLDAOFactory;
 import nl.avans.moviemenace.domain.Account;
 import nl.avans.moviemenace.domain.Movie;
+import nl.avans.moviemenace.domain.MovieList;
 import nl.avans.moviemenace.logic.MovieListManager;
 
 public class ListFilmAdapter extends RecyclerView.Adapter<ListFilmAdapter.ListFilmsViewHolder> implements Filterable {
 
+    DAOFactory daoFactory = new SQLDAOFactory();
+    MovieListManager movieListManager = new MovieListManager(daoFactory);
+
     private List<Movie> movies;
     private List<Movie> moviesFull;
-    private int listId;
     private Account account;
+    private MovieList movieList;
 
-    private DAOFactory daoFactory = new SQLDAOFactory();
-    private MovieListManager movieListManager = new MovieListManager(daoFactory);
-
-    public ListFilmAdapter(List<Movie> movies, Account account, int listId) {
+    public ListFilmAdapter(List<Movie> movies, Account account, MovieList movieList) {
         this.movies = movies;
-        this.moviesFull = movies;
         this.account = account;
-        this.listId = listId;
+        this.movieList = movieList;
+        this.moviesFull = new ArrayList<>();
     }
 
     @Override
@@ -85,8 +86,7 @@ public class ListFilmAdapter extends RecyclerView.Adapter<ListFilmAdapter.ListFi
         private ImageView mPosterIv;
         private TextView mTitleTv;
         private TextView mDescTv;
-
-        private Button mDeleteBn;
+        private Button mDeleteButton;
 
         public ListFilmsViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -95,23 +95,27 @@ public class ListFilmAdapter extends RecyclerView.Adapter<ListFilmAdapter.ListFi
 
             mPosterIv = itemView.findViewById(R.id.iv_list_film_viewholder_poster);
             mTitleTv = itemView.findViewById(R.id.tv_list_film_viewholder_title);
-            mDescTv = itemView.findViewById(R.id.tv_list_film_viewholder_desc);
+            mDescTv = itemView.findViewById(R.id.tv__list_film_viewholder_desc);
+            mDeleteButton = itemView.findViewById(R.id.bn_list_film_viewholder_delete);
 
-            mDeleteBn = itemView.findViewById(R.id.bn_list_film_viewholder_delete);
-
-            mDeleteBn.setOnClickListener((View v) -> {
-                new DatabaseTask().execute(movies.get(getAdapterPosition()));
-                movies.remove(getAdapterPosition());
-                notifyDataSetChanged();
-            });
+            mDeleteButton.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(context, FilmDetailActivity.class);
-            intent.putExtra(FilmDetailActivity.MOVIE_KEY, movies.get(getAdapterPosition()));
-            intent.putExtra(Account.ACCOUNT_KEY, account);
-            context.startActivity(intent);
+            Movie movie = movies.get(getAdapterPosition());
+            int viewID = v.getId();
+            if (viewID == R.id.bn_list_film_viewholder_delete) {
+                movies.remove(movie);
+                movieList.getMovies().remove(movie);
+                new DatabaseTask().execute(movie);
+                notifyDataSetChanged();
+            } else {
+                Intent intent = new Intent(context, FilmDetailActivity.class);
+                intent.putExtra(FilmDetailActivity.MOVIE_KEY, movie);
+                intent.putExtra(Account.ACCOUNT_KEY, account);
+                context.startActivity(intent);
+            }
         }
     }
 
@@ -141,6 +145,10 @@ public class ListFilmAdapter extends RecyclerView.Adapter<ListFilmAdapter.ListFi
         return moviesFull;
     }
 
+    public void setMoviesFull(List<Movie> movies) {
+        this.moviesFull.addAll(movies);
+    }
+
     public class DatabaseTask extends AsyncTask<Movie, Void, Void> {
 
         @Override
@@ -150,11 +158,9 @@ public class ListFilmAdapter extends RecyclerView.Adapter<ListFilmAdapter.ListFi
                 db.openConnection();
             }
             Movie movie = movies[0];
-            movieListManager.deleteMovieFromList(movie.getId(), listId);
+            movieListManager.deleteMovieFromList(movieList.getId(), movie.getId());
             db.closeConnection();
             return null;
         }
     }
 }
-
-

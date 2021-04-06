@@ -4,10 +4,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
-import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -30,6 +27,7 @@ import java.util.Locale;
 import nl.avans.moviemenace.R;
 import nl.avans.moviemenace.domain.Account;
 import nl.avans.moviemenace.domain.Movie;
+import nl.avans.moviemenace.logic.LanguageHelper;
 import nl.avans.moviemenace.logic.MovieEntityManager;
 import nl.avans.moviemenace.logic.MovieManager;
 import nl.avans.moviemenace.ui.FilmDetailActivity;
@@ -115,7 +113,7 @@ public class HomeFragment extends Fragment {
             mLoadingHeaderPb.setVisibility(View.INVISIBLE);
             if(!(movie == null)){
                 movieInBanner = movie;
-                if(Locale.getDefault().equals(Locale.US)){
+                if(LanguageHelper.isLanguage("us_EN")){
                     mDescription.setText(movie.getOverview());
                     Picasso.get().load(MainActivity.BASE_URL + movie.getBanner()).into(mHeaderImage);
                     mTitle.setText(movie.getTitle());
@@ -124,10 +122,7 @@ public class HomeFragment extends Fragment {
                     Picasso.get().load(MainActivity.BASE_URL + movie.getTranslations().get("Dutch").getUrl()).into(mHeaderImage);
                     mTitle.setText(movie.getTranslations().get("Dutch").getTitle());
                 }
-
             }
-
         }
     }
-
 }

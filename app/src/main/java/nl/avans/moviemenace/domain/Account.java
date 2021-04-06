@@ -12,22 +12,22 @@ import nl.avans.moviemenace.domain.validation.ZipCode;
 public class Account implements Serializable {
     public static final String ACCOUNT_KEY = "AccountKey";
 
-    private Email email;
+    private String email;
     private String name;
-    private Password password;
+    private String password;
     private String address;
-    private ZipCode zipCode;
+    private String zipCode;
     private String iban;
     private LocalDate dateOfBirth;
     private List<Ticket> tickets;
     private List<MovieList> movieLists;
 
     public Account(String email, String name, String password, String address, String zipCode, String iban, LocalDate dateOfBirth) {
-        this.email = new Email(email);
+        this.email = email;
         this.name = name;
-        this.password = new Password(password);
+        this.password = password;
         this.address = address;
-        this.zipCode = new ZipCode(zipCode);
+        this.zipCode = zipCode;
         this.iban = iban;
         this.dateOfBirth = dateOfBirth;
         this.tickets = new ArrayList<>();
@@ -35,11 +35,11 @@ public class Account implements Serializable {
     }
 
     public String getEmail() {
-        return email.getEmail();
+        return email;
     }
 
     public void setEmail(String email) {
-        this.email = new Email(email);
+        this.email = email;
     }
 
     public String getName() {
@@ -51,11 +51,11 @@ public class Account implements Serializable {
     }
 
     public String getPassword() {
-        return password.getPassword();
+        return password;
     }
 
     public void setPassword(String password) {
-        this.password = new Password(password);
+        this.password = password;
     }
 
     public String getAddress() {
@@ -67,11 +67,11 @@ public class Account implements Serializable {
     }
 
     public String getZipCode() {
-        return zipCode.getZipCodeValue();
+        return zipCode;
     }
 
     public void setZipCode(String zipCode) {
-        this.zipCode = new ZipCode(zipCode);
+        this.zipCode = zipCode;
     }
 
     public String getIban() {

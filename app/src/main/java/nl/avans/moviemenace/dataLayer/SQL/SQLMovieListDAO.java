@@ -29,6 +29,17 @@ public class SQLMovieListDAO extends DatabaseConnection implements MovieListDAO 
         }
     }
 
+    @Override
+    public void deleteMovieList(int listID) {
+        openConnection();
+        try {
+            String SQL = "DELETE FROM List WHERE ID = " + listID;
+            executeSQLStatement(SQL);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void addMovieToList(int listID, int movieID) {
         openConnection();
         try {
@@ -38,6 +49,18 @@ public class SQLMovieListDAO extends DatabaseConnection implements MovieListDAO 
             executeSQLStatement(SQL);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public void deleteMovieFromList(int listId, int movieID){
+        openConnection();
+        try{
+            String SQL = "DELETE FROM Listcontent WHERE MovieID = " + movieID + " AND ListID = " + listId;
+            executeSQLStatement(SQL);
+        } catch (Exception e){
+            e.printStackTrace();
+        } finally {
+            closeConnection();
         }
     }
 
@@ -133,18 +156,6 @@ public class SQLMovieListDAO extends DatabaseConnection implements MovieListDAO 
             e.printStackTrace();
         }
         return translations;
-    }
-
-    public void deleteMovieFromList(int movieID, int listId){
-        openConnection();
-        try{
-            String SQL = "DELETE FROM Listcontent WHERE MovieID = " + movieID + " AND ListID = " + listId;
-            executeSQLStatement(SQL);
-        } catch (Exception e){
-            e.printStackTrace();
-        } finally {
-            closeConnection();
-        }
     }
 
 }
