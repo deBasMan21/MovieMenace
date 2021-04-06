@@ -70,18 +70,20 @@ public class FilmToListActivity extends AppCompatActivity {
             }
             Account account = MainActivity.account;
             List<MovieList> movieLists;
+            List<MovieList> returnMovieLists = new ArrayList<>();
             if (account == null) {
                 movieLists = movieListManager.getMovieListsForAccount("");
             } else {
                 movieLists = movieListManager.getMovieListsForAccount(account.getEmail());
             }
+            returnMovieLists.addAll(movieLists);
             for (MovieList movieList : movieLists) {
                 if (movieListManager.listHasMovie(movieList.getId(), movie.getId())) {
-                    movieLists.remove(movieList);
+                    returnMovieLists.remove(movieList);
                 }
             }
             db.closeConnection();
-            return movieLists;
+            return returnMovieLists;
         }
 
         @Override
