@@ -1,312 +1,308 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView android:layout_height="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingHorizontal="24dp"
-        tools:context=".ui.RegisterActivity">
-        <!--name-->
+    android:layout_height="match_parent"
+    android:paddingHorizontal="24dp"
+    tools:context=".ui.RegisterActivity">
+    <!--name-->
 
-        <TextView
-            android:id="@+id/tv_register_name_error"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/register_empty_error"
-            android:textColor="@color/red_200"
-            android:textSize="12sp"
-            android:textStyle="italic"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@id/et_register_name"
-            app:layout_constraintStart_toStartOf="@id/et_register_name" />
+    <TextView
+        android:id="@+id/tv_register_name_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/register_empty_error"
+        android:textColor="@color/red_200"
+        android:textSize="12sp"
+        android:textStyle="italic"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@id/et_register_name"
+        app:layout_constraintStart_toStartOf="@id/et_register_name" />
 
-        <TextView
-            android:id="@+id/tv_register_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="45dp"
-            android:text="@string/name"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/tv_register_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:text="@string/name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/et_register_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/register_name_placeholder"
-            android:importantForAutofill="no"
-            android:inputType="textPersonName"
-            app:layout_constraintBottom_toBottomOf="@id/tv_register_name"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tv_register_name" />
+    <EditText
+        android:id="@+id/et_register_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/register_name_placeholder"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@id/tv_register_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_register_name" />
 
-        <!--email-->
-        <TextView
-            android:id="@+id/tv_register_email_error"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/register_email_error"
-            android:textColor="@color/red_200"
-            android:textSize="12sp"
-            android:textStyle="italic"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@id/et_register_email"
-            app:layout_constraintStart_toStartOf="@id/et_register_email" />
+    <!--email-->
+    <TextView
+        android:id="@+id/tv_register_email_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/register_email_error"
+        android:textColor="@color/red_200"
+        android:textSize="12sp"
+        android:textStyle="italic"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@id/et_register_email"
+        app:layout_constraintStart_toStartOf="@id/et_register_email" />
 
-        <TextView
-            android:id="@+id/tv_register_email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="45dp"
-            android:text="@string/email"
-            app:layout_constraintStart_toStartOf="@+id/tv_register_name"
-            app:layout_constraintTop_toBottomOf="@+id/tv_register_name" />
+    <TextView
+        android:id="@+id/tv_register_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:text="@string/email"
+        app:layout_constraintStart_toStartOf="@+id/tv_register_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_register_name" />
 
-        <EditText
-            android:id="@+id/et_register_email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/email_example_placeholder"
-            android:importantForAutofill="no"
-            android:inputType="textEmailAddress"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_register_email"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tv_register_email" />
+    <EditText
+        android:id="@+id/et_register_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/email_example_placeholder"
+        android:importantForAutofill="no"
+        android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_register_email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_register_email" />
 
-        <!--place-->
-        <TextView
-            android:id="@+id/tv_register_place_error"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/register_empty_error"
-            android:textColor="@color/red_200"
-            android:textSize="12sp"
-            android:textStyle="italic"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@+id/et_register_place"
-            app:layout_constraintStart_toStartOf="@+id/et_register_place" />
+    <!--place-->
+    <TextView
+        android:id="@+id/tv_register_iban_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/register_empty_error"
+        android:textColor="@color/red_200"
+        android:textSize="12sp"
+        android:textStyle="italic"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/et_register_iban"
+        app:layout_constraintStart_toStartOf="@+id/et_register_iban" />
 
-        <EditText
-            android:id="@+id/et_register_place"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/register_place_placeholder"
-            android:importantForAutofill="no"
-            android:inputType="textPersonName"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_register_place"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tv_register_place" />
+    <EditText
+        android:id="@+id/et_register_iban"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/register_iban_placeholder"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_register_iban"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_register_iban" />
 
-        <TextView
-            android:id="@+id/tv_register_place"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="45dp"
-            android:text="@string/place"
-            app:layout_constraintStart_toStartOf="@+id/tv_register_email"
-            app:layout_constraintTop_toBottomOf="@+id/tv_register_email" />
+    <TextView
+        android:id="@+id/tv_register_iban"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:text="@string/iban"
+        app:layout_constraintStart_toStartOf="@+id/tv_register_email"
+        app:layout_constraintTop_toBottomOf="@+id/tv_register_email" />
 
-        <!--address-->
-        <TextView
-            android:id="@+id/tv_register_address_error"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/register_empty_error"
-            android:textColor="@color/red_200"
-            android:textSize="12sp"
-            android:textStyle="italic"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@+id/et_register_address"
-            app:layout_constraintStart_toStartOf="@+id/et_register_address" />
+    <!--address-->
+    <TextView
+        android:id="@+id/tv_register_address_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/register_empty_error"
+        android:textColor="@color/red_200"
+        android:textSize="12sp"
+        android:textStyle="italic"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/et_register_address"
+        app:layout_constraintStart_toStartOf="@+id/et_register_address" />
 
-        <TextView
-            android:id="@+id/tv_register_address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="45dp"
-            android:text="@string/address"
-            app:layout_constraintStart_toStartOf="@+id/tv_register_place"
-            app:layout_constraintTop_toBottomOf="@+id/tv_register_place" />
+    <TextView
+        android:id="@+id/tv_register_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:text="@string/address"
+        app:layout_constraintStart_toStartOf="@+id/tv_register_iban"
+        app:layout_constraintTop_toBottomOf="@+id/tv_register_iban" />
 
-        <EditText
-            android:id="@+id/et_register_address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/register_address_placeholder"
-            android:importantForAutofill="no"
-            android:inputType="textPersonName"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_register_address"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tv_register_address" />
+    <EditText
+        android:id="@+id/et_register_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/register_address_placeholder"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_register_address"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_register_address" />
 
-        <!--zipcode-->
-        <TextView
-            android:id="@+id/tv_register_post_error"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/register_zip_code_error"
-            android:textColor="@color/red_200"
-            android:textSize="12sp"
-            android:textStyle="italic"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@+id/et_register_post_num"
-            app:layout_constraintStart_toStartOf="@+id/et_register_post_num" />
+    <!--zipcode-->
+    <TextView
+        android:id="@+id/tv_register_post_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/register_zip_code_error"
+        android:textColor="@color/red_200"
+        android:textSize="12sp"
+        android:textStyle="italic"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/et_register_post_num"
+        app:layout_constraintStart_toStartOf="@+id/et_register_post_num" />
 
-        <TextView
-            android:id="@+id/tv_register_post"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="45dp"
-            android:text="@string/post"
-            app:layout_constraintStart_toStartOf="@+id/tv_register_address"
-            app:layout_constraintTop_toBottomOf="@+id/tv_register_address" />
+    <TextView
+        android:id="@+id/tv_register_post"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:text="@string/post"
+        app:layout_constraintStart_toStartOf="@+id/tv_register_address"
+        app:layout_constraintTop_toBottomOf="@+id/tv_register_address" />
 
-        <EditText
-            android:id="@+id/et_register_post_num"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:ems="4"
-            android:hint="@string/zip_code_example_placeholder"
-            android:importantForAutofill="no"
-            android:inputType="numberSigned"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_register_post"
-            app:layout_constraintEnd_toStartOf="@+id/et_register_post_char"
-            app:layout_constraintTop_toTopOf="@+id/tv_register_post" />
+    <EditText
+        android:id="@+id/et_register_post_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:ems="4"
+        android:hint="@string/zip_code_example_placeholder"
+        android:importantForAutofill="no"
+        android:inputType="numberSigned"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_register_post"
+        app:layout_constraintEnd_toStartOf="@+id/et_register_post_char"
+        app:layout_constraintTop_toTopOf="@+id/tv_register_post" />
 
-        <EditText
-            android:id="@+id/et_register_post_char"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="2"
-            android:hint="@string/zip_code_example_placeholder_2"
-            android:importantForAutofill="no"
-            android:inputType="textPersonName"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_register_post"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tv_register_post" />
+    <EditText
+        android:id="@+id/et_register_post_char"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="2"
+        android:hint="@string/zip_code_example_placeholder_2"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_register_post"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_register_post" />
 
-        <!--birthday-->
-        <TextView
-            android:id="@+id/tv_register_birth_error"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/register_birthday_error"
-            android:textColor="@color/red_200"
-            android:textSize="12sp"
-            android:textStyle="italic"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@+id/et_register_birth"
-            app:layout_constraintStart_toStartOf="@+id/et_register_birth" />
+    <!--birthday-->
+    <TextView
+        android:id="@+id/tv_register_birth_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/register_birthday_error"
+        android:textColor="@color/red_200"
+        android:textSize="12sp"
+        android:textStyle="italic"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/et_register_birth"
+        app:layout_constraintStart_toStartOf="@+id/et_register_birth" />
 
-        <EditText
-            android:id="@+id/et_register_birth"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="false"
-            android:cursorVisible="false"
-            android:ems="10"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:importantForAutofill="no"
-            android:inputType="date"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_register_birth"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tv_register_birth" />
+    <EditText
+        android:id="@+id/et_register_birth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:cursorVisible="false"
+        android:ems="10"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:importantForAutofill="no"
+        android:inputType="date"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_register_birth"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_register_birth" />
 
-        <TextView
-            android:id="@+id/tv_register_birth"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="45dp"
-            android:text="@string/birth"
-            app:layout_constraintStart_toStartOf="@+id/tv_register_post"
-            app:layout_constraintTop_toBottomOf="@+id/tv_register_post" />
+    <TextView
+        android:id="@+id/tv_register_birth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:text="@string/birth"
+        app:layout_constraintStart_toStartOf="@+id/tv_register_post"
+        app:layout_constraintTop_toBottomOf="@+id/tv_register_post" />
 
-        <!--password-->
-        <TextView
-            android:id="@+id/tv_register_pass"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="64dp"
-            android:text="@string/pass"
-            app:layout_constraintStart_toStartOf="@+id/tv_register_birth"
-            app:layout_constraintTop_toBottomOf="@+id/tv_register_birth" />
+    <!--password-->
+    <TextView
+        android:id="@+id/tv_register_pass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="@string/pass"
+        app:layout_constraintStart_toStartOf="@+id/tv_register_birth"
+        app:layout_constraintTop_toBottomOf="@+id/tv_register_birth" />
 
 
-        <TextView
-            android:id="@+id/tv_register_password_error"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/register_password_error"
-            android:textColor="@color/red_200"
-            android:textSize="12sp"
-            android:textStyle="italic"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@+id/et_register_pass"
-            app:layout_constraintEnd_toEndOf="parent" />
+    <TextView
+        android:id="@+id/tv_register_password_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/register_password_error"
+        android:textColor="@color/red_200"
+        android:textSize="12sp"
+        android:textStyle="italic"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/et_register_pass"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-        <EditText
-            android:id="@+id/et_register_pass"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/password_placeholder"
-            android:inputType="textPassword"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_register_pass"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tv_register_pass"
-            android:importantForAutofill="no" />
+    <EditText
+        android:id="@+id/et_register_pass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/password_placeholder"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_register_pass"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_register_pass"
+        android:importantForAutofill="no" />
 
-        <TextView
-            android:id="@+id/tv_register_password_confirmation_error"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/register_repeat_password_error"
-            android:textColor="@color/red_200"
-            android:textSize="12sp"
-            android:textStyle="italic"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@+id/et_register_pass_re"
-            app:layout_constraintEnd_toEndOf="parent" />
+    <TextView
+        android:id="@+id/tv_register_password_confirmation_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/register_repeat_password_error"
+        android:textColor="@color/red_200"
+        android:textSize="12sp"
+        android:textStyle="italic"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/et_register_pass_re"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_register_pass_re"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="45dp"
-            android:text="@string/pass_re"
-            app:layout_constraintStart_toStartOf="@+id/tv_register_pass"
-            app:layout_constraintTop_toBottomOf="@+id/tv_register_pass" />
+    <TextView
+        android:id="@+id/tv_register_pass_re"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:text="@string/pass_re"
+        app:layout_constraintStart_toStartOf="@+id/tv_register_pass"
+        app:layout_constraintTop_toBottomOf="@+id/tv_register_pass" />
 
-        <EditText
-            android:id="@+id/et_register_pass_re"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/password_placeholder"
-            android:importantForAutofill="no"
-            android:inputType="textPassword"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_register_pass_re"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tv_register_pass_re" />
+    <EditText
+        android:id="@+id/et_register_pass_re"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/password_placeholder"
+        android:importantForAutofill="no"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_register_pass_re"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_register_pass_re" />
 
-        <Button
-            android:id="@+id/bn_register_conf"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:backgroundTint="@color/black"
-            android:text="@string/conf"
-            app:layout_constraintStart_toStartOf="@+id/tv_register_pass_re"
-            app:layout_constraintTop_toBottomOf="@+id/tv_register_pass_re" />
+    <Button
+        android:id="@+id/bn_register_conf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="@color/black"
+        android:text="@string/conf"
+        app:layout_constraintStart_toStartOf="@+id/tv_register_pass_re"
+        app:layout_constraintTop_toBottomOf="@+id/tv_register_pass_re" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

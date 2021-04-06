@@ -20,7 +20,7 @@
     <string name="list_desc_hint">Beschrijving voor de lijst</string>
     <string name="conf">Bevestigen</string>
     <string name="email">Email</string>
-    <string name="place">Plaats</string>
+    <string name="iban">Iban</string>
     <string name="address">Adres</string>
     <string name="post">Postcode</string>
     <string name="poster">Film poster</string>
@@ -81,7 +81,7 @@
     <string name="delete_list">Verwijder lijst</string>
     <string name="logout">Log uit</string>
     <string name="register_name_placeholder">Naam</string>
-    <string name="register_place_placeholder">Plaatsnaam</string>
+    <string name="register_iban_placeholder">NL99 BANK 0123456789</string>
     <string name="register_address_placeholder">straatnaam, nummer</string>
     <string name="email_example_placeholder">voorbeeld@email.nl</string>
     <string name="zip_code_example_placeholder">1234</string>

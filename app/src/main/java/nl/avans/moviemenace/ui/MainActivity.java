@@ -68,8 +68,12 @@ public class MainActivity extends AppCompatActivity {
 
         accountViewModel =
                 new ViewModelProvider(this).get(AccountViewModel.class);
+        if (getIntent().hasExtra(Account.ACCOUNT_KEY)) {
+            accountViewModel.setAccount((Account) getIntent().getSerializableExtra(Account.ACCOUNT_KEY));
+        } else {
+            accountViewModel.setAccount(account);
+        }
 
-        accountViewModel.setAccount((Account) getIntent().getSerializableExtra(Account.ACCOUNT_KEY));
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
