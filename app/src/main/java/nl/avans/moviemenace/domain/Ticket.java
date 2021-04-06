@@ -3,6 +3,8 @@ package nl.avans.moviemenace.domain;
 import java.io.Serializable;
 
 public class Ticket implements Serializable {
+    public static final String TICKET_KEY = "TicketKey";
+
     private int chairNumber;
     private String email;
     private int viewID;

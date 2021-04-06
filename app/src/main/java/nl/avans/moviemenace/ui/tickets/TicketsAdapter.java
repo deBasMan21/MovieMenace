@@ -57,6 +57,7 @@ public class TicketsAdapter extends RecyclerView.Adapter<TicketsAdapter.TicketsV
     public static class TicketsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private Context context;
         private Ticket ticket;
+        private Account account;
 
         private TextView mTitleTv;
         private TextView mLocationTv;
@@ -76,6 +77,10 @@ public class TicketsAdapter extends RecyclerView.Adapter<TicketsAdapter.TicketsV
 
         @Override
         public void onClick(View v) {
+            Intent ticketIntent = new Intent(context, TicketDetailActivity.class);
+            ticketIntent.putExtra(Ticket.TICKET_KEY, ticket);
+            ticketIntent.putExtra(Account.ACCOUNT_KEY, account);
+
             context.startActivity(new Intent(context, TicketDetailActivity.class));
         }
     }
@@ -92,6 +97,7 @@ public class TicketsAdapter extends RecyclerView.Adapter<TicketsAdapter.TicketsV
     @Override
     public void onBindViewHolder(@NonNull TicketsViewHolder holder, int position) {
         Ticket ticket = tickets.get(position);
+        holder.account = account;
         holder.ticket = ticket;
         Viewing viewing = viewings.get(position);
         Room room = viewing.getRoom();
