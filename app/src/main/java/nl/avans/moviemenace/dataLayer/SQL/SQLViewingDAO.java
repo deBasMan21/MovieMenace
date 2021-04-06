@@ -41,7 +41,7 @@ public class SQLViewingDAO extends DatabaseConnection implements ViewingDAO {
         //Prints out any errors that may occur
         e.printStackTrace();
         } finally {
-            closeConnection();
+
         }
         //returns the viewing
         return viewing;

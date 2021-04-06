@@ -1,5 +1,7 @@
 package nl.avans.moviemenace.dataLayer;
 
+import android.util.Log;
+
 import java.sql.*;
 
 /**
@@ -89,6 +91,10 @@ public class DatabaseConnection {
         if (query != null && connectionIsOpen()) {
             // Then, if succeeded, execute the query.
             try {
+                Log.e("DatabaseConnection", "executeSQLSelectStatement: connection closed " + connection.isClosed());
+                if (statement.isClosed()) {
+                    statement = connection.createStatement();
+                }
                 rs = statement.executeQuery(query);
             } catch (SQLException e) {
                 System.out.println(e);

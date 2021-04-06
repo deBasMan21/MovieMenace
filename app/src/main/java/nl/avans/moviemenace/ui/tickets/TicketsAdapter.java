@@ -92,7 +92,7 @@ public class TicketsAdapter extends RecyclerView.Adapter<TicketsAdapter.TicketsV
         Room room = viewings.get(position).getRoom();
         Cinema cinema = room.getCinema();
         holder.mTitleTv.setText(movies.get(position).getTitle());
-        holder.mLocationTv.setText(cinema.getName() + " - " + Resources.getSystem().getString(R.string.room_number) + room.getRoomNumber());
+        holder.mLocationTv.setText(cinema.getName() + " - " + "Zaal: " + room.getRoomNumber());
     }
 
     @Override
@@ -117,6 +117,7 @@ public class TicketsAdapter extends RecyclerView.Adapter<TicketsAdapter.TicketsV
                     Log.e("TicketAdapter", "doInBackground: " + t.getViewID());
                     Viewing viewing = viewingManager.getViewing(t.getViewID());
                     viewingList.add(viewing);
+                    Log.e("TicketAdapter", "doInBackground: " + viewing.getMovie());
                     Movie movie = movieManager.getMovie(null, viewing.getMovie());
                     movieList.add(movie);
                 }
