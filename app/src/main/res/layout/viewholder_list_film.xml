@@ -63,7 +63,9 @@
             android:layout_weight="1"
             android:backgroundTint="@color/black"
             android:text="@string/buy_ticket"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:drawableTint="@color/white"
+            android:drawableLeft="@drawable/ic_menu_tickets"/>
 
         <Button
             android:id="@+id/bn_list_film_viewholder_delete"
@@ -74,7 +76,9 @@
             android:layout_weight="1"
             android:backgroundTint="@color/black"
             android:text="@string/delete_from_list"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:drawableTint="@color/white"
+            android:drawableLeft="@drawable/ic_baseline_trashcan"/>
     </LinearLayout>
 
     <ImageView

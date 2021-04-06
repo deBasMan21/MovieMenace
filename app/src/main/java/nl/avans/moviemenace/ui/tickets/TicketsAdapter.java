@@ -13,6 +13,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,9 +45,11 @@ public class TicketsAdapter extends RecyclerView.Adapter<TicketsAdapter.TicketsV
     private List<Movie> movies;
 
     private Account account;
+    private Context context;
 
-    public TicketsAdapter(Account account) {
+    public TicketsAdapter(Context context, Account account) {
         tickets = new ArrayList<>();
+        this.context = context;
         this.account = account;
         new LoadTickets().execute(this.account);
     }
@@ -89,10 +93,13 @@ public class TicketsAdapter extends RecyclerView.Adapter<TicketsAdapter.TicketsV
     public void onBindViewHolder(@NonNull TicketsViewHolder holder, int position) {
         Ticket ticket = tickets.get(position);
         holder.ticket = ticket;
-        Room room = viewings.get(position).getRoom();
+        Viewing viewing = viewings.get(position);
+        Room room = viewing.getRoom();
         Cinema cinema = room.getCinema();
         holder.mTitleTv.setText(movies.get(position).getTitle());
-        holder.mLocationTv.setText(cinema.getName() + " - " + "Zaal: " + room.getRoomNumber());
+        holder.mLocationTv.setText(cinema.getName() + " - " + context.getString(R.string.room_num) + " " + room.getRoomNumber());
+        holder.mRowSeatTv.setText(context.getString(R.string.row_num) + " " + ticket.getRowNumber() + " - " + context.getString(R.string.seat_num) + " " + ticket.getChairNumber());
+        holder.mDateTimeTv.setText(viewing.getDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)) + " - " + viewing.getDate().format(DateTimeFormatter.ofPattern("HH:mm")));
     }
 
     @Override
