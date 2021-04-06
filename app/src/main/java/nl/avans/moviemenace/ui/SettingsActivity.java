@@ -55,6 +55,10 @@ public class SettingsActivity extends AppCompatActivity {
         mRgColor = findViewById(R.id.rg_color_mode);
 
         mLogoutButton = findViewById(R.id.bn_account_logout);
+
+        if(MainActivity.account == null){
+            mLogoutButton.setVisibility(View.INVISIBLE);
+        }
         mBackButton = findViewById(R.id.bn_account_confirm);
 
         if(LanguageHelper.isLanguage("us_EN")){
@@ -78,6 +82,11 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 MainActivity.account = null;
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra(Account.ACCOUNT_KEY, MainActivity.account);
+                startActivity(intent);
+
             }
         });
 
@@ -86,6 +95,7 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra(Account.ACCOUNT_KEY, MainActivity.account);
                 startActivity(intent);
             }
         });
