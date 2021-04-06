@@ -27,6 +27,9 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import nl.avans.moviemenace.R;
+import nl.avans.moviemenace.dataLayer.DatabaseConnection;
+import nl.avans.moviemenace.dataLayer.IDAO.TicketDAO;
+import nl.avans.moviemenace.dataLayer.SQL.SQLTicketDAO;
 import nl.avans.moviemenace.dataLayer.factory.DAOFactory;
 import nl.avans.moviemenace.dataLayer.rooms.MovieDB;
 import nl.avans.moviemenace.dataLayer.factory.SQLDAOFactory;
@@ -136,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         new insertMoviesIntoLocalDB().execute();
-
+        new updateTickets().execute();
     }
 
     @Override
@@ -167,6 +170,18 @@ public class MainActivity extends AppCompatActivity {
         protected Void doInBackground(Void... voids) {
             MovieManager mm = new MovieManager(factory);
             mem.insertAllMovies(mm.getAllMovies(mem));
+            return null;
+        }
+    }
+
+    public class updateTickets extends  AsyncTask<Void, Void, Void>{
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            DatabaseConnection db = new DatabaseConnection();
+            db.openConnection();
+            TicketDAO ticketDAO = factory.createTicketDAO();
+            ticketDAO.updateTickets();
             return null;
         }
     }

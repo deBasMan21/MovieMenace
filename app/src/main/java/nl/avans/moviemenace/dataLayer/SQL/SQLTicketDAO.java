@@ -113,7 +113,7 @@ public class SQLTicketDAO extends DatabaseConnection implements TicketDAO, Seria
         ArrayList<Ticket> tickets = new ArrayList<>();
         try{
             //this string contains the sql query to select the upcoming tickets for an account
-            String SQL = "SELECT * FROM TICKETS WHERE Email = '" + email + "' AND Status = 'UPCOMING'";
+            String SQL = "SELECT * FROM TICKETS WHERE Email = '" + email + "' AND Status = 'VALID'";
             //this executes the query
             executeSQLSelectStatement(SQL);
             //this creates a loop. within it the tickets are created and added to the list
@@ -179,5 +179,26 @@ public class SQLTicketDAO extends DatabaseConnection implements TicketDAO, Seria
         }
         //returns the list of tickets
         return tickets;
+    }
+
+    @Override
+    public void updateTickets(){
+        openConnection();
+        try{
+            String SQL = "SELECT * FROM Tickets AS T INNER JOIN Viewing AS V ON V.ViewID = T.ViewID WHERE T.Status = 'VALID' AND V.Date < GETDATE()";
+            executeSQLSelectStatement(SQL);
+            ArrayList<Ticket> tickets = new ArrayList<>();
+            while(rs.next()){
+                Ticket ticket = new Ticket(rs.getInt("ChairNumber"), rs.getString("Email"), rs.getInt("ViewID"), rs.getString("Status"), rs.getInt("RowNumber"));
+                tickets.add(ticket);
+            }
+
+            for (Ticket ticket : tickets) {
+                String updateSQL = "UPDATE Tickets SET Status = 'EXPIRED' WHERE Email = '" + ticket.getEmail() +"' AND ChairNumber = " + ticket.getChairNumber() + " AND ViewID = "  + ticket.getViewID();
+                executeSQLStatement(updateSQL);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
