@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -47,8 +48,11 @@ public class TicketsFragment extends Fragment {
             navController.navigate(R.id.nav_login);
         }
 
+        ProgressBar pb = view.findViewById(R.id.pb_tickets);
+        TextView loading = view.findViewById(R.id.tv_loading_tips);
+
         mTicketsRv = view.findViewById(R.id.rv_tickets);
-        mTicketsRv.setAdapter(new TicketsAdapter(getContext(), accountViewModel.getAccount()));
+        mTicketsRv.setAdapter(new TicketsAdapter(getContext(), accountViewModel.getAccount(), pb, loading));
         mTicketsRv.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false));
     }
 }

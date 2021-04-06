@@ -8,10 +8,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.w3c.dom.Text;
 
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -47,10 +50,15 @@ public class TicketsAdapter extends RecyclerView.Adapter<TicketsAdapter.TicketsV
     private Account account;
     private Context context;
 
-    public TicketsAdapter(Context context, Account account) {
+    private ProgressBar mProgress;
+    private TextView loading;
+
+    public TicketsAdapter(Context context, Account account, ProgressBar pb, TextView loading) {
         tickets = new ArrayList<>();
         this.context = context;
         this.account = account;
+        mProgress = pb;
+        this.loading = loading;
         new LoadTickets().execute(this.account);
     }
 
@@ -64,6 +72,9 @@ public class TicketsAdapter extends RecyclerView.Adapter<TicketsAdapter.TicketsV
         private TextView mRowSeatTv;
         private TextView mDateTimeTv;
 
+        private ProgressBar mProgress;
+
+
         public TicketsViewHolder(@NonNull View itemView) {
             super(itemView);
             context = itemView.getContext();
@@ -73,6 +84,8 @@ public class TicketsAdapter extends RecyclerView.Adapter<TicketsAdapter.TicketsV
             mLocationTv = itemView.findViewById(R.id.tv_ticket_viewholder_location);
             mRowSeatTv = itemView.findViewById(R.id.tv_ticket_viewholder_rowseat);
             mDateTimeTv = itemView.findViewById(R.id.tv_ticket_viewholder_datetime);
+            mProgress = itemView.findViewById(R.id.pb_tickets);
+
         }
 
         @Override
@@ -91,6 +104,8 @@ public class TicketsAdapter extends RecyclerView.Adapter<TicketsAdapter.TicketsV
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.viewholder_ticket, parent, false);
 
+
+
         return new TicketsViewHolder(view);
     }
 
@@ -106,6 +121,7 @@ public class TicketsAdapter extends RecyclerView.Adapter<TicketsAdapter.TicketsV
         holder.mLocationTv.setText(cinema.getName() + " - " + context.getString(R.string.room_num) + " " + room.getRoomNumber());
         holder.mRowSeatTv.setText(context.getString(R.string.row_num) + " " + ticket.getRowNumber() + " - " + context.getString(R.string.seat_num) + " " + ticket.getChairNumber());
         holder.mDateTimeTv.setText(viewing.getDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)) + " - " + viewing.getDate().format(DateTimeFormatter.ofPattern("HH:mm")));
+
     }
 
     @Override
@@ -115,6 +131,13 @@ public class TicketsAdapter extends RecyclerView.Adapter<TicketsAdapter.TicketsV
 
     public class LoadTickets extends AsyncTask<Account, Void, Void> {
         @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            mProgress.setVisibility(View.VISIBLE);
+            loading.setVisibility(View.VISIBLE);
+        }
+
+        @Override
         protected Void doInBackground(Account... accounts) {
 
             Account account = accounts[0];
@@ -123,9 +146,9 @@ public class TicketsAdapter extends RecyclerView.Adapter<TicketsAdapter.TicketsV
             List<Movie> movieList = new ArrayList<>();
 
             if (account == null) {
-                ticketList = ticketManager.getAllTicketsForAccount("");
+                ticketList = ticketManager.getUpcomingTicketsForAccount("");
             } else {
-                ticketList = ticketManager.getAllTicketsForAccount(account.getEmail());
+                ticketList = ticketManager.getUpcomingTicketsForAccount(account.getEmail());
                 for (Ticket t : ticketList) {
                     Log.e("TicketAdapter", "doInBackground: " + t.getViewID());
                     Viewing viewing = viewingManager.getViewing(t.getViewID());
@@ -146,6 +169,8 @@ public class TicketsAdapter extends RecyclerView.Adapter<TicketsAdapter.TicketsV
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+            mProgress.setVisibility(View.INVISIBLE);
+            loading.setVisibility(View.INVISIBLE);
             notifyDataSetChanged();
         }
     }

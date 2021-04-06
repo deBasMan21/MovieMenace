@@ -102,4 +102,6 @@
     <string name="error_language_change_without_connection">Er is geen internetverbinding dus alleen de UI zal van taal veranderen. Wanneer er weer een verbinding is vastgesteld zullen de overige onderdelen vertalen.</string>
     <string name="adult">Volwassen</string>
     <string name="children">Kinderen</string>
+    <string name="loading_text">Als je veel tickets hebt kan dit even duren...</string>
+    <string name="row_number">Rij:&#032;</string>
 </resources>
