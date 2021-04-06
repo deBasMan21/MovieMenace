@@ -16,4 +16,5 @@ public interface MovieListDAO {
     ArrayList<MovieList> getMovieListsForAccount(String email);
     ArrayList<Movie> getMoviesForList(int listID);
     HashMap<String, Translation> getTranslationsForMovie(int id);
+    boolean listHasMovie(int listID, int movieID);
 }

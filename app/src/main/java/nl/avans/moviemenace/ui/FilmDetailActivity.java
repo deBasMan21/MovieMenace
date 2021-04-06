@@ -35,6 +35,7 @@ import nl.avans.moviemenace.domain.Movie;
 import nl.avans.moviemenace.domain.Viewing;
 import nl.avans.moviemenace.logic.LanguageHelper;
 import nl.avans.moviemenace.logic.TicketManager;
+import nl.avans.moviemenace.ui.login.LoginFragment;
 
 public class FilmDetailActivity extends AppCompatActivity {
     private Movie movie;
@@ -71,31 +72,31 @@ public class FilmDetailActivity extends AppCompatActivity {
         mPoster = findViewById(R.id.iv_film_detail_poster);
         mAge = findViewById(R.id.tv_film_detail_agerating_value);
 
-        if(LanguageHelper.isLanguage("nl_NL") && movie.getTranslations() != null){
-            mDuration.setText(movie.getDuration()+ "");
+        if (LanguageHelper.isLanguage("nl_NL") && movie.getTranslations() != null) {
+            mDuration.setText(movie.getDuration() + "");
             mDescription.setText(movie.getTranslations().get("Dutch").getDescription());
             mTitle.setText(movie.getTranslations().get("Dutch").getTitle());
 
-            if(movie.getTitle().equals("Avans Endgame")){
+            if (movie.getTitle().equals("Avans Endgame")) {
                 Picasso.get().load("https://i.ibb.co/qNKQXP1/Microsoft-Teams-image.jpg").into(mPoster);
-            } else{
+            } else {
                 Picasso.get().load(MainActivity.BASE_URL + movie.getTranslations().get("Dutch").getUrl()).into(mPoster);
             }
         } else {
-            mDuration.setText(movie.getDuration()+ "");
+            mDuration.setText(movie.getDuration() + "");
             mDescription.setText(movie.getOverview());
             mTitle.setText(movie.getTitle());
-            if(movie.getTitle().equals("Avans Endgame")){
+            if (movie.getTitle().equals("Avans Endgame")) {
                 Picasso.get().load("https://i.ibb.co/qNKQXP1/Microsoft-Teams-image.jpg").into(mPoster);
-            } else{
+            } else {
                 Picasso.get().load(MainActivity.BASE_URL + movie.getUrl()).into(mPoster);
             }
         }
 
         if (movie.isAdult()) {
-            mAge.setText("Adult");
+            mAge.setText(R.string.adult);
         } else {
-            mAge.setText("Children");
+            mAge.setText(R.string.children);
         }
 
         viewingViewModel = new ViewModelProvider(this).get(ViewingViewModel.class);
@@ -112,7 +113,13 @@ public class FilmDetailActivity extends AppCompatActivity {
         mFilmToListBn = findViewById(R.id.bn_film_detail_list);
 
         mFilmToListBn.setOnClickListener((View v) -> {
-            startActivity(new Intent(v.getContext(), FilmToListActivity.class));
+            if (MainActivity.account != null) {
+                startActivity(new Intent(v.getContext(), FilmToListActivity.class)
+                .putExtra(MOVIE_KEY, movie));
+            } else {
+                startActivity(new Intent(v.getContext(), MainActivity.class)
+                        .putExtra(MainActivity.DESTINATION_KEY, "login"));
+            }
         });
 
         mPurchaseTicketBn = findViewById(R.id.bn_film_detail_ticket);

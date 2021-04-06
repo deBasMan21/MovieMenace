@@ -93,4 +93,6 @@
     <string name="register_password_error">Wachtwoord moet minimaal 8 karakters bevatten</string>
     <string name="register_repeat_password_error">Wachtwoorden komen niet overeen</string>
     <string name="register_empty_error">Veld mag niet leeg zijn</string>
+    <string name="adult">Volwassen</string>
+    <string name="children">Kinderen</string>
 </resources>

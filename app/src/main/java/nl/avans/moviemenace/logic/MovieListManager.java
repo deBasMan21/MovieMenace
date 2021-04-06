@@ -48,4 +48,8 @@ public class MovieListManager {
     public HashMap<String, Translation> getTranslationsForMovie(int id) {
         return movieListDAO.getTranslationsForMovie(id);
     }
+
+    public boolean listHasMovie(int listID, int movieID) {
+        return movieListDAO.listHasMovie(listID, movieID);
+    }
 }

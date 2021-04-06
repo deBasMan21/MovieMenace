@@ -148,11 +148,5 @@ public class ListToFilmsAdapter extends RecyclerView.Adapter<ListToFilmsAdapter.
             db.closeConnection();
             return null;
         }
-
-//        @Override
-//        protected void onPostExecute(Void aVoid) {
-//            super.onPostExecute(aVoid);
-//            notifyDataSetChanged();
-//        }
     }
 }
