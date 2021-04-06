@@ -138,6 +138,10 @@ public class TicketManager implements Serializable {
         return ticketDAO.getUsedTicketsForAccount(email);
     }
 
+    public void useTicket(Ticket ticket) {
+        ticketDAO.useTicket(ticket);
+    }
+
     public class DatabaseTask extends AsyncTask<Void, Void, ArrayList<Ticket>> {
 
         @Override

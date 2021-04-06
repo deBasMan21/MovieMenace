@@ -8,13 +8,12 @@
     tools:context=".ui.TicketDetailActivity">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/iv_ticket_detail_banner"
         android:layout_width="match_parent"
         android:layout_height="176dp"
-        android:background="#999999"
-        app:srcCompat="@drawable/ic_image_placeholder"
-        app:tint="@color/white"
-        android:contentDescription="@string/banner" />
+        android:contentDescription="@string/banner"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/ic_image_placeholder" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
