@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import nl.avans.moviemenace.dataLayer.DatabaseConnection;
 import nl.avans.moviemenace.dataLayer.IDAO.ViewingDAO;
+import nl.avans.moviemenace.domain.Cinema;
 import nl.avans.moviemenace.domain.Room;
 import nl.avans.moviemenace.domain.Ticket;
 import nl.avans.moviemenace.domain.Viewing;
@@ -26,7 +27,7 @@ public class SQLViewingDAO extends DatabaseConnection implements ViewingDAO {
         Viewing viewing = null;
         try{
             //this string contains the sql query to select a viewing
-            String SQL = "SELECT * FROM Viewing AS V INNER JOIN Room AS R ON R.RoomNumber = V.RoomNumber WHERE ViewID = " + viewID;
+            String SQL = "SELECT * FROM Viewing AS V INNER JOIN Room AS R ON R.RoomNumber = V.RoomNumber INNER JOIN Cinema AS C ON C.Name = R.CinemaName WHERE ViewID = " + viewID;
             //this executes the query
             executeSQLSelectStatement(SQL);
             while (rs.next()) {
@@ -34,6 +35,10 @@ public class SQLViewingDAO extends DatabaseConnection implements ViewingDAO {
                 LocalDateTime dateAndTime = LocalDateTime.of(LocalDate.parse(rs.getString("Date")), LocalTime.parse(rs.getString("StartTime")));
                 //creates room object to use in the viewing object
                 Room room = new Room(rs.getInt("RoomNumber"), rs.getInt("NumberOfSeats"), rs.getBoolean("3D"), rs.getInt("NumberOfRows"));
+
+                Cinema cinema = new Cinema(rs.getString("Name"), rs.getString("Place"), rs.getInt("NumberOfRooms"));
+
+                room.setCinema(cinema);
                 //adds the data to the viewing
                 viewing = new Viewing(rs.getInt("ViewID"), dateAndTime, rs.getDouble("Price"), rs.getBoolean("3D"), rs.getInt("MovieID"), room);
             }
