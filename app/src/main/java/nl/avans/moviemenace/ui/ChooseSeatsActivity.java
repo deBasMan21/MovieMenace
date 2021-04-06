@@ -158,7 +158,6 @@ public class ChooseSeatsActivity extends AppCompatActivity {
             } else {
                 new DatabaseTask().execute(createdTickets);
                 Intent ticketsIntent = new Intent(v.getContext(), MainActivity.class);
-                ticketsIntent.putExtra(MainActivity.DESTINATION_KEY, "tickets");
                 ticketsIntent.putExtra(Account.ACCOUNT_KEY, account);
                 startActivity(ticketsIntent);
             }
