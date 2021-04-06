@@ -150,7 +150,7 @@ public class SQLMovieDAO extends DatabaseConnection implements MovieDAO {
             //Prints out any errors that may occur
             e.printStackTrace();
         } finally {
-            closeConnection();
+            //closeConnection();
         }
         //Returns the movie object created before
         return movie;

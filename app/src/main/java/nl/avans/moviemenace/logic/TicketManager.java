@@ -81,7 +81,7 @@ public class TicketManager implements Serializable {
 
         // Check what chairnumbers are available
         ArrayList<Integer> seatNumbers = new ArrayList<>();
-        for (int i = 0; i < maxSeats; i ++ ) {
+        for (int i = 1; i <= maxSeats; i ++ ) {
             if (allTickets.size() == 0) {
                 seatNumbers.add(i);
             } else {
@@ -105,8 +105,8 @@ public class TicketManager implements Serializable {
         int seats = viewing.getRoom().getNumberOfSeats();
         int seatsInRow = seats / rows;
 
-        for (int i = 0; i < rows; i ++) {
-            int amountOfSeats = seatsInRow * (i + 1);
+        for (int i = 1; i <= rows; i ++) {
+            int amountOfSeats = seatsInRow * i;
             if (seatNumber <= amountOfSeats) {
                 return i;
             }
