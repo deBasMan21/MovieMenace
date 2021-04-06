@@ -90,7 +90,7 @@ public class EditAccountActivity extends AppCompatActivity {
             }
 
             //zip code validation
-            if (ZipCode.checkZipCode(zipCode) || zipCode.equals(" ")) {
+            if (!ZipCode.checkZipCode(zipCode)) {
                 correctInput = false;
                 zipCodeError.setVisibility(View.VISIBLE);
             } else {
