@@ -86,6 +86,7 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra(Account.ACCOUNT_KEY, MainActivity.account);
                 startActivity(intent);
             }
         });
