@@ -77,7 +77,7 @@
 
     <!--place-->
     <TextView
-        android:id="@+id/tv_register_place_error"
+        android:id="@+id/tv_register_iban_error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/register_empty_error"
@@ -85,27 +85,27 @@
         android:textSize="12sp"
         android:textStyle="italic"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/et_register_place"
-        app:layout_constraintStart_toStartOf="@+id/et_register_place" />
+        app:layout_constraintBottom_toTopOf="@+id/et_register_iban"
+        app:layout_constraintStart_toStartOf="@+id/et_register_iban" />
 
     <EditText
-        android:id="@+id/et_register_place"
+        android:id="@+id/et_register_iban"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="@string/register_place_placeholder"
+        android:hint="@string/register_iban_placeholder"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_register_place"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_register_iban"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_register_place" />
+        app:layout_constraintTop_toTopOf="@+id/tv_register_iban" />
 
     <TextView
-        android:id="@+id/tv_register_place"
+        android:id="@+id/tv_register_iban"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="45dp"
-        android:text="@string/place"
+        android:text="@string/iban"
         app:layout_constraintStart_toStartOf="@+id/tv_register_email"
         app:layout_constraintTop_toBottomOf="@+id/tv_register_email" />
 
@@ -128,8 +128,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="45dp"
         android:text="@string/address"
-        app:layout_constraintStart_toStartOf="@+id/tv_register_place"
-        app:layout_constraintTop_toBottomOf="@+id/tv_register_place" />
+        app:layout_constraintStart_toStartOf="@+id/tv_register_iban"
+        app:layout_constraintTop_toBottomOf="@+id/tv_register_iban" />
 
     <EditText
         android:id="@+id/et_register_address"

@@ -8,50 +8,27 @@
     android:paddingTop="32dp"
     tools:context=".ui.EditAccountActivity">
 
+    <!--Name-->
+    <TextView
+        android:id="@+id/tv_edit_name_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/register_empty_error"
+        android:textColor="@color/red_200"
+        android:textSize="12sp"
+        android:textStyle="italic"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@id/et_edit_account_name"
+        app:layout_constraintStart_toStartOf="@id/et_edit_account_name" />
+
     <TextView
         android:id="@+id/tv_edit_account_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:text="@string/name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_edit_account_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="@string/email"
-        app:layout_constraintStart_toStartOf="@+id/tv_edit_account_name"
-        app:layout_constraintTop_toBottomOf="@+id/tv_edit_account_name" />
-
-    <TextView
-        android:id="@+id/tv_edit_account_place"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="@string/place"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_edit_account_email" />
-
-    <TextView
-        android:id="@+id/tv_edit_account_address"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="@string/address"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_edit_account_place" />
-
-    <TextView
-        android:id="@+id/tv_edit_account_post"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="@string/post"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_edit_account_address" />
 
     <EditText
         android:id="@+id/et_edit_account_name"
@@ -65,7 +42,30 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/tv_edit_account_name"
         app:layout_constraintTop_toTopOf="@+id/tv_edit_account_name"
-        android:importantForAutofill="no" />
+        android:importantForAutofill="no"
+        android:hint="@string/register_name_placeholder"/>
+
+    <!--Email-->
+    <TextView
+        android:id="@+id/tv_edit_email_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/register_email_error"
+        android:textColor="@color/red_200"
+        android:textSize="12sp"
+        android:textStyle="italic"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/et_edit_account_email"
+        app:layout_constraintStart_toStartOf="@+id/et_edit_account_email" />
+
+    <TextView
+        android:id="@+id/tv_edit_account_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:text="@string/email"
+        app:layout_constraintStart_toStartOf="@+id/tv_edit_account_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_edit_account_name" />
 
     <EditText
         android:id="@+id/et_edit_account_email"
@@ -78,20 +78,32 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/tv_edit_account_email"
         app:layout_constraintTop_toTopOf="@+id/tv_edit_account_email"
-        android:importantForAutofill="no" />
+        android:importantForAutofill="no"
+        android:hint="@string/email_example_placeholder"/>
 
-    <EditText
-        android:id="@+id/et_edit_account_place"
+    <!--Place-->
+
+    <!--adress-->
+    <TextView
+        android:id="@+id/tv_edit_address_error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_edit_account_place"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/tv_edit_account_place"
-        app:layout_constraintTop_toTopOf="@+id/tv_edit_account_place"
-        android:importantForAutofill="no" />
+        android:text="@string/register_empty_error"
+        android:textColor="@color/red_200"
+        android:textSize="12sp"
+        android:textStyle="italic"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/et_edit_account_address"
+        app:layout_constraintStart_toStartOf="@+id/et_edit_account_address" />
+
+    <TextView
+        android:id="@+id/tv_edit_account_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:text="@string/address"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_edit_account_email" />
 
     <EditText
         android:id="@+id/et_edit_account_address"
@@ -104,19 +116,43 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/tv_edit_account_address"
         app:layout_constraintTop_toTopOf="@+id/tv_edit_account_address"
-        android:importantForAutofill="no" />
+        android:importantForAutofill="no"
+        android:hint="@string/register_address_placeholder"/>
+
+    <!--post-->
+    <TextView
+        android:id="@+id/tv_edit_post_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/register_empty_error"
+        android:textColor="@color/red_200"
+        android:textSize="12sp"
+        android:textStyle="italic"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/et_edit_account_post_num"
+        app:layout_constraintStart_toStartOf="@+id/et_edit_account_post_num" />
+
+    <TextView
+        android:id="@+id/tv_edit_account_post"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:text="@string/post"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_edit_account_address" />
 
     <EditText
         android:id="@+id/et_edit_account_post_char"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="numberSigned"
+        android:inputType="textPersonName"
         android:minEms="2"
         app:layout_constraintBottom_toBottomOf="@+id/et_edit_account_post_num"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/et_edit_account_post_num"
-        android:importantForAutofill="no" />
+        android:importantForAutofill="no"
+        android:hint="@string/zip_code_example_placeholder_2"/>
 
     <EditText
         android:id="@+id/et_edit_account_post_num"
@@ -124,15 +160,17 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="numberSigned"
         android:minEms="4"
         app:layout_constraintBottom_toBottomOf="@+id/tv_edit_account_post"
         app:layout_constraintEnd_toStartOf="@+id/et_edit_account_post_char"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/tv_edit_account_post"
         app:layout_constraintTop_toTopOf="@+id/tv_edit_account_post"
-        android:importantForAutofill="no" />
+        android:importantForAutofill="no"
+        android:hint="@string/zip_code_example_placeholder"/>
 
+<!--    button-->
     <Button
         android:id="@+id/bn_edit_account_conf"
         android:layout_width="wrap_content"
