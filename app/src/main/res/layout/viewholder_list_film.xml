@@ -55,19 +55,6 @@
         android:paddingVertical="8dp">
 
         <Button
-            android:id="@+id/bn_list_film_viewholder_ticket"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
-            android:layout_weight="1"
-            android:backgroundTint="@color/black"
-            android:text="@string/buy_ticket"
-            android:textColor="@color/white"
-            android:drawableTint="@color/white"
-            android:drawableLeft="@drawable/ic_menu_tickets"/>
-
-        <Button
             android:id="@+id/bn_list_film_viewholder_delete"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"

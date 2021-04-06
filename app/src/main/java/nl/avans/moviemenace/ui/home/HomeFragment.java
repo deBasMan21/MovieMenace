@@ -119,7 +119,11 @@ public class HomeFragment extends Fragment {
                     mTitle.setText(movie.getTranslations().get("Dutch").getTitle());
                 } else {
                     mDescription.setText(movie.getOverview());
-                    Picasso.get().load(MainActivity.BASE_URL + movie.getBanner()).into(mHeaderImage);
+                    if(movie.getTitle().equals("Avans Endgame")){
+                        Picasso.get().load("https://i.ibb.co/qNKQXP1/Microsoft-Teams-image.jpg").into(mHeaderImage);
+                    } else{
+                        Picasso.get().load(MainActivity.BASE_URL + movie.getUrl()).into(mHeaderImage);
+                    }
                     mTitle.setText(movie.getTitle());
                 }
             }
