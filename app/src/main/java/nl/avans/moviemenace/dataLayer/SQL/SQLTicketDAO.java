@@ -201,4 +201,17 @@ public class SQLTicketDAO extends DatabaseConnection implements TicketDAO, Seria
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void useTicket(Ticket ticket) {
+        openConnection();
+        try{
+            String SQL = "UPDATE Tickets SET Status = 'USED' WHERE Email = '" + ticket.getEmail() + "' AND ChairNumber = " + ticket.getChairNumber() + "AND ViewID = " + ticket.getViewID();
+            executeSQLStatement(SQL);
+        } catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            closeConnection();
+        }
+    }
 }

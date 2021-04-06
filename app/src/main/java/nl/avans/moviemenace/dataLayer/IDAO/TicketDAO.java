@@ -13,4 +13,5 @@ public interface TicketDAO {
     ArrayList<Ticket> getExpiredTicketsForAccount(String email);
     ArrayList<Ticket> getUsedTicketsForAccount(String email);
     void updateTickets();
+    void useTicket(Ticket ticket);
 }
