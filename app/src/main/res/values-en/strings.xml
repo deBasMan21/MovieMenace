@@ -91,6 +91,10 @@
     <string name="delete_from_list">Delete from list</string>
     <string name="logout">Log out</string>
     <string name="delete_list">Delete list</string>
+    <string name="error_no_viewings">No upcoming viewings found</string>
+    <string name="error_no_viewings_desc">In the upcoming week there are no viewings for this movie. Come back later to see the schedule for the future.</string>
+    <string name="warning">Warning!</string>
+    <string name="error_language_change_without_connection">There is no internet connection so only the UI will change language. When there is a connection established the resting parts will be translated.</string>
     <string name="adult">Adult</string>
     <string name="children">Children</string>
 </resources>

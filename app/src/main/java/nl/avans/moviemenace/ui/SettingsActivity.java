@@ -2,6 +2,7 @@ package nl.avans.moviemenace.ui;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -128,6 +129,7 @@ public class SettingsActivity extends AppCompatActivity {
                         config.locale = locale;
                         getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
                     } else {
+                        errorMessage();
                         LanguageHelper.setLanguage("nl_NL");
                         Locale locale = new Locale("nl");
                         Locale.setDefault(locale);
@@ -159,5 +161,15 @@ public class SettingsActivity extends AppCompatActivity {
         });
     }
 
+
+
+    public void errorMessage(){
+        new AlertDialog.Builder(this).setTitle(R.string.warning).setMessage(R.string.error_language_change_without_connection).setPositiveButton("Oke", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        }).show();
+    }
 
 }
