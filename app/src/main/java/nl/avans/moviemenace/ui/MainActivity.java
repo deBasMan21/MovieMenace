@@ -32,6 +32,7 @@ import nl.avans.moviemenace.dataLayer.rooms.MovieDB;
 import nl.avans.moviemenace.dataLayer.factory.SQLDAOFactory;
 import nl.avans.moviemenace.domain.Account;
 import nl.avans.moviemenace.domain.Movie;
+import nl.avans.moviemenace.logic.LanguageHelper;
 import nl.avans.moviemenace.logic.MovieEntityManager;
 import nl.avans.moviemenace.logic.MovieManager;
 import nl.avans.moviemenace.logic.TicketManager;
@@ -64,9 +65,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mem = new MovieEntityManager(getApplication());
         Room.databaseBuilder(this, MovieDB.class, "movieDB");
-
-        sharedPreferences = getPreferences(Context.MODE_PRIVATE);
-        language = Locale.forLanguageTag(sharedPreferences.getString("Language", Locale.US.toString()));
 
         accountViewModel =
                 new ViewModelProvider(this).get(AccountViewModel.class);
