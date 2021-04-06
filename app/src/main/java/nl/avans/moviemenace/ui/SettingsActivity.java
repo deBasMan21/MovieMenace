@@ -13,12 +13,14 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import java.util.Locale;
 
 import nl.avans.moviemenace.R;
+import nl.avans.moviemenace.dataLayer.DatabaseConnection;
 import nl.avans.moviemenace.domain.Account;
 import nl.avans.moviemenace.logic.LanguageHelper;
 import nl.avans.moviemenace.ui.home.HomeFragment;
@@ -116,12 +118,23 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    LanguageHelper.setLanguage("nl_NL");
-                    Locale locale = new Locale("nl");
-                    Locale.setDefault(locale);
-                    Configuration config = new Configuration();
-                    config.locale = locale;
-                    getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+                    DatabaseConnection db = new DatabaseConnection();
+                    if(db.openConnection()){
+                        db.closeConnection();
+                        LanguageHelper.setLanguage("nl_NL");
+                        Locale locale = new Locale("nl");
+                        Locale.setDefault(locale);
+                        Configuration config = new Configuration();
+                        config.locale = locale;
+                        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+                    } else {
+                        LanguageHelper.setLanguage("nl_NL");
+                        Locale locale = new Locale("nl");
+                        Locale.setDefault(locale);
+                        Configuration config = new Configuration();
+                        config.locale = locale;
+                        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+                    }
                 }
 
             }

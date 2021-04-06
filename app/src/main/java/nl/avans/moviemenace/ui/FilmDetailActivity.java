@@ -71,16 +71,25 @@ public class FilmDetailActivity extends AppCompatActivity {
         mPoster = findViewById(R.id.iv_film_detail_poster);
         mAge = findViewById(R.id.tv_film_detail_agerating_value);
 
-        if(LanguageHelper.isLanguage("us_EN")){
-            mDuration.setText(movie.getDuration()+ "");
-            mDescription.setText(movie.getOverview());
-            mTitle.setText(movie.getTitle());
-            Picasso.get().load(MainActivity.BASE_URL + movie.getUrl()).into(mPoster);
-        } else {
+        if(LanguageHelper.isLanguage("nl_NL") && movie.getTranslations() != null){
             mDuration.setText(movie.getDuration()+ "");
             mDescription.setText(movie.getTranslations().get("Dutch").getDescription());
             mTitle.setText(movie.getTranslations().get("Dutch").getTitle());
-            Picasso.get().load(MainActivity.BASE_URL + movie.getTranslations().get("Dutch").getUrl()).into(mPoster);
+
+            if(movie.getTitle().equals("Avans Endgame")){
+                Picasso.get().load("https://i.ibb.co/qNKQXP1/Microsoft-Teams-image.jpg").into(mPoster);
+            } else{
+                Picasso.get().load(MainActivity.BASE_URL + movie.getTranslations().get("Dutch").getUrl()).into(mPoster);
+            }
+        } else {
+            mDuration.setText(movie.getDuration()+ "");
+            mDescription.setText(movie.getOverview());
+            mTitle.setText(movie.getTitle());
+            if(movie.getTitle().equals("Avans Endgame")){
+                Picasso.get().load("https://i.ibb.co/qNKQXP1/Microsoft-Teams-image.jpg").into(mPoster);
+            } else{
+                Picasso.get().load(MainActivity.BASE_URL + movie.getUrl()).into(mPoster);
+            }
         }
 
         if (movie.isAdult()) {
