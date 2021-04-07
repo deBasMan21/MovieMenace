@@ -19,46 +19,56 @@
             android:name=".ui.ChooseSeatsActivity"
             android:noHistory="true"
             android:parentActivityName=".ui.PurchaseTicketActivity"
+            android:label="@string/menu_tickets"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.PurchaseTicketActivity"
             android:parentActivityName=".ui.MainActivity"
+            android:label="@string/menu_tickets"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.RegisterActivity"
             android:noHistory="true"
             android:parentActivityName=".ui.MainActivity"
+            android:label="@string/sign_up"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.CreateListActivity"
             android:noHistory="true"
             android:parentActivityName=".ui.MainActivity"
+            android:label="@string/menu_lists"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.ListToFilmActivity"
             android:noHistory="true"
             android:parentActivityName=".ui.MainActivity"
+            android:label="@string/menu_lists"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.FilmToListActivity"
             android:noHistory="true"
             android:parentActivityName=".ui.MainActivity"
+            android:label="@string/menu_lists"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.TicketDetailActivity"
             android:parentActivityName=".ui.MainActivity"
+            android:label="@string/menu_tickets"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.EditAccountActivity"
             android:parentActivityName=".ui.MainActivity"
+            android:label="@string/menu_account"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.ListDetailActivity"
             android:parentActivityName=".ui.MainActivity"
+            android:label="@string/menu_lists"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.FilmDetailActivity"
             android:parentActivityName=".ui.MainActivity"
+            android:label="@string/menu_films"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.MainActivity"

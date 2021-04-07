@@ -101,7 +101,12 @@
     <string name="room_num">Room:&#032;</string>
     <string name="row_num">Row:&#032;</string>
     <string name="seat_num">Seat:&#032;</string>
-    <string name="loading_text">When you have a lot of tickets this can take a while…</string>
+    <string name="loading_text">If you have a lot of tickets this could take a while…</string>
     <string name="price">Price</string>
     <string name="minutes">Minutes</string>
+    <string name="sign_up">Sign up</string>
+    <string name="no_tickets_msg">You currently don\'t have any tickets</string>
+    <string name="use_ticket">Use ticket</string>
+    <string name="use_ticket_conf_msg">Are you sure you want to use this ticket?</string>
+    <string name="cancel">Cancel</string>
 </resources>
