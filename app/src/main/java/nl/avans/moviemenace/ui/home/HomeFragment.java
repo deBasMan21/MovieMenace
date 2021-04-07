@@ -118,7 +118,7 @@ public class HomeFragment extends Fragment {
                     if(movie.getTitle().equals("Avans Endgame")){
                         Picasso.get().load("https://i.ibb.co/qNKQXP1/Microsoft-Teams-image.jpg").into(mHeaderImage);
                     } else{
-                        Picasso.get().load(MainActivity.BASE_URL + movie.getTranslations().get("Dutch").getUrl()).into(mHeaderImage);
+                        Picasso.get().load(MainActivity.BASE_URL + movie.getBanner()).into(mHeaderImage);
                     }
                     mTitle.setText(movie.getTranslations().get("Dutch").getTitle());
                 } else {
@@ -126,7 +126,7 @@ public class HomeFragment extends Fragment {
                     if(movie.getTitle().equals("Avans Endgame")){
                         Picasso.get().load("https://i.ibb.co/qNKQXP1/Microsoft-Teams-image.jpg").into(mHeaderImage);
                     } else{
-                        Picasso.get().load(MainActivity.BASE_URL + movie.getUrl()).into(mHeaderImage);
+                        Picasso.get().load(MainActivity.BASE_URL + movie.getBanner()).into(mHeaderImage);
                     }
                     mTitle.setText(movie.getTitle());
                 }
