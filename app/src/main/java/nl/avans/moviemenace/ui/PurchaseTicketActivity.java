@@ -47,6 +47,7 @@ public class PurchaseTicketActivity extends AppCompatActivity {
     private Integer[] seats;
     private TextView errorMessage;
     private TextView icon;
+    private TextView mTitle;
 
 
 
@@ -58,6 +59,7 @@ public class PurchaseTicketActivity extends AppCompatActivity {
         mSeatsSr = findViewById(R.id.sr_purchase_ticket_seats);
         mConfBn = findViewById(R.id.bn_purchase_ticket_conf);
         icon = findViewById(R.id.tv_3d_icon);
+        mTitle = findViewById(R.id.tv_purchase_ticket_title);
 
         this.context = this;
         this.account = MainActivity.account;
@@ -77,6 +79,8 @@ public class PurchaseTicketActivity extends AppCompatActivity {
             ticketManager = (TicketManager) intent.getSerializableExtra(TicketManager.TICKETMANAGER_KEY);
         }
 
+        mTitle.setText(movie.getTitle());
+        
         //sorted list to prevent double dates with multiple viewing times
         List<Viewing> sortedViewingList = new ArrayList<>();
         for (Viewing unsortedViewing: viewingList) {
