@@ -49,8 +49,8 @@
 
         <TextView
             android:id="@+id/tv_home_popular_header"
-            android:layout_width="414dp"
-            android:layout_height="68dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:background="#CE2127"
             android:paddingHorizontal="24dp"
