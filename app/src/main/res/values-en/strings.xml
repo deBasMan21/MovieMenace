@@ -112,4 +112,5 @@
     <string name="cancel">Cancel</string>
     <string name="no_lists_msg">You currently don\'t have any lists, create one below</string>
     <string name="error_email">An error occured while updating your account. This email already exists.</string>
+    <string name="no_films_msg">This list doesn\'t have any movies yet</string>
 </resources>
