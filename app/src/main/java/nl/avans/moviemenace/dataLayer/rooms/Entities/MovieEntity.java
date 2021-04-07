@@ -1,4 +1,4 @@
-package nl.avans.moviemenace.dataLayer.Rooms.Entities;
+package nl.avans.moviemenace.dataLayer.rooms.Entities;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
