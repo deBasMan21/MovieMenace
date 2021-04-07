@@ -48,6 +48,8 @@ public class ListDetailActivity extends AppCompatActivity {
     private List<Movie> movies = new ArrayList<>();
     private Account account;
 
+    private TextView mListMsgTv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +58,8 @@ public class ListDetailActivity extends AppCompatActivity {
         mListTitle = findViewById(R.id.tv_list_detail_title);
         mListDesc = findViewById(R.id.tv_list_detail_desc);
         mProgressBar = findViewById(R.id.pb_list_detail);
+
+        mListMsgTv = findViewById(R.id.tv_list_msg);
 
         mAddFb = findViewById(R.id.fb_list_detail_add);
         mAddFb.setOnClickListener((View v) -> {
@@ -136,6 +140,11 @@ public class ListDetailActivity extends AppCompatActivity {
         mListFilmAdapter.setMoviesFull(movies);
         mListFilmAdapter.notifyDataSetChanged();
         mProgressBar.setVisibility(View.INVISIBLE);
+        if (movies.size() == 0) {
+            mListMsgTv.setVisibility(View.VISIBLE);
+        } else {
+            mListMsgTv.setVisibility(View.INVISIBLE);
+        }
     }
 
     public class DatabaseTask extends AsyncTask<Void, Void, List<Movie>> {
