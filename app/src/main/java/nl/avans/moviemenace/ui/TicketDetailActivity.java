@@ -83,7 +83,12 @@ public class TicketDetailActivity extends AppCompatActivity {
         mBarcodeIv.setImageBitmap(encodeAsBitmap(ticket.getViewID() + ":" + ticket.getChairNumber() + ":" + ticket.getStatus()));
 
         mBannerIv = findViewById(R.id.iv_ticket_detail_banner);
-        Picasso.get().load(MainActivity.BASE_URL + movie.getBanner()).into(mBannerIv);
+        if(movie.getTitle().equals("Avans Endgame")){
+            Picasso.get().load("https://i.ibb.co/qNKQXP1/Microsoft-Teams-image.jpg").into(mBannerIv);
+        } else{
+            Picasso.get().load(MainActivity.BASE_URL + movie.getBanner()).into(mBannerIv);
+        }
+
 
         mUseBn.setOnClickListener((View v) -> {
             new AlertDialog.Builder(this)
