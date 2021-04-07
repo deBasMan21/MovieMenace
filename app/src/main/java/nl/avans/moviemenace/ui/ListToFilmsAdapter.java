@@ -102,7 +102,6 @@ public class ListToFilmsAdapter extends RecyclerView.Adapter<ListToFilmsAdapter.
             movieList.addMovie(movie);
             Integer[] IDs = {movieList.getId(), movie.getId()};
             new DatabaseTask().execute(IDs);
-//            movies.remove(movie);
             context.startActivity(intent);
         }
     }
