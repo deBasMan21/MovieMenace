@@ -108,4 +108,7 @@
     <string name="minutes">Minuten</string>
     <string name="sign_up">Registreer</string>
     <string name="no_tickets_msg">Je hebt op het moment geen tickets</string>
+    <string name="use_ticket">Ticket inleveren</string>
+    <string name="use_ticket_conf_msg">Weet u zeker dat u dit ticket wil gebruiken?</string>
+    <string name="cancel">Annuleren</string>
 </resources>

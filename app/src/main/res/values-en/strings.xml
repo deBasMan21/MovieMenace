@@ -105,4 +105,8 @@
     <string name="price">Price</string>
     <string name="minutes">Minutes</string>
     <string name="sign_up">Sign up</string>
+    <string name="no_tickets_msg">You currently don\'t have any tickets</string>
+    <string name="use_ticket">Use ticket</string>
+    <string name="use_ticket_conf_msg">Are you sure you want to use this ticket?</string>
+    <string name="cancel">Cancel</string>
 </resources>
