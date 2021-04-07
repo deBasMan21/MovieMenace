@@ -119,24 +119,13 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    DatabaseConnection db = new DatabaseConnection();
-                    if(db.openConnection()){
-                        db.closeConnection();
-                        LanguageHelper.setLanguage("nl_NL");
-                        Locale locale = new Locale("nl");
-                        Locale.setDefault(locale);
-                        Configuration config = new Configuration();
-                        config.locale = locale;
-                        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
-                    } else {
-                        errorMessage();
-                        LanguageHelper.setLanguage("nl_NL");
-                        Locale locale = new Locale("nl");
-                        Locale.setDefault(locale);
-                        Configuration config = new Configuration();
-                        config.locale = locale;
-                        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
-                    }
+                    errorMessage();
+                    LanguageHelper.setLanguage("nl_NL");
+                    Locale locale = new Locale("nl");
+                    Locale.setDefault(locale);
+                    Configuration config = new Configuration();
+                    config.locale = locale;
+                    getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
                 }
 
             }
