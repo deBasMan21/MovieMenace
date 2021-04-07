@@ -87,16 +87,16 @@ public class TicketDetailActivity extends AppCompatActivity {
 
         mUseBn.setOnClickListener((View v) -> {
             new AlertDialog.Builder(this)
-                    .setTitle("Ticket inleveren")
-                    .setMessage("Weet u zeker dat u dit ticket wil gebruiken?")
-                    .setPositiveButton("Inleveren", (dialog, which) -> {
+                    .setTitle(R.string.use_ticket)
+                    .setMessage(R.string.use_ticket_conf_msg)
+                    .setPositiveButton(R.string.use, (dialog, which) -> {
                         new UseTicket().execute(ticket);
                         Intent ticketsIntent = new Intent(this, MainActivity.class);
                         ticketsIntent.putExtra(MainActivity.DESTINATION_KEY, "tickets");
                         ticketsIntent.putExtra(Account.ACCOUNT_KEY, account);
                         startActivity(ticketsIntent);
                     })
-                    .setNegativeButton("Annuleren", null)
+                    .setNegativeButton(R.string.cancel, null)
                     .setIcon(R.drawable.ic_menu_tickets)
                     .show();
         });

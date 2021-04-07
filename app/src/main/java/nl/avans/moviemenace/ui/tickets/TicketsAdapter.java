@@ -158,10 +158,8 @@ public class TicketsAdapter extends RecyclerView.Adapter<TicketsAdapter.TicketsV
             } else {
                 ticketList = ticketManager.getUpcomingTicketsForAccount(account.getEmail());
                 for (Ticket t : ticketList) {
-                    Log.e("TicketAdapter", "doInBackground: " + t.getViewID());
                     Viewing viewing = viewingManager.getViewing(t.getViewID());
                     viewingList.add(viewing);
-                    Log.e("TicketAdapter", "doInBackground: " + viewing.getMovie());
                     Movie movie = movieManager.getMovie(null, viewing.getMovie());
                     movieList.add(movie);
                 }
@@ -178,7 +176,12 @@ public class TicketsAdapter extends RecyclerView.Adapter<TicketsAdapter.TicketsV
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             mProgress.setVisibility(View.INVISIBLE);
-            loading.setVisibility(View.INVISIBLE);
+            if (viewings.size() == 0) {
+                loading.setText(R.string.no_tickets_msg);
+            } else {
+                loading.setText(R.string.loading_text);
+                loading.setVisibility(View.INVISIBLE);
+            }
             notifyDataSetChanged();
         }
     }

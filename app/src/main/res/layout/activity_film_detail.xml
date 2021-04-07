@@ -1,118 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingHorizontal="24dp"
-    android:paddingVertical="32dp"
-    tools:context=".ui.FilmDetailActivity">
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/iv_film_detail_poster"
-        android:layout_width="140dp"
-        android:layout_height="200dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_image_placeholder"
-        android:contentDescription="@string/poster" />
-
-    <TextView
-        android:id="@+id/tv_detail_title"
-        android:layout_width="0dp"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Title"
-        android:layout_marginStart="16dp"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tv_film_detail_duration"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/iv_film_detail_poster"
-        app:layout_constraintTop_toTopOf="@+id/iv_film_detail_poster" />
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="32dp"
+        tools:context=".ui.FilmDetailActivity">
 
-    <TextView
-        android:id="@+id/tv_film_detail_duration"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/duration"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_detail_title"
-        app:layout_constraintStart_toEndOf="@+id/iv_film_detail_poster"
-        tools:layout_editor_absoluteY="32dp" />
+        <ImageView
+            android:id="@+id/iv_film_detail_poster"
+            android:layout_width="140dp"
+            android:layout_height="200dp"
+            android:contentDescription="@string/poster"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_image_placeholder" />
 
-    <TextView
-        android:id="@+id/tv_film_detail_duration_value"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/time_placeholder"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tv_film_detail_duration"
-        app:layout_constraintTop_toBottomOf="@+id/tv_film_detail_duration" />
-
-    <TextView
-        android:id="@+id/tv_film_detail_agerating"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/agerating"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/iv_film_detail_poster"
-        app:layout_constraintTop_toBottomOf="@+id/tv_film_detail_duration_value" />
-
-    <TextView
-        android:id="@+id/tv_film_detail_agerating_value"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/agerating_placeholder"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tv_film_detail_agerating"
-        app:layout_constraintTop_toBottomOf="@+id/tv_film_detail_agerating" />
-
-    <TextView
-        android:id="@+id/tv_film_detail_desc"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/film_desc_placeholder"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_film_detail_poster" />
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_film_detail_desc">
-
-        <Button
-            android:id="@+id/bn_film_detail_ticket"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/tv_detail_title"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_weight="1"
-            android:backgroundTint="@color/black"
-            android:text="@string/buy_ticket" />
-
-        <Button
-            android:id="@+id/bn_film_detail_list"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:backgroundTint="@color/black"
-            android:text="@string/add_to_list"
+            android:layout_marginStart="16dp"
+            android:text="Title"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/tv_film_detail_duration"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_film_detail_desc" />
-    </LinearLayout>
+            app:layout_constraintStart_toEndOf="@+id/iv_film_detail_poster"
+            app:layout_constraintTop_toTopOf="@+id/iv_film_detail_poster" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tv_film_detail_duration"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/duration"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_film_detail_poster"
+            app:layout_constraintTop_toBottomOf="@+id/tv_detail_title"
+            tools:layout_editor_absoluteY="32dp" />
+
+        <TextView
+            android:id="@+id/tv_film_detail_duration_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/time_placeholder"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_film_detail_duration"
+            app:layout_constraintTop_toBottomOf="@+id/tv_film_detail_duration" />
+
+        <TextView
+            android:id="@+id/tv_film_detail_agerating"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/agerating"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_film_detail_poster"
+            app:layout_constraintTop_toBottomOf="@+id/tv_film_detail_duration_value" />
+
+        <TextView
+            android:id="@+id/tv_film_detail_agerating_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/agerating_placeholder"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_film_detail_agerating"
+            app:layout_constraintTop_toBottomOf="@+id/tv_film_detail_agerating" />
+
+        <TextView
+            android:id="@+id/tv_film_detail_desc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/film_desc_placeholder"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_film_detail_poster" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_film_detail_desc">
+
+            <Button
+                android:id="@+id/bn_film_detail_ticket"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/black"
+                android:text="@string/buy_ticket" />
+
+            <Button
+                android:id="@+id/bn_film_detail_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/black"
+                android:text="@string/add_to_list"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_film_detail_desc" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
