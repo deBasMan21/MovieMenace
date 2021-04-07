@@ -113,4 +113,5 @@
     <string name="cancel">Annuleren</string>
     <string name="purchase_ticket_error">Geen beschikbare plaatsen meer</string>
     <string name="no_lists_msg">Je hebt op het moment geen lijsten, maak ze hieronder aan</string>
+    <string name="error_email">Er is een fout opgetreden bij het maken van het account. Het email adress bestaat al.</string>
 </resources>
