@@ -79,7 +79,7 @@ public class FilmDetailActivity extends AppCompatActivity {
         mAge = findViewById(R.id.tv_film_detail_agerating_value);
 
         if (LanguageHelper.isLanguage("nl_NL") && movie.getTranslations() != null) {
-            mDuration.setText(movie.getDuration() + "");
+            mDuration.setText(movie.getDuration() + " " + getString(R.string.minutes));
             mDescription.setText(movie.getTranslations().get("Dutch").getDescription());
             mTitle.setText(movie.getTranslations().get("Dutch").getTitle());
 
@@ -89,7 +89,7 @@ public class FilmDetailActivity extends AppCompatActivity {
                 Picasso.get().load(MainActivity.BASE_URL + movie.getTranslations().get("Dutch").getUrl()).into(mPoster);
             }
         } else {
-            mDuration.setText(movie.getDuration() + "");
+            mDuration.setText(movie.getDuration() + " " + getString(R.string.minutes));
             mDescription.setText(movie.getOverview());
             mTitle.setText(movie.getTitle());
             if (movie.getTitle().equals("Avans Endgame")) {
