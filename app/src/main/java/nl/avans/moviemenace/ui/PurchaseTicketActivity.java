@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -43,6 +44,8 @@ public class PurchaseTicketActivity extends AppCompatActivity {
     private int selectedSeats;
     private Viewing selectedViewing;
     private Account account;
+    private Integer[] seats;
+    private TextView errorMessage;
 
 
 
@@ -50,6 +53,8 @@ public class PurchaseTicketActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_purchase_ticket);
+        errorMessage = findViewById(R.id.tv_purchase_ticket_error);
+
         this.context = this;
         this.account = MainActivity.account;
         if (account == null) {
@@ -108,6 +113,10 @@ public class PurchaseTicketActivity extends AppCompatActivity {
             //the selected index of the spinner == the index of the sorted list and can be different from the original viewingList
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //reset previous error settings
+                errorMessage.setVisibility(View.INVISIBLE);
+                mConfBn.setClickable(true);
+
                 //Revert selected date (from sortingList) into a viewing, must be retrieved from the original list
                 int selectedIndex = mDateSr.getSelectedItemPosition();
 
@@ -123,26 +132,34 @@ public class PurchaseTicketActivity extends AppCompatActivity {
                 int availableSeats = ticketManager.checkAvailableSeats(selectedViewing);
 
                 //Generate amount of spinner items for selecting seats
-                Integer[] seats = new Integer[availableSeats];
+                seats = new Integer[availableSeats];
                 for (int i = 0; i < seats.length; i++) {
                     seats[i] = i + 1;
                 }
+
                 //Create seats spinner
                 mSeatsSr = findViewById(R.id.sr_purchase_ticket_seats);
                 ArrayAdapter<Integer> seatsAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, seats);
                 seatsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+                //If there are no seats available show message and disable spinner
+                if (seats.length == 0) {
+                    mConfBn.setClickable(false);
+                    mSeatsSr.setEnabled(false);
+                    mSeatsSr.setClickable(false);
+                    errorMessage.setVisibility(View.VISIBLE);
+                } else {
+                    mSeatsSr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            selectedSeats = seats[mSeatsSr.getSelectedItemPosition()];
+                        }
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+                        }
+                    });
+                }
                 mSeatsSr.setAdapter(seatsAdapter);
-                mSeatsSr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        selectedSeats = seats[mSeatsSr.getSelectedItemPosition()];
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-
-                    }
-                });
 
                 //Check if the selected viewing has multiple times
                 ArrayList<String> times = new ArrayList<>();
@@ -181,31 +198,14 @@ public class PurchaseTicketActivity extends AppCompatActivity {
 
             }
         });
-
-
-
-
-
-
-
         mConfBn = findViewById(R.id.bn_purchase_ticket_conf);
         mConfBn.setOnClickListener((View v) -> {
-            if(selectedDate == null){
-                new AlertDialog.Builder(this).setTitle(R.string.error_no_viewings).setMessage(R.string.error_no_viewings_desc).setPositiveButton("Oke", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        finish();
-                    }
-                }).show();
-            } else{
                 Intent newIntent = new Intent(v.getContext(), ChooseSeatsActivity.class);
                 newIntent.putExtra(ChooseSeatsActivity.SEATS_AMOUNT_KEY, selectedSeats);
                 newIntent.putExtra(Account.ACCOUNT_KEY, account);
                 newIntent.putExtra(Viewing.VIEWING_KEY, selectedViewing);
                 newIntent.putExtra(TicketManager.TICKETMANAGER_KEY, ticketManager);
                 startActivity(newIntent);
-            }
-
         });
     }
 

@@ -21,6 +21,7 @@ import java.util.List;
 
 import nl.avans.moviemenace.domain.Account;
 import nl.avans.moviemenace.domain.Movie;
+import nl.avans.moviemenace.logic.LanguageHelper;
 import nl.avans.moviemenace.ui.FilmDetailActivity;
 import nl.avans.moviemenace.R;
 import nl.avans.moviemenace.ui.MainActivity;
@@ -123,12 +124,22 @@ public class FilmsAdapter extends RecyclerView.Adapter<FilmsAdapter.FilmViewHold
     @Override
     public void onBindViewHolder(@NonNull FilmViewHolder holder, int position) {
         Movie movie = movieList.get(position);
-        holder.mTitleTv.setText(movie.getTitle());
-        if(movie.getTitle().equals("Avans Endgame")){
-            Picasso.get().load("https://i.ibb.co/qNKQXP1/Microsoft-Teams-image.jpg").into(holder.mPosterIv);
-        } else{
-            Picasso.get().load(MainActivity.BASE_URL + movie.getUrl()).into(holder.mPosterIv);
+        if(LanguageHelper.isLanguage("en_US")){
+            holder.mTitleTv.setText(movie.getTitle());
+            if(movie.getTitle().equals("Avans Endgame")){
+                Picasso.get().load("https://i.ibb.co/qNKQXP1/Microsoft-Teams-image.jpg").into(holder.mPosterIv);
+            } else{
+                Picasso.get().load(MainActivity.BASE_URL + movie.getUrl()).into(holder.mPosterIv);
+            }
+        } else {
+            holder.mTitleTv.setText(movie.getTranslations().get("Dutch").getTitle());
+            if(movie.getTitle().equals("Avans Endgame")){
+                Picasso.get().load("https://i.ibb.co/qNKQXP1/Microsoft-Teams-image.jpg").into(holder.mPosterIv);
+            } else{
+                Picasso.get().load(MainActivity.BASE_URL + movie.getTranslations().get("Dutch").getUrl()).into(holder.mPosterIv);
+            }
         }
+
     }
 
     @Override
