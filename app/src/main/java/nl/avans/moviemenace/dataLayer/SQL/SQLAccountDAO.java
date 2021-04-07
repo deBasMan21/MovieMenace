@@ -39,22 +39,30 @@ public class SQLAccountDAO extends DatabaseConnection implements AccountDAO  {
     }
 
     @Override
-    public void updateAccount(String email, Account updatedAccount) {
+    public boolean updateAccount(String email, Account updatedAccount) {
         openConnection();
+        boolean returnValue = false;
         try{
+            String SQL = "";
+            if(email.equals(updatedAccount.getEmail())){
+                SQL = "UPDATE Account SET Name = '" + updatedAccount.getName() + "', Adress = '"
+                        + updatedAccount.getAddress() + "', Zipcode = '" + updatedAccount.getZipCode() + "' WHERE Email = '" + email + "'";
+            } else{
+                SQL = "UPDATE Account SET Email = '"
+                        + updatedAccount.getEmail() + "', Name = '" + updatedAccount.getName() + "', Adress = '"
+                        + updatedAccount.getAddress() + "', Zipcode = '" + updatedAccount.getZipCode() + "' WHERE Email = '" + email + "'";
+            }
             //This string contains the update query filled in with the data from the updatedaccount
-            String SQL = "UPDATE Account SET Email = '"
-                    + updatedAccount.getEmail() + "', Name = '" + updatedAccount.getName() + "', Adress = '"
-                    + updatedAccount.getAddress() + "', Zipcode = '" + updatedAccount.getZipCode() + "' WHERE Email = '" + email + "'";
 
             //This executes the query
-            executeSQLStatement(SQL);
+            returnValue = executeSQLStatement(SQL);
         } catch(Exception e){
-            //Prints out any errors that may occur
             e.printStackTrace();
-        } finally {
-            closeConnection();
+            return false;
+            //Prints out any errors that may occur
+
         }
+        return returnValue;
     }
 
     @Override

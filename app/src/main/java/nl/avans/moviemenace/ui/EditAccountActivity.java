@@ -1,7 +1,9 @@
 package nl.avans.moviemenace.ui;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -35,8 +37,10 @@ public class EditAccountActivity extends AppCompatActivity {
     private DAOFactory factory = new SQLDAOFactory();
     private AccountManager accountManager = new AccountManager(factory);
     private String prevEmail = MainActivity.account.getEmail();
+    private String zipCode = "";
 
     private Button mConfBn;
+    private View v;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +65,9 @@ public class EditAccountActivity extends AppCompatActivity {
         mConfBn = findViewById(R.id.bn_edit_account_conf);
 
         mConfBn.setOnClickListener((View v) -> {
+            this.v = v;
             String email = mEmailEt.getText().toString();
-            String zipCode = mPostNumEt.getText().toString() + " " + mPostCharEt.getText().toString();
+            zipCode = mPostNumEt.getText().toString() + " " + mPostCharEt.getText().toString();
             emailError.setVisibility(View.INVISIBLE);
             zipCodeError.setVisibility(View.INVISIBLE);
             nameError.setVisibility(View.INVISIBLE);
@@ -101,14 +106,21 @@ public class EditAccountActivity extends AppCompatActivity {
             //Final decision
             if (correctInput) {
                 new DatabaseTask().execute();
-                MainActivity.account.setName(mNameEt.getText().toString());
-                MainActivity.account.setEmail(mEmailEt.getText().toString());
-                MainActivity.account.setAddress(mAddressEt.getText().toString());
-                MainActivity.account.setZipCode(zipCode);
-
-                startActivity(new Intent(v.getContext(), MainActivity.class).putExtra(MainActivity.DESTINATION_KEY, "account"));
             }
         });
+    }
+
+    public void startIntent(){
+        startActivity(new Intent(v.getContext(), MainActivity.class).putExtra(MainActivity.DESTINATION_KEY, "account"));
+    }
+
+    public void errorMessage(){
+        new AlertDialog.Builder(this).setTitle(R.string.warning).setMessage(R.string.error_email).setPositiveButton("Oke", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        }).show();
     }
 
     @Override
@@ -117,11 +129,25 @@ public class EditAccountActivity extends AppCompatActivity {
         return true;
     }
 
-    public class DatabaseTask extends AsyncTask<Void, Void, Void> {
+    public class DatabaseTask extends AsyncTask<Void, Void, Boolean> {
         @Override
-        protected Void doInBackground(Void... voids) {
-            accountManager.updateAccount(prevEmail, MainActivity.account);
-            return null;
+        protected Boolean doInBackground(Void... voids) {
+            Account acc = new Account(mEmailEt.getText().toString(), mNameEt.getText().toString(), MainActivity.account.getPassword(), mAddressEt.getText().toString(), zipCode, MainActivity.account.getIban(), MainActivity.account.getDateOfBirth());
+            return accountManager.updateAccount(prevEmail, acc);
+        }
+
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            super.onPostExecute(aBoolean);
+            if(aBoolean){
+                MainActivity.account.setName(mNameEt.getText().toString());
+                MainActivity.account.setEmail(mEmailEt.getText().toString());
+                MainActivity.account.setAddress(mAddressEt.getText().toString());
+                MainActivity.account.setZipCode(zipCode);
+                startIntent();
+            } else{
+                errorMessage();
+            }
         }
     }
 }

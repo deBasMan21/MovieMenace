@@ -16,8 +16,8 @@ public class AccountManager {
         return accountDAO.getAccount(email);
     }
 
-    public void updateAccount(String email, Account updatedAccount) {
-        accountDAO.updateAccount(email, updatedAccount);
+    public boolean updateAccount(String email, Account updatedAccount) {
+        return accountDAO.updateAccount(email, updatedAccount);
     }
 
     public void createAccount(Account newAccount) {
