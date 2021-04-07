@@ -104,4 +104,5 @@
     <string name="loading_text">When you have a lot of tickets this can take a while…</string>
     <string name="price">Price</string>
     <string name="minutes">Minutes</string>
+    <string name="sign_up">Sign up</string>
 </resources>
