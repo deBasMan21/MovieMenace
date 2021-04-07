@@ -101,5 +101,6 @@
     <string name="room_num">Room:&#032;</string>
     <string name="row_num">Row:&#032;</string>
     <string name="seat_num">Seat:&#032;</string>
-    <string name="loading_text">When you have a lot of tickets this can take a while...</string>
+    <string name="loading_text">When you have a lot of tickets this can take a while…</string>
+    <string name="price">Price</string>
 </resources>
