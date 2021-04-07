@@ -7,6 +7,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.view.View;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +33,8 @@ public class FilmToListActivity extends AppCompatActivity {
     private List<MovieList> movieLists = new ArrayList<>();
     private Movie movie;
 
+    private TextView mFilmToListsMsgTv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +45,8 @@ public class FilmToListActivity extends AppCompatActivity {
         if (originalIntent.getSerializableExtra(FilmDetailActivity.MOVIE_KEY) != null) {
             movie = (Movie) originalIntent.getSerializableExtra(FilmDetailActivity.MOVIE_KEY);
         }
+
+        mFilmToListsMsgTv = findViewById(R.id.tv_film_to_lists_msg);
 
         mListsRv = findViewById(R.id.rv_film_to_lists);
         mFilmToListAdapter = new FilmToListAdapter(movieLists, movie);
@@ -89,6 +96,9 @@ public class FilmToListActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(List<MovieList> movieLists) {
             super.onPostExecute(movieLists);
+            if (movieLists.size() == 0) {
+                mFilmToListsMsgTv.setVisibility(View.VISIBLE);
+            }
             setMovieLists(movieLists);
         }
     }
