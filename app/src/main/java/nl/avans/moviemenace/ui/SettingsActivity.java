@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
@@ -39,6 +40,8 @@ public class SettingsActivity extends AppCompatActivity {
     private Button mLogoutButton;
     private Button mBackButton;
 
+    private TextView warning;
+
     private Context context;
     private Resources recourses;
     private Configuration config = new Configuration();
@@ -56,6 +59,9 @@ public class SettingsActivity extends AppCompatActivity {
 
         mRgLanguage = findViewById(R.id.rg_language);
         mRgColor = findViewById(R.id.rg_color_mode);
+
+        warning = findViewById(R.id.warning_language);
+        warning.setVisibility(View.INVISIBLE);
 
         mLogoutButton = findViewById(R.id.bn_account_logout);
 
@@ -121,6 +127,16 @@ public class SettingsActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     errorMessage();
+                    warning.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        mRbLanguageEn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    warning.setVisibility(View.VISIBLE);
                 }
             }
         });
