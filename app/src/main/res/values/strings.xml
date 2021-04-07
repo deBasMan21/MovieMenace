@@ -99,7 +99,7 @@
     <string name="error_no_viewings">Geen aankomende kijkmomenten</string>
     <string name="error_no_viewings_desc">In de aankomende week zijn er geen momenten om deze film te bekijken. Kom later terug voor het programma van toekomstige weken.</string>
     <string name="warning">Waarschuwing!</string>
-    <string name="error_language_change_without_connection">Er is geen internetverbinding dus alleen de UI zal van taal veranderen. Wanneer er weer een verbinding is vastgesteld zullen de overige onderdelen vertalen.</string>
+    <string name="error_language_change_without_connection">Als er geen internetverbinding is zal alleen de UI  van taal veranderen. Wanneer er weer een verbinding is vastgesteld zullen de overige onderdelen vertalen.</string>
     <string name="adult">Volwassen</string>
     <string name="children">Kinderen</string>
     <string name="loading_text">Als je veel tickets hebt kan dit even duren…</string>
