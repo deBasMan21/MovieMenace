@@ -55,10 +55,12 @@ public class AccountFragment extends Fragment {
             return;
         }
 
-        mNameTv = view.findViewById(R.id.email);
+        mNameTv = view.findViewById(R.id.tv_account_name);
+        mEmailTv = view.findViewById(R.id.tv_account_email);
         mBirthTv = view.findViewById(R.id.tv_account_birth);
         mAddressTv = view.findViewById(R.id.tv_account_address);
         mNameTv.append(": " + account.getName());
+        mEmailTv.append(": " + account.getEmail());
         mBirthTv.append(": " + account.getDateOfBirth());
         mAddressTv.append(": " + account.getAddress());
 
