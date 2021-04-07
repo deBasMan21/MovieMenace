@@ -107,4 +107,5 @@
     <string name="price">Prijs</string>
     <string name="minutes">Minuten</string>
     <string name="sign_up">Registreer</string>
+    <string name="no_tickets_msg">Je hebt op het moment geen tickets</string>
 </resources>
