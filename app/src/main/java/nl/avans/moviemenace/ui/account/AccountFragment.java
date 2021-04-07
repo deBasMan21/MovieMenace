@@ -30,6 +30,7 @@ public class AccountFragment extends Fragment {
     private Account account;
 
     private Button mEditBn;
+    private Button mLogoutBn;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -61,6 +62,17 @@ public class AccountFragment extends Fragment {
         mBirthTv.append(": " + account.getDateOfBirth());
         mAddressTv.append(": " + account.getAddress());
 
+        mLogoutBn = view.findViewById(R.id.bn_logout);
+        mLogoutBn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.account = null;
+                Intent intent = new Intent(getContext(), MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra(Account.ACCOUNT_KEY, MainActivity.account);
+                startActivity(intent);
+            }
+        });
 
         mEditBn = view.findViewById(R.id.bn_account_edit);
         mEditBn.setOnClickListener((View v) -> {

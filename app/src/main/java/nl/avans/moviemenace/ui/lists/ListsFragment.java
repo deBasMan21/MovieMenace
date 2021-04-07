@@ -1,6 +1,5 @@
 package nl.avans.moviemenace.ui.lists;
 
-import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,9 +7,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.DatePicker;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -47,6 +46,8 @@ public class ListsFragment extends Fragment {
 
     private FloatingActionButton mAddFb;
 
+    private TextView mListsMsgTv;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         setHasOptionsMenu(true);
@@ -58,12 +59,19 @@ public class ListsFragment extends Fragment {
 
         listsViewModel.setAccount(accountViewModel.getAccount());
 
+        View root = inflater.inflate(R.layout.fragment_lists, container, false);
+        mListsMsgTv = root.findViewById(R.id.tv_lists_msg);
+
         listsViewModel.getMovieLists().observe(getViewLifecycleOwner(),
                 new Observer<List<MovieList>>() {
                     @Override
                     public void onChanged(List<MovieList> newMovieLists) {
                         movieLists = newMovieLists;
                         mMyListsAdapter.setMovieList(newMovieLists);
+                        if (newMovieLists.size() == 0) {
+                            mListsMsgTv.setVisibility(View.VISIBLE);
+                        }
+
                         if (mMyListsAdapter.getMovieListsFull().size() == 0) {
                             mMyListsAdapter.setMovieListsFull(movieLists);
                         }
@@ -71,7 +79,7 @@ public class ListsFragment extends Fragment {
                     }
                 });
 
-        View root = inflater.inflate(R.layout.fragment_lists, container, false);
+
 
         return root;
     }
