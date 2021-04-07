@@ -1,4 +1,4 @@
-package nl.avans.moviemenace.dataLayer.rooms;
+package nl.avans.moviemenace.dataLayer.Rooms;
 
 import android.content.Context;
 
@@ -9,8 +9,8 @@ import androidx.room.RoomDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import nl.avans.moviemenace.dataLayer.rooms.Entities.MovieEntity;
-import nl.avans.moviemenace.dataLayer.rooms.RoomDAO.RoomMovieDAO;
+import nl.avans.moviemenace.dataLayer.Rooms.Entities.MovieEntity;
+import nl.avans.moviemenace.dataLayer.Rooms.RoomDAO.RoomMovieDAO;
 
 @Database(entities = MovieEntity.class, version = 1)
 public abstract class MovieDB extends RoomDatabase {
