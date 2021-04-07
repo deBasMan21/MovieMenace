@@ -124,19 +124,19 @@ public class FilmsAdapter extends RecyclerView.Adapter<FilmsAdapter.FilmViewHold
     @Override
     public void onBindViewHolder(@NonNull FilmViewHolder holder, int position) {
         Movie movie = movieList.get(position);
-        if(LanguageHelper.isLanguage("en_US")){
-            holder.mTitleTv.setText(movie.getTitle());
-            if(movie.getTitle().equals("Avans Endgame")){
-                Picasso.get().load("https://i.ibb.co/qNKQXP1/Microsoft-Teams-image.jpg").into(holder.mPosterIv);
-            } else{
-                Picasso.get().load(MainActivity.BASE_URL + movie.getUrl()).into(holder.mPosterIv);
-            }
-        } else {
+        if(LanguageHelper.isLanguage("nl_NL") && movie.getTranslations() != null){
             holder.mTitleTv.setText(movie.getTranslations().get("Dutch").getTitle());
             if(movie.getTitle().equals("Avans Endgame")){
                 Picasso.get().load("https://i.ibb.co/qNKQXP1/Microsoft-Teams-image.jpg").into(holder.mPosterIv);
             } else{
                 Picasso.get().load(MainActivity.BASE_URL + movie.getTranslations().get("Dutch").getUrl()).into(holder.mPosterIv);
+            }
+        } else {
+            holder.mTitleTv.setText(movie.getTitle());
+            if(movie.getTitle().equals("Avans Endgame")){
+                Picasso.get().load("https://i.ibb.co/qNKQXP1/Microsoft-Teams-image.jpg").into(holder.mPosterIv);
+            } else{
+                Picasso.get().load(MainActivity.BASE_URL + movie.getUrl()).into(holder.mPosterIv);
             }
         }
 
