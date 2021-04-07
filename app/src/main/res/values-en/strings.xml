@@ -115,4 +115,6 @@
     <string name="no_films_msg">This list doesn\'t have any movies yet</string>
     <string name="warning_language_update">The language will be updated when you press on back.</string>
     <string name="no_film_to_list_msg">There are no list that this film isn\'t a part of already</string>
+    <string name="normal_price">Normal price: </string>
+    <string name="discount">2,50 euro discount: children under 12 years \n2,00 euro discount: 65 year or older</string>
 </resources>

@@ -73,10 +73,23 @@
         app:layout_constraintTop_toBottomOf="@+id/sr_purchase_ticket_times" />
 
     <TextView
-        android:id="@+id/tv_purchase_ticket_error"
+        android:id="@+id/tv_3d_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="3D"
+        android:visibility="invisible"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tv_purchase_ticket_error"
+        app:layout_constraintStart_toStartOf="@id/bn_purchase_ticket_conf"
+        app:layout_constraintTop_toBottomOf="@+id/sr_purchase_ticket_seats" />
+
+    <TextView
+        android:id="@+id/tv_purchase_ticket_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:text="@string/purchase_ticket_error"
         android:textColor="@color/red_200"
         android:textSize="12sp"
@@ -89,9 +102,9 @@
         android:id="@+id/bn_purchase_ticket_conf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="45dp"
+        android:backgroundTint="@color/black"
         android:text="@string/choose_seats"
         app:layout_constraintStart_toStartOf="@+id/tv_purchase_ticket_seats"
-        app:layout_constraintTop_toBottomOf="@+id/sr_purchase_ticket_seats"
-        android:backgroundTint="@color/black" />
+        app:layout_constraintTop_toBottomOf="@+id/sr_purchase_ticket_seats" />
 </androidx.constraintlayout.widget.ConstraintLayout>

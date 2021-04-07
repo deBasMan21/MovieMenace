@@ -53,10 +53,30 @@
             app:layout_constraintTop_toBottomOf="@+id/iv_choose_seats_hall_preview" />
 
         <TextView
+            android:id="@+id/normal_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/normal_price"
+            app:layout_constraintBottom_toTopOf="@+id/discount"
+            app:layout_constraintStart_toStartOf="@id/tv_choose_seats_price"
+            app:layout_constraintTop_toBottomOf="@+id/ll_choose_seats_ticket_list"></TextView>
+
+        <TextView
+            android:id="@+id/discount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/discount"
+            app:layout_constraintBottom_toTopOf="@id/error_seat_selection"
+            app:layout_constraintStart_toStartOf="@id/tv_choose_seats_price"
+            app:layout_constraintTop_toBottomOf="@id/normal_price" />
+        <TextView
             android:id="@+id/error_seat_selection"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/ll_choose_seats_ticket_list"
+            app:layout_constraintTop_toBottomOf="@id/discount"
             app:layout_constraintBottom_toTopOf="@id/bn_choose_seats_conf"
             android:gravity="right"
             android:textColor="@color/red_200"
@@ -64,24 +84,25 @@
             android:textStyle="italic"
             android:visibility="invisible"
             />
+
         <Button
             android:id="@+id/bn_choose_seats_conf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:backgroundTint="@color/black"
             android:text="@string/pay"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ll_choose_seats_ticket_list" />
+            app:layout_constraintTop_toBottomOf="@+id/error_seat_selection" />
 
         <TextView
             android:id="@+id/tv_choose_seats_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:text="@string/price"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ll_choose_seats_ticket_list" />
+            app:layout_constraintTop_toBottomOf="@+id/error_seat_selection" />
 
         <TextView
             android:id="@+id/tv_choose_seats_price_value"

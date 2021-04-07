@@ -42,6 +42,7 @@ public class ChooseSeatsActivity extends AppCompatActivity {
     private List<View> viewList= new ArrayList<>();
     private TicketManager ticketManager;
     private ImageView mChairs;
+    private TextView price;
 
 
     @Override
@@ -77,6 +78,8 @@ public class ChooseSeatsActivity extends AppCompatActivity {
             ticketManager = (TicketManager) intent.getSerializableExtra(TicketManager.TICKETMANAGER_KEY);
         }
 
+        price = findViewById(R.id.normal_price);
+        price.append(" " + viewing.getPrice() + ",-");
 
         //Create list for spinners
         ArrayList<Integer> availableSeatNumbers = ticketManager.getAvailableSeatNumbers(viewing);
@@ -183,7 +186,7 @@ public class ChooseSeatsActivity extends AppCompatActivity {
     }
 
     public void calculateTotalPrice() {
-        int result = 0;
+        double result = 0.0;
         for (View x : viewList) {
             EditText test = x.findViewById(R.id.editTextNumberSigned);
             int age = Integer.valueOf(test.getText().toString());

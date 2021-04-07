@@ -46,6 +46,7 @@ public class PurchaseTicketActivity extends AppCompatActivity {
     private Account account;
     private Integer[] seats;
     private TextView errorMessage;
+    private TextView icon;
 
 
 
@@ -56,6 +57,7 @@ public class PurchaseTicketActivity extends AppCompatActivity {
         errorMessage = findViewById(R.id.tv_purchase_ticket_error);
         mSeatsSr = findViewById(R.id.sr_purchase_ticket_seats);
         mConfBn = findViewById(R.id.bn_purchase_ticket_conf);
+        icon = findViewById(R.id.tv_3d_icon);
 
         this.context = this;
         this.account = MainActivity.account;
@@ -231,6 +233,12 @@ public class PurchaseTicketActivity extends AppCompatActivity {
                         }
 
                         mSeatsSr.setAdapter(seatsAdapterTime);
+
+                        if (selectedViewing.isThreeDimensional()) {
+                            icon.setVisibility(View.VISIBLE);
+                        } else {
+                            icon.setVisibility(View.INVISIBLE);
+                        }
                     }
 
                     @Override

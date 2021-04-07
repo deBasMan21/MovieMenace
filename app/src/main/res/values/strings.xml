@@ -117,4 +117,6 @@
     <string name="no_films_msg">Deze lijst heeft geen nog films</string>
     <string name="warning_language_update">De taal wordt geupdatet als je op terug drukt.</string>
     <string name="no_film_to_list_msg">Er zijn geen lijsten waar deze film niet al deel van is</string>
+    <string name="normal_price">Normale prijs: </string>
+    <string name="discount">2,50 euro korting: 11 jaar of jonger \n2,00 euro korting: 65 jaar of ouder</string>
 </resources>
