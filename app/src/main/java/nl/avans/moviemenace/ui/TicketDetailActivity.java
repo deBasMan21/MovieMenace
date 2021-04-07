@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -121,8 +122,9 @@ public class TicketDetailActivity extends AppCompatActivity {
         hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
         Writer codeWriter = new Code128Writer();
         try {
-            int width = Resources.getSystem().getDisplayMetrics().widthPixels;
-            int height = 400;
+            DisplayMetrics displayMetrics = Resources.getSystem().getDisplayMetrics();
+            int width = displayMetrics.widthPixels;
+            int height = 150 * (displayMetrics.densityDpi / 160);
             BitMatrix bitMatrix = codeWriter.encode(data, BarcodeFormat.CODE_128, width, height, hintMap);
             Bitmap bmp = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
             for (int i = 0; i < width; i++) {
