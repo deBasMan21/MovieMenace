@@ -55,7 +55,7 @@ public class ListToFilmActivity extends AppCompatActivity {
         mListToFilmsRv = findViewById(R.id.rv_list_to_films);
         mListToFilmsAdapter = new ListToFilmsAdapter(movies, movieList, account);
         mListToFilmsRv.setAdapter(mListToFilmsAdapter);
-        mListToFilmsRv.setLayoutManager(new GridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false));
+        mListToFilmsRv.setLayoutManager(new GridLayoutManager(this, MovieManager.calculateColumns(this, 118), GridLayoutManager.VERTICAL, false));
 
         new DatabaseTask().execute();
     }

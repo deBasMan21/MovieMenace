@@ -1,6 +1,8 @@
 package nl.avans.moviemenace.logic;
 
+import android.content.Context;
 import android.provider.ContactsContract;
+import android.util.DisplayMetrics;
 
 import java.util.ArrayList;
 
@@ -59,8 +61,10 @@ public class MovieManager {
         }
     }
 
-
-
-
+    public static int calculateColumns(Context context, float columnWidthDp) {
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        float screenWidthDp = displayMetrics.widthPixels / displayMetrics.density;
+        return (int) (screenWidthDp / columnWidthDp + 0.5);
+    }
 
 }

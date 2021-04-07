@@ -32,6 +32,7 @@ import java.util.List;
 
 import nl.avans.moviemenace.R;
 import nl.avans.moviemenace.domain.Movie;
+import nl.avans.moviemenace.logic.MovieManager;
 import nl.avans.moviemenace.ui.account.AccountViewModel;
 
 public class FilmsFragment extends Fragment {
@@ -81,7 +82,7 @@ public class FilmsFragment extends Fragment {
 
         mFilmsRv = view.findViewById(R.id.rv_films);
         mFilmsRv.setAdapter(filmsAdapter = new FilmsAdapter(movieList, accountViewModel.getAccount()));
-        mFilmsRv.setLayoutManager(new GridLayoutManager(this.getContext(), calculateColumns(118), GridLayoutManager.VERTICAL, false));
+        mFilmsRv.setLayoutManager(new GridLayoutManager(this.getContext(), MovieManager.calculateColumns(this.getContext(), 118), GridLayoutManager.VERTICAL, false));
     }
 
     @Override
@@ -128,12 +129,6 @@ public class FilmsFragment extends Fragment {
             }
         });
 
-    }
-
-    private int calculateColumns(float columnWidthDp) {
-        DisplayMetrics displayMetrics = getContext().getResources().getDisplayMetrics();
-        float screenWidthDp = displayMetrics.widthPixels / displayMetrics.density;
-        return (int) (screenWidthDp / columnWidthDp + 0.5);
     }
 
     private void setSearchString(String searchQuery){
