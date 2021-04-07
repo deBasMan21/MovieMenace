@@ -114,7 +114,12 @@ public class FilmDetailActivity extends AppCompatActivity {
                 if (movie.getTitle().equals("Avans Endgame")) {
                     Picasso.get().load("https://i.ibb.co/qNKQXP1/Microsoft-Teams-image.jpg").resize(900, 1200).into(imageView);
                 } else {
-                    Picasso.get().load(MainActivity.BASE_URL + movie.getTranslations().get("Dutch").getUrl()).resize(900, 1200).into(imageView);
+                    if(LanguageHelper.isLanguage("en_US")){
+                        Picasso.get().load(MainActivity.BASE_URL + movie.getUrl()).resize(900, 1200).into(imageView);
+                    } else if(LanguageHelper.isLanguage("nl_NL")){
+                        Picasso.get().load(MainActivity.BASE_URL + movie.getTranslations().get("Dutch").getUrl()).resize(900, 1200).into(imageView);
+                    }
+
                 }
                 builder.addContentView(imageView, new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                 builder.show();
