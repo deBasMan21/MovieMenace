@@ -96,8 +96,10 @@ public class ListToFilmsAdapter extends RecyclerView.Adapter<ListToFilmsAdapter.
 
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(context, MainActivity.class);
+            Intent intent = new Intent(context, ListDetailActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.putExtra(Account.ACCOUNT_KEY, account);
+            intent.putExtra(ListsFragment.LIST_KEY, movieList);
             Movie movie = movies.get(getAdapterPosition());
             movieList.addMovie(movie);
             Integer[] IDs = {movieList.getId(), movie.getId()};
