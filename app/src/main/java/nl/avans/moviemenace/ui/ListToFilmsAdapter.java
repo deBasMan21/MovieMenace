@@ -27,6 +27,7 @@ import nl.avans.moviemenace.dataLayer.factory.SQLDAOFactory;
 import nl.avans.moviemenace.domain.Account;
 import nl.avans.moviemenace.domain.Movie;
 import nl.avans.moviemenace.domain.MovieList;
+import nl.avans.moviemenace.logic.LanguageHelper;
 import nl.avans.moviemenace.logic.MovieListManager;
 import nl.avans.moviemenace.ui.lists.ListsFragment;
 
@@ -118,8 +119,21 @@ public class ListToFilmsAdapter extends RecyclerView.Adapter<ListToFilmsAdapter.
     @Override
     public void onBindViewHolder(@NonNull ListToFilmsViewHolder holder, int position) {
         Movie movie = movies.get(position);
-        holder.mTitleTv.setText(movie.getTitle());
-        Picasso.get().load(MainActivity.BASE_URL + movie.getUrl()).into(holder.mPosterIv);
+        if(LanguageHelper.isLanguage("en_US")){
+            holder.mTitleTv.setText(movie.getTitle());
+            if(movie.getTitle().equals("Avans Endgame")){
+                Picasso.get().load("https://i.ibb.co/qNKQXP1/Microsoft-Teams-image.jpg").into(holder.mPosterIv);
+            } else{
+                Picasso.get().load(MainActivity.BASE_URL + movie.getUrl()).into(holder.mPosterIv);
+            }
+        } else {
+            holder.mTitleTv.setText(movie.getTranslations().get("Dutch").getTitle());
+            if(movie.getTitle().equals("Avans Endgame")){
+                Picasso.get().load("https://i.ibb.co/qNKQXP1/Microsoft-Teams-image.jpg").into(holder.mPosterIv);
+            } else{
+                Picasso.get().load(MainActivity.BASE_URL + movie.getTranslations().get("Dutch").getUrl()).into(holder.mPosterIv);
+            }
+        }
     }
 
     @Override
