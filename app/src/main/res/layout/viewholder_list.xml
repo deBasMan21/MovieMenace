@@ -16,14 +16,14 @@
         android:layout_marginBottom="6dp">
 
         <ImageView
+            style="@style/Theme.MovieMenace.Icon"
             android:id="@+id/iv_list_viewholder_ic"
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:contentDescription="@string/list"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_menu_lists"
-            app:tint="@color/black" />
+            app:srcCompat="@drawable/ic_menu_lists" />
 
         <TextView
             android:id="@+id/tv_list_viewholder_title"

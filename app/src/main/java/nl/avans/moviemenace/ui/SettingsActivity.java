@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -40,6 +41,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     private Context context;
     private Resources recourses;
+    private Configuration config = new Configuration();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,32 +96,15 @@ public class SettingsActivity extends AppCompatActivity {
         mBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra(Account.ACCOUNT_KEY, MainActivity.account);
-                startActivity(intent);
-            }
-        });
-
-        mRbLanguageEn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
+                if(mRbLanguageEn.isChecked()){
                     LanguageHelper.setLanguage("en_US");
                     Locale locale = new Locale("en");
                     Locale.setDefault(locale);
                     Configuration config = new Configuration();
                     config.locale = locale;
                     getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
-                }
+                } else if(mRbLanguageNl.isChecked()){
 
-            }
-        });
-        mRbLanguageNl.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    errorMessage();
                     LanguageHelper.setLanguage("nl_NL");
                     Locale locale = new Locale("nl");
                     Locale.setDefault(locale);
@@ -127,7 +112,16 @@ public class SettingsActivity extends AppCompatActivity {
                     config.locale = locale;
                     getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
                 }
+                startIntent();
+            }
+        });
 
+        mRbLanguageNl.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    errorMessage();
+                }
             }
         });
 
@@ -150,6 +144,13 @@ public class SettingsActivity extends AppCompatActivity {
         });
     }
 
+    public void startIntent(){
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra(Account.ACCOUNT_KEY, MainActivity.account);
+        startActivity(intent);
+    }
+
 
 
     public void errorMessage(){
@@ -157,6 +158,12 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
+            }
+        }).setNegativeButton(R.string.back, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                mRbLanguageEn.setChecked(true);
+                mRbLanguageNl.setChecked(false);
             }
         }).show();
     }
