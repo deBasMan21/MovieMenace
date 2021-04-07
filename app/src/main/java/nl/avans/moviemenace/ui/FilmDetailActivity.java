@@ -1,5 +1,6 @@
 package nl.avans.moviemenace.ui;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -146,11 +147,21 @@ public class FilmDetailActivity extends AppCompatActivity {
 
         mPurchaseTicketBn = findViewById(R.id.bn_film_detail_ticket);
         mPurchaseTicketBn.setOnClickListener((View v) -> {
-            Intent purchaseTicketIntent = new Intent(v.getContext(), PurchaseTicketActivity.class);
-            purchaseTicketIntent.putExtra(MOVIE_KEY, movie);
-            purchaseTicketIntent.putExtra("test", (Serializable) viewingList);
-            purchaseTicketIntent.putExtra(TicketManager.TICKETMANAGER_KEY, ticketManager);
-            startActivity(purchaseTicketIntent);
+            if (viewingList.size() == 0) {
+                new AlertDialog.Builder(this).setTitle(R.string.error_no_viewings).setMessage(R.string.error_no_viewings_desc).setPositiveButton("Oke", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                }).show();
+            } else {
+                Intent purchaseTicketIntent = new Intent(v.getContext(), PurchaseTicketActivity.class);
+                purchaseTicketIntent.putExtra(MOVIE_KEY, movie);
+                purchaseTicketIntent.putExtra("test", (Serializable) viewingList);
+                purchaseTicketIntent.putExtra(TicketManager.TICKETMANAGER_KEY, ticketManager);
+                startActivity(purchaseTicketIntent);
+            }
+
         });
     }
 
