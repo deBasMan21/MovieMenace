@@ -111,7 +111,10 @@ public class EditAccountActivity extends AppCompatActivity {
     }
 
     public void startIntent(){
-        startActivity(new Intent(v.getContext(), MainActivity.class).putExtra(MainActivity.DESTINATION_KEY, "account"));
+        Intent accountIntent = new Intent(v.getContext(), MainActivity.class);
+        accountIntent.putExtra(MainActivity.DESTINATION_KEY, "account");
+        accountIntent.putExtra(Account.ACCOUNT_KEY, MainActivity.account);
+        startActivity(accountIntent);
     }
 
     public void errorMessage(){
