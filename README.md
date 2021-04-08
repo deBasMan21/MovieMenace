@@ -1,2 +1,9 @@
 # MovieMenace
-This is an app for cinema's where you can find movies, make lists and buy tickets.
+Dit is de MovieMenace app die we gemaakt hebben voor het PRMSE project. 
+Dit project is gemaakt door:
+-Bas Buijsen
+-Stefan de Nijs
+-Frank Gabrsek
+-Qiang Loozen
+
+Dit project is ingeleverd op 9-4-2021.
